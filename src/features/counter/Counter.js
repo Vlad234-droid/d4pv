@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
   decrement,
   increment,
@@ -7,15 +8,24 @@ import {
   incrementAsync,
   incrementIfOdd,
   selectCount,
+  actions
 } from './counterSlice';
 import styles from './Counter.module.css';
+
+
+
 
 export function Counter() {
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
   const [incrementAmount, setIncrementAmount] = useState('2');
 
-  const incrementValue = Number(incrementAmount) || 0;
+  const incrementValue = Number(incrementAmount) || 0;  
+
+  const {increment, incrementAsync} = bindActionCreators(actions, dispatch)
+  
+  
+  
 
   return (
     <div>
@@ -31,7 +41,7 @@ export function Counter() {
         <button
           className={styles.button}
           aria-label="Increment value"
-          onClick={() => dispatch(increment())}
+          onClick={() => increment()}
         >
           +
         </button>
@@ -51,8 +61,12 @@ export function Counter() {
         </button>
         <button
           className={styles.asyncButton}
-          onClick={() => dispatch(incrementAsync(incrementValue))}
-        >
+          onClick={() => {
+            incrementAsync(incrementValue).then((state, actions) => {
+              console.log('incrementAsyncData', actions);
+              
+            } )
+          }}>
           Add Async
         </button>
         <button
