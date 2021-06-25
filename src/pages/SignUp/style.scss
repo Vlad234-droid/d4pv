@@ -1,0 +1,48 @@
+.login-page {
+  .wrapper {
+    .block_sign_up {
+      width: 512px;
+      height: 683px;
+      padding: 40px 64px 48px;
+      border-radius: 4px;
+      box-shadow: 0 4px 8px 0 rgba(0, 25, 94, 0.1);
+      background-color: #ffffff;
+      margin-top: 100px;
+      .logo4pv {
+        text-align: center;
+      }
+      .up_in {
+        width: 100%;
+        display: flex;
+        align-self: center;
+        justify-content: space-between;
+        h2 {
+          &:first-child {
+            font-size: 40px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.2;
+            letter-spacing: normal;
+            color: #00254d;
+            margin-bottom: 0px;
+          }
+          &:last-child {
+            margin-bottom: 0px;
+            align-self: flex-end;
+
+            a {
+              font-size: 16px;
+              font-weight: bold;
+              font-stretch: normal;
+              font-style: normal;
+              line-height: 1.5;
+              letter-spacing: normal;
+              color: #ffb500;
+            }
+          }
+        }
+      }
+    }
+  }
+}

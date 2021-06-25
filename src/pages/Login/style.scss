@@ -1,0 +1,99 @@
+.login-page {
+  .wrapper {
+    .fl {
+      height: 89vh;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      //padding-left: 100px;
+    }
+  }
+  .form_login_block {
+    margin-top: 80px;
+    width: 512px;
+    height: 500px;
+    padding: 40px 64px 48px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px 0 rgba(0, 25, 94, 0.1);
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    .in_up {
+      width: 100%;
+      height: 100px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      h2 {
+        margin-bottom: 0px;
+        &:first-child {
+          font-size: 40px;
+          font-weight: bold;
+          font-stretch: normal;
+          font-style: normal;
+          letter-spacing: normal;
+          color: #00254d;
+        }
+        &:last-child {
+          margin-top: 13px;
+
+          a {
+            font-size: 16px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.5;
+            letter-spacing: normal;
+            color: #ffb500;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    .ant-form {
+      width: 100%;
+      .ant-row {
+        .ant-col {
+          padding: 0px;
+          label {
+            opacity: 0.5;
+            font-family: Montserrat;
+            font-size: 11px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            letter-spacing: -0.1px;
+            color: #00254d;
+          }
+        }
+      }
+    }
+    .forgot_pass {
+      margin-bottom: 0px;
+      a {
+        font-family: Montserrat;
+        font-size: 13px;
+        font-weight: 600;
+        font-stretch: normal;
+        font-style: normal;
+        letter-spacing: -0.09px;
+        text-align: center;
+        color: #ffb40a;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+@media (max-width: 1919px) {
+  .login-page {
+    .wrapper {
+      .form_login_block {
+        width: 428px;
+      }
+    }
+  }
+}
