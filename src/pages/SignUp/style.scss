@@ -2,20 +2,23 @@
   .wrapper {
     .block_sign_up {
       width: 512px;
-      height: 683px;
+      height: 715px;
       padding: 40px 64px 48px;
       border-radius: 4px;
       box-shadow: 0 4px 8px 0 rgba(0, 25, 94, 0.1);
       background-color: #ffffff;
-      margin-top: 100px;
+      margin-top: 80px;
       .logo4pv {
         text-align: center;
       }
       .up_in {
+        margin-top: 15px;
         width: 100%;
         display: flex;
         align-self: center;
         justify-content: space-between;
+        margin-bottom: 18px;
+
         h2 {
           &:first-child {
             font-size: 40px;
@@ -40,6 +43,66 @@
               letter-spacing: normal;
               color: #ffb500;
             }
+          }
+        }
+      }
+    }
+    .block_wrapper {
+      .form_sign_up {
+        .ant-col {
+          padding: 0px;
+          .ant-row {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            &:first-child {
+              margin-top: 0px;
+            }
+          }
+          label {
+            opacity: 0.5;
+            font-family: Montserrat;
+            font-size: 11px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            letter-spacing: -0.1px;
+            color: #00254d;
+          }
+        }
+        .policy {
+          font-family: Montserrat;
+          font-size: 14px;
+          font-weight: 500;
+          font-stretch: normal;
+          font-style: normal;
+          line-height: 1.38;
+          letter-spacing: -0.1px;
+          text-align: center;
+          color: #00254d;
+
+          span {
+            &:first-child,
+            &:last-child {
+              font-weight: 600;
+              color: #ffb40a;
+              text-decoration: underline;
+              cursor: pointer;
+            }
+          }
+        }
+        .ant-col {
+          .showPassFirst,
+          .showPassApproved {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            position: absolute;
+            top: 50%;
+            right: 0px;
+            transform: translateY(-50%);
+            margin-right: 16px;
+            cursor: pointer;
           }
         }
       }
