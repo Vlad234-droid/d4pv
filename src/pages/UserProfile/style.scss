@@ -8,6 +8,7 @@
   .wrapper {
     .container_info {
       .back {
+        margin-top: 24px;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -25,12 +26,44 @@
         }
       }
       .forms_container {
+        display: flex;
+        //flex-wrap: wrap;
+
         .form_profile {
+          .information {
+            h2 {
+              font-size: 18px;
+              font-weight: bold;
+              font-stretch: normal;
+              font-style: normal;
+              letter-spacing: normal;
+              color: #00254d;
+              margin-bottom: 35px;
+              margin-top: 0px;
+            }
+          }
+          //flex-basis: 572px;
+          width: calc(100% / 2);
+          //min-width: 572px;
+          height: 460px;
+          padding: 32px 40px 48px 32px;
+          border-radius: 4px;
+          box-shadow: 0 1px 4px 0 rgba(0, 25, 94, 0.2);
+          background-color: #ffffff;
           .blocks_wrapper {
+            display: flex;
+            flex-direction: row;
+
             .selfi_wrapper {
-              max-width: 104px;
+              width: 128px;
+              .centeredIMG {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 16px;
+              }
               .selfi {
-                display: inline-block;
+                display: block;
                 position: relative;
                 width: 96px;
                 height: 96px;
@@ -42,13 +75,21 @@
                   object-fit: contain;
                 }
               }
+
+              .change {
+                width: 54%;
+                margin: 0px auto 16px auto;
+              }
+              .delete {
+                width: 46%;
+                margin: 0 auto;
+              }
               .change,
               .delete {
-                padding: 0 10px 0px 10px;
                 .SVG_reload,
                 .SVG_delete {
                   cursor: pointer;
-                  width: 80%;
+
                   display: flex;
                   flex-direction: row;
                   align-items: center;
@@ -64,6 +105,75 @@
                 }
               }
             }
+
+            .form_password {
+              margin-left: 40px;
+              flex: auto;
+              .form_FL_name {
+                .ant-col {
+                  .ant-row.ant-form-item {
+                    margin-bottom: 20.5px;
+                    .ant-col.ant-form-item-label {
+                      padding-bottom: 0px;
+                      opacity: 0.5;
+                      font-family: Montserrat;
+                      font-size: 11px;
+                      font-weight: normal;
+                      font-stretch: normal;
+                      font-style: normal;
+                      letter-spacing: -0.1px;
+                      color: #00254d;
+                    }
+                  }
+                }
+                .ant-row.ant-form-item {
+                  .ant-btn.ant-btn-primary.btn_save_prof {
+                    margin-top: 19.5px;
+                    margin-bottom: 28px;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .change_password_block {
+          width: calc(100% / 2);
+          //min-width: 572px;
+          //flex-basis: 572px;
+          height: 140px;
+          border-radius: 4px;
+          box-shadow: 0 1px 4px 0 rgba(0, 25, 94, 0.2);
+          background-color: #ffffff;
+          margin-left: 28px;
+          padding: 0px 0px 48px 32px;
+
+          & > h2 {
+            font-family: Montserrat;
+            font-size: 16px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            letter-spacing: normal;
+            color: #00254d;
+          }
+          & > span {
+            display: inline-block;
+            font-family: Montserrat;
+            padding: 3px 3px 3px 0px;
+            font-size: 13px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            letter-spacing: -0.09px;
+            color: #ffb40a;
+            text-decoration: underline;
+            cursor: pointer;
+          }
+          &.full_form {
+            height: 460px;
+            .ant-form.change_password_form {
+              max-width: 332px;
+            }
           }
         }
       }
@@ -75,6 +185,8 @@
       font-style: normal;
       letter-spacing: normal;
       color: #00254d;
+      margin-top: 24px;
+      margin-bottom: 16px;
     }
   }
 }
