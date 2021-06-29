@@ -1,0 +1,80 @@
+.app-dashboard.user_profile {
+  //max-width: 1920px;
+  min-height: 100vh;
+  overflow: hidden;
+  min-width: 1170px;
+  height: 100vh;
+  overflow-x: visible;
+  .wrapper {
+    .container_info {
+      .back {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        cursor: pointer;
+        p {
+          font-size: 13px;
+          font-weight: 600;
+          font-stretch: normal;
+          font-style: normal;
+          line-height: 1.38;
+          letter-spacing: -0.09px;
+          text-align: center;
+          color: #ffb40a;
+          margin-left: 8px;
+        }
+      }
+      .forms_container {
+        .form_profile {
+          .blocks_wrapper {
+            .selfi_wrapper {
+              max-width: 104px;
+              .selfi {
+                display: inline-block;
+                position: relative;
+                width: 96px;
+                height: 96px;
+                overflow: hidden;
+                border-radius: 50%;
+                img {
+                  width: auto;
+                  height: 100%;
+                  object-fit: contain;
+                }
+              }
+              .change,
+              .delete {
+                padding: 0 10px 0px 10px;
+                .SVG_reload,
+                .SVG_delete {
+                  cursor: pointer;
+                  width: 80%;
+                  display: flex;
+                  flex-direction: row;
+                  align-items: center;
+                  p {
+                    font-size: 13px;
+                    font-weight: 600;
+                    font-stretch: normal;
+                    font-style: normal;
+                    letter-spacing: -0.09px;
+                    color: #ffb40a;
+                    text-decoration: underline;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    h2 {
+      font-size: 20px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      letter-spacing: normal;
+      color: #00254d;
+    }
+  }
+}

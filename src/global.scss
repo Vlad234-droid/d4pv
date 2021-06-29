@@ -21,6 +21,15 @@ code {
   height: 100vh;
   margin: 0 calc(100% - 82%);
 }
+h1,
+h2,
+h4,
+h5,
+h6,
+p {
+  font-family: Montserrat;
+  margin: 0;
+}
 
 .ant-btn {
   display: inline-flex;

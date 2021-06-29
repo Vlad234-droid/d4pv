@@ -6,7 +6,7 @@ import { Logo4PV } from '../../components/icons';
 import { Link } from 'react-router-dom';
 import { ShowPassword } from '../../components/icons';
 
-const LoginPage = () => {
+const SignUpToProject = () => {
   const [valueFirstPass, setValueFirstPass] = useState('');
   const [valueSecondPass, setValueSecondPass] = useState('');
   const [showPassFirst, setShowPassFirst] = useState(false);
@@ -29,16 +29,13 @@ const LoginPage = () => {
   return (
     <Layout isLogged={false} mode="login" className="login-page">
       <div className="wrapper">
-        <div className="block_sign_up">
+        <div className="block_sign_up_toProject">
           <div className="block_wrapper">
             <div className="logo4pv">
               <Logo4PV />
             </div>
-            <div className="up_in">
-              <h2>Sign Up</h2>
-              <h2>
-                <Link to="/sign-in">Sign In</Link>
-              </h2>
+            <div className="goSolar">
+              <h2>Sign Up to GO Solar</h2>
             </div>
             <Form className="form_sign_up" form={form} layout="vertical" onFinish={onFinishHandler}>
               <Row gutter={24}>
@@ -107,14 +104,6 @@ const LoginPage = () => {
                     onChange={(e) => setValueSecondPass(() => e.target.value)}
                   />
                 </Form.Item>
-                {/* <div className="showPassApproved">
-                  <ShowPassword />
-                </div> */}
-              </Col>
-              <Col span={24}>
-                <Form.Item label="Organization Name" name="OrgName">
-                  <Input placeholder="Type your organization name" type="text" />
-                </Form.Item>
               </Col>
 
               <Form.Item>
@@ -134,4 +123,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignUpToProject;

@@ -11,9 +11,15 @@ const initialState = {
 // will call the thunk with the `dispatch` function as the first argument. Async
 // code can then be executed and other actions can be dispatched. Thunks are
 // typically used to make async requests.
-export const incrementAsync = createAsyncThunk('counter/fetchCount', async (amount) => {
+export const incrementAsync = createAsyncThunk('counter/fetchCount', async (amount, { getState }) => {
   const response = await fetchCount(amount);
   // The value we return becomes the `fulfilled` action payload
+  // const currentValue = selectCount(getState());
+  const {
+    counter: { value },
+  } = getState();
+  console.log(value);
+
   return response.data;
 });
 
@@ -64,6 +70,10 @@ export const selectCount = (state) => state.counter.value;
 // Here's an example of conditionally dispatching actions based on current state.
 export const incrementIfOdd = (amount) => (dispatch, getState) => {
   const currentValue = selectCount(getState());
+  // const {
+  //   counter: { value },
+  // } = getState();
+
   if (currentValue % 2 === 1) {
     dispatch(incrementByAmount(amount));
   }

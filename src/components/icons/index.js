@@ -2,6 +2,11 @@ import React from 'react';
 
 import './icons.scss';
 
+const centeredSVG = () => ({
+  display: 'block',
+  margin: '0 auto',
+});
+
 const IconInfo = () => {
   return (
     <svg
@@ -108,4 +113,112 @@ const ShowPassword = () => {
   );
 };
 
-export { IconInfo, Logo4PV, ShowPassword };
+const Question = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" style={{ cursor: 'pointer' }}>
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g transform="translate(-1762.000000, -17.000000) translate(1762.000000, 17.000000) translate(0.916667, 0.916667)">
+            <circle cx="10.083" cy="10.083" r="10.083" fill="#00254D" fillOpacity=".9" />
+            <path
+              fill="#FFF"
+              fillRule="nonzero"
+              d="M9.35 11.675l1.599-.47c-.176-.156-.264-.361-.264-.616 0-.225.083-.435.249-.63.166-.196.372-.377.616-.543.244-.166.486-.347.726-.543.24-.195.442-.45.609-.762.166-.313.249-.665.249-1.056 0-.695-.274-1.254-.821-1.68-.548-.425-1.291-.638-2.23-.638-1.33 0-2.4.475-3.212 1.423L8.06 7.495c.509-.607 1.11-.91 1.804-.91.382 0 .668.079.858.235.191.156.286.357.286.601 0 .215-.112.43-.337.646-.225.215-.47.4-.733.557-.264.156-.509.391-.734.704-.225.313-.337.665-.337 1.056 0 .508.161.939.484 1.29zm.704 3.153c.323 0 .601-.117.836-.352s.352-.513.352-.836c0-.323-.117-.601-.352-.836s-.513-.352-.836-.352c-.323 0-.601.117-.836.352s-.352.513-.352.836c0 .323.117.601.352.836s.513.352.836.352z"
+            />
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+const ProfileDropDown = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      style={{ cursor: 'pointer', display: 'block', margin: '0 auto' }}>
+      <g fill="none" fillRule="evenodd">
+        <g fill="#FFB40A">
+          <g>
+            <path
+              d="M13.097 4.293L7.739 9.38 2.703 4.292c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L7.039 11.5c.39.39 1.02.39 1.41 0l6.068-5.798c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0z"
+              transform="translate(-1856.000000, -20.000000) translate(1856.000000, 20.000000)"
+            />
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+const BackLeftSVG = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" style={centeredSVG()}>
+      <g fill="none" fillRule="evenodd">
+        <g fill="#FFB40A">
+          <g>
+            <g>
+              <path
+                d="M2.704 4.267l5.358 5.087 5.037-5.087c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-5.747 5.797c-.39.39-1.02.39-1.41 0L1.284 5.677c-.39-.39-.39-1.02 0-1.41.39-.38 1.03-.39 1.42 0z"
+                transform="translate(-374.000000, -83.000000) translate(374.000000, 81.000000) translate(0.000000, 2.000000) translate(7.896318, 7.870483) scale(1, -1) rotate(90.000000) translate(-7.896318, -7.870483)"
+              />
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+const SVG_Reload = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" style={centeredSVG()}>
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g>
+            <g>
+              <path
+                d="M0 0L16 0 16 16 0 16z"
+                transform="translate(-432.000000, -380.000000) translate(432.000000, 379.000000) translate(0.000000, 1.000000)"
+              />
+              <path
+                fill="#FFB40A"
+                d="M7.952 3.528v-1.86c0-.3-.36-.447-.566-.234L4.852 3.961c-.133.133-.133.34 0 .473L7.38 6.961c.213.207.573.06.573-.24v-1.86c2.487 0 4.454 2.28 3.907 4.86-.313 1.513-1.54 2.733-3.047 3.047-2.38.5-4.5-1.134-4.82-3.34-.046-.32-.326-.567-.653-.567-.4 0-.72.353-.667.753.414 2.927 3.2 5.094 6.354 4.48 2.08-.406 3.753-2.08 4.16-4.16.66-3.42-1.94-6.406-5.234-6.406z"
+                transform="translate(-432.000000, -380.000000) translate(432.000000, 379.000000) translate(0.000000, 1.000000)"
+              />
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+const SVG_delete = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" style={centeredSVG()}>
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g>
+            <g>
+              <path
+                d="M0 0L16 0 16 16 0 16z"
+                transform="translate(-432.000000, -414.000000) translate(432.000000, 379.000000) translate(0.000000, 35.000000)"
+              />
+              <path
+                fill="#FFB40A"
+                d="M12 4.667v8C12 13.4 11.4 14 10.667 14H5.333C4.6 14 4 13.4 4 12.667v-8h8zM7.333 6H6v6.667h1.333V6zM10 6H8.667v6.667H10V6zm-.333-4l.666.667h2.334V4H3.333V2.667h2.334L6.333 2h3.334z"
+                transform="translate(-432.000000, -414.000000) translate(432.000000, 379.000000) translate(0.000000, 35.000000)"
+              />
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+export { IconInfo, Logo4PV, ShowPassword, Question, ProfileDropDown, BackLeftSVG, SVG_Reload, SVG_delete };

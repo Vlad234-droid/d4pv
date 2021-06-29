@@ -4,6 +4,9 @@ import CoreRouter from './CoreRouter';
 import PrivateRoute from './PrivatRouter';
 import ForgotPassword from '../pages/ForgotPassword';
 import SignUp from '../pages/SignUp';
+import Counter from '../features/counter/Counter';
+import UserProfile from '../pages/UserProfile';
+import SignUpToProject from '../pages/SignUpToProject';
 
 const LoginPage = lazyWithPreload(() => import('../pages/Login'));
 
@@ -15,6 +18,10 @@ const routes = () => {
         <Route exact path="/sign-in/" component={LoginPage} />
         <Route exact path="/forgotPassword/" component={ForgotPassword} />
         <Route exact path="/sign-up/" component={SignUp} />
+        <Route exact path="/sign-up-toProject/" component={SignUpToProject} />
+        <Route exact path="/test" component={Counter} />
+        <Route exact path="/userProfile" component={UserProfile} />
+
         {/* <PrivateRoute exact path='/replies/' component={Login} /> */}
       </CoreRouter>
     </React.Suspense>
