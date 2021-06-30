@@ -11,13 +11,14 @@ const initialState = {
 // will call the thunk with the `dispatch` function as the first argument. Async
 // code can then be executed and other actions can be dispatched. Thunks are
 // typically used to make async requests.
-export const incrementAsync = createAsyncThunk('counter/fetchCount', async (amount, { getState }) => {
+export const incrementAsync = createAsyncThunk('counter/fetchCount', async (amount, ThunkAPI) => {
   const response = await fetchCount(amount);
   // The value we return becomes the `fulfilled` action payload
   // const currentValue = selectCount(getState());
+  console.log('ThunkAPI', ThunkAPI);
   const {
     counter: { value },
-  } = getState();
+  } = ThunkAPI.getState();
   console.log(value);
 
   return response.data;

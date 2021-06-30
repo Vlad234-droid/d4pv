@@ -1,4 +1,7 @@
-.app-dashboard.user_profile {
+.app-dashboard.admin_profile {
+  &.allow_over {
+    overflow: visible;
+  }
   //max-width: 1920px;
   min-height: 100vh;
   overflow: hidden;
@@ -121,7 +124,7 @@
           }
         }
         .change_password_block {
-          width: calc(100% / 2);
+          width: 572px;
           //min-width: 572px;
           //flex-basis: 572px;
           padding: 32px 0px 48px 32px;
@@ -194,6 +197,20 @@
                 }
               }
             }
+          }
+        }
+        .wraper_2_blocks {
+          display: flex;
+          flex-direction: column;
+          .organisation {
+            width: 572px;
+            height: 290px;
+            padding: 32px 32px 48px;
+            border-radius: 4px;
+            box-shadow: 0 1px 4px 0 rgba(0, 25, 94, 0.2);
+            background-color: #ffffff;
+            margin-left: 28px;
+            margin-bottom: 24px;
           }
         }
       }

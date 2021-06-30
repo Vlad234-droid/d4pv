@@ -7,6 +7,7 @@ import SignUp from '../pages/SignUp';
 import Counter from '../features/counter/Counter';
 import UserProfile from '../pages/UserProfile';
 import SignUpToProject from '../pages/SignUpToProject';
+import AdminProfile from '../pages/AdminProfile';
 
 const LoginPage = lazyWithPreload(() => import('../pages/Login'));
 
@@ -21,6 +22,7 @@ const routes = () => {
         <Route exact path="/sign-up-toProject/" component={SignUpToProject} />
         <Route exact path="/test" component={Counter} />
         <Route exact path="/userProfile" component={UserProfile} />
+        <Route exact path="/adminProfile" component={AdminProfile} />
 
         {/* <PrivateRoute exact path='/replies/' component={Login} /> */}
       </CoreRouter>

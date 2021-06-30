@@ -84,7 +84,7 @@ const UserProfile = () => {
                 </div>
                 <div className="form_password">
                   <Form className="form_FL_name" form={form} layout="vertical" onFinish={onFinishHandler}>
-                    <Col span={24}>
+                    <Col span={24} style={{ minHeight: '50px !important' }}>
                       <Form.Item label="First Name" name="firstName">
                         <Input placeholder="Goward" type="text" />
                       </Form.Item>
@@ -118,7 +118,7 @@ const UserProfile = () => {
               ) : (
                 <Form className="change_password_form" form={form} layout="vertical" onFinish={onFinishPasswordHandler}>
                   <Col span={24}>
-                    <Form.Item label="Password" name="old_password" className="passwordFirst">
+                    <Form.Item label="Current Password" name="old_password" className="passwordFirst">
                       <Input
                         suffix={suffixFirst}
                         value={valueFirstPass}
@@ -172,10 +172,12 @@ const UserProfile = () => {
                       />
                     </Form.Item>
                   </Col>
-                  <Row gutter={16} style={{ marginTop: '31.1px' }}>
+                  <Row gutter={16} style={{ marginTop: '41.1px' }}>
                     <Col span={11}>
                       <Form.Item>
-                        <Button htmlType="submit">Cancel</Button>
+                        <Button type="default" htmlType="submit">
+                          Cancel
+                        </Button>
                       </Form.Item>
                     </Col>
                     <Col span={13}>

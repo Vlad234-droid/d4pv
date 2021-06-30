@@ -45,9 +45,8 @@ function Counter() {
         <button
           className={styles.asyncButton}
           onClick={() => {
-            incrementAsync(incrementValue).then((state, actions) => {
-              // console.log('state', state);
-              // console.log('incrementAsyncData', actions);
+            incrementAsync(incrementValue).then((state) => {
+              console.log('state', state);
             });
           }}>
           Add Async
