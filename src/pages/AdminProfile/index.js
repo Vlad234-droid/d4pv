@@ -22,6 +22,11 @@ const AdminProfile = () => {
     form.resetFields();
   };
 
+  const onFinishHandlerOrganization = (values) => {
+    console.log('values', values);
+    form.resetFields();
+  };
+
   const onFinishPasswordHandler = (values) => {
     console.log('values password', values);
   };
@@ -114,8 +119,24 @@ const AdminProfile = () => {
             <div className="wraper_2_blocks">
               <div className="organisation">
                 <h2>Organization information</h2>
-                Lor, impedit, eaque natus doloribus dolor quis deserunt cupiditate molestias vitae aliquid
-                necessitatibus!
+                <Form
+                  className="form_profile_admin"
+                  form={form}
+                  layout="vertical"
+                  onFinish={onFinishHandlerOrganization}>
+                  <Col span={24}>
+                    <Form.Item label="Organization Name" name="OrgName">
+                      <Input placeholder="Type your organization name" type="text" />
+                    </Form.Item>
+                  </Col>
+                  <Col span={10} style={{ marginTop: '37px' }}>
+                    <Form.Item>
+                      <Button type="primary" htmlType="submit">
+                        Save
+                      </Button>
+                    </Form.Item>
+                  </Col>
+                </Form>
               </div>
               <div className={`change_password_block ${showFormPassword && 'full_form'}`}>
                 <h2>Change Password</h2>

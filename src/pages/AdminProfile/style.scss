@@ -35,7 +35,7 @@
         .form_profile {
           .information {
             h2 {
-              font-size: 18px;
+              font-size: 16px;
               font-weight: bold;
               font-stretch: normal;
               font-style: normal;
@@ -124,6 +124,7 @@
           }
         }
         .change_password_block {
+          margin-bottom: 40px;
           width: 572px;
           //min-width: 572px;
           //flex-basis: 572px;
@@ -142,7 +143,8 @@
             font-style: normal;
             letter-spacing: normal;
             color: #00254d;
-            margin: 0;
+            margin-top: 10px;
+            margin-bottom: 0px;
           }
           & > span {
             display: inline-block;
@@ -211,6 +213,18 @@
             background-color: #ffffff;
             margin-left: 28px;
             margin-bottom: 24px;
+            .form_profile_admin {
+              margin-top: 34px;
+            }
+            h2 {
+              font-size: 16px;
+              font-weight: bold;
+              font-stretch: normal;
+              font-style: normal;
+              letter-spacing: normal;
+              color: #00254d;
+              margin-top: 0px;
+            }
           }
         }
       }
