@@ -4,6 +4,8 @@ import './style.scss';
 import { SearchSVG } from '../../icons';
 import ModalAddUser from './ModalAddUser';
 import ModalDeleteUser from './ModalDeleteUser';
+import TableOfUsers from './TableOfUsers';
+
 const UsersTable = () => {
   const [form] = Form.useForm();
   const [showAddUser, setShowAddUser] = useState(false);
@@ -23,7 +25,7 @@ const UsersTable = () => {
     <div className="block_users" id="block_users">
       <ModalAddUser showAddUser={showAddUser} setShowAddUser={setShowAddUser} />
       <ModalDeleteUser showDeleteUser={showDeleteUser} setShowDeleteUser={setShowDeleteUser} />
-      <button onClick={() => setShowDeleteUser(() => true)}>Delete User</button>
+      {/*<button onClick={() => setShowDeleteUser(() => true)}>Delete User</button>*/}
       <div className="title_users">
         <h2>Users</h2>
       </div>
@@ -48,7 +50,9 @@ const UsersTable = () => {
           </Row>
         </Form>
       </div>
-      <div>Hello</div>
+      <div>
+        <TableOfUsers />
+      </div>
     </div>
   );
 };

@@ -1,0 +1,36 @@
+.ant-table-wrapper.table_users {
+  .ant-table {
+    .ant-table-tbody {
+      tr {
+        td {
+          .wrapper_name {
+            display: flex;
+            align-items: center;
+            .wrapper_img {
+              display: block;
+              position: relative;
+              width: 32px;
+              height: 32px;
+              overflow: hidden;
+              border-radius: 50%;
+              img {
+                width: auto;
+                height: 100%;
+                object-fit: contain;
+              }
+            }
+            h3 {
+              font-size: 13px;
+              font-weight: 600;
+              font-stretch: normal;
+              font-style: normal;
+              letter-spacing: normal;
+              color: #00254d;
+              margin-bottom: 0px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
