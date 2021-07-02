@@ -1,0 +1,13 @@
+.block_users {
+  .title_users {
+    & > h2 {
+      font-size: 20px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      letter-spacing: normal;
+      color: #00254d;
+      margin-bottom: 16px;
+    }
+  }
+}

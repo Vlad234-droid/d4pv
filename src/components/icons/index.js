@@ -173,7 +173,7 @@ const BackLeftSVG = () => {
   );
 };
 
-const SVG_Reload = () => {
+const SVGReload = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" style={centeredSVG()}>
       <g fill="none" fillRule="evenodd">
@@ -197,7 +197,7 @@ const SVG_Reload = () => {
   );
 };
 
-const SVG_delete = () => {
+const SVGDelete = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" style={centeredSVG()}>
       <g fill="none" fillRule="evenodd">
@@ -243,5 +243,108 @@ const Pinion = () => {
     </svg>
   );
 };
+const UsersSVG = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style={centeredSVG()}>
+      <g fill="none" fillOpacity=".9" fillRule="evenodd">
+        <g fill="#00254D">
+          <g>
+            <g>
+              <path
+                d="M5.993 7.997c.736 0 1.428.187 2.031.516 1.32.72 2.215 2.12 2.215 3.73v1.309H0v-1.31c0-1.588.873-2.973 2.165-3.7.615-.347 1.324-.545 2.08-.545zm6.858-1.164c2.334 0 4.233 1.9 4.233 4.233v1.792h-5.439v-.616c0-1.51-.588-2.929-1.655-3.996-.276-.276-.576-.52-.894-.73.663-.432 1.454-.683 2.302-.683zM5.12 0c1.813 0 3.288 1.559 3.288 3.475 0 1.385-.77 2.583-1.883 3.14-.426.215-.903.334-1.405.334-.503 0-.98-.12-1.406-.334C2.602 6.058 1.83 4.86 1.83 3.475 1.83 1.559 3.306 0 5.12 0zm7.002.467c1.563 0 2.842 1.334 2.855 2.984.007.794-.278 1.546-.8 2.116-.536.583-1.256.908-2.028.915h-.022c-1.563 0-2.842-1.334-2.855-2.984C9.258 1.84 10.527.481 12.1.468z"
+                transform="translate(-406.000000, -203.000000) translate(406.000000, 203.000000) translate(3.000000, 5.000000)"
+              />
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
 
-export { IconInfo, Logo4PV, ShowPassword, Question, ProfileDropDown, BackLeftSVG, SVG_Reload, SVG_delete, Pinion };
+const SVGCompanies = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style={centeredSVG()}>
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g>
+            <path
+              d="M0 0L24 0 24 24 0 24z"
+              transform="translate(-406.000000, -267.000000) translate(406.000000, 267.000000)"
+            />
+            <g>
+              <path
+                d="M0 0L24 0 24 24 0 24z"
+                transform="translate(-406.000000, -267.000000) translate(406.000000, 267.000000)"
+              />
+              <path
+                fill="#00254D"
+                fillOpacity=".9"
+                d="M12 7V5c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2h-8zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm9 12h-7v-2h2v-2h-2v-2h2v-2h-2V9h7c.55 0 1 .45 1 1v8c0 .55-.45 1-1 1zm-1-8h-2v2h2v-2zm0 4h-2v2h2v-2z"
+                transform="translate(-406.000000, -267.000000) translate(406.000000, 267.000000)"
+              />
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+const SearchSVG = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style={centeredSVG()}>
+      <g fill="none" fillRule="evenodd">
+        <g fill="#FFB40A" fillRule="nonzero">
+          <g>
+            <g>
+              <path
+                d="M12.535 14.403c-1.297.924-2.885 1.468-4.6 1.468C3.553 15.87 0 12.318 0 7.935 0 3.553 3.553 0 7.935 0c4.383 0 7.936 3.553 7.936 7.935 0 1.715-.544 3.303-1.468 4.6l5.213 5.214c.514.514.51 1.336 0 1.845l-.022.022c-.508.508-1.335.51-1.845 0l-5.214-5.213zm-4.6-.4c3.352 0 6.069-2.716 6.069-6.068 0-3.351-2.717-6.068-6.069-6.068-3.351 0-6.068 2.717-6.068 6.068 0 3.352 2.717 6.069 6.068 6.069z"
+                transform="translate(-1466.000000, -259.000000) translate(1466.000000, 259.000000) translate(2.000000, 2.000000)"
+              />
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+const CloseIconSVG = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g>
+            <g>
+              <path
+                d="M0 0L24 0 24 24 0 24z"
+                transform="translate(-1192.000000, -216.000000) translate(688.000000, 200.000000) translate(504.000000, 16.000000)"
+              />
+              <path
+                fill="#FFB40A"
+                d="M18.3 5.71c-.39-.39-1.02-.39-1.41 0L12 10.59 7.11 5.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L10.59 12 5.7 16.89c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 13.41l4.89 4.89c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z"
+                transform="translate(-1192.000000, -216.000000) translate(688.000000, 200.000000) translate(504.000000, 16.000000)"
+              />
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+export {
+  IconInfo,
+  Logo4PV,
+  ShowPassword,
+  Question,
+  ProfileDropDown,
+  BackLeftSVG,
+  SVGReload,
+  SVGDelete,
+  Pinion,
+  UsersSVG,
+  SVGCompanies,
+  SearchSVG,
+  CloseIconSVG,
+};

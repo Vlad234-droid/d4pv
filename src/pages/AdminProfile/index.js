@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import LayoutAdmin from '../../components/LayoutAdmin/Layout';
 import './style.scss';
-import { BackLeftSVG, SVG_Reload, SVG_delete } from '../../components/icons';
+import { BackLeftSVG, SVGReload, SVGDelete } from '../../components/icons';
 import { Form, Input, Button, Row, Col } from 'antd';
 import { ShowPassword } from '../../components/icons';
 
@@ -76,13 +76,13 @@ const AdminProfile = () => {
 
                   <div className="change">
                     <div className="SVG_reload">
-                      <SVG_Reload />
+                      <SVGReload />
                       <p>Change</p>
                     </div>
                   </div>
                   <div className="delete">
                     <div className="SVG_delete">
-                      <SVG_delete />
+                      <SVGDelete />
                       <p>Delete</p>
                     </div>
                   </div>
