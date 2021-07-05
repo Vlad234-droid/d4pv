@@ -5,6 +5,7 @@ import './style.scss';
 import { Tabs } from 'antd';
 import { TapPaneConfig } from './config';
 import UsersTable from '../../components/PageConfigurations/UsersTable';
+import CompaniesTable from '../../components/PageConfigurations/CompaniesTable';
 
 const { TabPane } = Tabs;
 
@@ -21,7 +22,7 @@ const AdminConfigurations = () => {
           return <UsersTable />;
 
         case '2':
-          return currentTub;
+          return <CompaniesTable />;
 
         default:
           return currentTub;

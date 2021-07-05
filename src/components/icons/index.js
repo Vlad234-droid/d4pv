@@ -333,6 +333,68 @@ const CloseIconSVG = () => {
     </svg>
   );
 };
+
+const EditSVG = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      style={centeredSVG()}
+      data-action="edit">
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g>
+            <g>
+              <path
+                d="M0 0L24 0 24 24 0 24z"
+                transform="translate(-1418.000000, -368.000000) translate(706.000000, 356.000000) translate(712.000000, 12.000000)"
+              />
+              <path
+                fill="#00254D"
+                fillOpacity=".9"
+                d="M5.335 14.667l3.998 4.006L4 20l.673-2.69zm8.462-8c1.172 1.172 2.362 2.363 3.536 3.54l-7.13 7.126-3.536-3.537 7.13-7.13zm2.588-2.44c.418-.328 1.04-.296 1.428.07.652.616 1.289 1.25 1.903 1.904.375.399.368 1.03.04 1.467-.073.098-.16.186-.246.274-.237.243-.476.483-.715.725l-3.462-3.458c.346-.327.674-.687 1.052-.983z"
+                transform="translate(-1418.000000, -368.000000) translate(706.000000, 356.000000) translate(712.000000, 12.000000)"
+              />
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+const DeleteSVG = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      style={centeredSVG()}
+      data-action="delete">
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g>
+            <g>
+              <path
+                d="M0 0L24 0 24 24 0 24z"
+                transform="translate(-1458.000000, -416.000000) translate(706.000000, 404.000000) translate(752.000000, 12.000000)"
+              />
+              <path
+                fill="#00254D"
+                fillOpacity=".9"
+                d="M18 7v12c0 1.1-.9 2-2 2H8c-1.1 0-2-.9-2-2V7h12zm-7 2H9v10h2V9zm4 0h-2v10h2V9zm-.5-6l1 1H19v2H5V4h3.5l1-1h5z"
+                transform="translate(-1458.000000, -416.000000) translate(706.000000, 404.000000) translate(752.000000, 12.000000)"
+              />
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
 export {
   IconInfo,
   Logo4PV,
@@ -347,4 +409,6 @@ export {
   SVGCompanies,
   SearchSVG,
   CloseIconSVG,
+  EditSVG,
+  DeleteSVG,
 };

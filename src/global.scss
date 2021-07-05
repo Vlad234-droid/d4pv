@@ -169,15 +169,13 @@ p {
 .ant-input-affix-wrapper {
   padding: 0px 11px;
 }
-.ant-input-affix-wrapper.ant-input-affix-wrapper-focused {
+.ant-input-affix-wrapper {
   &:hover {
-    border: solid 1px rgba(178, 190, 202, 0.4);
+    border: solid 1px rgba(178, 190, 202, 0.4) !important;
   }
 }
-.ant-input-affix-wrapper,
-.ant-input-affix-wrapper-focused {
-  border: solid 1px rgba(178, 190, 202, 0.4) !important;
-  box-shadow: 0px transparent;
+.ant-input-affix-wrapper.ant-input-affix-wrapper-focused {
+  border: solid 1px rgba(178, 190, 202, 0.4);
 }
 
 .ant-input-affix-wrapper:focus,

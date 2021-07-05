@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { Form, Button, Input, Row, Col } from 'antd';
 import './style.scss';
 import { SearchSVG } from '../../icons';
-import ModalAddUser from './ModalAddUser';
-import ModalDeleteUser from './ModalDeleteUser';
-import TableOfUsers from './TableOfUsers';
+import ModalAddCompany from './ModalAddCompany';
+import ModalDeleteCompany from './ModalDeleteCompany';
+import TableOfCompanies from './TableOfCompanies';
 
-const UsersTable = () => {
+const CompaniesTable = () => {
   const [form] = Form.useForm();
-  const [showAddUser, setShowAddUser] = useState(false);
-  const [showDeleteUser, setShowDeleteUser] = useState(false);
+  const [showAddCompany, setShowAddCompany] = useState(false);
+  const [showDeleteCompany, setShowDeleteCompany] = useState(false);
   const [serchToggle, setSearchToggle] = useState(false);
 
   const onFinish = (values) => {
@@ -23,11 +23,11 @@ const UsersTable = () => {
   );
 
   return (
-    <div className="block_users" id="block_users">
-      <ModalAddUser showAddUser={showAddUser} setShowAddUser={setShowAddUser} />
-      <ModalDeleteUser showDeleteUser={showDeleteUser} setShowDeleteUser={setShowDeleteUser} />
+    <div className="block_users" id="block_companies">
+      <ModalAddCompany showAddCompany={showAddCompany} setShowAddCompany={setShowAddCompany} />
+      <ModalDeleteCompany showDeleteCompany={showDeleteCompany} setShowDeleteCompany={setShowDeleteCompany} />
       <div className="title_users">
-        <h2>Users</h2>
+        <h2>Saved Companies</h2>
       </div>
       <div className="form_to_add">
         <Form form={form} className="create_user" onFinish={onFinish}>
@@ -38,8 +38,8 @@ const UsersTable = () => {
                 htmlType="submit"
                 className="save_link"
                 style={{ height: '40px' }}
-                onClick={() => setShowAddUser(() => true)}>
-                Add User
+                onClick={() => setShowAddCompany(() => true)}>
+                Add Company
               </Button>
             </Col>
             <Col span={serchToggle ? 18 : 8} offset={serchToggle ? 2 : 12}>
@@ -51,9 +51,9 @@ const UsersTable = () => {
         </Form>
       </div>
       <div>
-        <TableOfUsers setShowDeleteUser={setShowDeleteUser} />
+        <TableOfCompanies setShowDeleteCompany={setShowDeleteCompany} />
       </div>
     </div>
   );
 };
-export default UsersTable;
+export default CompaniesTable;

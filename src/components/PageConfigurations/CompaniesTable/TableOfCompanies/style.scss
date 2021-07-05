@@ -24,8 +24,8 @@
           }
         }
         td {
-          &.roles,
-          &.email {
+          &.company_phone,
+          &.company_name {
             font-size: 13px;
             font-weight: 500;
             font-stretch: normal;
@@ -35,31 +35,16 @@
           }
           padding: 8px 16px;
           border-bottom: hidden;
-          .wrapper_name {
-            display: flex;
-            align-items: center;
-            .wrapper_img {
-              display: block;
-              position: relative;
-              width: 32px;
-              height: 32px;
-              overflow: hidden;
-              border-radius: 50%;
-              margin-right: 8px;
-              img {
-                width: auto;
-                height: 100%;
-                object-fit: contain;
-              }
-            }
-            h3 {
-              font-size: 13px;
-              font-weight: 600;
-              font-stretch: normal;
-              font-style: normal;
-              letter-spacing: normal;
-              color: #00254d;
-              margin-bottom: 0px;
+          .logo {
+            display: block;
+            position: relative;
+            width: 32px;
+            height: 32px;
+            overflow: hidden;
+            img {
+              width: auto;
+              height: 100%;
+              object-fit: contain;
             }
           }
           .actions_block {
