@@ -3,7 +3,7 @@ import LayoutAdmin from '../../components/LayoutAdmin/Layout';
 import './style.scss';
 import { BackLeftSVG, SVGReload, SVGDelete } from '../../components/icons';
 import { Form, Input, Button, Row, Col } from 'antd';
-import { ShowPassword } from '../../components/icons';
+import { ShowPassword, CloseToShowPassword } from '../../components/icons';
 
 const AdminProfile = () => {
   const [form] = Form.useForm();
@@ -33,17 +33,17 @@ const AdminProfile = () => {
 
   const suffixFirst = (
     <div className="showPassFirst" onClick={() => setShowPassFirst((prev) => !prev)}>
-      <ShowPassword />
+      {!showPassFirst ? <ShowPassword /> : <CloseToShowPassword />}
     </div>
   );
   const suffixSecond = (
     <div className="showPassSecond" onClick={() => setShowPassSecond((prev) => !prev)}>
-      <ShowPassword />
+      {!showPassSecond ? <ShowPassword /> : <CloseToShowPassword />}
     </div>
   );
   const suffixThird = (
     <div className="showPassThird" onClick={() => setShowPassThird((prev) => !prev)}>
-      <ShowPassword />
+      {!showPassThird ? <ShowPassword /> : <CloseToShowPassword />}
     </div>
   );
 
@@ -101,7 +101,19 @@ const AdminProfile = () => {
                     </Col>
 
                     <Col span={24}>
-                      <Form.Item label="Email" name="email">
+                      <Form.Item
+                        label="Email"
+                        name="email"
+                        rules={[
+                          {
+                            type: 'email',
+                            message: 'Please input your Email!',
+                          },
+                          {
+                            required: true,
+                            message: 'Email is required!',
+                          },
+                        ]}>
                         <Input placeholder="test@mail.com" />
                       </Form.Item>
                     </Col>
@@ -125,7 +137,15 @@ const AdminProfile = () => {
                   layout="vertical"
                   onFinish={onFinishHandlerOrganization}>
                   <Col span={24}>
-                    <Form.Item label="Organization Name" name="OrgName">
+                    <Form.Item
+                      label="Organization Name"
+                      name="OrgName"
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Input organization name!',
+                        },
+                      ]}>
                       <Input placeholder="Type your organization name" type="text" />
                     </Form.Item>
                   </Col>
@@ -149,12 +169,16 @@ const AdminProfile = () => {
                     layout="vertical"
                     onFinish={onFinishPasswordHandler}>
                     <Col span={24}>
-                      <Form.Item label="Current Password" name="old_password" className="passwordFirst">
+                      <Form.Item
+                        label="Current Password"
+                        name="old_password"
+                        className="passwordFirst"
+                        rules={[{ required: true, message: 'Please input your current password!' }]}>
                         <Input
                           suffix={suffixFirst}
                           value={valueFirstPass}
                           type={showPassFirst ? 'text' : 'password'}
-                          placeholder="Create your password"
+                          placeholder="Current Password"
                           className="passwordFirst"
                           onChange={(e) => setValueFirstPass(() => e.target.value)}
                         />
@@ -206,7 +230,7 @@ const AdminProfile = () => {
                     <Row gutter={16} style={{ marginTop: '41.1px' }}>
                       <Col span={11}>
                         <Form.Item>
-                          <Button type="default" htmlType="submit" onClick={() => setShowFormPassword(() => false)}>
+                          <Button type="default" onClick={() => setShowFormPassword(() => false)}>
                             Cancel
                           </Button>
                         </Form.Item>

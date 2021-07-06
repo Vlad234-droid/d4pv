@@ -32,7 +32,19 @@ const ForgotPassword = (props) => {
                     <h2>Recover Password</h2>
                   </div>
                   <Form className="form-sign_in" form={form} layout="vertical" onFinish={onFinish}>
-                    <Form.Item label="Email" name="email">
+                    <Form.Item
+                      label="Email"
+                      name="email"
+                      rules={[
+                        {
+                          type: 'email',
+                          message: 'Please input your Email!',
+                        },
+                        {
+                          required: true,
+                          message: 'Email is required!',
+                        },
+                      ]}>
                       <Input placeholder="Type your email" />
                     </Form.Item>
                     <Form.Item>
@@ -48,7 +60,6 @@ const ForgotPassword = (props) => {
                   <p className="link_email">If you have an account, we will email you link to reset password </p>
                   <Button type="primary">
                     <Link to="/" onClick={() => setThanks(() => false)}>
-                      {' '}
                       Back to Sign In
                     </Link>
                   </Button>

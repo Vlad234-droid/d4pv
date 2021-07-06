@@ -26,10 +26,28 @@ const LoginPage = (props) => {
               </h2>
             </div>
             <Form className="form-sign_in" form={form} layout="vertical" onFinish={onFinishHandler}>
-              <Form.Item label="Email" name="email">
+              <Form.Item
+                label="Email"
+                name="email"
+                rules={[
+                  {
+                    type: 'email',
+                    message: 'Please input your Email!',
+                  },
+                  {
+                    required: true,
+                    message: 'Email is required!',
+                  },
+                ]}>
                 <Input placeholder="Add your email" />
               </Form.Item>
-              <Form.Item label="Password" name="password">
+              <Form.Item
+                label="Password"
+                name="password"
+                rules={[
+                  { min: 6, message: 'Password must be at least 6 characters!' },
+                  { required: true, message: 'Please input your password!' },
+                ]}>
                 <Input placeholder="Type your password" type="password" />
               </Form.Item>
               <Form.Item>

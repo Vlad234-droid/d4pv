@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Table } from 'antd';
 import { EditSVG, DeleteSVG } from '../../../icons';
-
 import './style.scss';
+
 const TableOfCompanies = ({ setShowDeleteCompany }) => {
   const [tableLoading, setTableLoading] = useState(false);
   const [dataSource, setDataSource] = useState([
@@ -18,7 +18,7 @@ const TableOfCompanies = ({ setShowDeleteCompany }) => {
       ),
       company_name: 'SunPower by Test',
       company_phone: '+46328746',
-      address: 'Lviv Leniana 49',
+      address: 'Lviv Leniana 49 SunPower by Test SunPower by Test',
     },
     {
       key: 2,
@@ -69,7 +69,12 @@ const TableOfCompanies = ({ setShowDeleteCompany }) => {
       className: 'company_phone',
     },
     {
-      title: 'Actions',
+      title: 'Address',
+      dataIndex: 'address',
+      key: 'address',
+      className: 'address',
+    },
+    {
       dataIndex: 'actions',
       key: 'actions',
       render: (_, record, index) => {
@@ -108,7 +113,7 @@ const TableOfCompanies = ({ setShowDeleteCompany }) => {
 
   return (
     <Table
-      className="table_users"
+      className="table_companies"
       loading={tableLoading}
       dataSource={dataSource}
       columns={columns}

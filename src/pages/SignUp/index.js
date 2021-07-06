@@ -4,7 +4,7 @@ import { Form, Input, Button, Row, Col } from 'antd';
 import './style.scss';
 import { Logo4PV } from '../../components/icons';
 import { Link } from 'react-router-dom';
-import { ShowPassword } from '../../components/icons';
+import { ShowPassword, CloseToShowPassword } from '../../components/icons';
 
 const LoginPage = () => {
   const [valueFirstPass, setValueFirstPass] = useState('');
@@ -18,12 +18,12 @@ const LoginPage = () => {
   };
   const suffixFirst = (
     <div className="showPassFirst" onClick={() => setShowPassFirst((prev) => !prev)}>
-      <ShowPassword />
+      {!showPassFirst ? <ShowPassword /> : <CloseToShowPassword />}
     </div>
   );
   const suffixSecond = (
     <div className="showPassFirst" onClick={() => setShowPassSecond((prev) => !prev)}>
-      <ShowPassword />
+      {!showPassSecond ? <ShowPassword /> : <CloseToShowPassword />}
     </div>
   );
   return (
@@ -54,7 +54,19 @@ const LoginPage = () => {
                 </Col>
               </Row>
               <Col span={24}>
-                <Form.Item label="Email" name="email">
+                <Form.Item
+                  label="Email"
+                  name="email"
+                  rules={[
+                    {
+                      type: 'email',
+                      message: 'Please input your Email!',
+                    },
+                    {
+                      required: true,
+                      message: 'Email is required!',
+                    },
+                  ]}>
                   <Input placeholder="Type your email" />
                 </Form.Item>
               </Col>

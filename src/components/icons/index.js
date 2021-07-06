@@ -1,4 +1,5 @@
 import React from 'react';
+import { ReactReduxContext } from 'react-redux';
 
 import './icons.scss';
 
@@ -113,6 +114,35 @@ const ShowPassword = () => {
   );
 };
 
+const CloseToShowPassword = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g>
+            <path
+              d="M0 0L24 0 24 24 0 24z"
+              transform="translate(-783.000000, -511.000000) translate(783.000000, 511.000000)"
+            />
+            <g>
+              <path
+                d="M0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0z"
+                transform="translate(-783.000000, -511.000000) translate(783.000000, 511.000000)"
+              />
+              <path
+                fill="#00254D"
+                fillOpacity=".9"
+                d="M12 6.5c2.76 0 5 2.24 5 5 0 .51-.1 1-.24 1.46l3.06 3.06c1.39-1.23 2.49-2.77 3.18-4.53C21.27 7.11 17 4 12 4c-1.27 0-2.49.2-3.64.57l2.17 2.17c.47-.14.96-.24 1.47-.24zM2.71 3.16c-.39.39-.39 1.02 0 1.41l1.97 1.97C3.06 7.83 1.77 9.53 1 11.5 2.73 15.89 7 19 12 19c1.52 0 2.97-.3 4.31-.82l2.72 2.72c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L4.13 3.16c-.39-.39-1.03-.39-1.42 0zM12 16.5c-2.76 0-5-2.24-5-5 0-.77.18-1.5.49-2.14l1.57 1.57c-.03.18-.06.37-.06.57 0 1.66 1.34 3 3 3 .2 0 .38-.03.57-.07L14.14 16c-.65.32-1.37.5-2.14.5zm2.97-5.33c-.15-1.4-1.25-2.49-2.64-2.64l2.64 2.64z"
+                transform="translate(-783.000000, -511.000000) translate(783.000000, 511.000000)"
+              />
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
 const Question = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" style={{ cursor: 'pointer' }}>
@@ -120,6 +150,25 @@ const Question = () => {
         <g>
           <g transform="translate(-1762.000000, -17.000000) translate(1762.000000, 17.000000) translate(0.916667, 0.916667)">
             <circle cx="10.083" cy="10.083" r="10.083" fill="#00254D" fillOpacity=".9" />
+            <path
+              fill="#FFF"
+              fillRule="nonzero"
+              d="M9.35 11.675l1.599-.47c-.176-.156-.264-.361-.264-.616 0-.225.083-.435.249-.63.166-.196.372-.377.616-.543.244-.166.486-.347.726-.543.24-.195.442-.45.609-.762.166-.313.249-.665.249-1.056 0-.695-.274-1.254-.821-1.68-.548-.425-1.291-.638-2.23-.638-1.33 0-2.4.475-3.212 1.423L8.06 7.495c.509-.607 1.11-.91 1.804-.91.382 0 .668.079.858.235.191.156.286.357.286.601 0 .215-.112.43-.337.646-.225.215-.47.4-.733.557-.264.156-.509.391-.734.704-.225.313-.337.665-.337 1.056 0 .508.161.939.484 1.29zm.704 3.153c.323 0 .601-.117.836-.352s.352-.513.352-.836c0-.323-.117-.601-.352-.836s-.513-.352-.836-.352c-.323 0-.601.117-.836.352s-.352.513-.352.836c0 .323.117.601.352.836s.513.352.836.352z"
+            />
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+const QuestionOpen = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g transform="translate(-1762.000000, -338.000000) translate(1762.000000, 338.000000) translate(0.916667, 0.916667)">
+            <circle cx="10.083" cy="10.083" r="10.083" fill="#FFB40A" />
             <path
               fill="#FFF"
               fillRule="nonzero"
@@ -395,10 +444,33 @@ const DeleteSVG = () => {
     </svg>
   );
 };
+
+const CloseSVG = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style={centeredSVG()}>
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g>
+            <path
+              d="M0 0L24 0 24 24 0 24z"
+              transform="translate(-1466.000000, -259.000000) translate(1466.000000, 259.000000)"
+            />
+            <path
+              fill="#FFB40A"
+              d="M18.3 5.71c-.39-.39-1.02-.39-1.41 0L12 10.59 7.11 5.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L10.59 12 5.7 16.89c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 13.41l4.89 4.89c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z"
+              transform="translate(-1466.000000, -259.000000) translate(1466.000000, 259.000000)"
+            />
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
 export {
   IconInfo,
   Logo4PV,
   ShowPassword,
+  CloseToShowPassword,
   Question,
   ProfileDropDown,
   BackLeftSVG,
@@ -410,5 +482,7 @@ export {
   SearchSVG,
   CloseIconSVG,
   EditSVG,
+  CloseSVG,
   DeleteSVG,
+  QuestionOpen,
 };

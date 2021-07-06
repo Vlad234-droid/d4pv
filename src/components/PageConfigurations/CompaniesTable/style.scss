@@ -12,6 +12,11 @@
   }
   .form_to_add {
     .create_user {
+      .ant-row {
+        .ant-col {
+          transition: all 0.3s ease;
+        }
+      }
       .input_link {
         .block_sufix {
           cursor: pointer;

@@ -45,11 +45,6 @@
     .rec_pas {
       h2 {
         font-size: 20px;
-        font-weight: bold;
-        font-stretch: normal;
-        font-style: normal;
-        letter-spacing: normal;
-        color: #00254d;
         margin-bottom: 0px;
         margin-top: 20px;
       }
@@ -77,29 +72,17 @@
     .thank-you {
       margin-top: 35px;
       margin-bottom: 0px;
-      font-family: Montserrat;
       font-size: 20px;
-      font-weight: bold;
-      font-stretch: normal;
-      font-style: normal;
-      letter-spacing: normal;
-      color: #00254d;
     }
     .link_email {
-      text-align: center;
       margin-bottom: 0px;
-      font-family: Montserrat;
       font-size: 13px;
       font-weight: 600;
-      font-stretch: normal;
-      font-style: normal;
-      letter-spacing: normal;
       text-align: center;
-      color: #00254d;
     }
   }
 }
-@media (max-width: 1919px) {
+@media (max-width: 1440px) {
   .login-page {
     .wrapper {
       .fl_recover {

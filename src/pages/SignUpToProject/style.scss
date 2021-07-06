@@ -14,13 +14,7 @@
       .goSolar {
         h2 {
           text-align: center;
-          font-family: Montserrat;
           font-size: 20px;
-          font-weight: bold;
-          font-stretch: normal;
-          font-style: normal;
-          letter-spacing: normal;
-          color: #00254d;
           margin-top: 45px;
           margin-bottom: 25px;
         }
@@ -37,16 +31,7 @@
               margin-top: 0px;
             }
           }
-          .ant-row.passwordFirst,
-          .passwordApproved {
-            .ant-col {
-              label {
-                &::before {
-                  display: none;
-                }
-              }
-            }
-          }
+
           .ant-row.passwordApproved.ant-form-item-has-error {
             .ant-col.ant-form-item-label {
               label {
@@ -57,15 +42,10 @@
             .ant-col.ant-form-item-control {
               .ant-form-item-control-input {
                 .ant-form-item-control-input-content {
-                  border: solid 1px #ff0015 !important;
-                  border-radius: 2px;
-                  display: inline-flex;
-                  width: 100%;
-                  span {
-                    input {
-                      border: none;
-                    }
-                  }
+                  // border: solid 1px #ff0015 !important;
+                  // border-radius: 2px;
+                  // display: inline-flex;
+                  // width: 100%;
                 }
               }
             }
@@ -93,27 +73,13 @@
               }
             }
           }
-          label {
-            opacity: 0.5;
-            font-family: Montserrat;
-            font-size: 11px;
-            font-weight: normal;
-            font-stretch: normal;
-            font-style: normal;
-            letter-spacing: -0.1px;
-            color: #00254d;
-          }
         }
         .policy {
-          font-family: Montserrat;
           font-size: 14px;
           font-weight: 500;
-          font-stretch: normal;
-          font-style: normal;
           line-height: 1.38;
           letter-spacing: -0.1px;
           text-align: center;
-          color: #00254d;
           margin-top: 30px;
 
           span {

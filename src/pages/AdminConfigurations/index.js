@@ -10,7 +10,7 @@ import CompaniesTable from '../../components/PageConfigurations/CompaniesTable';
 const { TabPane } = Tabs;
 
 const AdminConfigurations = () => {
-  const [currentTub, setCurrentTub] = useState('1');
+  const [currentTub, setCurrentTub] = useState('2');
   function callback(key) {
     setCurrentTub(() => key);
   }
