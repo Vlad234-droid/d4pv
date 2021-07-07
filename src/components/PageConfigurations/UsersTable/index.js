@@ -35,7 +35,6 @@ const UsersTable = () => {
             <Col span={4}>
               <Button
                 type="primary"
-                htmlType="submit"
                 className="save_link"
                 style={{ height: '40px' }}
                 onClick={() => setShowAddUser(() => true)}>

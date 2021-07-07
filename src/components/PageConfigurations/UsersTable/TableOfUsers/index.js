@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Table } from 'antd';
 import { EditSVG, DeleteSVG } from '../../../icons';
+import ModalEditUser from '../ModalEditUser';
 
 import './style.scss';
 const TableOfUsers = ({ setShowDeleteUser }) => {
+  const [showEditUser, setShowEditUser] = useState(false);
+  const [currRecordRow, setCurrRecordRow] = useState({});
   const [tableLoading, setTableLoading] = useState(false);
   const [dataSource, setDataSource] = useState([
     {
@@ -13,7 +16,7 @@ const TableOfUsers = ({ setShowDeleteUser }) => {
           <div className="wrapper_img">
             <img
               src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-              alt="Photo"
+              alt="Logo"
             />
           </div>
           <h3 className="name">Vlad</h3>
@@ -21,6 +24,7 @@ const TableOfUsers = ({ setShowDeleteUser }) => {
       ),
       role: 'admin',
       email: 'vladikvladvita2@gmail.com',
+      conf: 'confirmitation',
     },
     {
       key: 2,
@@ -29,7 +33,7 @@ const TableOfUsers = ({ setShowDeleteUser }) => {
           <div className="wrapper_img">
             <img
               src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-              alt="Photo"
+              alt="Logo"
             />
           </div>
           <h3 className="name">Dima</h3>
@@ -45,7 +49,7 @@ const TableOfUsers = ({ setShowDeleteUser }) => {
           <div className="wrapper_img">
             <img
               src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-              alt="Photo"
+              alt="Logo"
             />
           </div>
           <h3 className="name">Rav</h3>
@@ -80,24 +84,24 @@ const TableOfUsers = ({ setShowDeleteUser }) => {
       key: 'actions',
       render: (_, record, index) => {
         return (
-          <div
-            className="actions_block"
-            onChange={(e) => {
-              console.log('e div', e);
-            }}>
+          <div className="actions_block">
             <div
               onClick={(e) => {
-                console.log('e', e.target.dataset.action);
-                console.log('record', record);
-                console.log('index', index);
+                //console.log('e', e.target.dataset.action);
+                //console.log('record', record);
+                //console.log('index', index);
+                setCurrRecordRow(() => ({
+                  ...record,
+                }));
+                setShowEditUser(() => true);
               }}>
               <EditSVG />
             </div>
             <div
               onClick={(e) => {
-                console.log('e', e.target.dataset.action);
-                console.log('record', record);
-                console.log('index', index);
+                //console.log('e', e.target.dataset.action);
+                //console.log('record', record);
+                //console.log('index', index);
                 setShowDeleteUser(() => true);
               }}>
               <DeleteSVG />
@@ -113,14 +117,17 @@ const TableOfUsers = ({ setShowDeleteUser }) => {
   };
 
   return (
-    <Table
-      className="table_users"
-      loading={tableLoading}
-      dataSource={dataSource}
-      columns={columns}
-      onChange={onChange}
-      pagination={false}
-    />
+    <>
+      <Table
+        className="table_users"
+        loading={tableLoading}
+        dataSource={dataSource}
+        columns={columns}
+        onChange={onChange}
+        pagination={false}
+      />
+      <ModalEditUser record={currRecordRow} showEditUser={showEditUser} setShowEditUser={setShowEditUser} />
+    </>
   );
 };
 

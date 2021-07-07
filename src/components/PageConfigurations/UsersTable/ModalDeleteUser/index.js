@@ -1,6 +1,6 @@
 import React from 'react';
 import { CloseIconSVG } from '../../../icons';
-import { Modal, Form, Input, Button, Col, Row, Radio } from 'antd';
+import { Modal, Form, Button, Col, Row } from 'antd';
 import './style.scss';
 
 const ModalDeleteUser = ({ showDeleteUser, setShowDeleteUser }) => {

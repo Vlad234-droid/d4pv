@@ -3,7 +3,7 @@
   min-height: 100vh;
   overflow: hidden;
   min-width: 1170px;
-  height: 100vh;
+  //height: 100vh;
   overflow-x: visible;
   .wrapper {
     .container_info {
@@ -31,7 +31,7 @@
         margin-top: 16px;
         .info_from_tab {
           width: 872px;
-          height: 560px;
+          min-height: 560px;
           padding: 32px 40px 32px 40px;
           border-radius: 4px;
           box-shadow: 0 1px 4px 0 rgba(0, 25, 94, 0.2);

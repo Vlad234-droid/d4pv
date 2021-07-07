@@ -1,0 +1,55 @@
+.container_add__company {
+  .head_block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .arrow_left {
+      cursor: pointer;
+      padding: 2px 2px 2px 0px;
+    }
+    div > h2 {
+      font-size: 20px;
+      margin-left: 8px;
+      margin-top: 2px;
+    }
+  }
+  .form_add_company {
+    margin-top: 21px;
+    .line {
+      hr {
+        margin-top: 11.5px;
+        border: none;
+        color: rgba(178, 190, 202, 0.4);
+        background-color: rgba(178, 190, 202, 0.4);
+        height: 1px;
+      }
+    }
+    .after_line_block {
+      h2 {
+        font-size: 14px;
+        margin-top: 10px;
+      }
+    }
+    .row_address {
+      .extra {
+        span {
+          position: absolute;
+          cursor: pointer;
+          top: 0px;
+          right: 18px;
+          font-family: Montserrat;
+          font-size: 11px;
+          font-weight: 600;
+          font-stretch: normal;
+          font-style: normal;
+          letter-spacing: -0.1px;
+          color: #ffb40a;
+          z-index: 1;
+        }
+      }
+    }
+    .btns {
+      margin-top: 27px;
+    }
+  }
+}

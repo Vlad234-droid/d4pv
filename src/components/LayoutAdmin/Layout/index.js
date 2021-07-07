@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../Header';
 import { Layout } from 'antd';
-
+import './style.scss';
 const LayoutAdmin = ({ children, className }) => {
   return (
     <div className={`app-dashboard ${className}`}>

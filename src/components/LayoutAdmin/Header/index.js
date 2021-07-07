@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './style.scss';
 import { Question, ProfileDropDown, Logo4PV, Pinion, QuestionOpen } from '../../../components/icons';
-import { Form, Input, Button, Row, Col, Menu, Dropdown } from 'antd';
+import { Form, Input, Button, Col, Menu, Dropdown } from 'antd';
 import { SearchSVG } from '../../icons';
 
 const menuProfile = (

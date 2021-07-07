@@ -1,5 +1,4 @@
 import React from 'react';
-import { ReactReduxContext } from 'react-redux';
 
 import './icons.scss';
 
@@ -466,6 +465,66 @@ const CloseSVG = () => {
     </svg>
   );
 };
+
+const ArrowLeftBigSVG = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style={centeredSVG()}>
+      <g fill="none" fillRule="evenodd">
+        <g fill="#FFB40A">
+          <g>
+            <path
+              d="M4.056 6.4l8.037 7.631L19.648 6.4c.585-.585 1.53-.585 2.115 0 .585.585.585 1.53 0 2.115l-8.62 8.696c-.585.585-1.53.585-2.115 0L1.926 8.515c-.585-.585-.585-1.53 0-2.115.585-.57 1.545-.585 2.13 0z"
+              transform="translate(-706.000000, -207.000000) translate(706.000000, 207.000000) translate(11.844478, 11.805725) scale(1, -1) rotate(90.000000) translate(-11.844478, -11.805725)"
+            />
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+const StarSVG = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style={centeredSVG()}>
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g>
+            <g transform="translate(-762.000000, -315.000000) translate(714.000000, 267.000000) translate(48.000000, 48.000000)">
+              <rect width="23" height="23" x=".5" y=".5" stroke="#FFB40A" rx="2" />
+              <path
+                fill="#FFB40A"
+                d="M12 15.6l-2.65 1.619c-.472.288-1.087.14-1.375-.332-.138-.226-.18-.497-.12-.754l.721-3.02-2.358-2.021c-.42-.36-.469-.99-.11-1.41.172-.2.417-.325.68-.346l3.096-.248 1.193-2.868c.212-.51.797-.751 1.307-.54.244.102.438.296.54.54l1.192 2.868 3.096.248c.55.044.96.526.917 1.076-.021.264-.146.508-.347.68l-2.358 2.02.72 3.021c.129.538-.203 1.077-.74 1.205-.257.062-.528.019-.754-.12L12 15.6z"
+              />
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+const CloseSmallSVG = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" style={centeredSVG()}>
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g>
+            <g>
+              <path
+                d="M0 0L16 0 16 16 0 16z"
+                transform="translate(-858.000000, -385.000000) translate(714.000000, 332.000000) translate(144.000000, 53.000000)"
+              />
+              <path
+                fill="#FFB40A"
+                d="M12.2 3.807c-.26-.26-.68-.26-.94 0L8 7.06 4.74 3.8c-.26-.26-.68-.26-.94 0-.26.26-.26.68 0 .94L7.06 8 3.8 11.26c-.26.26-.26.68 0 .94.26.26.68.26.94 0L8 8.94l3.26 3.26c.26.26.68.26.94 0 .26-.26.26-.68 0-.94L8.94 8l3.26-3.26c.253-.253.253-.68 0-.933z"
+                transform="translate(-858.000000, -385.000000) translate(714.000000, 332.000000) translate(144.000000, 53.000000)"
+              />
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
 export {
   IconInfo,
   Logo4PV,
@@ -485,4 +544,7 @@ export {
   CloseSVG,
   DeleteSVG,
   QuestionOpen,
+  ArrowLeftBigSVG,
+  StarSVG,
+  CloseSmallSVG,
 };

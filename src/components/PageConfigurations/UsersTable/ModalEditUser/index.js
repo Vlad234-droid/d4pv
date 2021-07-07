@@ -3,28 +3,28 @@ import { Modal, Form, Input, Button, Col, Row, Radio } from 'antd';
 import './style.scss';
 import { CloseIconSVG } from '../../../icons';
 
-const ModalAddUser = ({ showAddUser, setShowAddUser }) => {
+const ModalEditUser = ({ record, showEditUser, setShowEditUser }) => {
   const [form] = Form.useForm();
-
+  console.log('record', record);
   const onFinish = (values) => {
     console.log('values', values);
-    setShowAddUser(() => false);
+    //setShowEditUser(() => false);
   };
 
   return (
     <Modal
-      visible={showAddUser}
+      visible={showEditUser}
       closeIcon={<CloseIconSVG />}
       onCancel={() => {
-        setShowAddUser(() => false);
+        setShowEditUser(() => false);
       }}
       cancelButtonProps={{ style: { display: 'none' } }}
       okButtonProps={{ style: { display: 'none' } }}
-      getContainer={() => document.getElementById('block_users')}
+      getContainer={() => document.querySelector('.table_users')}
       width={544}
-      className="modal_createUser">
+      className="modal_editUser">
       <Form
-        name="user_create"
+        name="edit_human"
         layout="vertical"
         form={form}
         requiredMark={true}
@@ -32,19 +32,20 @@ const ModalAddUser = ({ showAddUser, setShowAddUser }) => {
         initialValues={{
           option__user__admin: 'admin',
         }}>
-        <h2>Add User</h2>
+        <h2>Edit User</h2>
         <Col span={24}>
-          <Form.Item
-            name="email"
-            className="email"
-            label="User Email"
-            rules={[
-              {
-                required: true,
-                message: 'Type your email',
-              },
-            ]}>
-            <Input />
+          <Form.Item className="exept">
+            <div className="block_info">
+              <div className="direction">
+                <div className="wrapper_img">
+                  <img src={record?.name?.props?.children[0]?.props?.children?.props?.src} alt="logo" />
+                </div>
+                <div className="infos">
+                  <h3>{record?.name?.props?.children[1]?.props?.children}</h3>
+                  <h3>{record.email}</h3>
+                </div>
+              </div>
+            </div>
           </Form.Item>
         </Col>
 
@@ -54,12 +55,16 @@ const ModalAddUser = ({ showAddUser, setShowAddUser }) => {
               <Row gutter={192}>
                 <Col span={5}>
                   <Radio value="user" name="user">
-                    <Button type="button">User</Button>
+                    <Button type="button" className="user_btn">
+                      Regular User
+                    </Button>
                   </Radio>
                 </Col>
-                <Col span={5}>
+                <Col span={5} className="col-exp">
                   <Radio value="admin" name="admin">
-                    <Button type="primary">Admin</Button>
+                    <Button type="primary" className="admin_btn">
+                      Admin
+                    </Button>
                   </Radio>
                 </Col>
               </Row>
@@ -73,7 +78,7 @@ const ModalAddUser = ({ showAddUser, setShowAddUser }) => {
               <Button
                 type="button"
                 onClick={() => {
-                  setShowAddUser(() => false);
+                  setShowEditUser(() => false);
                 }}>
                 Cancel
               </Button>
@@ -89,4 +94,4 @@ const ModalAddUser = ({ showAddUser, setShowAddUser }) => {
     </Modal>
   );
 };
-export default ModalAddUser;
+export default ModalEditUser;

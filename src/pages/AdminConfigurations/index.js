@@ -11,25 +11,23 @@ const { TabPane } = Tabs;
 
 const AdminConfigurations = () => {
   const [currentTub, setCurrentTub] = useState('2');
+
   function callback(key) {
     setCurrentTub(() => key);
   }
 
-  const renderItemsTabs = useCallback(
-    (currentTub) => {
-      switch (currentTub) {
-        case '1':
-          return <UsersTable />;
+  const renderItemsTabs = useCallback((currentTub) => {
+    switch (currentTub) {
+      case '1':
+        return <UsersTable />;
 
-        case '2':
-          return <CompaniesTable />;
+      case '2':
+        return <CompaniesTable />;
 
-        default:
-          return currentTub;
-      }
-    },
-    [currentTub],
-  );
+      default:
+        return currentTub;
+    }
+  }, []);
 
   return (
     <LayoutAdmin className="admin_configurations">

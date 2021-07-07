@@ -4,7 +4,7 @@ import { EditSVG, DeleteSVG } from '../../../icons';
 import './style.scss';
 
 const TableOfCompanies = ({ setShowDeleteCompany }) => {
-  const [tableLoading, setTableLoading] = useState(false);
+  //const [tableLoading, setTableLoading] = useState(false);
   const [dataSource, setDataSource] = useState([
     {
       key: 1,
@@ -114,7 +114,7 @@ const TableOfCompanies = ({ setShowDeleteCompany }) => {
   return (
     <Table
       className="table_companies"
-      loading={tableLoading}
+      //loading={tableLoading}
       dataSource={dataSource}
       columns={columns}
       onChange={onChange}

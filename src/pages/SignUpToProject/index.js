@@ -3,7 +3,6 @@ import Layout from '../../components/LayoutGuest/Layout';
 import { Form, Input, Button, Row, Col } from 'antd';
 import './style.scss';
 import { Logo4PV } from '../../components/icons';
-import { Link } from 'react-router-dom';
 import { ShowPassword, CloseToShowPassword } from '../../components/icons';
 
 const SignUpToProject = () => {
