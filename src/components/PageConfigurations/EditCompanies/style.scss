@@ -1,4 +1,18 @@
 .container_add__company {
+  position: relative;
+  .switch_mode {
+    z-index: 1;
+    cursor: pointer;
+    position: absolute;
+    top: 59px;
+    right: 0px;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px 0 rgba(0, 25, 94, 0.1);
+    background-color: #ffffff;
+  }
   .head_block {
     display: flex;
     flex-direction: row;
@@ -47,9 +61,23 @@
           z-index: 1;
         }
       }
+      .address_column {
+        margin-top: 13px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 30px;
+      }
     }
     .btns {
       margin-top: 27px;
+    }
+    .ant-form-item-control-input-content {
+      h3 {
+        font-size: 12px;
+        font-weight: 500;
+        margin-bottom: 0px;
+      }
     }
   }
 }

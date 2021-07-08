@@ -525,6 +525,50 @@ const CloseSmallSVG = () => {
     </svg>
   );
 };
+
+const ArrowDownSelectSVG = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" style={centeredSVG()}>
+      <g fill="none" fillRule="evenodd">
+        <g fill="#FFB40A">
+          <g>
+            <g>
+              <path
+                d="M2.678 4.5l5.358 5.088L13.073 4.5c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-5.747 5.797c-.39.39-1.02.39-1.41 0L1.258 5.91c-.39-.39-.39-1.02 0-1.41.39-.38 1.03-.39 1.42 0z"
+                transform="translate(-1198.000000, -775.000000) translate(989.000000, 746.000000) translate(217.766802, 37.974165) rotate(-90.000000) translate(-217.766802, -37.974165) translate(209.766802, 29.974165) translate(7.870483, 8.103682) scale(1, -1) rotate(90.000000) translate(-7.870483, -8.103682)"
+              />
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+const EditCompanySVG = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style={centeredSVG()}>
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g>
+            <g>
+              <path
+                d="M0 0L24 0 24 24 0 24z"
+                transform="translate(-1474.000000, -340.000000) translate(1466.000000, 332.000000) translate(8.000000, 8.000000)"
+              />
+              <path
+                fill="#00254D"
+                fillOpacity=".9"
+                d="M5.335 14.667l3.998 4.006L4 20l.673-2.69zm8.462-8c1.172 1.172 2.362 2.363 3.536 3.54l-7.13 7.126-3.536-3.537 7.13-7.13zm2.588-2.44c.418-.328 1.04-.296 1.428.07.652.616 1.289 1.25 1.903 1.904.375.399.368 1.03.04 1.467-.073.098-.16.186-.246.274-.237.243-.476.483-.715.725l-3.462-3.458c.346-.327.674-.687 1.052-.983z"
+                transform="translate(-1474.000000, -340.000000) translate(1466.000000, 332.000000) translate(8.000000, 8.000000)"
+              />
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
 export {
   IconInfo,
   Logo4PV,
@@ -547,4 +591,6 @@ export {
   ArrowLeftBigSVG,
   StarSVG,
   CloseSmallSVG,
+  ArrowDownSelectSVG,
+  EditCompanySVG,
 };

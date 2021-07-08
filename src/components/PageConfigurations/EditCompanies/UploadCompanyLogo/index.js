@@ -6,19 +6,17 @@ import { SVGReload, CloseSmallSVG } from '../../../icons';
 
 const { Dragger } = Upload;
 
-const UploadCompanyLogo = ({ form, edit, setEdit, setLogoUrl, logoUrl }) => {
+const UploadCompanyLogo = ({ editMode, testArray, form, editCompanyLogo, setEditCompanyLogo, setLogoUrl, logoUrl }) => {
   const customRequest = (e) => {
-    console.log('current value', e);
     form.setFieldsValue({
       logo: e.file,
     });
-    console.log('here1', e.file);
     setLogoUrl(() => URL.createObjectURL(e.file));
     e.onSuccess('ok');
-    setEdit(() => true);
+    setEditCompanyLogo(() => true);
   };
 
-  if (edit) {
+  if (editCompanyLogo) {
     return (
       <div className="edit_dragger">
         <Dragger
@@ -39,7 +37,7 @@ const UploadCompanyLogo = ({ form, edit, setEdit, setLogoUrl, logoUrl }) => {
               <div
                 onClick={(e) => {
                   e.stopPropagation();
-                  setEdit(() => false);
+                  setEditCompanyLogo(() => false);
                 }}>
                 <div>
                   <CloseSmallSVG />
@@ -58,17 +56,23 @@ const UploadCompanyLogo = ({ form, edit, setEdit, setLogoUrl, logoUrl }) => {
         name="file"
         customRequest={customRequest}
         accept=".jpg,.jpeg,.png"
-        className={`upload-logo ${false ? 'loading' : ''} `}
+        className={`upload-logo ${false ? 'loading' : ''} ${!editMode && 'edit'} `}
         showUploadList={false}>
         {/* <div className="upload-loading">
           <Spin />
         </div> */}
-        <div className="upload-title">
-          <div>
-            <StarSVG />
+        {testArray.logo === undefined ? (
+          <div className="upload-title">
+            <div>
+              <StarSVG />
+            </div>
+            <span className="upload_photo">Upload logo</span>
           </div>
-          <span className="upload_photo">Upload logo</span>
-        </div>
+        ) : (
+          <div className="img_logo__block">
+            <img src={URL.createObjectURL(testArray.logo)} alt="logo" />
+          </div>
+        )}
       </Dragger>
     </Tooltip>
   );
