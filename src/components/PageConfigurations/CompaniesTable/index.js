@@ -11,7 +11,7 @@ const CompaniesTable = () => {
   const [form] = Form.useForm();
   const [showDeleteCompany, setShowDeleteCompany] = useState(false);
   const [serchToggle, setSearchToggle] = useState(false);
-  const [editCompanyState, setEditCompanyState] = useState(true);
+  const [editCompanyState, setEditCompanyState] = useState(false);
 
   const onFinish = (values) => {
     console.log('values', values);

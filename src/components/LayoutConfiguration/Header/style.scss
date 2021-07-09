@@ -1,0 +1,77 @@
+header {
+  min-width: 100%;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 0px 48px 0px 36px;
+  border-bottom: 1px solid rgba(178, 190, 202, 0.5);
+
+  .header_wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .logo {
+      width: 120px;
+      margin-right: 60px;
+    }
+    .logo > div {
+      height: 55px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      &:after {
+        content: '';
+        width: 1px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: -30px;
+        background-color: rgba(178, 190, 202, 0.5);
+      }
+    }
+    .block {
+      flex: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .solar {
+        flex: auto;
+        h2 {
+          font-size: 20px;
+        }
+      }
+      .corner_container {
+        .question {
+          margin-right: 24px;
+          padding: 3px;
+          display: flex;
+        }
+        display: flex;
+        align-items: center;
+
+        .photo_drop {
+          display: flex;
+          align-items: center;
+          .drop {
+            padding: 3px;
+          }
+          .user_photo {
+            display: inline-block;
+            position: relative;
+            width: 40px;
+            height: 40px;
+            overflow: hidden;
+            border-radius: 50%;
+            margin-right: 8px;
+            img {
+              width: auto;
+              height: 100%;
+              object-fit: contain;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,91 @@
+.ant-table-wrapper.table_users {
+  margin-top: 10px;
+  .ant-table {
+    .ant-table-thead {
+      tr {
+        th {
+          background-color: #ffffff;
+          border-top: 1px solid #b2beca;
+          border-bottom: 1px solid #b2beca;
+          padding: 4.5px 16px;
+          font-size: 9px;
+          font-weight: 600;
+          line-height: 1.33;
+          letter-spacing: -0.1px;
+          color: #b2beca;
+          text-transform: uppercase;
+          padding: 10px 16px;
+
+          &::before {
+            display: none;
+          }
+        }
+      }
+    }
+    .ant-table-tbody {
+      tr {
+        &:nth-child(even) {
+          background-color: rgba(178, 190, 202, 0.1);
+        }
+        &:hover {
+          td {
+            background-color: unset;
+          }
+        }
+        td {
+          &.roles,
+          &.email {
+            font-size: 13px;
+            font-weight: 500;
+            font-stretch: normal;
+            font-style: normal;
+            letter-spacing: -0.1px;
+            color: #00254d;
+          }
+          padding: 8px 16px;
+          border-bottom: hidden;
+          .wrapper_name {
+            display: flex;
+            align-items: center;
+            .wrapper_img {
+              display: block;
+              position: relative;
+              width: 32px;
+              height: 32px;
+              overflow: hidden;
+              border-radius: 50%;
+              margin-right: 8px;
+              img {
+                width: auto;
+                height: 100%;
+                object-fit: contain;
+              }
+            }
+            h3 {
+              font-size: 13px;
+              font-weight: 600;
+              font-stretch: normal;
+              font-style: normal;
+              letter-spacing: normal;
+              color: #00254d;
+              margin-bottom: 0px;
+            }
+          }
+          .actions_block {
+            width: 80%;
+            margin: 0px auto 0px 0px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            div {
+              cursor: pointer;
+              &:nth-child(1) {
+                align-self: flex-start;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

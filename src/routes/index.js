@@ -9,6 +9,10 @@ import UserProfile from '../pages/UserProfile';
 import SignUpToProject from '../pages/SignUpToProject';
 import AdminProfile from '../pages/AdminProfile';
 import AdminConfigurations from '../pages/AdminConfigurations';
+import AdminUsersConfigurations from '../pages/AdminUsersConfigurations';
+import AdminCompaniesConfigurations from '../pages/AdminCompaniesConfigurations';
+import AdminCompanyInfoConf from '../pages/AdminCompanyInfoConf';
+import AdminAddCompanyConfigurations from '../pages/AdminAddCompanyConfigurations';
 
 const LoginPage = lazyWithPreload(() => import('../pages/Login'));
 
@@ -24,8 +28,14 @@ const routes = () => {
         <Route exact path="/test" component={Counter} />
         <Route exact path="/userProfile" component={UserProfile} />
         <Route exact path="/adminProfile" component={AdminProfile} />
-        <Route exact path="/adminConfigurations" component={AdminConfigurations} />
+        {/* <Route exact path="/adminConfigurations" component={AdminConfigurations} /> */}
+        <Route exact path="/admin-users-conf" component={AdminUsersConfigurations} />
+        <Route exact path="/admin-companies-conf" component={AdminCompaniesConfigurations} />
+        <Route exact path="/admin-add-company-conf" component={AdminAddCompanyConfigurations} />
+        <Route exact path="/admin-company-info-conf/:id" component={AdminCompanyInfoConf} />
 
+        {/* тут создаешь отдельный лейайт с хедером и с хедером и табный тот что с слева 
+        левый таб должен быть в лейауте а все что будет с справа будут отдельнеы роуты*/}
         {/* <PrivateRoute exact path='/replies/' component={Login} /> */}
       </CoreRouter>
     </React.Suspense>

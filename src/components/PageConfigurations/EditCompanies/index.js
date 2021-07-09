@@ -5,11 +5,11 @@ import './style.scss';
 import UploadCompanyLogo from './UploadCompanyLogo';
 import { ArrowDownSelectSVG, EditCompanySVG } from '../../icons';
 
-const EditCompanies = ({ setEditCompanyState }) => {
+const AdminCompanyInfoConf = ({ setEditCompanyState }) => {
   const [form] = Form.useForm();
   const [logoUrl, setLogoUrl] = useState(null);
   const [editCompanyLogo, setEditCompanyLogo] = useState(false);
-  const [editMode, setEditMode] = useState(true);
+  const [editMode, setEditMode] = useState(false);
 
   const [testArray, setTestArray] = useState({});
 
@@ -97,6 +97,7 @@ const EditCompanies = ({ setEditCompanyState }) => {
             </Form.Item>
           </Col>
         </Row>
+
         {/* //????//// */}
         <Row gutter={33}>
           <Col span={8}>
@@ -206,4 +207,4 @@ const EditCompanies = ({ setEditCompanyState }) => {
   );
 };
 
-export default EditCompanies;
+export default AdminCompanyInfoConf;
