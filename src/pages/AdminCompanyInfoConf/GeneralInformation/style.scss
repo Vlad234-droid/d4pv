@@ -1,35 +1,8 @@
-.container_add__company {
-  position: relative;
-  .switch_mode {
-    z-index: 1;
-    cursor: pointer;
-    position: absolute;
-    top: 59px;
-    right: 0px;
-    width: 40px;
-    height: 40px;
-    padding: 8px;
-    border-radius: 4px;
-    box-shadow: 0 4px 8px 0 rgba(0, 25, 94, 0.1);
-    background-color: #ffffff;
-  }
-  .head_block {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    .arrow_left {
-      cursor: pointer;
-      padding: 2px 2px 2px 0px;
-    }
-    div > h2 {
-      font-size: 20px;
-      margin-left: 8px;
-      margin-top: 2px;
-    }
-  }
-  .form_add_company {
+.info_from_tab {
+  .form_add_company.editMode {
     margin-top: 21px;
     .line {
+      display: none !important;
       hr {
         margin-top: 11.5px;
         border: none;

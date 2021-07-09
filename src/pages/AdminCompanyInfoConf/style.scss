@@ -4,7 +4,7 @@
     z-index: 1;
     cursor: pointer;
     position: absolute;
-    top: 59px;
+    top: 121px;
     right: 0px;
     width: 40px;
     height: 40px;
@@ -27,57 +27,89 @@
       margin-top: 2px;
     }
   }
-  .form_add_company {
-    margin-top: 21px;
-    .line {
-      hr {
-        margin-top: 11.5px;
-        border: none;
-        color: rgba(178, 190, 202, 0.4);
-        background-color: rgba(178, 190, 202, 0.4);
-        height: 1px;
-      }
-    }
-    .after_line_block {
-      h2 {
-        font-size: 14px;
-        margin-top: 10px;
-      }
-    }
-    .row_address {
-      .extra {
-        span {
-          position: absolute;
-          cursor: pointer;
-          top: 0px;
-          right: 18px;
-          font-family: Montserrat;
-          font-size: 11px;
-          font-weight: 600;
-          font-stretch: normal;
-          font-style: normal;
-          letter-spacing: -0.1px;
-          color: #ffb40a;
-          z-index: 1;
+  .tabs_companies {
+    .ant-tabs {
+      .ant-tabs-nav {
+        &::before {
+          opacity: 0.4;
+          background-color: #b2beca;
         }
-      }
-      .address_column {
-        margin-top: 13px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin-bottom: 30px;
-      }
-    }
-    .btns {
-      margin-top: 27px;
-    }
-    .ant-form-item-control-input-content {
-      h3 {
-        font-size: 12px;
-        font-weight: 500;
-        margin-bottom: 0px;
+
+        .ant-tabs-nav-list {
+          .ant-tabs-tab {
+            font-family: Montserrat;
+            font-size: 13px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            color: #00254d;
+            &.ant-tabs-tab-active {
+              .ant-tabs-tab-btn {
+                color: #ffb500 !important;
+              }
+            }
+          }
+          .ant-tabs-ink-bar {
+            height: 4px;
+            border-radius: 4px;
+            background-color: #ffb40a;
+            bottom: -1.8px;
+          }
+        }
       }
     }
   }
+  // .form_add_company {
+  //   margin-top: 21px;
+  //   .line {
+  //     hr {
+  //       margin-top: 11.5px;
+  //       border: none;
+  //       color: rgba(178, 190, 202, 0.4);
+  //       background-color: rgba(178, 190, 202, 0.4);
+  //       height: 1px;
+  //     }
+  //   }
+  //   .after_line_block {
+  //     h2 {
+  //       font-size: 14px;
+  //       margin-top: 10px;
+  //     }
+  //   }
+  //   .row_address {
+  //     .extra {
+  //       span {
+  //         position: absolute;
+  //         cursor: pointer;
+  //         top: 0px;
+  //         right: 18px;
+  //         font-family: Montserrat;
+  //         font-size: 11px;
+  //         font-weight: 600;
+  //         font-stretch: normal;
+  //         font-style: normal;
+  //         letter-spacing: -0.1px;
+  //         color: #ffb40a;
+  //         z-index: 1;
+  //       }
+  //     }
+  //     .address_column {
+  //       margin-top: 13px;
+  //       display: flex;
+  //       flex-direction: column;
+  //       justify-content: center;
+  //       margin-bottom: 30px;
+  //     }
+  //   }
+  //   .btns {
+  //     margin-top: 27px;
+  //   }
+  //   .ant-form-item-control-input-content {
+  //     h3 {
+  //       font-size: 12px;
+  //       font-weight: 500;
+  //       margin-bottom: 0px;
+  //     }
+  //   }
+  // }
 }

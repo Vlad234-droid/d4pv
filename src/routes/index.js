@@ -34,8 +34,6 @@ const routes = () => {
         <Route exact path="/admin-add-company-conf" component={AdminAddCompanyConfigurations} />
         <Route exact path="/admin-company-info-conf/:id" component={AdminCompanyInfoConf} />
 
-        {/* тут создаешь отдельный лейайт с хедером и с хедером и табный тот что с слева 
-        левый таб должен быть в лейауте а все что будет с справа будут отдельнеы роуты*/}
         {/* <PrivateRoute exact path='/replies/' component={Login} /> */}
       </CoreRouter>
     </React.Suspense>

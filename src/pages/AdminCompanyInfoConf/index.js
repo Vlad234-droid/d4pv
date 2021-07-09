@@ -1,114 +1,58 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowLeftBigSVG, ArrowDownSelectSVG, EditCompanySVG } from '../../components/icons';
-import { Form, Input, Button, Row, Col, Select } from 'antd';
+import React, { useState, useMemo } from 'react';
+import { ArrowLeftBigSVG, EditCompanySVG } from '../../components/icons';
 import './style.scss';
-import UploadCompanyLogo from './UploadCompanyLogo';
 import LayoutConfiguration from '../../components/LayoutConfiguration/Layout';
-import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Tabs } from 'antd';
+import GeneralInformation from './GeneralInformation';
+import PreferencesTab from './PreferencesTab';
+
+const { TabPane } = Tabs;
 
 const AdminCompanyInfoConf = () => {
-  const [form] = Form.useForm();
-  const [logoUrl, setLogoUrl] = useState(null);
-  const [editCompanyLogo, setEditCompanyLogo] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const { id } = useParams();
-  const [dataSource, setDataSource] = useState([
-    {
-      key: 1,
-      logo: (
-        <div className="logo">
-          <img
-            src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-            alt="logo"
-          />
-        </div>
-      ),
-      company_name: 'SunPower by Test',
-      company_phone: '+46328746',
-      address: 'Lviv Leniana 49 SunPower by Test SunPower by Test',
-    },
-    {
-      key: 2,
-      logo: (
-        <div className="logo">
-          <img
-            src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-            alt="logo"
-          />
-        </div>
-      ),
-      company_name: 'SunPower by Kamtech Solar',
-      company_phone: '+243123412',
-      address: 'Kyiv lomonosova 678',
-    },
-    {
-      key: 3,
-      logo: (
-        <div className="logo">
-          <img
-            src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-            alt="logo"
-          />
-        </div>
-      ),
-      company_name: 'Sun Royale shine ',
-      company_phone: '+467839',
-      address: 'The center of City',
-    },
-  ]);
-
+  const [activeTabsKey, setActiveTabsKey] = useState('1');
   const [testArray, setTestArray] = useState({});
+  const callback = (key) => setActiveTabsKey(() => key);
 
-  const [extraAddress, setExtraAddress] = useState(false);
-
-  useEffect(() => {
-    const data = dataSource
-      .filter((item) => item.key === Number(id))
-      .map((item) => ({
-        compname: item.company_name,
-        compphone: item.company_phone,
-        searchaddress: item.address,
-      }));
-    setTestArray(() => ({
-      ...data[0],
-    }));
-  }, []);
-
-  const onFinishHandler = (values) => {
-    setTestArray(() => ({
-      ...values,
-    }));
-    form.resetFields();
-    setEditMode(() => false);
-    setEditCompanyLogo(() => false);
-  };
-
-  const onGenderChange = (value) => {
-    console.log('value', value);
-  };
-
-  const suffixIcon = (
-    <div style={{ zIndex: '-2' }}>
-      <ArrowDownSelectSVG />
-    </div>
-  );
-
-  const attr = (value) => {
-    if (editMode)
-      return {
-        name: value,
-      };
-  };
-
-  const dashCheck = (value) => {
-    if (value === undefined) return '-';
-    return value;
-  };
+  const config = [
+    {
+      tab: 'General Information',
+      key: '1',
+      clasname: 'general_info tab',
+      component: (
+        <GeneralInformation
+          setTestArray={setTestArray}
+          editMode={editMode}
+          testArray={testArray}
+          setEditMode={setEditMode}
+        />
+      ),
+    },
+    {
+      tab: 'Notes',
+      key: '2',
+      clasname: 'notes tab',
+      component: <div>Notes</div>,
+    },
+    {
+      tab: 'Requirements',
+      key: '3',
+      clasname: 'requirements tab',
+      component: <div>Requirements</div>,
+    },
+    {
+      tab: 'Preferences',
+      key: '4',
+      clasname: 'preferences tab',
+      component: <PreferencesTab />,
+    },
+  ];
 
   return (
     <LayoutConfiguration>
       <div className="container_add__company">
-        {!editMode && (
+        {!editMode && activeTabsKey === '1' && (
           <div className="switch_mode" onClick={() => setEditMode(() => true)}>
             <div>
               <EditCompanySVG />
@@ -127,146 +71,26 @@ const AdminCompanyInfoConf = () => {
             <h2>{!editMode ? testArray.compname : 'Edit Contractor Company'}</h2>
           </div>
         </div>
-        <div className="tabs_companies"></div>
-        <Form className="form_add_company" form={form} layout="vertical" onFinish={onFinishHandler}>
-          <Form.Item label="Logo" name="logo">
-            <UploadCompanyLogo
-              testArray={testArray}
-              form={form}
-              logoUrl={logoUrl}
-              setLogoUrl={setLogoUrl}
-              editCompanyLogo={editCompanyLogo}
-              setEditCompanyLogo={setEditCompanyLogo}
-              editMode={editMode}
-            />
-          </Form.Item>
-
-          {/* //????//// */}
-          <Row gutter={33}>
-            <Col span={8}>
-              <Form.Item label="Company Name" {...attr('compname')}>
-                {editMode ? <Input placeholder="" type="text" /> : <h3>{dashCheck(testArray.compname)}</h3>}
-              </Form.Item>
-            </Col>
-            <Col span={8}>
-              <Form.Item label="Company Phone" {...attr('compphone')}>
-                {editMode ? <Input placeholder="" type="number" /> : <h3>{dashCheck(testArray.compphone)}</h3>}
-              </Form.Item>
-            </Col>
-            <Col span={8}>
-              <Form.Item label="License Number" {...attr('licnumber')}>
-                {editMode ? <Input placeholder="" type="text" /> : <h3>{dashCheck(testArray.licnumber)}</h3>}
-              </Form.Item>
-            </Col>
-          </Row>
-
-          {/* //????//// */}
-          <Row gutter={33}>
-            <Col span={8}>
-              <Form.Item label="Project Manager Full Name" {...attr('p_m__name')}>
-                {editMode ? <Input placeholder="" type="text" /> : <h3>{dashCheck(testArray.p_m__name)}</h3>}
-              </Form.Item>
-            </Col>
-            <Col span={8}>
-              <Form.Item label="Project Manager Phone Number" {...attr('p_m_phone')}>
-                {editMode ? <Input placeholder="" type="number" /> : <h3>{dashCheck(testArray.p_m_phone)}</h3>}
-              </Form.Item>
-            </Col>
-          </Row>
-          <div className="line">
-            <hr />
+        {!editMode && (
+          <div className="tabs_companies">
+            <Tabs activetabskey="1" onChange={callback}>
+              {config.map((item) => (
+                <TabPane tab={item.tab} key={item.key} className={item.clasname}>
+                  {item.component}
+                </TabPane>
+              ))}
+            </Tabs>
           </div>
-          <div className="after_line_block">
-            <h2>Contractor Company Address</h2>
-          </div>
-          {/* //????//// */}
-
-          <Row gutter={33} style={{ marginTop: '11px' }} className="row_address">
-            <Col span={16}>
-              <div className="extra" onClick={() => setExtraAddress((prev) => !prev)}>
-                <span></span>
-                <span>{`${!editMode ? '' : !extraAddress ? 'Enter Manually' : 'Search Loaction'}`}</span>
-              </div>
-              <Form.Item
-                label={`${!editMode ? 'Address' : !extraAddress ? 'Search Address' : 'Address Line #1'}`}
-                {...attr('searchaddress')}>
-                {editMode ? (
-                  <Input placeholder="" type="text" />
-                ) : extraAddress ? (
-                  <div className="address_column">
-                    <h3>
-                      Address: {testArray.searchaddress} {testArray.address_l_2}
-                    </h3>
-                    <h3>
-                      {testArray.state} {testArray.zip} {testArray.city}
-                    </h3>
-                  </div>
-                ) : (
-                  <h3>{testArray.searchaddress}</h3>
-                )}
-              </Form.Item>
-            </Col>
-            {editMode
-              ? extraAddress && (
-                  <Col span={8}>
-                    <Form.Item label="Address Line #2" {...attr('address_l_2')}>
-                      <Input placeholder="" type="text" />
-                    </Form.Item>
-                  </Col>
-                )
-              : ''}
-          </Row>
-          {editMode
-            ? extraAddress && (
-                <Row gutter={33}>
-                  <Col span={8}>
-                    <Form.Item label="City" {...attr('city')}>
-                      <Input placeholder="" type="text" />
-                    </Form.Item>
-                  </Col>
-                  <Col span={8}>
-                    <Form.Item label="State" {...attr('state')}>
-                      <Select placeholder="Select State" onChange={onGenderChange} suffixIcon={suffixIcon}>
-                        <Select.Option value="male">male</Select.Option>
-                        <Select.Option value="female">female</Select.Option>
-                        <Select.Option value="other">other</Select.Option>
-                      </Select>
-                    </Form.Item>
-                  </Col>
-                  <Col span={8}>
-                    <Form.Item label="ZIP" {...attr('zip')}>
-                      <Input placeholder="" type="text" />
-                    </Form.Item>
-                  </Col>
-                </Row>
-              )
-            : ''}
-
-          {/* //????//// */}
-          {editMode && (
-            <Form.Item className="btns">
-              <Row gutter={16}>
-                <Col span={4}>
-                  <Button
-                    type="button"
-                    onClick={() => {
-                      setExtraAddress(() => false);
-                      setEditMode(() => false);
-                      setEditCompanyLogo(() => false);
-                    }}>
-                    Cancel
-                  </Button>
-                </Col>
-                <Col span={6}>
-                  <Button type="primary" htmlType="submit">
-                    Save
-                  </Button>
-                </Col>
-              </Row>
-            </Form.Item>
-          )}
-        </Form>
+        )}
       </div>
+      {editMode && (
+        <GeneralInformation
+          setTestArray={setTestArray}
+          editMode={editMode}
+          testArray={testArray}
+          setEditMode={setEditMode}
+        />
+      )}
     </LayoutConfiguration>
   );
 };
