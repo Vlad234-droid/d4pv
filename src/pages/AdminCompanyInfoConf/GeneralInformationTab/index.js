@@ -5,7 +5,7 @@ import './style.scss';
 import UploadCompanyLogo from '../UploadCompanyLogo';
 import { useParams } from 'react-router-dom';
 
-const GeneralInformation = ({ setTestArray, editMode, testArray, setEditMode }) => {
+const GeneralInformationTab = ({ setTestArray, editMode, testArray, setEditMode }) => {
   const [form] = Form.useForm();
   const [logoUrl, setLogoUrl] = useState(null);
   const [editCompanyLogo, setEditCompanyLogo] = useState(false);
@@ -68,7 +68,7 @@ const GeneralInformation = ({ setTestArray, editMode, testArray, setEditMode }) 
     setTestArray(() => ({
       ...data[0],
     }));
-  }, []);
+  }, [dataSource, id, setTestArray]);
 
   const onFinishHandler = (values) => {
     setTestArray(() => ({
@@ -88,7 +88,6 @@ const GeneralInformation = ({ setTestArray, editMode, testArray, setEditMode }) 
       <ArrowDownSelectSVG />
     </div>
   );
-
   const attr = (value) => {
     if (editMode)
       return {
@@ -100,9 +99,10 @@ const GeneralInformation = ({ setTestArray, editMode, testArray, setEditMode }) 
     if (value === undefined) return '-';
     return value;
   };
+
   return (
     <Form
-      className={`form_add_company ${editMode && 'editMode'}`}
+      className={`form_info_company info ${editMode && 'editMode'}`}
       form={form}
       layout="vertical"
       onFinish={onFinishHandler}>
@@ -161,7 +161,6 @@ const GeneralInformation = ({ setTestArray, editMode, testArray, setEditMode }) 
       <Row gutter={33} style={{ marginTop: '11px' }} className="row_address">
         <Col span={16}>
           <div className="extra" onClick={() => setExtraAddress((prev) => !prev)}>
-            <span></span>
             <span>{`${!editMode ? '' : !extraAddress ? 'Enter Manually' : 'Search Loaction'}`}</span>
           </div>
           <Form.Item
@@ -246,4 +245,4 @@ const GeneralInformation = ({ setTestArray, editMode, testArray, setEditMode }) 
   );
 };
 
-export default GeneralInformation;
+export default GeneralInformationTab;

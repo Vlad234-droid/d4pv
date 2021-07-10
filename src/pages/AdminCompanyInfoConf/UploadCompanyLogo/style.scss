@@ -1,4 +1,4 @@
-.form_add_company {
+.form_info_company {
   .ant-row.ant-form-item {
     .ant-form-item-control-input-content {
       .ant-upload.ant-upload-drag.upload-logo {
@@ -46,12 +46,11 @@
           left: 50%;
           width: 120px;
           height: 120px;
-          background-color: red !important;
           transform: translate(-50%, -50%);
           display: block;
           img {
             object-fit: cover;
-            width: iherit;
+            width: 100%;
             height: 100%;
           }
         }

@@ -8,7 +8,7 @@ import Counter from '../features/counter/Counter';
 import UserProfile from '../pages/UserProfile';
 import SignUpToProject from '../pages/SignUpToProject';
 import AdminProfile from '../pages/AdminProfile';
-import AdminConfigurations from '../pages/AdminConfigurations';
+
 import AdminUsersConfigurations from '../pages/AdminUsersConfigurations';
 import AdminCompaniesConfigurations from '../pages/AdminCompaniesConfigurations';
 import AdminCompanyInfoConf from '../pages/AdminCompanyInfoConf';
@@ -28,7 +28,6 @@ const routes = () => {
         <Route exact path="/test" component={Counter} />
         <Route exact path="/userProfile" component={UserProfile} />
         <Route exact path="/adminProfile" component={AdminProfile} />
-        {/* <Route exact path="/adminConfigurations" component={AdminConfigurations} /> */}
         <Route exact path="/admin-users-conf" component={AdminUsersConfigurations} />
         <Route exact path="/admin-companies-conf" component={AdminCompaniesConfigurations} />
         <Route exact path="/admin-add-company-conf" component={AdminAddCompanyConfigurations} />

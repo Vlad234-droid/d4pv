@@ -1,17 +1,18 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { ArrowLeftBigSVG, EditCompanySVG } from '../../components/icons';
 import './style.scss';
 import LayoutConfiguration from '../../components/LayoutConfiguration/Layout';
 import { Link } from 'react-router-dom';
 import { Tabs } from 'antd';
-import GeneralInformation from './GeneralInformation';
+import GeneralInformationTab from './GeneralInformationTab';
 import PreferencesTab from './PreferencesTab';
+import NotesTab from './NotesTab';
 
 const { TabPane } = Tabs;
 
 const AdminCompanyInfoConf = () => {
   const [editMode, setEditMode] = useState(false);
-  const [activeTabsKey, setActiveTabsKey] = useState('1');
+  const [activeTabsKey, setActiveTabsKey] = useState('2');
   const [testArray, setTestArray] = useState({});
   const callback = (key) => setActiveTabsKey(() => key);
 
@@ -21,7 +22,7 @@ const AdminCompanyInfoConf = () => {
       key: '1',
       clasname: 'general_info tab',
       component: (
-        <GeneralInformation
+        <GeneralInformationTab
           setTestArray={setTestArray}
           editMode={editMode}
           testArray={testArray}
@@ -33,7 +34,7 @@ const AdminCompanyInfoConf = () => {
       tab: 'Notes',
       key: '2',
       clasname: 'notes tab',
-      component: <div>Notes</div>,
+      component: <NotesTab />,
     },
     {
       tab: 'Requirements',
@@ -51,7 +52,7 @@ const AdminCompanyInfoConf = () => {
 
   return (
     <LayoutConfiguration>
-      <div className="container_add__company">
+      <div className="container_edit__company">
         {!editMode && activeTabsKey === '1' && (
           <div className="switch_mode" onClick={() => setEditMode(() => true)}>
             <div>
@@ -73,7 +74,7 @@ const AdminCompanyInfoConf = () => {
         </div>
         {!editMode && (
           <div className="tabs_companies">
-            <Tabs activetabskey="1" onChange={callback}>
+            <Tabs activetabskey={activeTabsKey} onChange={callback} defaultActiveKey={activeTabsKey}>
               {config.map((item) => (
                 <TabPane tab={item.tab} key={item.key} className={item.clasname}>
                   {item.component}
@@ -84,7 +85,7 @@ const AdminCompanyInfoConf = () => {
         )}
       </div>
       {editMode && (
-        <GeneralInformation
+        <GeneralInformationTab
           setTestArray={setTestArray}
           editMode={editMode}
           testArray={testArray}

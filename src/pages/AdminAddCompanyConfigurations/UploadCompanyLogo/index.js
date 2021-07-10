@@ -2,6 +2,7 @@ import React from 'react';
 import { Tooltip, Upload, Spin } from 'antd';
 import './style.scss';
 import { SVGReload, CloseSmallSVG, StarSVG } from '../../../components/icons';
+import './style.scss';
 
 const { Dragger } = Upload;
 

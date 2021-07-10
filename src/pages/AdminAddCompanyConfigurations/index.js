@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowLeftBigSVG, ArrowDownSelectSVG, EditCompanySVG } from '../../components/icons';
+import React, { useState } from 'react';
+import { ArrowLeftBigSVG, ArrowDownSelectSVG } from '../../components/icons';
 import { Form, Input, Button, Row, Col, Select } from 'antd';
 import './style.scss';
 import UploadCompanyLogo from './UploadCompanyLogo';
@@ -31,7 +31,7 @@ const AdminCompanyInfoConf = () => {
 
   return (
     <LayoutConfiguration>
-      <div className="container_add__company">
+      <div className="container_add__company add">
         <div className="head_block">
           <Link to="/admin-companies-conf">
             <div className="arrow_left">
@@ -43,7 +43,7 @@ const AdminCompanyInfoConf = () => {
             <h2>Add Contractor Company</h2>
           </div>
         </div>
-        <Form className="form_add_company" form={form} layout="vertical" onFinish={onFinishHandler}>
+        <Form className="form_add_company add_comp" form={form} layout="vertical" onFinish={onFinishHandler}>
           <Form.Item label="Logo" name="logo">
             <UploadCompanyLogo
               form={form}

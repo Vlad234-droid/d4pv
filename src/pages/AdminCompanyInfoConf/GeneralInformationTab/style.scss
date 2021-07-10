@@ -1,8 +1,40 @@
+.tabs_companies {
+  .ant-tabs {
+    .form_info_company {
+      .after_line_block {
+        h2 {
+          font-size: 14px;
+          margin-top: 10px;
+        }
+      }
+      .line {
+        hr {
+          margin-top: 11.5px;
+          border: none;
+          color: rgba(178, 190, 202, 0.4);
+          background-color: rgba(178, 190, 202, 0.4);
+          height: 1px;
+        }
+      }
+      .after_line_block {
+        h2 {
+          font-size: 14px;
+          font-weight: bold;
+        }
+      }
+      .ant-form-item-control-input-content {
+        h3 {
+          font-size: 12px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
 .info_from_tab {
-  .form_add_company.editMode {
-    margin-top: 21px;
+  .form_info_company.editMode.info {
     .line {
-      display: none !important;
       hr {
         margin-top: 11.5px;
         border: none;
@@ -14,7 +46,7 @@
     .after_line_block {
       h2 {
         font-size: 14px;
-        margin-top: 10px;
+        font-weight: bold;
       }
     }
     .row_address {

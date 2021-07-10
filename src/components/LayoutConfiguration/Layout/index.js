@@ -5,6 +5,8 @@ import { Tabs } from 'antd';
 import { TapPaneConfig } from './config';
 import { Layout } from 'antd';
 import { useHistory, useLocation } from 'react-router-dom';
+import './style.scss';
+
 const { TabPane } = Tabs;
 
 const LayoutConfiguration = ({ children, className }) => {
