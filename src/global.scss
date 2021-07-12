@@ -333,3 +333,13 @@ p {
 .ant-modal-footer {
   display: none;
 }
+
+//line
+.line {
+  hr {
+    border: none;
+    color: rgba(178, 190, 202, 0.4);
+    background-color: rgba(178, 190, 202, 0.4);
+    height: 1px;
+  }
+}

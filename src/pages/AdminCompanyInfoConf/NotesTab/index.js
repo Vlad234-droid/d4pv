@@ -19,7 +19,7 @@ const NotesTab = () => {
     }
   };
   return (
-    <div className="notes_tab_container">
+    <div className="inner_notes_tab_container">
       <div className="notes_tab_block">
         <Tabs tabPosition="left" className="notes_tab" onChange={callback} defaultActiveKey="1">
           {config.map((item) => (

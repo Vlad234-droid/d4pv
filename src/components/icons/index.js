@@ -569,6 +569,37 @@ const EditCompanySVG = () => {
     </svg>
   );
 };
+
+const IconToShow = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style={centeredSVG()}>
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g>
+            <g>
+              <path
+                d="M0 0L24 0 24 24 0 24z"
+                transform="translate(-1442.000000, -461.000000) translate(946.000000, 448.000000) translate(496.000000, 13.000000)"
+              />
+              <g>
+                <path
+                  d="M0 0L24 0 24 24 0 24z"
+                  transform="translate(-1442.000000, -461.000000) translate(946.000000, 448.000000) translate(496.000000, 13.000000)"
+                />
+                <path
+                  fill="#00254D"
+                  fillOpacity=".9"
+                  d="M12 4C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 12.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+                  transform="translate(-1442.000000, -461.000000) translate(946.000000, 448.000000) translate(496.000000, 13.000000)"
+                />
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
 export {
   IconInfo,
   Logo4PV,
@@ -593,4 +624,5 @@ export {
   CloseSmallSVG,
   ArrowDownSelectSVG,
   EditCompanySVG,
+  IconToShow,
 };
