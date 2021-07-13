@@ -74,11 +74,10 @@ const SitePlanTab = () => {
             <p className={`${item.visibleNote && 'modeOpacity'}`}>
               Reference: <span>{item.reference}</span>
             </p>
-            {!item.visibleNote && (
-              <p>
-                Requested by: <span>{item.requested}</span>
-              </p>
-            )}
+
+            <p className={`${item.visibleNote && 'modeOpacity'}`}>
+              Requested by: <span>{item.requested}</span>
+            </p>
           </div>
           <div className="line">
             <hr />

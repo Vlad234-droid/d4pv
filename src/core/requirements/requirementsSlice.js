@@ -5,7 +5,6 @@ const initialState = {
     {
       text: 'loremlorem loremlooremlorem loremlorem loremlorem',
       reference: 'angle.con',
-      requested: 'Vlad',
       key: 1,
       visibleNote: false,
     },
@@ -14,14 +13,12 @@ const initialState = {
     {
       text: 'loremlorem loremlorem loremlorem loremlorem loremlorem loremlorem loremlorem',
       reference: 'angle.con',
-      requested: 'Vlad',
       key: 1,
       visibleNote: false,
     },
     {
       text: 'merol merol mermerol merol merol merol merol merol ',
       reference: 'googl.com',
-      requested: 'Dima',
       key: 2,
       visibleNote: false,
     },
@@ -30,7 +27,6 @@ const initialState = {
     {
       text: 'merol merol merol merol merol merol merol merol merol ',
       reference: 'googl.com',
-      requested: 'Dima',
       key: 2,
       visibleNote: false,
     },
@@ -39,7 +35,6 @@ const initialState = {
     {
       text: 'merol merol meroerol merol merol merol merol merol merol ',
       reference: 'googl.com',
-      requested: 'Dima',
       key: 2,
       visibleNote: false,
     },

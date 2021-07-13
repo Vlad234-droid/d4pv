@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Form, Button, Col, Row, Input } from 'antd';
-import './style.scss';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState } from 'draft-js';
 import { CloseIconSVG } from '../../../../../components/icons';
