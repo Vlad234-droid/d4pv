@@ -1,5 +1,4 @@
 import React from 'react';
-import './style.scss';
 import { Button, Col } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { EditCompanySVG, IconToShow, DeleteSVG, HideNotesSVG } from '../../../../components/icons';
@@ -9,8 +8,8 @@ import EditNote from './EditNote';
 import { useState } from 'react';
 import DOMPurify from 'dompurify';
 
-const SitePlanTab = () => {
-  const { sitePlan } = useSelector((state) => state.notes);
+const LineDiagramTab = () => {
+  const { diagram } = useSelector((state) => state.notes);
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const [toEdit, setToEdit] = useState({});
@@ -19,11 +18,11 @@ const SitePlanTab = () => {
   const { deleteNote, changeNoteVisibility } = bindActionCreators(actions, dispatch);
 
   const chooseEditHandler = (key) => {
-    const filtered = sitePlan.filter((item) => item.key === key);
+    const filtered = diagram.filter((item) => item.key === key);
     const [first] = filtered;
     setToEdit(() => ({
       ...first,
-      note: 'sitePlan',
+      note: 'diagram',
     }));
     setEditModal(() => true);
   };
@@ -38,7 +37,7 @@ const SitePlanTab = () => {
     <div className="site_plan_block">
       <EditNote toEdit={toEdit} editModal={editModal} setEditModal={setEditModal} />
       <div className="add_block">
-        <h2>Site Plan Notes</h2>
+        <h2>Line Diagram</h2>
         <Col span={7}>
           <Button type="primary" style={{ maxHeight: '40px' }}>
             Add Note
@@ -48,7 +47,7 @@ const SitePlanTab = () => {
       <div className="line">
         <hr />
       </div>
-      {sitePlan.map((item) => (
+      {diagram.map((item) => (
         <div className="info_container" key={item.key}>
           <div className="actions_do">
             <p className={`updated ${item.visibleNote && 'modeOpacity'}`}>Updated 10.10.2021 by {item.requested}</p>
@@ -56,10 +55,10 @@ const SitePlanTab = () => {
               <div className="btnSVG" id="edit_note" onClick={() => chooseEditHandler(item.key)}>
                 <EditCompanySVG />
               </div>
-              <div className="btnSVG" onClick={() => changeNoteVisibility({ key: item.key, note: 'sitePlan' })}>
+              <div className="btnSVG" onClick={() => changeNoteVisibility({ key: item.key, note: 'diagram' })}>
                 {item.visibleNote !== undefined && !item.visibleNote ? <IconToShow /> : <HideNotesSVG />}
               </div>
-              <div className="btnSVG" onClick={() => deleteNote({ key: item.key, note: 'sitePlan' })}>
+              <div className="btnSVG" onClick={() => deleteNote({ key: item.key, note: 'diagram' })}>
                 <DeleteSVG />
               </div>
             </div>
@@ -89,4 +88,4 @@ const SitePlanTab = () => {
   );
 };
 
-export default SitePlanTab;
+export default LineDiagramTab;

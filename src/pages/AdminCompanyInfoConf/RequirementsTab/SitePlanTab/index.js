@@ -3,20 +3,19 @@ import './style.scss';
 import { Button, Col } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { EditCompanySVG, IconToShow, DeleteSVG, HideNotesSVG } from '../../../../components/icons';
-import { actions } from '../../../../core/notes/notesSlice';
+import { actions } from '../../../../core/requirements/requirementsSlice';
 import { bindActionCreators } from 'redux';
-import EditNote from './EditNote';
+import EditRequirements from './EditRequirements';
 import { useState } from 'react';
 import DOMPurify from 'dompurify';
 
 const SitePlanTab = () => {
-  const { sitePlan } = useSelector((state) => state.notes);
-  const state = useSelector((state) => state);
+  const { sitePlan } = useSelector((state) => state.requirements);
   const dispatch = useDispatch();
   const [toEdit, setToEdit] = useState({});
   const [editModal, setEditModal] = useState(false);
 
-  const { deleteNote, changeNoteVisibility } = bindActionCreators(actions, dispatch);
+  const { deleteRequirement, changeRequirementVisibility } = bindActionCreators(actions, dispatch);
 
   const chooseEditHandler = (key) => {
     const filtered = sitePlan.filter((item) => item.key === key);
@@ -36,12 +35,12 @@ const SitePlanTab = () => {
 
   return (
     <div className="site_plan_block">
-      <EditNote toEdit={toEdit} editModal={editModal} setEditModal={setEditModal} />
+      <EditRequirements toEdit={toEdit} editModal={editModal} setEditModal={setEditModal} />
       <div className="add_block">
-        <h2>Site Plan Notes</h2>
+        <h2>Site Plan Requirments</h2>
         <Col span={7}>
           <Button type="primary" style={{ maxHeight: '40px' }}>
-            Add Note
+            Add Requirments
           </Button>
         </Col>
       </div>
@@ -53,13 +52,13 @@ const SitePlanTab = () => {
           <div className="actions_do">
             <p className={`updated ${item.visibleNote && 'modeOpacity'}`}>Updated 10.10.2021 by {item.requested}</p>
             <div className="svgBtn">
-              <div className="btnSVG" id="edit_note" onClick={() => chooseEditHandler(item.key)}>
+              <div className="btnSVG" id="edit_requirements" onClick={() => chooseEditHandler(item.key)}>
                 <EditCompanySVG />
               </div>
-              <div className="btnSVG" onClick={() => changeNoteVisibility({ key: item.key, note: 'sitePlan' })}>
+              <div className="btnSVG" onClick={() => changeRequirementVisibility({ key: item.key, note: 'sitePlan' })}>
                 {item.visibleNote !== undefined && !item.visibleNote ? <IconToShow /> : <HideNotesSVG />}
               </div>
-              <div className="btnSVG" onClick={() => deleteNote({ key: item.key, note: 'sitePlan' })}>
+              <div className="btnSVG" onClick={() => deleteRequirement({ key: item.key, note: 'sitePlan' })}>
                 <DeleteSVG />
               </div>
             </div>
@@ -68,7 +67,6 @@ const SitePlanTab = () => {
             <h3
               className={`${item.visibleNote && 'modeOpacity'}`}
               dangerouslySetInnerHTML={createMarkup(item.text)}></h3>
-            {/* <div dangerouslySetInnerHTML={createMarkup(convertedContent)}></div> */}
           </div>
           <div className="addit_info">
             <p className={`${item.visibleNote && 'modeOpacity'}`}>

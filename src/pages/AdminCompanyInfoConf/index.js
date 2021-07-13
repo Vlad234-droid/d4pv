@@ -7,6 +7,7 @@ import { Tabs } from 'antd';
 import GeneralInformationTab from './GeneralInformationTab';
 import PreferencesTab from './PreferencesTab';
 import NotesTab from './NotesTab';
+import RequirementsTab from './RequirementsTab';
 
 const { TabPane } = Tabs;
 
@@ -40,7 +41,7 @@ const AdminCompanyInfoConf = () => {
       tab: 'Requirements',
       key: '3',
       clasname: 'requirements tab',
-      component: <div>Requirements</div>,
+      component: <RequirementsTab />,
     },
     {
       tab: 'Preferences',

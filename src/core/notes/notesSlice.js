@@ -3,41 +3,70 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   sitePlan: [
     {
-      text: 'vladvlad vladvlad vladvlad vladvlad vladvlad vladvlad vladvlad vladvlad vladvlad vladvlad ',
+      text:
+        'loremlorem loremlorem loremloremloremlorem loremlorem loremlorem loremlorem loremlorem loremlorem loremlorem',
       reference: 'angle.con',
       requested: 'Vlad',
       key: 1,
       visibleNote: false,
     },
     {
-      text: 'Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima ',
+      text: 'merol merol merol merol merol merol merol merol merol merol merol merol merol merol merol merol ',
+      reference: 'googl.com',
+      requested: 'Dima',
+      key: 2,
+      visibleNote: false,
+    },
+    {
+      text:
+        'Dfwe.few.few  ewklfnwlkfnwlef felfnlwefn f3lfnwelfgfew fwfnwjfnwlf  fwejfnwjf wfjkwebfw flwebnf,mwe fkljw fkwebf ',
+      reference: 'ljebwfl.com',
+      requested: 'Alena',
+      key: 3,
+      visibleNote: false,
+    },
+  ],
+  solarPlan: [
+    {
+      text:
+        'loremlorem loremlorem loremloremloremlorem loremlorem loremlorem loremlorem loremlorem loremlorem loremlorem',
+      reference: 'angle.con',
+      requested: 'Vlad',
+      key: 1,
+      visibleNote: false,
+    },
+    {
+      text: 'merol merol merol merol merol merol merol merol merol merol merol merol merol merol merol merol ',
       reference: 'googl.com',
       requested: 'Dima',
       key: 2,
       visibleNote: false,
     },
   ],
-  SolarPlan: [],
-  Diagram: [],
-  Assembly: [],
+  diagram: [
+    {
+      text: 'merol merol merol merol merol merol merol merol merol merol merol merol merol merol merol merol ',
+      reference: 'googl.com',
+      requested: 'Dima',
+      key: 2,
+      visibleNote: false,
+    },
+  ],
+  assembly: [
+    {
+      text: 'merol merol merol merol merol merol merol merol merol merol merol merol merol merol merol merol ',
+      reference: 'googl.com',
+      requested: 'Dima',
+      key: 2,
+      visibleNote: false,
+    },
+  ],
 };
 
 export const notesSlice = createSlice({
   name: 'notes',
   initialState,
-  // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    // increment: (state) => {
-    //   // Redux Toolkit allows us to write "mutating" logic in reducers. It
-    //   // doesn't actually mutate the state because it uses the Immer library,
-    //   // which detects changes to a "draft state" and produces a brand new
-    //   // immutable state based off those changes
-    //   state.value += 1;
-    // },
-    // decrement: (state) => {
-    //   state.value -= 1;
-    // },
-    // // Use the PayloadAction type to declare the contents of `action.payload`
     deleteNote: (state, { payload }) => {
       state[payload.note] = state[payload.note].filter((item) => item.key !== payload.key);
     },
@@ -46,14 +75,28 @@ export const notesSlice = createSlice({
         payload.note
       ][state[payload.note].findIndex((item) => item.key === payload.key)].visibleNote;
     },
+    changeTextNote: (state, { payload }) => {
+      const { key, text, note } = payload;
+      state[note][state[note].findIndex((item) => item.key === key)].text = text;
+    },
+    changeReferenceNote: (state, { payload }) => {
+      const { key, text, note } = payload;
+      state[note][state[note].findIndex((item) => item.key === key)].reference = text;
+    },
+    changeRequestedNote: (state, { payload }) => {
+      const { key, text, note } = payload;
+      state[note][state[note].findIndex((item) => item.key === key)].requested = text;
+    },
   },
 });
-export const { deleteNote, changeNoteVisibility } = notesSlice.actions;
+export const {
+  deleteNote,
+  changeNoteVisibility,
+  changeTextNote,
+  changeReferenceNote,
+  changeRequestedNote,
+} = notesSlice.actions;
 
 export const actions = { ...notesSlice.actions };
-
-// export const actions = { ...counterSlice.actions, incrementAsync };
-
-// export const sitePlanNotes = (state) => state.notes.sitePlan;
 
 export default notesSlice.reducer;

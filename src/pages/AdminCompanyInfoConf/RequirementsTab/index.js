@@ -8,7 +8,7 @@ import AssemblyDetailsTab from './AssemblyDetailsTab';
 import { config } from './config';
 const { TabPane } = Tabs;
 
-const NotesTab = () => {
+const RequirementsTab = () => {
   const [keyTab, setKeyTab] = useState('1');
   const callback = (key) => setKeyTab(() => key);
 
@@ -25,9 +25,9 @@ const NotesTab = () => {
     }
   };
   return (
-    <div className="inner_notes_tab_container">
-      <div className="notes_tab_block">
-        <Tabs tabPosition="left" className="notes_tab" onChange={callback} defaultActiveKey="1">
+    <div className="inner_requirements_tab_container">
+      <div className="requirements_tab_block">
+        <Tabs tabPosition="left" className="requirements_tab" onChange={callback} defaultActiveKey="1">
           {config.map((item) => (
             <TabPane tab={item.tab} key={item.key} />
           ))}
@@ -38,4 +38,4 @@ const NotesTab = () => {
   );
 };
 
-export default NotesTab;
+export default RequirementsTab;
