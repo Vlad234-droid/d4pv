@@ -20,6 +20,57 @@
           color: #00254d;
         }
       }
+      .rdw-editor-toolbar.toolbar-class {
+        border: none;
+        min-height: 40px;
+        border-bottom: 1px solid rgba(178, 190, 202, 0.4);
+        border-radius: 0px;
+        position: relative;
+        .rdw-inline-wrapper {
+          .rdw-option-wrapper {
+            border: none;
+            display: none;
+            &.custom_bold,
+            &.custom_underline {
+              display: flex;
+              padding: 5px;
+              border-radius: 2px;
+              margin: 0 4px;
+              max-width: 20px;
+              justify-content: center;
+              align-items: center;
+              cursor: pointer;
+              background: white;
+              text-transform: capitalize;
+              img {
+                vertical-align: middle;
+                border-style: none;
+                width: 25px;
+                object-fit: cover;
+                height: 25px;
+              }
+            }
+          }
+        }
+        .rdw-image-wrapper {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 0px;
+          .rdw-option-wrapper {
+            border: none;
+            &.iconIMG_custom {
+              img {
+                vertical-align: middle;
+                border-style: none;
+                width: 25px;
+                object-fit: cover;
+                height: 25px;
+              }
+            }
+          }
+        }
+      }
     }
     .rdw-editor-toolbar.toolbar-class {
       border: none;

@@ -13,12 +13,14 @@ import { convertToRaw, ContentState } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import './style.scss';
+import iconIMG from '../../../../components/icons/icon-img.png';
 
 const AddRequirementsModal = ({ keyTab, addRequirements, setAddRequirements }) => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const { addRequirement } = bindActionCreators(actions, dispatch);
   const [editorState, setEditorState] = useState();
+  const [filePicker, setFilePicker] = useState('');
 
   const onFinish = ({ reference, requested }) => {
     let currentContentAsHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
@@ -37,6 +39,31 @@ const AddRequirementsModal = ({ keyTab, addRequirements, setAddRequirements }) =
     const editorState = EditorState.createWithContent(contentState);
     setEditorState(() => editorState);
   }, [addRequirements]);
+
+  const Test = () => {
+    return (
+      <div>
+        <div>few;fmwefmweklfmnwlkemnflwenflkw</div>
+      </div>
+    );
+  };
+
+  const uploadCallbackHandler = (file) => {
+    const imageObject = {
+      file: file,
+      localSrc: URL.createObjectURL(file),
+    };
+
+    setFilePicker(() => imageObject);
+
+    return new Promise((resolve, reject) => {
+      resolve({
+        data: {
+          link: URL.createObjectURL(file),
+        },
+      });
+    });
+  };
 
   return (
     <Modal
@@ -59,17 +86,24 @@ const AddRequirementsModal = ({ keyTab, addRequirements, setAddRequirements }) =
           <Form.Item name="wysiwyg">
             <Editor
               editorState={editorState}
-              // defaultContentState={contentState}
               onEditorStateChange={handleEditorChange}
               wrapperClassName="wrapper-class"
               editorClassName="editor-class"
               toolbarClassName="toolbar-class"
               toolbar={{
-                options: ['inline'],
+                options: ['inline', 'image'],
                 inline: { options: ['bold', 'underline'] },
                 inline: {
                   bold: { icon: bold, className: 'custom_bold' },
                   underline: { icon: underline, className: 'custom_underline' },
+                },
+                image: {
+                  icon: iconIMG,
+                  className: 'iconIMG_custom',
+                  // component: Test,
+                  urlEnabled: false,
+                  previewImage: true,
+                  uploadCallback: uploadCallbackHandler,
                 },
               }}
             />

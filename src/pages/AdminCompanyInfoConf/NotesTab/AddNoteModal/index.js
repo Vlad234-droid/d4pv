@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import { Modal, Form, Button, Col, Row, Input } from 'antd';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState } from 'draft-js';
