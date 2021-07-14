@@ -7,6 +7,7 @@ const initialState = {
       reference: 'angle.con',
       key: 1,
       visibleNote: false,
+      requested: 'Vlad',
     },
   ],
   solarPlan: [
@@ -15,28 +16,32 @@ const initialState = {
       reference: 'angle.con',
       key: 1,
       visibleNote: false,
+      requested: 'Vlad',
     },
     {
       text: 'merol merol mermerol merol merol merol merol merol ',
       reference: 'googl.com',
       key: 2,
       visibleNote: false,
+      requested: 'Vlad',
     },
   ],
   diagram: [
     {
       text: 'merol merol merol merol merol merol merol merol merol ',
       reference: 'googl.com',
-      key: 2,
+      key: 1,
       visibleNote: false,
+      requested: 'Vlad',
     },
   ],
   assembly: [
     {
       text: 'merol merol meroerol merol merol merol merol merol merol ',
       reference: 'googl.com',
-      key: 2,
+      key: 1,
       visibleNote: false,
+      requested: 'Vlad',
     },
   ],
 };
@@ -65,6 +70,21 @@ export const requirementsSlice = createSlice({
       const { key, text, note } = payload;
       state[note][state[note].findIndex((item) => item.key === key)].requested = text;
     },
+    addRequirement: (state, { payload }) => {
+      const { keyTab, text, reference, requested } = payload;
+      let arrKeys = Object.keys(state);
+      const index = arrKeys.findIndex((_, i) => i == keyTab);
+      state[arrKeys[index]] = [
+        ...state[arrKeys[index]],
+        {
+          text,
+          reference,
+          requested,
+          key: state[arrKeys[index]].length + 1,
+          visibleNote: false,
+        },
+      ];
+    },
   },
 });
 export const {
@@ -73,6 +93,7 @@ export const {
   changeTextRequirement,
   changeReferenceRequirement,
   changeRequestedRequirement,
+  addRequirement,
 } = requirementsSlice.actions;
 
 export const actions = { ...requirementsSlice.actions };

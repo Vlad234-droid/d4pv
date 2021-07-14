@@ -7,13 +7,14 @@ import { bindActionCreators } from 'redux';
 import EditNote from './EditNote';
 import { useState } from 'react';
 import DOMPurify from 'dompurify';
+import AddNoteModal from '../AddNoteModal';
 
-const AssemblyDetailsTab = () => {
+const AssemblyDetailsTab = ({ keyTab }) => {
   const { assembly } = useSelector((state) => state.notes);
   const dispatch = useDispatch();
   const [toEdit, setToEdit] = useState({});
   const [editModal, setEditModal] = useState(false);
-
+  const [addNoteModal, setAddNoteModal] = useState(false);
   const { deleteNote, changeNoteVisibility } = bindActionCreators(actions, dispatch);
 
   const chooseEditHandler = (key) => {
@@ -33,12 +34,18 @@ const AssemblyDetailsTab = () => {
   };
 
   return (
-    <div className="site_plan_block">
+    <div className="site_plan_block tab_block">
       <EditNote toEdit={toEdit} editModal={editModal} setEditModal={setEditModal} />
+      <AddNoteModal keyTab={keyTab} addNoteModal={addNoteModal} setAddNoteModal={setAddNoteModal} />
+
       <div className="add_block">
         <h2>Assembly Details</h2>
         <Col span={7}>
-          <Button type="primary" style={{ maxHeight: '40px' }}>
+          <Button
+            id="add_note"
+            type="primary"
+            style={{ maxHeight: '40px' }}
+            onClick={() => setAddNoteModal(() => true)}>
             Add Note
           </Button>
         </Col>

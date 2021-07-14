@@ -57,7 +57,7 @@ const initialState = {
       text: 'merol merol merol merol merol merol merol merol merol merol merol merol merol merol merol merol ',
       reference: 'googl.com',
       requested: 'Dima',
-      key: 2,
+      key: 1,
       visibleNote: false,
     },
   ],
@@ -87,6 +87,21 @@ export const notesSlice = createSlice({
       const { key, text, note } = payload;
       state[note][state[note].findIndex((item) => item.key === key)].requested = text;
     },
+    addNote: (state, { payload }) => {
+      const { keyTab, text, reference, requested } = payload;
+      let arrKeys = Object.keys(state);
+      const index = arrKeys.findIndex((_, i) => i == keyTab);
+      state[arrKeys[index]] = [
+        ...state[arrKeys[index]],
+        {
+          text,
+          reference,
+          requested,
+          key: state[arrKeys[index]].length + 1,
+          visibleNote: false,
+        },
+      ];
+    },
   },
 });
 export const {
@@ -95,6 +110,7 @@ export const {
   changeTextNote,
   changeReferenceNote,
   changeRequestedNote,
+  addNote,
 } = notesSlice.actions;
 
 export const actions = { ...notesSlice.actions };

@@ -8,16 +8,16 @@ import { bindActionCreators } from 'redux';
 import EditNote from './EditNote';
 import { useState } from 'react';
 import DOMPurify from 'dompurify';
+import AddNoteModal from '../AddNoteModal';
 
-const SitePlanTab = () => {
+const SitePlanTab = ({ keyTab }) => {
   const { sitePlan } = useSelector((state) => state.notes);
-  const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const [toEdit, setToEdit] = useState({});
   const [editModal, setEditModal] = useState(false);
+  const [addNoteModal, setAddNoteModal] = useState(false);
 
   const { deleteNote, changeNoteVisibility } = bindActionCreators(actions, dispatch);
-
   const chooseEditHandler = (key) => {
     const filtered = sitePlan.filter((item) => item.key === key);
     const [first] = filtered;
@@ -35,12 +35,18 @@ const SitePlanTab = () => {
   };
 
   return (
-    <div className="site_plan_block">
+    <div className="site_plan_block tab_block">
       <EditNote toEdit={toEdit} editModal={editModal} setEditModal={setEditModal} />
+      {/* /////////////////////////////////////////////////////////////////////// */}
+      <AddNoteModal keyTab={keyTab} addNoteModal={addNoteModal} setAddNoteModal={setAddNoteModal} />
       <div className="add_block">
         <h2>Site Plan Notes</h2>
         <Col span={7}>
-          <Button type="primary" style={{ maxHeight: '40px' }}>
+          <Button
+            type="primary"
+            style={{ maxHeight: '40px' }}
+            id="add_note"
+            onClick={() => setAddNoteModal(() => true)}>
             Add Note
           </Button>
         </Col>
@@ -68,7 +74,6 @@ const SitePlanTab = () => {
             <h3
               className={`${item.visibleNote && 'modeOpacity'}`}
               dangerouslySetInnerHTML={createMarkup(item.text)}></h3>
-            {/* <div dangerouslySetInnerHTML={createMarkup(convertedContent)}></div> */}
           </div>
           <div className="addit_info">
             <p className={`${item.visibleNote && 'modeOpacity'}`}>

@@ -15,13 +15,13 @@ const RequirementsTab = () => {
   const checkForRenderTabs = () => {
     switch (keyTab) {
       case '1':
-        return <SitePlanTab />;
+        return <SitePlanTab keyTab={0} />;
       case '2':
-        return <SolarAttachmentPlan />;
+        return <SolarAttachmentPlan keyTab={1} />;
       case '3':
-        return <LineDiagramTab />;
+        return <LineDiagramTab keyTab={2} />;
       case '4':
-        return <AssemblyDetailsTab />;
+        return <AssemblyDetailsTab keyTab={3} />;
     }
   };
   return (

@@ -4,21 +4,23 @@ import './style.scss';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState } from 'draft-js';
 import { CloseIconSVG } from '../../../../../components/icons';
-import { convertFromRaw } from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { convertToHTML } from 'draft-convert';
 import { actions } from '../../../../../core/notes/notesSlice';
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
 import bold from '../../../../../components/icons/icons-type-bold@3x.png';
 import underline from '../../../../../components/icons/icons-type-underline@3x.png';
+import { convertToRaw, ContentState } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
 
 const EditNote = ({ setEditModal, editModal, toEdit }) => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const { changeTextNote, changeReferenceNote, changeRequestedNote } = bindActionCreators(actions, dispatch);
   const onFinish = ({ reference, requested, wysiwyg }) => {
-    let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
+    let currentContentAsHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+
     changeTextNote({ key: toEdit.key, note: toEdit.note, text: currentContentAsHTML });
     if (reference !== undefined) changeReferenceNote({ key: toEdit.key, note: toEdit.note, text: reference });
     if (requested !== undefined) changeRequestedNote({ key: toEdit.key, note: toEdit.note, text: requested });
@@ -26,42 +28,21 @@ const EditNote = ({ setEditModal, editModal, toEdit }) => {
     setEditModal(() => false);
   };
 
-  useEffect(() => {
-    const contentState = {
-      entityMap: {},
-      blocks: [
-        {
-          key: '18ql9',
-          text: `${toEdit.text !== undefined && toEdit.text.replace(/<[^>]+>/g, '')}`,
-          type: 'unstyled',
-          depth: 0,
-          inlineStyleRanges: [],
-          entityRanges: [],
-        },
-      ],
-    };
-    setEditorState(() => EditorState.createWithContent(convertFromRaw(contentState)));
-  }, [toEdit]);
-
-  const contentState = {
-    entityMap: {},
-    blocks: [
-      {
-        key: '18ql9',
-        text: `${toEdit.text !== undefined && toEdit.text.replace(/<[^>]+>/g, '')}`,
-        type: 'unstyled',
-        depth: 0,
-        inlineStyleRanges: [],
-        entityRanges: [],
-      },
-    ],
-  };
-
-  const [editorState, setEditorState] = useState(() => EditorState.createWithContent(convertFromRaw(contentState)));
+  const [editorState, setEditorState] = useState();
   const handleEditorChange = (state) => {
     setEditorState(() => state);
-    //
   };
+
+  useEffect(() => {
+    if (toEdit.text !== undefined) {
+      const contentBlock = htmlToDraft(toEdit.text);
+      if (contentBlock) {
+        const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+        const editorState = EditorState.createWithContent(contentState);
+        setEditorState(() => editorState);
+      }
+    }
+  }, [toEdit]);
 
   return (
     <Modal

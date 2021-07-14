@@ -7,13 +7,14 @@ import { bindActionCreators } from 'redux';
 import EditRequirements from './EditRequirements';
 import { useState } from 'react';
 import DOMPurify from 'dompurify';
+import AddRequirementsModal from '../AddRequirementsModal';
 
-const SitePlanTab = () => {
+const SitePlanTab = ({ keyTab }) => {
   const { solarPlan } = useSelector((state) => state.requirements);
   const dispatch = useDispatch();
   const [toEdit, setToEdit] = useState({});
   const [editModal, setEditModal] = useState(false);
-
+  const [addRequirements, setAddRequirements] = useState(false);
   const { deleteRequirement, changeRequirementVisibility } = bindActionCreators(actions, dispatch);
 
   const chooseEditHandler = (key) => {
@@ -33,12 +34,18 @@ const SitePlanTab = () => {
   };
 
   return (
-    <div className="site_plan_block">
+    <div className="site_plan_block tab_block">
       <EditRequirements toEdit={toEdit} editModal={editModal} setEditModal={setEditModal} />
+      {/* /////////////////////////////////////////////////////////////////////////// */}
+      <AddRequirementsModal keyTab={keyTab} addRequirements={addRequirements} setAddRequirements={setAddRequirements} />
       <div className="add_block">
         <h2>Solar Attachment Requirments</h2>
         <Col span={7}>
-          <Button type="primary" style={{ maxHeight: '40px' }}>
+          <Button
+            type="primary"
+            style={{ maxHeight: '40px' }}
+            id="add_requirement"
+            onClick={() => setAddRequirements(() => true)}>
             Add Requirments
           </Button>
         </Col>
