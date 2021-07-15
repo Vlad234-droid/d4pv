@@ -13,7 +13,7 @@ const { TabPane } = Tabs;
 
 const AdminCompanyInfoConf = () => {
   const [editMode, setEditMode] = useState(false);
-  const [activeTabsKey, setActiveTabsKey] = useState('3');
+  const [activeTabsKey, setActiveTabsKey] = useState('1');
   const [testArray, setTestArray] = useState({});
   const callback = (key) => setActiveTabsKey(() => key);
 

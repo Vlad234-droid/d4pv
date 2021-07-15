@@ -24,7 +24,6 @@ const TableOfUsers = ({ setShowDeleteUser }) => {
       ),
       role: 'admin',
       email: 'vladikvladvita2@gmail.com',
-      conf: 'confirmitation',
     },
     {
       key: 2,
@@ -57,6 +56,24 @@ const TableOfUsers = ({ setShowDeleteUser }) => {
       ),
       role: 'super admin',
       email: 'rav@gmail.com',
+    },
+    {
+      key: 4,
+      name: (
+        <div className="wrapper_name">
+          <div className="wrapper_img">
+            <img
+              src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+              alt="Logo"
+            />
+          </div>
+          <h3 className="name">Victor</h3>
+        </div>
+      ),
+      role: 'admin',
+      email: 'victor@gmail.com',
+      conf: 'confirmitation',
+      onCheck: true,
     },
   ]);
 
@@ -125,6 +142,9 @@ const TableOfUsers = ({ setShowDeleteUser }) => {
         columns={columns}
         onChange={onChange}
         pagination={false}
+        rowClassName={(record) => {
+          return record.onCheck ? 'onCheck' : '';
+        }}
       />
       <ModalEditUser record={currRecordRow} showEditUser={showEditUser} setShowEditUser={setShowEditUser} />
     </>

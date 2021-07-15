@@ -6,7 +6,8 @@ import { Form, Input, Button, Row, Col } from 'antd';
 import { ShowPassword, CloseToShowPassword } from '../../components/icons';
 
 const UserProfile = () => {
-  const [form] = Form.useForm();
+  const [formProfileInformation] = Form.useForm();
+  const [formPassword] = Form.useForm();
   const [showFormPassword, setShowFormPassword] = useState(false);
 
   const [showPassFirst, setShowPassFirst] = useState(false);
@@ -19,11 +20,12 @@ const UserProfile = () => {
 
   const onFinishHandler = (values) => {
     console.log('values', values);
-    form.resetFields();
+    formProfileInformation.resetFields();
   };
 
   const onFinishPasswordHandler = (values) => {
     console.log('values password', values);
+    formPassword.resetFields();
   };
 
   const PasswordFormChange = () => {
@@ -31,7 +33,7 @@ const UserProfile = () => {
       <Form
         name="change_password_form"
         className="change_password_form"
-        form={form}
+        form={formProfileInformation}
         layout="vertical"
         onFinish={onFinishPasswordHandler}>
         <Col span={24}>
@@ -188,7 +190,7 @@ const UserProfile = () => {
                   <Form
                     name="form_FL_name"
                     className="form_FL_name"
-                    form={form}
+                    form={formPassword}
                     layout="vertical"
                     onFinish={onFinishHandler}>
                     <Col span={24} style={{ minHeight: '50px !important' }}>

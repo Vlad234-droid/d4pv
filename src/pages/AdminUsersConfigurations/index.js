@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Input, Row, Col } from 'antd';
 import './style.scss';
-import { SearchSVG } from '../../components/icons';
+import { SearchSVG, CloseSVG } from '../../components/icons';
 import ModalAddUser from './ModalAddUser';
 import ModalDeleteUser from './ModalDeleteUser';
 import TableOfUsers from './TableOfUsers';
@@ -18,8 +18,22 @@ const AdminUsersConfigurations = () => {
   };
 
   const suffixSearch = (
-    <div style={{ cursor: 'pointer' }}>
-      <SearchSVG />
+    <div
+      style={{ cursor: 'pointer', zIndex: '1000' }}
+      data-suffix="suffix"
+      onClick={(e) => {
+        console.log('log from suffix', e.currentTarget);
+      }}>
+      {!serchToggle ? (
+        <SearchSVG />
+      ) : (
+        <CloseSVG
+          onClick={(e) => {
+            console.log('log from suffix', e.currentTarget);
+            setSearchToggle(false);
+          }}
+        />
+      )}
     </div>
   );
 
@@ -45,7 +59,16 @@ const AdminUsersConfigurations = () => {
               </Col>
               <Col span={serchToggle ? 18 : 8} offset={serchToggle ? 2 : 12}>
                 <Form.Item name="search" className="input_link" onClick={() => setSearchToggle((prev) => !prev)}>
-                  <Input placeholder="Search" suffix={suffixSearch} />
+                  <Input
+                    placeholder="Search"
+                    suffix={suffixSearch}
+                    onBlur={() => setSearchToggle(() => false)}
+                    onClick={(e) => console.log('e from click', e)}
+                    onFocus={(e) => {
+                      console.log('e from blur', e.currentTarget);
+                      setSearchToggle((prev) => !prev);
+                    }}
+                  />
                 </Form.Item>
               </Col>
             </Row>

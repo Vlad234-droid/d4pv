@@ -31,6 +31,9 @@ const EditRequirements = ({ setEditModal, editModal, toEdit }) => {
   };
 
   useEffect(() => {
+    if (editModal) document.body.style.overflow = 'hidden';
+    if (!editModal) document.body.style.overflow = 'unset';
+
     if (toEdit.text !== undefined) {
       const contentBlock = htmlToDraft(toEdit.text);
       if (contentBlock) {
@@ -53,7 +56,7 @@ const EditRequirements = ({ setEditModal, editModal, toEdit }) => {
       getContainer={() => document.getElementById('edit_requirements')}
       width={664}
       className="modal_edit_requirements">
-      <h3 className="edit_requirements_title">Edit Note</h3>
+      <h3 className="edit_requirements_title">Edit Requirement</h3>
 
       {/* // ????//////?????* */}
 

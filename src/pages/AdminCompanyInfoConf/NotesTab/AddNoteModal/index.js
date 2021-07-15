@@ -33,6 +33,9 @@ const AddNoteModal = ({ keyTab, addNoteModal, setAddNoteModal }) => {
   };
 
   useEffect(() => {
+    if (addNoteModal) document.body.style.overflow = 'hidden';
+    if (!addNoteModal) document.body.style.overflow = 'unset';
+
     const contentBlock = htmlToDraft('<h6></h6>');
     const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
     const editorState = EditorState.createWithContent(contentState);

@@ -15,15 +15,15 @@ import htmlToDraft from 'html-to-draftjs';
 import './style.scss';
 import iconIMG from '../../../../components/icons/icon-img.png';
 
-const AddRequirementsModal = ({ keyTab, addRequirements, setAddRequirements }) => {
+const AddRequirementsModal = ({ fileUrl, setFileUrl, keyTab, addRequirements, setAddRequirements }) => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const { addRequirement } = bindActionCreators(actions, dispatch);
   const [editorState, setEditorState] = useState();
-  const [filePicker, setFilePicker] = useState('');
 
   const onFinish = ({ reference, requested }) => {
     let currentContentAsHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+    console.log('currentContentAsHTML', currentContentAsHTML);
     addRequirement({ keyTab, text: currentContentAsHTML, reference, requested });
     form.resetFields();
     setAddRequirements(() => false);
@@ -34,19 +34,22 @@ const AddRequirementsModal = ({ keyTab, addRequirements, setAddRequirements }) =
   };
 
   useEffect(() => {
+    if (addRequirements) document.body.style.overflow = 'hidden';
+    if (!addRequirements) document.body.style.overflow = 'unset';
+
     const contentBlock = htmlToDraft('<h6></h6>');
     const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
     const editorState = EditorState.createWithContent(contentState);
     setEditorState(() => editorState);
   }, [addRequirements]);
 
-  const Test = () => {
-    return (
-      <div>
-        <div>few;fmwefmweklfmnwlkemnflwenflkw</div>
-      </div>
-    );
-  };
+  // const Test = () => {
+  //   return (
+  //     <div>
+  //       <button onClick={() => }>hello</button>
+  //     </div>
+  //   );
+  // };
 
   const uploadCallbackHandler = (file) => {
     const imageObject = {
@@ -54,12 +57,12 @@ const AddRequirementsModal = ({ keyTab, addRequirements, setAddRequirements }) =
       localSrc: URL.createObjectURL(file),
     };
 
-    setFilePicker(() => imageObject);
+    setFileUrl(() => imageObject);
 
     return new Promise((resolve, reject) => {
       resolve({
         data: {
-          link: URL.createObjectURL(file),
+          link: `${URL.createObjectURL(file)}`,
         },
       });
     });
@@ -77,7 +80,7 @@ const AddRequirementsModal = ({ keyTab, addRequirements, setAddRequirements }) =
       getContainer={() => document.getElementById('add_requirement')}
       width={664}
       className="modal_add_requirements">
-      <h3 className="add_requirements_title">Add Note</h3>
+      <h3 className="add_requirements_title">Add Requirement</h3>
 
       {/* // ????//////?????* */}
 
@@ -104,6 +107,11 @@ const AddRequirementsModal = ({ keyTab, addRequirements, setAddRequirements }) =
                   urlEnabled: false,
                   previewImage: true,
                   uploadCallback: uploadCallbackHandler,
+                  alignmentEnabled: false,
+                  defaultSize: {
+                    height: '135',
+                    width: '240',
+                  },
                 },
               }}
             />
@@ -113,11 +121,6 @@ const AddRequirementsModal = ({ keyTab, addRequirements, setAddRequirements }) =
         <Row gutter={24}>
           <Col span={12}>
             <Form.Item label="Requested By" name="requested">
-              <Input placeholder="" type="text" />
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item label="Reference" name="reference">
               <Input placeholder="" type="text" />
             </Form.Item>
           </Col>

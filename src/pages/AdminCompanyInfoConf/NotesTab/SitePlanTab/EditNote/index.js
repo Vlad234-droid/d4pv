@@ -33,6 +33,9 @@ const EditNote = ({ setEditModal, editModal, toEdit }) => {
   };
 
   useEffect(() => {
+    if (editModal) document.body.style.overflow = 'hidden';
+    if (!editModal) document.body.style.overflow = 'unset';
+
     if (toEdit.text !== undefined) {
       const contentBlock = htmlToDraft(toEdit.text);
       if (contentBlock) {

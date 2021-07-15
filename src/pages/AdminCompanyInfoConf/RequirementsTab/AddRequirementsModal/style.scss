@@ -7,7 +7,7 @@
       padding: 40px 48px 48px 48px;
     }
     .wrapper-class.rdw-editor-wrapper {
-      height: 174px;
+      height: 190px;
       box-shadow: 0 1px 4px 0 rgba(0, 25, 94, 0.2);
     }
     .wrapper-class {
@@ -108,10 +108,22 @@
     }
     .editor-class {
       height: 75%;
-      padding: 0px 18px 0px 18px;
+      padding: 5px 18px 0px 18px;
+      font-weight: 500;
       .public-DraftStyleDefault-block.public-DraftStyleDefault-ltr {
         margin: 0px;
       }
+      figure {
+        .rdw-image-alignment.rdw-image-center {
+          display: block;
+          img {
+            margin-top: 10px;
+          }
+        }
+      }
+    }
+    .rdw-image-modal-size {
+      display: none;
     }
 
     h3 {

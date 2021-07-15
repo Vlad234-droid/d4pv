@@ -70,9 +70,9 @@ const SitePlanTab = ({ keyTab }) => {
             </div>
           </div>
           <div className="text_box">
-            <h3
+            <div
               className={`${item.visibleNote && 'modeOpacity'}`}
-              dangerouslySetInnerHTML={createMarkup(item.text)}></h3>
+              dangerouslySetInnerHTML={createMarkup(item.text)}></div>
           </div>
           <div className="addit_info">
             <p className={`${item.visibleNote && 'modeOpacity'}`}>

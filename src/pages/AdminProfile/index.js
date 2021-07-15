@@ -6,7 +6,9 @@ import { Form, Input, Button, Row, Col } from 'antd';
 import { ShowPassword, CloseToShowPassword } from '../../components/icons';
 
 const AdminProfile = () => {
-  const [form] = Form.useForm();
+  const [formProfileInfo] = Form.useForm();
+  const [formOrganization] = Form.useForm();
+  const [formPassword] = Form.useForm();
   const [showFormPassword, setShowFormPassword] = useState(false);
 
   const [showPassFirst, setShowPassFirst] = useState(false);
@@ -19,16 +21,17 @@ const AdminProfile = () => {
 
   const onFinishHandler = (values) => {
     console.log('values', values);
-    form.resetFields();
+    formProfileInfo.resetFields();
   };
 
   const onFinishHandlerOrganization = (values) => {
     console.log('values', values);
-    form.resetFields();
+    formOrganization.resetFields();
   };
 
   const onFinishPasswordHandler = (values) => {
     console.log('values password', values);
+    formPassword.resetFields();
   };
 
   const suffixFirst = (
@@ -88,7 +91,7 @@ const AdminProfile = () => {
                   </div>
                 </div>
                 <div className="form_password">
-                  <Form className="form_FL_name" form={form} layout="vertical" onFinish={onFinishHandler}>
+                  <Form className="form_FL_name" form={formProfileInfo} layout="vertical" onFinish={onFinishHandler}>
                     <Col span={24} style={{ minHeight: '50px !important' }}>
                       <Form.Item label="First Name" name="firstName">
                         <Input placeholder="Goward" type="text" />
@@ -133,7 +136,7 @@ const AdminProfile = () => {
                 <h2>Organization information</h2>
                 <Form
                   className="form_profile_admin"
-                  form={form}
+                  form={formOrganization}
                   layout="vertical"
                   onFinish={onFinishHandlerOrganization}>
                   <Col span={24}>
@@ -165,7 +168,7 @@ const AdminProfile = () => {
                 ) : (
                   <Form
                     className="change_password_form"
-                    form={form}
+                    form={formPassword}
                     layout="vertical"
                     onFinish={onFinishPasswordHandler}>
                     <Col span={24}>

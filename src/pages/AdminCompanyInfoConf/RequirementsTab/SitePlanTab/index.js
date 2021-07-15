@@ -9,6 +9,7 @@ import EditRequirements from './EditRequirements';
 import { useState } from 'react';
 import DOMPurify from 'dompurify';
 import AddRequirementsModal from '../AddRequirementsModal';
+import Parser from 'html-react-parser';
 
 const SitePlanTab = ({ keyTab }) => {
   const { sitePlan } = useSelector((state) => state.requirements);
@@ -17,6 +18,7 @@ const SitePlanTab = ({ keyTab }) => {
   const [editModal, setEditModal] = useState(false);
   const [addRequirements, setAddRequirements] = useState(false);
   const { deleteRequirement, changeRequirementVisibility } = bindActionCreators(actions, dispatch);
+  const [fileUrl, setFileUrl] = useState('');
 
   const chooseEditHandler = (key) => {
     const filtered = sitePlan.filter((item) => item.key === key);
@@ -28,17 +30,17 @@ const SitePlanTab = ({ keyTab }) => {
     setEditModal(() => true);
   };
 
-  const createMarkup = (html) => {
-    return {
-      __html: DOMPurify.sanitize(html),
-    };
-  };
-
   return (
     <div className="site_plan_block tab_block">
       <EditRequirements toEdit={toEdit} editModal={editModal} setEditModal={setEditModal} />
       {/* /////////////////////////////////////////////////////////////////////////// */}
-      <AddRequirementsModal keyTab={keyTab} addRequirements={addRequirements} setAddRequirements={setAddRequirements} />
+      <AddRequirementsModal
+        keyTab={keyTab}
+        addRequirements={addRequirements}
+        setAddRequirements={setAddRequirements}
+        fileUrl={fileUrl}
+        setFileUrl={setFileUrl}
+      />
 
       <div className="add_block">
         <h2>Site Plan Requirments</h2>
@@ -72,9 +74,7 @@ const SitePlanTab = ({ keyTab }) => {
             </div>
           </div>
           <div className="text_box">
-            <h3
-              className={`${item.visibleNote && 'modeOpacity'}`}
-              dangerouslySetInnerHTML={createMarkup(item.text)}></h3>
+            <div className={`${item.visibleNote && 'modeOpacity'}`}>{Parser(item.text)}</div>
           </div>
           <div className="addit_info">
             <p className={`${item.visibleNote && 'modeOpacity'}`}>
