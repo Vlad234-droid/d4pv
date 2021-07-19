@@ -3,7 +3,7 @@ export async function account(endpoint, { body, ...customConfig } = {}) {
 
   const config = {
     method: body ? 'POST' : 'GET',
-    ...customConfig,
+    // ...customConfig,
     headers: {
       ...headers,
       ...customConfig.headers,
@@ -11,8 +11,10 @@ export async function account(endpoint, { body, ...customConfig } = {}) {
   };
 
   if (body) {
-    config.body = JSON.stringify(body);
+    config.body = body;
   }
+
+  console.log('config', config);
 
   try {
     const response = await fetch(endpoint, config);
@@ -28,6 +30,7 @@ export async function account(endpoint, { body, ...customConfig } = {}) {
 }
 const checkForEndPoints = (endpoint, data) => {
   const splitted = endpoint.split('/');
+  console.log('data', data);
   const { [splitted.length - 1]: lastEndpoint } = splitted;
   switch (lastEndpoint) {
     case 'accounts':

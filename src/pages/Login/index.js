@@ -4,11 +4,20 @@ import { Form, Input, Button } from 'antd';
 import './style.scss';
 import { Logo4PV } from '../../components/icons';
 import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { actions } from '../../core/account/accountSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
   const [form] = Form.useForm();
-  const onFinishHandler = (values) => {
-    console.log('values', values);
+  const { logInAcc } = bindActionCreators(actions, dispatch);
+
+  const onFinishHandler = ({ email, password }) => {
+    logInAcc({
+      username: email,
+      password,
+    });
     form.resetFields();
   };
   return (

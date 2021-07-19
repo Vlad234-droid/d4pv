@@ -22,6 +22,20 @@ const resetPassword = createAsyncThunk('account/resetPassword', async (body) => 
   const response = await account.post(`${REACT_APP_API_URL}/accounts/reset-password`, { ...body });
   return response;
 });
+const logInAcc = createAsyncThunk('account/authoriseAccount', async (body) => {
+  const response = await account.post(
+    `${REACT_APP_API_URL}/accounts/auth`,
+    {
+      ...body,
+    },
+    {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    },
+  );
+  return response;
+});
 
 const accountSlice = createSlice({
   name: 'account',
@@ -70,7 +84,7 @@ const accountSlice = createSlice({
 
 const {} = accountSlice.actions;
 
-export const actions = { ...accountSlice.actions, createAccount, createAccountInvite, resetPassword };
+export const actions = { ...accountSlice.actions, createAccount, createAccountInvite, resetPassword, logInAcc };
 
 export default accountSlice.reducer;
 
