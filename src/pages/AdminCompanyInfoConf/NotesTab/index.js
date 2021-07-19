@@ -5,7 +5,7 @@ import SitePlanTab from './SitePlanTab';
 import SolarAttachmentPlan from './SolarAttachmentPlan';
 import LineDiagramTab from './LineDiagramTab';
 import AssemblyDetailsTab from './AssemblyDetailsTab';
-import { config } from './config';
+import config from './config';
 const { TabPane } = Tabs;
 
 const NotesTab = () => {

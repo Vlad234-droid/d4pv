@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import Layout from '../../components/LayoutGuest/Layout';
-import { Form, Input, Button, Row, Col } from 'antd';
+import { Form, Input, Button, Row, Col, notification } from 'antd';
 import './style.scss';
 import { Logo4PV } from '../../components/icons';
 import { Link } from 'react-router-dom';
 import { ShowPassword, CloseToShowPassword } from '../../components/icons';
+import { actions } from '../../core/account/accountSlice';
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 const LoginPage = () => {
   const [valueFirstPass, setValueFirstPass] = useState('');
@@ -12,10 +15,29 @@ const LoginPage = () => {
   const [showPassFirst, setShowPassFirst] = useState(false);
   const [showPassSecond, setShowPassSecond] = useState(false);
   const [form] = Form.useForm();
-  const onFinishHandler = (values) => {
-    console.log('values', values);
+  const dispatch = useDispatch();
+
+  const { createAccount } = bindActionCreators(actions, dispatch);
+
+  const onFinishHandler = ({ email, first_name, last_name, password, organisation }) => {
+    createAccount({
+      email,
+      first_name,
+      last_name,
+      password,
+      organisation,
+    }).then((data) => {
+      if (data.error) {
+        return notification.error({
+          message: 'Notification Title',
+          description: data.error.message,
+          duration: 3.5,
+        });
+      }
+    });
     form.resetFields();
   };
+
   const suffixFirst = (
     <div className="showPassFirst" onClick={() => setShowPassFirst((prev) => !prev)}>
       {!showPassFirst ? <ShowPassword /> : <CloseToShowPassword />}
@@ -26,6 +48,7 @@ const LoginPage = () => {
       {!showPassSecond ? <ShowPassword /> : <CloseToShowPassword />}
     </div>
   );
+
   return (
     <Layout isLogged={false} mode="login" className="login-page">
       <div className="wrapper">
@@ -43,12 +66,28 @@ const LoginPage = () => {
             <Form className="form_sign_up" form={form} layout="vertical" onFinish={onFinishHandler}>
               <Row gutter={24}>
                 <Col span={12}>
-                  <Form.Item label="First Name" name="firstName">
+                  <Form.Item
+                    label="First Name"
+                    name="first_name"
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Name is required!',
+                      },
+                    ]}>
                     <Input placeholder="Add your first name" type="text" />
                   </Form.Item>
                 </Col>
                 <Col span={12}>
-                  <Form.Item label="Last Name" name="lastName">
+                  <Form.Item
+                    label="Last Name"
+                    name="last_name"
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Last Name is required!',
+                      },
+                    ]}>
                     <Input placeholder="Add your last name" type="text" />
                   </Form.Item>
                 </Col>
@@ -76,8 +115,13 @@ const LoginPage = () => {
                   name="passwordFirst"
                   className="passwordFirst"
                   rules={[
-                    { min: 6, message: 'Password must be at least 6 characters!' },
+                    // { min: 6, message: 'Password must be at least 6 characters!' },
                     { required: true, message: 'Please input your password!' },
+                    // {
+                    //   pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
+                    //   message:
+                    //     'Invalid password. Valid password must be at least 8 characters long and contain both lower and uppercase characters and at least one number',
+                    // },
                   ]}>
                   <Input
                     suffix={suffixFirst}
@@ -124,13 +168,21 @@ const LoginPage = () => {
                 </div> */}
               </Col>
               <Col span={24}>
-                <Form.Item label="Organization Name" name="OrgName">
-                  <Input placeholder="Type your organization name" type="text" />
+                <Form.Item
+                  label="Organisation Name"
+                  name="organisation"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Organisation Name is required!',
+                    },
+                  ]}>
+                  <Input placeholder="Type your organisation name" type="text" />
                 </Form.Item>
               </Col>
 
               <Form.Item>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" style={{ marginTop: '5px' }}>
                   Sign Up
                 </Button>
               </Form.Item>

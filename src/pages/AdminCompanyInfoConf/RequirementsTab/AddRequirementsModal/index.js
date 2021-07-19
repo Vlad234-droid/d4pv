@@ -95,8 +95,8 @@ const AddRequirementsModal = ({ fileUrl, setFileUrl, keyTab, addRequirements, se
               toolbarClassName="toolbar-class"
               toolbar={{
                 options: ['inline', 'image'],
-                inline: { options: ['bold', 'underline'] },
                 inline: {
+                  options: ['bold', 'underline'],
                   bold: { icon: bold, className: 'custom_bold' },
                   underline: { icon: underline, className: 'custom_underline' },
                 },

@@ -3,9 +3,7 @@ import { Modal, Form, Button, Col, Row, Input } from 'antd';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState } from 'draft-js';
 import { CloseIconSVG } from '../../../../../components/icons';
-import { convertFromRaw } from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { convertToHTML } from 'draft-convert';
 import { actions } from '../../../../../core/notes/notesSlice';
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
@@ -45,7 +43,7 @@ const EditNote = ({ setEditModal, editModal, toEdit }) => {
         setEditorState(() => editorState);
       }
     }
-  }, [toEdit]);
+  }, [toEdit, editModal]);
 
   return (
     <Modal
@@ -75,8 +73,8 @@ const EditNote = ({ setEditModal, editModal, toEdit }) => {
               toolbarClassName="toolbar-class"
               toolbar={{
                 options: ['inline'],
-                inline: { options: ['bold', 'underline'] },
                 inline: {
+                  options: ['bold', 'underline'],
                   bold: { icon: bold, className: 'custom_bold' },
                   underline: { icon: underline, className: 'custom_underline' },
                 },

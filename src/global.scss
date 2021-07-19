@@ -316,14 +316,13 @@ p {
   }
 }
 .ant-form {
-  .ant-col {
-    .ant-row.ant-form-item.ant-form-item-with-help.ant-form-item-has-error {
-      .ant-form-item-explain.ant-form-item-explain-error {
-        position: absolute;
-        top: 100%;
-        left: 0%;
-        right: 0%;
-      }
+  .ant-form-item-with-help {
+    .ant-form-item-explain {
+      position: absolute;
+      top: 100%;
+      left: 0%;
+      right: 0%;
+      color: #fc4d4e;
     }
   }
 }

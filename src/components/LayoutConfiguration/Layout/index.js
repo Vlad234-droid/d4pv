@@ -17,7 +17,7 @@ const LayoutConfiguration = ({ children, className }) => {
   useEffect(() => {
     if (location.pathname.includes('user')) setCurrentTub(() => '1');
     if (location.pathname.includes('compan')) setCurrentTub(() => '2');
-  }, []);
+  }, [location.pathname]);
 
   function callback(key) {
     switch (key) {
@@ -58,7 +58,6 @@ const LayoutConfiguration = ({ children, className }) => {
                             <p>{item.text}</p>
                           </span>
                         }
-                        key={item.key}
                       />
                     ))}
                   </Tabs>

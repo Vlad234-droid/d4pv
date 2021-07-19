@@ -73,7 +73,7 @@ export const requirementsSlice = createSlice({
     addRequirement: (state, { payload }) => {
       const { keyTab, text, reference, requested } = payload;
       let arrKeys = Object.keys(state);
-      const index = arrKeys.findIndex((_, i) => i == keyTab);
+      const index = arrKeys.findIndex((_, i) => i === keyTab);
       state[arrKeys[index]] = [
         ...state[arrKeys[index]],
         {

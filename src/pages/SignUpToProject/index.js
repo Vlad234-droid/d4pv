@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import Layout from '../../components/LayoutGuest/Layout';
-import { Form, Input, Button, Row, Col } from 'antd';
+import { Form, Input, Button, Row, Col, notification } from 'antd';
 import './style.scss';
 import { Logo4PV } from '../../components/icons';
 import { ShowPassword, CloseToShowPassword } from '../../components/icons';
+import { actions } from '../../core/account/accountSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 const SignUpToProject = () => {
   const [valueFirstPass, setValueFirstPass] = useState('');
@@ -11,10 +14,29 @@ const SignUpToProject = () => {
   const [showPassFirst, setShowPassFirst] = useState(false);
   const [showPassSecond, setShowPassSecond] = useState(false);
   const [form] = Form.useForm();
-  const onFinishHandler = (values) => {
-    console.log('values', values);
+  const dispatch = useDispatch();
+  const status = useSelector((state) => state.account);
+  console.log('status', status);
+  const { createAccountInvite } = bindActionCreators(actions, dispatch);
+
+  const onFinishHandler = ({ first_name, last_name, password, invite_id = '3fa85f64-5717-4562-b3fc-2c963f66afa6' }) => {
+    createAccountInvite({
+      first_name,
+      last_name,
+      password,
+      invite_id,
+    }).then((data) => {
+      if (data.error) {
+        return notification.error({
+          message: 'Notification Title',
+          description: data.error.message,
+          duration: 3.5,
+        });
+      }
+    });
     form.resetFields();
   };
+
   const suffixFirst = (
     <div className="showPassFirst" onClick={() => setShowPassFirst((prev) => !prev)}>
       {!showPassFirst ? <ShowPassword /> : <CloseToShowPassword />}
@@ -36,15 +58,31 @@ const SignUpToProject = () => {
             <div className="goSolar">
               <h2>Sign Up to GO Solar</h2>
             </div>
-            <Form className="form_sign_up" form={form} layout="vertical" onFinish={onFinishHandler}>
+            <Form className="form_sign_up_toProject" form={form} layout="vertical" onFinish={onFinishHandler}>
               <Row gutter={24}>
                 <Col span={12}>
-                  <Form.Item label="First Name" name="firstName">
+                  <Form.Item
+                    label="First Name"
+                    name="first_name"
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Name is required!',
+                      },
+                    ]}>
                     <Input placeholder="Add your first name" type="text" />
                   </Form.Item>
                 </Col>
                 <Col span={12}>
-                  <Form.Item label="Last Name" name="lastName">
+                  <Form.Item
+                    label="Last Name"
+                    name="last_name"
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Last Name is required!',
+                      },
+                    ]}>
                     <Input placeholder="Add your last name" type="text" />
                   </Form.Item>
                 </Col>
@@ -72,8 +110,13 @@ const SignUpToProject = () => {
                   name="passwordFirst"
                   className="passwordFirst"
                   rules={[
-                    { min: 6, message: 'Password must be at least 6 characters!' },
+                    // { min: 6, message: 'Password must be at least 6 characters!' },
                     { required: true, message: 'Please input your password!' },
+                    {
+                      pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
+                      message:
+                        'Invalid password. Valid password must be at least 8 characters long and contain both lower and uppercase characters and at least one number',
+                    },
                   ]}>
                   <Input
                     suffix={suffixFirst}
@@ -118,7 +161,7 @@ const SignUpToProject = () => {
               </Col>
 
               <Form.Item>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" style={{ marginTop: '5px' }}>
                   Sign Up
                 </Button>
               </Form.Item>

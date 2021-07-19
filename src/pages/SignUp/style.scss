@@ -72,14 +72,17 @@
             }
           }
           .ant-row.passwordFirst {
+            .ant-form-item-explain {
+              font-size: 9px;
+            }
             .ant-col {
               position: relative;
               &:first-child {
                 &::after {
-                  content: '(Password must be at least 6 characters)';
+                  content: '(Password must be at least 8 characters)';
                   position: absolute;
                   top: 0px;
-                  right: 0px;
+                  right: 21px;
                   width: 218px;
                   opacity: 0.5;
                   font-family: Montserrat;
@@ -90,6 +93,7 @@
                   letter-spacing: -0.1px;
                   color: #00254d;
                   text-align: right;
+                  white-space: nowrap;
                 }
               }
             }

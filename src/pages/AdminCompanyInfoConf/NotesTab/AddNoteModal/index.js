@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Form, Button, Col, Row, Input } from 'antd';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState } from 'draft-js';
@@ -70,8 +70,8 @@ const AddNoteModal = ({ keyTab, addNoteModal, setAddNoteModal }) => {
               toolbarClassName="toolbar-class"
               toolbar={{
                 options: ['inline'],
-                inline: { options: ['bold', 'underline'] },
                 inline: {
+                  options: ['bold', 'underline'],
                   bold: { icon: bold, className: 'custom_bold' },
                   underline: { icon: underline, className: 'custom_underline' },
                 },

@@ -43,7 +43,7 @@ const EditNote = ({ setEditModal, editModal, toEdit }) => {
         setEditorState(() => editorState);
       }
     }
-  }, [toEdit]);
+  }, [toEdit, editModal]);
 
   return (
     <Modal
@@ -73,8 +73,8 @@ const EditNote = ({ setEditModal, editModal, toEdit }) => {
               toolbarClassName="toolbar-class"
               toolbar={{
                 options: ['inline'],
-                inline: { options: ['bold', 'underline'] },
                 inline: {
+                  options: ['bold', 'underline'],
                   bold: { icon: bold, className: 'custom_bold' },
                   underline: { icon: underline, className: 'custom_underline' },
                 },

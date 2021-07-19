@@ -5,6 +5,8 @@ import './icons.scss';
 const centeredSVG = () => ({
   display: 'block',
   margin: '0 auto',
+  // ??test??//
+  cursor: 'pointer',
 });
 
 const IconInfo = () => {
@@ -421,8 +423,7 @@ const DeleteSVG = () => {
       height="24"
       viewBox="0 0 24 24"
       style={centeredSVG()}
-      style={{ cursor: 'pointer' }}
-      data-action="delete">
+      dataAction="delete">
       <g fill="none" fillRule="evenodd">
         <g>
           <g>
@@ -548,13 +549,7 @@ const ArrowDownSelectSVG = () => {
 
 const EditCompanySVG = () => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      style={centeredSVG()}
-      style={{ cursor: 'pointer' }}>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style={centeredSVG()}>
       <g fill="none" fillRule="evenodd">
         <g>
           <g>
@@ -579,13 +574,7 @@ const EditCompanySVG = () => {
 
 const IconToShow = () => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      style={centeredSVG()}
-      style={{ cursor: 'pointer' }}>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style={centeredSVG()}>
       <g fill="none" fillRule="evenodd">
         <g>
           <g>
@@ -616,13 +605,7 @@ const IconToShow = () => {
 
 const HideNotesSVG = () => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      style={centeredSVG()}
-      style={{ cursor: 'pointer' }}>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style={centeredSVG()}>
       <g fill="none" fillRule="evenodd">
         <g>
           <g>
@@ -654,7 +637,7 @@ const HideNotesSVG = () => {
 const UserForCheck = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-      <g fill="none" fill-rule="evenodd">
+      <g fill="none" fillRule="evenodd">
         <g fill="#B2BECA">
           <g>
             <g>

@@ -7,7 +7,6 @@ import { actions } from '../../../../core/requirements/requirementsSlice';
 import { bindActionCreators } from 'redux';
 import EditRequirements from './EditRequirements';
 import { useState } from 'react';
-import DOMPurify from 'dompurify';
 import AddRequirementsModal from '../AddRequirementsModal';
 import Parser from 'html-react-parser';
 

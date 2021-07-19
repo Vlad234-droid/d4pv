@@ -5,7 +5,7 @@ import './style.scss';
 import { Logo4PV } from '../../components/icons';
 import { Link } from 'react-router-dom';
 
-const LoginPage = (props) => {
+const LoginPage = () => {
   const [form] = Form.useForm();
   const onFinishHandler = (values) => {
     console.log('values', values);

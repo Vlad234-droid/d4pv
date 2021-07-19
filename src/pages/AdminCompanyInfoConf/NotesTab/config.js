@@ -1,4 +1,4 @@
-export const config = [
+const config = [
   {
     tab: 'Site Plan',
     key: 1,
@@ -16,3 +16,4 @@ export const config = [
     key: 4,
   },
 ];
+export default config;
