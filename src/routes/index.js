@@ -21,13 +21,13 @@ const routes = () => {
     <React.Suspense fallback="">
       <CoreRouter>
         <Route exact path="/" component={LoginPage} />
-        <Route exact path="/sign-in/" component={LoginPage} />
-        <Route exact path="/forgotPassword/" component={ForgotPassword} />
         <Route exact path="/sign-up/" component={SignUp} />
+        <Route exact path="/sign-in/" component={LoginPage} />
+        <Route exact path="/forgot-assword/" component={ForgotPassword} />
         <Route exact path="/accounts/invite/:id" component={SignUpToProject} />
         {/* <Route exact path="/test" component={Counter} /> */}
-        <Route exact path="/userProfile" component={UserProfile} />
-        <Route exact path="/adminProfile" component={AdminProfile} />
+        <Route exact path="/profile" component={UserProfile} />
+        <Route exact path="/admin-profile" component={AdminProfile} />
         <Route exact path="/admin-users-conf" component={AdminUsersConfigurations} />
         <Route exact path="/admin-companies-conf" component={AdminCompaniesConfigurations} />
         <Route exact path="/admin-add-company-conf" component={AdminAddCompanyConfigurations} />
