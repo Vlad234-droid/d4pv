@@ -42,9 +42,10 @@ header.header_wrapper_configuration {
         }
       }
       .corner_container {
+        position: relative;
         .dropMenuQuestion {
-          left: 805px !important;
-          top: 55px !important;
+          left: -152px !important;
+          top: 51px !important;
           .dropDown_block_question {
             width: 248px;
             border-radius: 4px;
@@ -85,7 +86,7 @@ header.header_wrapper_configuration {
         }
 
         .dropMenuProfile {
-          left: 972px !important;
+          left: 0px !important;
           top: 55px !important;
         }
         .ant-dropdown {

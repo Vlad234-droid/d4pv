@@ -8,6 +8,7 @@ import { ShowPassword, CloseToShowPassword } from '../../components/icons';
 import { actions } from '../../core/account/accountSlice';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { useSelector } from 'react-redux';
 
 const LoginPage = () => {
   const [valueFirstPass, setValueFirstPass] = useState('');
@@ -16,6 +17,7 @@ const LoginPage = () => {
   const [showPassSecond, setShowPassSecond] = useState(false);
   const [form] = Form.useForm();
   const dispatch = useDispatch();
+  const { status, error } = useSelector((state) => state.account);
 
   const { createAccount } = bindActionCreators(actions, dispatch);
 
@@ -27,6 +29,7 @@ const LoginPage = () => {
       password,
       organisation,
     }).then((data) => {
+      console.log('data', data);
       if (data.error) {
         return notification.error({
           message: 'Notification Title',
@@ -49,9 +52,17 @@ const LoginPage = () => {
     </div>
   );
 
+  const noti = () => {
+    return notification.success({
+      message: 'Notification Title',
+      description: 'account have been created',
+    });
+  };
+
   return (
     <Layout isLogged={false} mode="login" className="login-page">
       <div className="wrapper">
+        {status === 'succeeded' && noti()}
         <div className="block_sign_up">
           <div className="block_wrapper">
             <div className="logo4pv">

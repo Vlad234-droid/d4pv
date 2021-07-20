@@ -24,7 +24,7 @@ const routes = () => {
         <Route exact path="/sign-in/" component={LoginPage} />
         <Route exact path="/forgotPassword/" component={ForgotPassword} />
         <Route exact path="/sign-up/" component={SignUp} />
-        <Route exact path="/sign-up-toProject/" component={SignUpToProject} />
+        <Route exact path="/accounts/invite/:id" component={SignUpToProject} />
         {/* <Route exact path="/test" component={Counter} /> */}
         <Route exact path="/userProfile" component={UserProfile} />
         <Route exact path="/adminProfile" component={AdminProfile} />

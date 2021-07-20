@@ -14,7 +14,6 @@ const ForgotPassword = () => {
   const [form] = Form.useForm();
   const { resetPassword } = bindActionCreators(actions, dispatch);
   const { passwordStatus } = useSelector((state) => state.account);
-  console.log('passwordStatus', passwordStatus);
 
   const onFinish = ({ email }) => {
     resetPassword({

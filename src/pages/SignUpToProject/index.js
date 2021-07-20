@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '../../components/LayoutGuest/Layout';
 import { Form, Input, Button, Row, Col, notification } from 'antd';
 import './style.scss';
@@ -7,6 +7,7 @@ import { ShowPassword, CloseToShowPassword } from '../../components/icons';
 import { actions } from '../../core/account/accountSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { useParams } from 'react-router-dom';
 
 const SignUpToProject = () => {
   const [valueFirstPass, setValueFirstPass] = useState('');
@@ -17,7 +18,28 @@ const SignUpToProject = () => {
   const dispatch = useDispatch();
   const status = useSelector((state) => state.account);
   console.log('status', status);
-  const { createAccountInvite } = bindActionCreators(actions, dispatch);
+  const { createAccountInvite, getInviteInfo } = bindActionCreators(actions, dispatch);
+  const { id } = useParams();
+
+  // useEffect(() => {
+  //   createAccountInvite({
+  //     first_name: 'string',
+  //     last_name: 'string',
+  //     invite_id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+  //     password: 'MacOs2020',
+  //   }).then((data) => {
+  //     if (data.error) {
+  //       return notification.error({
+  //         message: 'Notification Title',
+  //         description: data.error.message,
+  //         duration: 3.5,
+  //       });
+  //     }
+  //   });
+  // }, []);
+  useEffect(() => {
+    getInviteInfo(id);
+  }, []);
 
   const onFinishHandler = ({ first_name, last_name, password, invite_id = '3fa85f64-5717-4562-b3fc-2c963f66afa6' }) => {
     createAccountInvite({

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { account } from '../services/account';
+import { fetchApi } from '../fetchApi';
 
 const { REACT_APP_API_URL } = process.env;
 
@@ -11,39 +11,31 @@ const initialState = {
 };
 
 const createAccount = createAsyncThunk('account/createAccount', async (body) => {
-  const response = await account.post(
-    `${REACT_APP_API_URL}/accounts`,
-    { ...body },
-    {
-      method: 'POST',
-    },
-  );
+  const response = await fetchApi(`${REACT_APP_API_URL}/accounts`, 'POST', null, JSON.stringify(body));
   return response;
 });
 const createAccountInvite = createAsyncThunk('account/createAccountInvite', async (body) => {
-  const response = await account.post(`${REACT_APP_API_URL}/accounts/invite`, { ...body }, { method: 'POST' });
+  const response = await fetchApi(`${REACT_APP_API_URL}/accounts/invite`, 'POST', null, JSON.stringify(body));
   return response;
 });
 const resetPassword = createAsyncThunk('account/resetPassword', async (body) => {
-  const response = await account.post(`${REACT_APP_API_URL}/accounts/reset-password`, { ...body }, { method: 'POST' });
+  const response = await fetchApi(`${REACT_APP_API_URL}/accounts/reset-password`, 'POST', null, JSON.stringify(body));
   return response;
 });
 const logInAcc = createAsyncThunk('account/authoriseAccount', async (body) => {
-  const response = await account.post(
-    `${REACT_APP_API_URL}/accounts/auth`,
-    {
-      ...body,
-    },
-    {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      method: 'POST',
-    },
-  );
+  const formData = new FormData();
+  for (let i in body) {
+    formData.append(i, body[i]);
+  }
+  const headers = { Accept: 'application/json' };
+  const response = await fetchApi(`${REACT_APP_API_URL}/accounts/auth`, 'POST', headers, formData);
   return response;
 });
 
+const getInviteInfo = createAsyncThunk('account/getInviteInfo', async (id) => {
+  const response = await fetchApi(`${REACT_APP_API_URL}/accounts/invite/${id}`, null, null, null);
+  return response;
+});
 const accountSlice = createSlice({
   name: 'account',
   initialState,
@@ -68,10 +60,16 @@ const accountSlice = createSlice({
     [createAccount.pending]: (state, action) => {
       state.status = 'loading';
     },
-    [createAccount.fulfilled]: (state, { payload }) => {
+    [createAccount.fulfilled]: (state, action) => {
       state.status = 'succeeded';
       // Add any fetched posts to the array
-      state.account_id = payload.account_id;
+      console.log('action', action);
+      state.account_id = action.payload.account_id;
+    },
+    [createAccount.rejected]: (state, action) => {
+      state.status = 'failed';
+      console.log('payload fropmhere', action);
+      //state.error = action.error;
     },
     [createAccountInvite.fulfilled]: (state, { payload }) => {
       state.status = 'succeeded';
@@ -81,17 +79,19 @@ const accountSlice = createSlice({
     [resetPassword.fulfilled]: (state, { payload }) => {
       state.passwordStatus = 'succeeded';
     },
-    // [createAccount.rejected]: (state, { payload }) => {
-    //   state.status = 'failed';
-    //   console.log('payload', payload);
-    //   state.error = payload.detail;
-    // },
   },
 });
 
 const {} = accountSlice.actions;
 
-export const actions = { ...accountSlice.actions, createAccount, createAccountInvite, resetPassword, logInAcc };
+export const actions = {
+  ...accountSlice.actions,
+  createAccount,
+  createAccountInvite,
+  resetPassword,
+  logInAcc,
+  getInviteInfo,
+};
 
 export default accountSlice.reducer;
 
