@@ -3,7 +3,7 @@ import Layout from '../../components/LayoutGuest/Layout';
 import { Form, Input, Button, Row, Col, notification } from 'antd';
 import './style.scss';
 import { Logo4PV } from '../../components/icons';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { ShowPassword, CloseToShowPassword } from '../../components/icons';
 import { actions } from '../../core/account/accountSlice';
 import { useDispatch } from 'react-redux';
@@ -18,6 +18,7 @@ const LoginPage = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const { status, error } = useSelector((state) => state.account);
+  const history = useHistory();
 
   const { createAccount } = bindActionCreators(actions, dispatch);
 
@@ -29,9 +30,16 @@ const LoginPage = () => {
       password,
       organisation,
     }).then((data) => {
-      console.log('data', data);
+      if (data.type === 'account/createAccount/fulfilled') {
+        notification.success({
+          message: 'Notification Title',
+          description: 'account have been created',
+          duration: 3.5,
+        });
+        history.push('/sign-in/');
+      }
       if (data.error) {
-        return notification.error({
+        notification.error({
           message: 'Notification Title',
           description: data.error.message,
           duration: 3.5,
@@ -52,17 +60,9 @@ const LoginPage = () => {
     </div>
   );
 
-  const noti = () => {
-    return notification.success({
-      message: 'Notification Title',
-      description: 'account have been created',
-    });
-  };
-
   return (
     <Layout isLogged={false} mode="login" className="login-page">
       <div className="wrapper">
-        {status === 'succeeded' && noti()}
         <div className="block_sign_up">
           <div className="block_wrapper">
             <div className="logo4pv">
@@ -128,11 +128,11 @@ const LoginPage = () => {
                   rules={[
                     // { min: 6, message: 'Password must be at least 6 characters!' },
                     { required: true, message: 'Please input your password!' },
-                    // {
-                    //   pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
-                    //   message:
-                    //     'Invalid password. Valid password must be at least 8 characters long and contain both lower and uppercase characters and at least one number',
-                    // },
+                    {
+                      pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
+                      message:
+                        'Invalid password. Valid password must be at least 8 characters long and contain both lower and uppercase characters and at least one number',
+                    },
                   ]}>
                   <Input
                     suffix={suffixFirst}
@@ -193,7 +193,7 @@ const LoginPage = () => {
               </Col>
 
               <Form.Item>
-                <Button type="primary" htmlType="submit" style={{ marginTop: '5px' }}>
+                <Button type="primary" htmlType="submit" style={{ marginTop: '5px' }} loading={status === 'loading'}>
                   Sign Up
                 </Button>
               </Form.Item>

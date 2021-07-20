@@ -4,7 +4,7 @@ import { fetchApi } from '../fetchApi';
 const { REACT_APP_API_URL } = process.env;
 
 const initialState = {
-  status: 'idle',
+  status: 'idle', //succeddded
   error: null,
   account_id: '',
   passwordStatus: 'idle',
