@@ -54,7 +54,7 @@ const LoginPage = () => {
                 label="Password"
                 name="password"
                 rules={[
-                  { min: 6, message: 'Password must be at least 6 characters!' },
+                  { min: 8, message: 'Password must be at least 8 characters!' },
                   { required: true, message: 'Please input your password!' },
                 ]}>
                 <Input placeholder="Type your password" type="password" />

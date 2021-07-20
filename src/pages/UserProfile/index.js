@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '../../components/LayoutDashboard/Layout';
 import './style.scss';
 import { BackLeftSVG, SVGReload, SVGDelete } from '../../components/icons';
 import { Form, Input, Button, Row, Col } from 'antd';
 import { ShowPassword, CloseToShowPassword } from '../../components/icons';
+import { bindActionCreators } from 'redux';
+import { useDispatch } from 'react-redux';
+import { actions } from '../../core/profile/profileSlice';
+import UploadImg from './UploadImg';
 
 const UserProfile = () => {
+  const dispatch = useDispatch();
   const [formProfileInformation] = Form.useForm();
   const [formPassword] = Form.useForm();
   const [showFormPassword, setShowFormPassword] = useState(false);
@@ -18,6 +23,9 @@ const UserProfile = () => {
   const [valueSecondPass, setValueSecondPass] = useState('');
   const [valueThirdPass, setValueThirdPass] = useState('');
 
+  const [logoUrl, setLogoUrl] = useState(null);
+  const [editCompanyLogo, setEditCompanyLogo] = useState(false);
+
   const onFinishHandler = (values) => {
     console.log('values', values);
     formProfileInformation.resetFields();
@@ -27,6 +35,12 @@ const UserProfile = () => {
     console.log('values password', values);
     formPassword.resetFields();
   };
+
+  const { getProfile } = bindActionCreators(actions, dispatch);
+
+  useEffect(() => {
+    getProfile();
+  }, []);
 
   const PasswordFormChange = () => {
     return (
@@ -163,7 +177,7 @@ const UserProfile = () => {
                 <h2>Profile information</h2>
               </div>
               <div className="blocks_wrapper">
-                <div className="selfi_wrapper">
+                {/* <div className="selfi_wrapper">
                   <div className="centeredIMG">
                     <div className="selfi">
                       <img
@@ -185,7 +199,7 @@ const UserProfile = () => {
                       <p>Delete</p>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div className="form_password">
                   <Form
                     name="form_FL_name"
@@ -193,40 +207,56 @@ const UserProfile = () => {
                     form={formPassword}
                     layout="vertical"
                     onFinish={onFinishHandler}>
-                    <Col span={24} style={{ minHeight: '50px !important' }}>
-                      <Form.Item label="First Name" name="firstName">
-                        <Input placeholder="Goward" type="text" />
-                      </Form.Item>
-                    </Col>
-                    <Col span={24}>
-                      <Form.Item label="Last Name" name="lastName">
-                        <Input placeholder="Cooper" type="text" />
-                      </Form.Item>
-                    </Col>
+                    <Row gutter={20}>
+                      <Col span={7}>
+                        <Form.Item name="logo">
+                          <UploadImg
+                            form={formProfileInformation}
+                            logoUrl={logoUrl}
+                            setLogoUrl={setLogoUrl}
+                            editCompanyLogo={editCompanyLogo}
+                            setEditCompanyLogo={setEditCompanyLogo}
+                          />
+                        </Form.Item>
+                      </Col>
+                      <Col span={17}>
+                        <Col span={24} style={{ minHeight: '50px !important' }}>
+                          <Form.Item label="First Name" name="firstName">
+                            <Input placeholder="Goward" type="text" />
+                          </Form.Item>
+                        </Col>
+                        <Col span={24}>
+                          <Form.Item label="Last Name" name="lastName">
+                            <Input placeholder="Cooper" type="text" />
+                          </Form.Item>
+                        </Col>
 
-                    <Col span={24}>
-                      <Form.Item
-                        label="Email"
-                        name="email"
-                        rules={[
-                          {
-                            type: 'email',
-                            message: 'Please input your Email!',
-                          },
-                          {
-                            required: true,
-                            message: 'Email is required!',
-                          },
-                        ]}>
-                        <Input placeholder="test@mail.com" />
-                      </Form.Item>
-                    </Col>
-
-                    <Form.Item>
-                      <Button type="primary" htmlType="submit" className="btn_save_prof">
-                        Save
-                      </Button>
-                    </Form.Item>
+                        <Col span={24}>
+                          <Form.Item
+                            label="Email"
+                            name="email"
+                            rules={[
+                              {
+                                type: 'email',
+                                message: 'Please input your Email!',
+                              },
+                              {
+                                required: true,
+                                message: 'Email is required!',
+                              },
+                            ]}>
+                            <Input placeholder="test@mail.com" />
+                          </Form.Item>
+                        </Col>
+                        <Col span={24}>
+                          <Form.Item>
+                            <Button type="primary" htmlType="submit" className="btn_save_prof">
+                              Save
+                            </Button>
+                          </Form.Item>
+                        </Col>
+                      </Col>
+                    </Row>
                   </Form>
                 </div>
               </div>
