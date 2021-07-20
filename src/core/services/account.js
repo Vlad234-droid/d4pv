@@ -1,8 +1,15 @@
 export async function account(endpoint, { body, ...customConfig } = {}) {
   const headers = { 'Content-Type': 'application/json', Accept: 'application/json' };
 
+  // const formData = new FormData();
+
+  // if (!isEmpty(body)) {
+  //   for (let i in body) {
+  //     formData.append(i, body[i]);
+  //   }
+  // }
   const config = {
-    method: body ? 'POST' : 'GET',
+    method: customConfig.method,
     // ...customConfig,
     headers: {
       ...headers,
@@ -10,11 +17,13 @@ export async function account(endpoint, { body, ...customConfig } = {}) {
     },
   };
 
-  if (body) {
-    config.body = body;
-  }
+  // function isEmpty(obj) {
+  //   return Object.keys(obj).length === 0;
+  // }
 
-  console.log('config', config);
+  if (body) {
+    config.body = JSON.stringify(body);
+  }
 
   try {
     const response = await fetch(endpoint, config);

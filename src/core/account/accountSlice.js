@@ -11,15 +11,21 @@ const initialState = {
 };
 
 const createAccount = createAsyncThunk('account/createAccount', async (body) => {
-  const response = await account.post(`${REACT_APP_API_URL}/accounts`, { ...body });
+  const response = await account.post(
+    `${REACT_APP_API_URL}/accounts`,
+    { ...body },
+    {
+      method: 'POST',
+    },
+  );
   return response;
 });
 const createAccountInvite = createAsyncThunk('account/createAccountInvite', async (body) => {
-  const response = await account.post(`${REACT_APP_API_URL}/accounts/invite`, { ...body });
+  const response = await account.post(`${REACT_APP_API_URL}/accounts/invite`, { ...body }, { method: 'POST' });
   return response;
 });
 const resetPassword = createAsyncThunk('account/resetPassword', async (body) => {
-  const response = await account.post(`${REACT_APP_API_URL}/accounts/reset-password`, { ...body });
+  const response = await account.post(`${REACT_APP_API_URL}/accounts/reset-password`, { ...body }, { method: 'POST' });
   return response;
 });
 const logInAcc = createAsyncThunk('account/authoriseAccount', async (body) => {
@@ -32,6 +38,7 @@ const logInAcc = createAsyncThunk('account/authoriseAccount', async (body) => {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
+      method: 'POST',
     },
   );
   return response;
