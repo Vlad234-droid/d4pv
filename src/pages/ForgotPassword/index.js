@@ -1,22 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Layout from '../../components/LayoutGuest/Layout';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, notification } from 'antd';
 import './style.scss';
 import { Logo4PV } from '../../components/icons';
 import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { actions } from '../../core/account/accountSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
-const ForgotPassword = (props) => {
+const ForgotPassword = () => {
   const [thanks, setThanks] = useState(false);
+  const dispatch = useDispatch();
   const [form] = Form.useForm();
-  const onFinish = (values) => {
-    setThanks(() => true);
-    console.log('values', values);
+  const { resetPassword } = bindActionCreators(actions, dispatch);
+  const { passwordStatus } = useSelector((state) => state.account);
+  console.log('passwordStatus', passwordStatus);
+
+  const onFinish = ({ email }) => {
+    resetPassword({
+      email,
+    }).then((data) => {
+      if (data?.error?.message) {
+        return notification.error({
+          message: 'Notification Title',
+          description: data.error.message,
+          duration: 3.5,
+        });
+      } else {
+        setThanks(() => true);
+      }
+    });
     form.resetFields();
   };
 
-  useEffect(() => {
-    return () => setThanks(() => false);
-  }, []);
   return (
     <Layout isLogged={false} mode="login" className="login-page">
       <div className="wrapper">
@@ -31,12 +47,24 @@ const ForgotPassword = (props) => {
                   <div className="rec_pas">
                     <h2>Recover Password</h2>
                   </div>
-                  <Form className="form-sign_in" form={form} layout="vertical" onFinish={onFinish}>
-                    <Form.Item label="Email" name="email">
+                  <Form className="form-resetPassword" form={form} layout="vertical" onFinish={onFinish}>
+                    <Form.Item
+                      label="Email"
+                      name="email"
+                      rules={[
+                        {
+                          type: 'email',
+                          message: 'Please input your Email!',
+                        },
+                        {
+                          required: true,
+                          message: 'Email is required!',
+                        },
+                      ]}>
                       <Input placeholder="Type your email" />
                     </Form.Item>
                     <Form.Item>
-                      <Button htmlType="submit" type="primary">
+                      <Button htmlType="submit" type="primary" style={{ marginTop: '5px' }}>
                         Recover Password
                       </Button>
                     </Form.Item>
@@ -48,7 +76,6 @@ const ForgotPassword = (props) => {
                   <p className="link_email">If you have an account, we will email you link to reset password </p>
                   <Button type="primary">
                     <Link to="/" onClick={() => setThanks(() => false)}>
-                      {' '}
                       Back to Sign In
                     </Link>
                   </Button>

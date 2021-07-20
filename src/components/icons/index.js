@@ -5,6 +5,8 @@ import './icons.scss';
 const centeredSVG = () => ({
   display: 'block',
   margin: '0 auto',
+  // ??test??//
+  cursor: 'pointer',
 });
 
 const IconInfo = () => {
@@ -113,6 +115,35 @@ const ShowPassword = () => {
   );
 };
 
+const CloseToShowPassword = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g>
+            <path
+              d="M0 0L24 0 24 24 0 24z"
+              transform="translate(-783.000000, -511.000000) translate(783.000000, 511.000000)"
+            />
+            <g>
+              <path
+                d="M0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0z"
+                transform="translate(-783.000000, -511.000000) translate(783.000000, 511.000000)"
+              />
+              <path
+                fill="#00254D"
+                fillOpacity=".9"
+                d="M12 6.5c2.76 0 5 2.24 5 5 0 .51-.1 1-.24 1.46l3.06 3.06c1.39-1.23 2.49-2.77 3.18-4.53C21.27 7.11 17 4 12 4c-1.27 0-2.49.2-3.64.57l2.17 2.17c.47-.14.96-.24 1.47-.24zM2.71 3.16c-.39.39-.39 1.02 0 1.41l1.97 1.97C3.06 7.83 1.77 9.53 1 11.5 2.73 15.89 7 19 12 19c1.52 0 2.97-.3 4.31-.82l2.72 2.72c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L4.13 3.16c-.39-.39-1.03-.39-1.42 0zM12 16.5c-2.76 0-5-2.24-5-5 0-.77.18-1.5.49-2.14l1.57 1.57c-.03.18-.06.37-.06.57 0 1.66 1.34 3 3 3 .2 0 .38-.03.57-.07L14.14 16c-.65.32-1.37.5-2.14.5zm2.97-5.33c-.15-1.4-1.25-2.49-2.64-2.64l2.64 2.64z"
+                transform="translate(-783.000000, -511.000000) translate(783.000000, 511.000000)"
+              />
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
 const Question = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" style={{ cursor: 'pointer' }}>
@@ -120,6 +151,25 @@ const Question = () => {
         <g>
           <g transform="translate(-1762.000000, -17.000000) translate(1762.000000, 17.000000) translate(0.916667, 0.916667)">
             <circle cx="10.083" cy="10.083" r="10.083" fill="#00254D" fillOpacity=".9" />
+            <path
+              fill="#FFF"
+              fillRule="nonzero"
+              d="M9.35 11.675l1.599-.47c-.176-.156-.264-.361-.264-.616 0-.225.083-.435.249-.63.166-.196.372-.377.616-.543.244-.166.486-.347.726-.543.24-.195.442-.45.609-.762.166-.313.249-.665.249-1.056 0-.695-.274-1.254-.821-1.68-.548-.425-1.291-.638-2.23-.638-1.33 0-2.4.475-3.212 1.423L8.06 7.495c.509-.607 1.11-.91 1.804-.91.382 0 .668.079.858.235.191.156.286.357.286.601 0 .215-.112.43-.337.646-.225.215-.47.4-.733.557-.264.156-.509.391-.734.704-.225.313-.337.665-.337 1.056 0 .508.161.939.484 1.29zm.704 3.153c.323 0 .601-.117.836-.352s.352-.513.352-.836c0-.323-.117-.601-.352-.836s-.513-.352-.836-.352c-.323 0-.601.117-.836.352s-.352.513-.352.836c0 .323.117.601.352.836s.513.352.836.352z"
+            />
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+const QuestionOpen = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g transform="translate(-1762.000000, -338.000000) translate(1762.000000, 338.000000) translate(0.916667, 0.916667)">
+            <circle cx="10.083" cy="10.083" r="10.083" fill="#FFB40A" />
             <path
               fill="#FFF"
               fillRule="nonzero"
@@ -373,7 +423,7 @@ const DeleteSVG = () => {
       height="24"
       viewBox="0 0 24 24"
       style={centeredSVG()}
-      data-action="delete">
+      dataAction="delete">
       <g fill="none" fillRule="evenodd">
         <g>
           <g>
@@ -395,10 +445,221 @@ const DeleteSVG = () => {
     </svg>
   );
 };
+
+const CloseSVG = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style={centeredSVG()}>
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g>
+            <path
+              d="M0 0L24 0 24 24 0 24z"
+              transform="translate(-1466.000000, -259.000000) translate(1466.000000, 259.000000)"
+            />
+            <path
+              fill="#FFB40A"
+              d="M18.3 5.71c-.39-.39-1.02-.39-1.41 0L12 10.59 7.11 5.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L10.59 12 5.7 16.89c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 13.41l4.89 4.89c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z"
+              transform="translate(-1466.000000, -259.000000) translate(1466.000000, 259.000000)"
+            />
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+const ArrowLeftBigSVG = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style={centeredSVG()}>
+      <g fill="none" fillRule="evenodd">
+        <g fill="#FFB40A">
+          <g>
+            <path
+              d="M4.056 6.4l8.037 7.631L19.648 6.4c.585-.585 1.53-.585 2.115 0 .585.585.585 1.53 0 2.115l-8.62 8.696c-.585.585-1.53.585-2.115 0L1.926 8.515c-.585-.585-.585-1.53 0-2.115.585-.57 1.545-.585 2.13 0z"
+              transform="translate(-706.000000, -207.000000) translate(706.000000, 207.000000) translate(11.844478, 11.805725) scale(1, -1) rotate(90.000000) translate(-11.844478, -11.805725)"
+            />
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+const StarSVG = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style={centeredSVG()}>
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g>
+            <g transform="translate(-762.000000, -315.000000) translate(714.000000, 267.000000) translate(48.000000, 48.000000)">
+              <rect width="23" height="23" x=".5" y=".5" stroke="#FFB40A" rx="2" />
+              <path
+                fill="#FFB40A"
+                d="M12 15.6l-2.65 1.619c-.472.288-1.087.14-1.375-.332-.138-.226-.18-.497-.12-.754l.721-3.02-2.358-2.021c-.42-.36-.469-.99-.11-1.41.172-.2.417-.325.68-.346l3.096-.248 1.193-2.868c.212-.51.797-.751 1.307-.54.244.102.438.296.54.54l1.192 2.868 3.096.248c.55.044.96.526.917 1.076-.021.264-.146.508-.347.68l-2.358 2.02.72 3.021c.129.538-.203 1.077-.74 1.205-.257.062-.528.019-.754-.12L12 15.6z"
+              />
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+const CloseSmallSVG = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" style={centeredSVG()}>
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g>
+            <g>
+              <path
+                d="M0 0L16 0 16 16 0 16z"
+                transform="translate(-858.000000, -385.000000) translate(714.000000, 332.000000) translate(144.000000, 53.000000)"
+              />
+              <path
+                fill="#FFB40A"
+                d="M12.2 3.807c-.26-.26-.68-.26-.94 0L8 7.06 4.74 3.8c-.26-.26-.68-.26-.94 0-.26.26-.26.68 0 .94L7.06 8 3.8 11.26c-.26.26-.26.68 0 .94.26.26.68.26.94 0L8 8.94l3.26 3.26c.26.26.68.26.94 0 .26-.26.26-.68 0-.94L8.94 8l3.26-3.26c.253-.253.253-.68 0-.933z"
+                transform="translate(-858.000000, -385.000000) translate(714.000000, 332.000000) translate(144.000000, 53.000000)"
+              />
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+const ArrowDownSelectSVG = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" style={centeredSVG()}>
+      <g fill="none" fillRule="evenodd">
+        <g fill="#FFB40A">
+          <g>
+            <g>
+              <path
+                d="M2.678 4.5l5.358 5.088L13.073 4.5c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-5.747 5.797c-.39.39-1.02.39-1.41 0L1.258 5.91c-.39-.39-.39-1.02 0-1.41.39-.38 1.03-.39 1.42 0z"
+                transform="translate(-1198.000000, -775.000000) translate(989.000000, 746.000000) translate(217.766802, 37.974165) rotate(-90.000000) translate(-217.766802, -37.974165) translate(209.766802, 29.974165) translate(7.870483, 8.103682) scale(1, -1) rotate(90.000000) translate(-7.870483, -8.103682)"
+              />
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+const EditCompanySVG = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style={centeredSVG()}>
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g>
+            <g>
+              <path
+                d="M0 0L24 0 24 24 0 24z"
+                transform="translate(-1474.000000, -340.000000) translate(1466.000000, 332.000000) translate(8.000000, 8.000000)"
+              />
+              <path
+                fill="#00254D"
+                fillOpacity=".9"
+                d="M5.335 14.667l3.998 4.006L4 20l.673-2.69zm8.462-8c1.172 1.172 2.362 2.363 3.536 3.54l-7.13 7.126-3.536-3.537 7.13-7.13zm2.588-2.44c.418-.328 1.04-.296 1.428.07.652.616 1.289 1.25 1.903 1.904.375.399.368 1.03.04 1.467-.073.098-.16.186-.246.274-.237.243-.476.483-.715.725l-3.462-3.458c.346-.327.674-.687 1.052-.983z"
+                transform="translate(-1474.000000, -340.000000) translate(1466.000000, 332.000000) translate(8.000000, 8.000000)"
+              />
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+const IconToShow = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style={centeredSVG()}>
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g>
+            <g>
+              <path
+                d="M0 0L24 0 24 24 0 24z"
+                transform="translate(-1442.000000, -461.000000) translate(946.000000, 448.000000) translate(496.000000, 13.000000)"
+              />
+              <g>
+                <path
+                  d="M0 0L24 0 24 24 0 24z"
+                  transform="translate(-1442.000000, -461.000000) translate(946.000000, 448.000000) translate(496.000000, 13.000000)"
+                />
+                <path
+                  fill="#00254D"
+                  fillOpacity=".9"
+                  d="M12 4C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 12.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+                  transform="translate(-1442.000000, -461.000000) translate(946.000000, 448.000000) translate(496.000000, 13.000000)"
+                />
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+const HideNotesSVG = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style={centeredSVG()}>
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g>
+            <g>
+              <path
+                d="M0 0L24 0 24 24 0 24z"
+                transform="translate(-1442.000000, -461.000000) translate(946.000000, 448.000000) translate(496.000000, 13.000000)"
+              />
+              <g>
+                <path
+                  d="M0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0z"
+                  transform="translate(-1442.000000, -461.000000) translate(946.000000, 448.000000) translate(496.000000, 13.000000)"
+                />
+                <path
+                  fill="#00254D"
+                  fillOpacity=".9"
+                  d="M12 6.5c2.76 0 5 2.24 5 5 0 .51-.1 1-.24 1.46l3.06 3.06c1.39-1.23 2.49-2.77 3.18-4.53C21.27 7.11 17 4 12 4c-1.27 0-2.49.2-3.64.57l2.17 2.17c.47-.14.96-.24 1.47-.24zM2.71 3.16c-.39.39-.39 1.02 0 1.41l1.97 1.97C3.06 7.83 1.77 9.53 1 11.5 2.73 15.89 7 19 12 19c1.52 0 2.97-.3 4.31-.82l2.72 2.72c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L4.13 3.16c-.39-.39-1.03-.39-1.42 0zM12 16.5c-2.76 0-5-2.24-5-5 0-.77.18-1.5.49-2.14l1.57 1.57c-.03.18-.06.37-.06.57 0 1.66 1.34 3 3 3 .2 0 .38-.03.57-.07L14.14 16c-.65.32-1.37.5-2.14.5zm2.97-5.33c-.15-1.4-1.25-2.49-2.64-2.64l2.64 2.64z"
+                  transform="translate(-1442.000000, -461.000000) translate(946.000000, 448.000000) translate(496.000000, 13.000000)"
+                />
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+const UserForCheck = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <g fill="none" fillRule="evenodd">
+        <g fill="#B2BECA">
+          <g>
+            <g>
+              <g>
+                <path
+                  d="M5.993 7.997c.736 0 1.428.187 2.031.516 1.32.72 2.215 2.12 2.215 3.73v1.309H0v-1.31c0-1.588.873-2.973 2.165-3.7.615-.347 1.324-.545 2.08-.545zM5.12 0c1.813 0 3.288 1.559 3.288 3.475 0 1.385-.77 2.583-1.883 3.14-.426.215-.903.334-1.405.334-.503 0-.98-.12-1.406-.334C2.602 6.058 1.83 4.86 1.83 3.475 1.83 1.559 3.306 0 5.12 0z"
+                  transform="translate(-726.000000, -512.000000) translate(706.000000, 500.000000) translate(20.000000, 12.000000) translate(7.000000, 5.000000)"
+                />
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
 export {
   IconInfo,
   Logo4PV,
   ShowPassword,
+  CloseToShowPassword,
   Question,
   ProfileDropDown,
   BackLeftSVG,
@@ -410,5 +671,15 @@ export {
   SearchSVG,
   CloseIconSVG,
   EditSVG,
+  CloseSVG,
   DeleteSVG,
+  QuestionOpen,
+  ArrowLeftBigSVG,
+  StarSVG,
+  CloseSmallSVG,
+  ArrowDownSelectSVG,
+  EditCompanySVG,
+  IconToShow,
+  HideNotesSVG,
+  UserForCheck,
 };

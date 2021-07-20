@@ -1,0 +1,75 @@
+.site_plan_block.tab_block {
+  .modal_add_note {
+    .add_note_title {
+      margin-bottom: 25px;
+    }
+    .ant-modal-body {
+      padding: 40px 48px 48px 48px;
+    }
+    .wrapper-class.rdw-editor-wrapper {
+      height: 174px;
+      box-shadow: 0 1px 4px 0 rgba(0, 25, 94, 0.2);
+    }
+    .wrapper-class {
+      span {
+        span {
+          font-family: Montserrat;
+          font-size: 12px;
+          line-height: 1.5;
+          letter-spacing: -0.1px;
+          color: #00254d;
+        }
+      }
+      .rdw-editor-toolbar.toolbar-class {
+        border: none;
+        min-height: 40px;
+        border-bottom: 1px solid rgba(178, 190, 202, 0.4);
+        border-radius: 0px;
+        position: relative;
+        .rdw-inline-wrapper {
+          .rdw-option-wrapper {
+            border: none;
+            display: none;
+            &.custom_bold,
+            &.custom_underline {
+              display: flex;
+              padding: 5px;
+              border-radius: 2px;
+              margin: 0 4px;
+              max-width: 20px;
+              justify-content: center;
+              align-items: center;
+              cursor: pointer;
+              background: white;
+              text-transform: capitalize;
+              img {
+                vertical-align: middle;
+                border-style: none;
+                width: 25px;
+                object-fit: cover;
+                height: 25px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .editor-class {
+      height: 75%;
+      padding: 5px 18px 0px 18px;
+      .public-DraftStyleDefault-block.public-DraftStyleDefault-ltr {
+        margin: 0px;
+      }
+    }
+
+    h3 {
+      font-size: 16px;
+      text-align: center;
+      font-weight: bold;
+    }
+    .submit__cancel_note__add {
+      margin: 28px 131px 0px 131px;
+    }
+  }
+}

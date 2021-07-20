@@ -1,0 +1,84 @@
+.modal_edit_requirements {
+  .edit_requirements_title {
+    margin-bottom: 25px;
+  }
+  .ant-modal-body {
+    padding: 48px 48px 29px 48px;
+  }
+  .wrapper-class.rdw-editor-wrapper {
+    height: 190px;
+    box-shadow: 0 1px 4px 0 rgba(0, 25, 94, 0.2);
+  }
+  .wrapper-class {
+    span {
+      font-family: Montserrat;
+      font-size: 12px;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.5;
+      letter-spacing: -0.1px;
+      color: #00254d;
+    }
+  }
+  .rdw-editor-toolbar.toolbar-class {
+    border: none;
+    min-height: 40px;
+    border-bottom: 1px solid rgba(178, 190, 202, 0.4);
+    border-radius: 0px;
+    .rdw-inline-wrapper {
+      .rdw-option-wrapper {
+        display: none;
+        &.custom_bold,
+        &.custom_underline {
+          display: flex;
+          padding: 5px;
+          border-radius: 2px;
+          margin: 0 4px;
+          max-width: 20px;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          background: white;
+          text-transform: capitalize;
+          img {
+            vertical-align: middle;
+            border-style: none;
+            width: 25px;
+            object-fit: cover;
+            height: 25px;
+          }
+        }
+      }
+      .rdw-option-wrapper {
+        border: none;
+      }
+    }
+  }
+  .editor-class {
+    height: 75%;
+    padding: 5px 18px 0px 18px;
+    .public-DraftStyleDefault-block.public-DraftStyleDefault-ltr {
+      margin: 0px;
+    }
+    figure {
+      .rdw-image-alignment.rdw-image-center {
+        display: block;
+        img {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+  .rdw-image-modal-size {
+    display: none;
+  }
+
+  h3 {
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+  }
+  .submit__cancel_requirements {
+    margin: 28px 131px 0px 131px;
+  }
+}

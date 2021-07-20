@@ -14,20 +14,14 @@
       .goSolar {
         h2 {
           text-align: center;
-          font-family: Montserrat;
           font-size: 20px;
-          font-weight: bold;
-          font-stretch: normal;
-          font-style: normal;
-          letter-spacing: normal;
-          color: #00254d;
           margin-top: 45px;
           margin-bottom: 25px;
         }
       }
     }
     .block_wrapper {
-      .form_sign_up {
+      .form_sign_up_toProject {
         .ant-col {
           padding: 0px;
           .ant-row {
@@ -37,16 +31,7 @@
               margin-top: 0px;
             }
           }
-          .ant-row.passwordFirst,
-          .passwordApproved {
-            .ant-col {
-              label {
-                &::before {
-                  display: none;
-                }
-              }
-            }
-          }
+
           .ant-row.passwordApproved.ant-form-item-has-error {
             .ant-col.ant-form-item-label {
               label {
@@ -57,28 +42,26 @@
             .ant-col.ant-form-item-control {
               .ant-form-item-control-input {
                 .ant-form-item-control-input-content {
-                  border: solid 1px #ff0015 !important;
-                  border-radius: 2px;
-                  display: inline-flex;
-                  width: 100%;
-                  span {
-                    input {
-                      border: none;
-                    }
-                  }
+                  // border: solid 1px #ff0015 !important;
+                  // border-radius: 2px;
+                  // display: inline-flex;
+                  // width: 100%;
                 }
               }
             }
           }
           .ant-row.passwordFirst {
+            .ant-form-item-explain {
+              font-size: 9px;
+            }
             .ant-col {
               position: relative;
               &:first-child {
                 &::after {
-                  content: '(Password must be at least 6 characters)';
+                  content: '(Password must be at least 8 characters)';
                   position: absolute;
                   top: 0px;
-                  right: 0px;
+                  right: 21px;
                   width: 218px;
                   opacity: 0.5;
                   font-family: Montserrat;
@@ -89,31 +72,18 @@
                   letter-spacing: -0.1px;
                   color: #00254d;
                   text-align: right;
+                  white-space: nowrap;
                 }
               }
             }
           }
-          label {
-            opacity: 0.5;
-            font-family: Montserrat;
-            font-size: 11px;
-            font-weight: normal;
-            font-stretch: normal;
-            font-style: normal;
-            letter-spacing: -0.1px;
-            color: #00254d;
-          }
         }
         .policy {
-          font-family: Montserrat;
           font-size: 14px;
           font-weight: 500;
-          font-stretch: normal;
-          font-style: normal;
           line-height: 1.38;
           letter-spacing: -0.1px;
           text-align: center;
-          color: #00254d;
           margin-top: 30px;
 
           span {

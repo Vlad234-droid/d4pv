@@ -3,10 +3,11 @@ import Layout from '../../components/LayoutDashboard/Layout';
 import './style.scss';
 import { BackLeftSVG, SVGReload, SVGDelete } from '../../components/icons';
 import { Form, Input, Button, Row, Col } from 'antd';
-import { ShowPassword } from '../../components/icons';
+import { ShowPassword, CloseToShowPassword } from '../../components/icons';
 
 const UserProfile = () => {
-  const [form] = Form.useForm();
+  const [formProfileInformation] = Form.useForm();
+  const [formPassword] = Form.useForm();
   const [showFormPassword, setShowFormPassword] = useState(false);
 
   const [showPassFirst, setShowPassFirst] = useState(false);
@@ -19,26 +20,129 @@ const UserProfile = () => {
 
   const onFinishHandler = (values) => {
     console.log('values', values);
-    form.resetFields();
+    formProfileInformation.resetFields();
   };
 
   const onFinishPasswordHandler = (values) => {
     console.log('values password', values);
+    formPassword.resetFields();
+  };
+
+  const PasswordFormChange = () => {
+    return (
+      <Form
+        name="change_password_form"
+        className="change_password_form"
+        form={formProfileInformation}
+        layout="vertical"
+        onFinish={onFinishPasswordHandler}>
+        <Col span={24}>
+          <Form.Item
+            label="Current Password"
+            name="old_password"
+            className="passwordFirst"
+            rules={[
+              {
+                required: true,
+                message: 'Current password is required!',
+              },
+            ]}>
+            <Input
+              suffix={suffixFirst}
+              value={valueFirstPass}
+              type={showPassFirst ? 'text' : 'password'}
+              placeholder="Create your password"
+              className="passwordFirst"
+              onChange={(e) => setValueFirstPass(() => e.target.value)}
+            />
+          </Form.Item>
+        </Col>
+        <Col span={24}>
+          <Form.Item
+            label="Password"
+            name="new_password"
+            className="new_password"
+            rules={[
+              {
+                required: true,
+                message: 'New password is required!',
+              },
+            ]}>
+            <Input
+              suffix={suffixSecond}
+              value={valueSecondPass}
+              type={showPassSecond ? 'text' : 'password'}
+              placeholder="Create your password"
+              className="new_password"
+              onChange={(e) => setValueSecondPass(() => e.target.value)}
+            />
+          </Form.Item>
+        </Col>
+        <Col span={24}>
+          <Form.Item
+            label="Repeat New Password"
+            name="new_password_approved"
+            className="new_password_approved"
+            dependencies={['new_password']}
+            rules={[
+              {
+                required: true,
+                message: 'Please confirm your password!',
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('new_password') === value) {
+                    return Promise.resolve();
+                  }
+
+                  return Promise.reject(new Error('Incorrect password'));
+                },
+              }),
+            ]}>
+            <Input
+              suffix={suffixThird}
+              value={valueThirdPass}
+              type={showPassThird ? 'text' : 'password'}
+              placeholder="Repeat your password"
+              className="passwordApproved"
+              onChange={(e) => setValueThirdPass(() => e.target.value)}
+            />
+          </Form.Item>
+        </Col>
+
+        <Row gutter={16} style={{ marginTop: '41.1px' }}>
+          <Col span={11}>
+            <Form.Item>
+              <Button type="default" onClick={() => setShowFormPassword(() => false)}>
+                Cancel
+              </Button>
+            </Form.Item>
+          </Col>
+          <Col span={13}>
+            <Form.Item>
+              <Button type="primary" htmlType="submit">
+                Confirm
+              </Button>
+            </Form.Item>
+          </Col>
+        </Row>
+      </Form>
+    );
   };
 
   const suffixFirst = (
     <div className="showPassFirst" onClick={() => setShowPassFirst((prev) => !prev)}>
-      <ShowPassword />
+      {!showPassFirst ? <ShowPassword /> : <CloseToShowPassword />}
     </div>
   );
   const suffixSecond = (
     <div className="showPassSecond" onClick={() => setShowPassSecond((prev) => !prev)}>
-      <ShowPassword />
+      {!showPassSecond ? <ShowPassword /> : <CloseToShowPassword />}
     </div>
   );
   const suffixThird = (
     <div className="showPassThird" onClick={() => setShowPassThird((prev) => !prev)}>
-      <ShowPassword />
+      {!showPassThird ? <ShowPassword /> : <CloseToShowPassword />}
     </div>
   );
 
@@ -83,7 +187,12 @@ const UserProfile = () => {
                   </div>
                 </div>
                 <div className="form_password">
-                  <Form className="form_FL_name" form={form} layout="vertical" onFinish={onFinishHandler}>
+                  <Form
+                    name="form_FL_name"
+                    className="form_FL_name"
+                    form={formPassword}
+                    layout="vertical"
+                    onFinish={onFinishHandler}>
                     <Col span={24} style={{ minHeight: '50px !important' }}>
                       <Form.Item label="First Name" name="firstName">
                         <Input placeholder="Goward" type="text" />
@@ -96,7 +205,19 @@ const UserProfile = () => {
                     </Col>
 
                     <Col span={24}>
-                      <Form.Item label="Email" name="email">
+                      <Form.Item
+                        label="Email"
+                        name="email"
+                        rules={[
+                          {
+                            type: 'email',
+                            message: 'Please input your Email!',
+                          },
+                          {
+                            required: true,
+                            message: 'Email is required!',
+                          },
+                        ]}>
                         <Input placeholder="test@mail.com" />
                       </Form.Item>
                     </Col>
@@ -116,79 +237,7 @@ const UserProfile = () => {
               {!showFormPassword ? (
                 <span onClick={() => setShowFormPassword(() => true)}>Change</span>
               ) : (
-                <Form className="change_password_form" form={form} layout="vertical" onFinish={onFinishPasswordHandler}>
-                  <Col span={24}>
-                    <Form.Item label="Current Password" name="old_password" className="passwordFirst">
-                      <Input
-                        suffix={suffixFirst}
-                        value={valueFirstPass}
-                        type={showPassFirst ? 'text' : 'password'}
-                        placeholder="Create your password"
-                        className="passwordFirst"
-                        onChange={(e) => setValueFirstPass(() => e.target.value)}
-                      />
-                    </Form.Item>
-                  </Col>
-                  <Col span={24}>
-                    <Form.Item label="Password" name="new_password" className="new_password">
-                      <Input
-                        suffix={suffixSecond}
-                        value={valueSecondPass}
-                        type={showPassSecond ? 'text' : 'password'}
-                        placeholder="Create your password"
-                        className="new_password"
-                        onChange={(e) => setValueSecondPass(() => e.target.value)}
-                      />
-                    </Form.Item>
-                  </Col>
-                  <Col span={24}>
-                    <Form.Item
-                      label="Repeat New Password"
-                      name="new_password_approved"
-                      className="new_password_approved"
-                      dependencies={['new_password']}
-                      rules={[
-                        {
-                          required: true,
-                          message: 'Please confirm your password!',
-                        },
-                        ({ getFieldValue }) => ({
-                          validator(_, value) {
-                            if (!value || getFieldValue('new_password') === value) {
-                              return Promise.resolve();
-                            }
-
-                            return Promise.reject(new Error('Incorrect password'));
-                          },
-                        }),
-                      ]}>
-                      <Input
-                        suffix={suffixThird}
-                        value={valueThirdPass}
-                        type={showPassThird ? 'text' : 'password'}
-                        placeholder="Repeat your password"
-                        className="passwordApproved"
-                        onChange={(e) => setValueThirdPass(() => e.target.value)}
-                      />
-                    </Form.Item>
-                  </Col>
-                  <Row gutter={16} style={{ marginTop: '41.1px' }}>
-                    <Col span={11}>
-                      <Form.Item>
-                        <Button type="default" htmlType="submit">
-                          Cancel
-                        </Button>
-                      </Form.Item>
-                    </Col>
-                    <Col span={13}>
-                      <Form.Item>
-                        <Button type="primary" htmlType="submit">
-                          Confirm
-                        </Button>
-                      </Form.Item>
-                    </Col>
-                  </Row>
-                </Form>
+                <PasswordFormChange />
               )}
             </div>
           </div>

@@ -1,0 +1,32 @@
+.container_edit__company {
+  .inner_requirements_tab_container {
+    display: flex;
+    flex-direction: row;
+    .requirements_tab_block {
+      flex-basis: 208px;
+      height: 460px;
+      border: solid 1px rgba(178, 190, 202, 0.4);
+      padding-top: 12px;
+
+      .ant-tabs.ant-tabs-left.requirements_tab {
+        width: 208px;
+        .ant-tabs-nav-list {
+          min-width: 208px;
+          .ant-tabs-tab {
+            padding: 12px 0px 12px 24px;
+            &.ant-tabs-tab-active {
+              background-color: rgba(255, 180, 10, 0.2);
+            }
+            color: rgba(0, 37, 77, 0.5);
+          }
+          .ant-tabs-ink-bar {
+            display: none;
+          }
+        }
+      }
+    }
+    .tabs_content {
+      flex-grow: 1;
+    }
+  }
+}

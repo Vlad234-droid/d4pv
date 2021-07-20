@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Layout from '../../components/LayoutGuest/Layout';
 import { Form, Input, Button } from 'antd';
 import './style.scss';
 import { Logo4PV } from '../../components/icons';
 import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { actions } from '../../core/account/accountSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
-const LoginPage = (props) => {
+const LoginPage = () => {
+  const dispatch = useDispatch();
   const [form] = Form.useForm();
-  const onFinishHandler = (values) => {
-    console.log('values', values);
+  const { logInAcc } = bindActionCreators(actions, dispatch);
+
+  const onFinishHandler = ({ email, password }) => {
+    logInAcc({
+      username: email,
+      password,
+    });
     form.resetFields();
   };
   return (
@@ -26,10 +35,28 @@ const LoginPage = (props) => {
               </h2>
             </div>
             <Form className="form-sign_in" form={form} layout="vertical" onFinish={onFinishHandler}>
-              <Form.Item label="Email" name="email">
+              <Form.Item
+                label="Email"
+                name="email"
+                rules={[
+                  {
+                    type: 'email',
+                    message: 'Please input your Email!',
+                  },
+                  {
+                    required: true,
+                    message: 'Email is required!',
+                  },
+                ]}>
                 <Input placeholder="Add your email" />
               </Form.Item>
-              <Form.Item label="Password" name="password">
+              <Form.Item
+                label="Password"
+                name="password"
+                rules={[
+                  { min: 6, message: 'Password must be at least 6 characters!' },
+                  { required: true, message: 'Please input your password!' },
+                ]}>
                 <Input placeholder="Type your password" type="password" />
               </Form.Item>
               <Form.Item>
