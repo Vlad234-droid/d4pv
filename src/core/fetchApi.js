@@ -8,20 +8,13 @@ export async function fetchApi(endpoint, method, headers, body) {
   };
 
   if (body) config.body = body;
-
-  try {
-    const response = await fetch(endpoint, config);
-    const data = await response.json();
-    if (response.ok) {
-      return data;
-    }
-    ////
-    console.log('data from services', data); // {detail: "some info with error"}
-    const msg = checkForEndPoints(endpoint, data);
-    throw new Error(msg);
-  } catch (err) {
-    return Promise.reject(err); // text
+  const response = await fetch(endpoint, config);
+  const data = await response.json();
+  if (!response.ok) {
+    // console.log('data', data.detail);
+    throw new Error(data.detail);
   }
+  return data;
 }
 
 const checkForEndPoints = (endpoint, data) => {

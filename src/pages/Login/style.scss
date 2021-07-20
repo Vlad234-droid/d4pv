@@ -1,16 +1,12 @@
 .login-page {
   .wrapper {
     .fl {
-      height: 89vh;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-start;
+      height: 100%;
+      margin: 13vh 0 5vh 0;
       //padding-left: 100px;
     }
   }
   .form_login_block {
-    margin-top: 80px;
     width: 512px;
     padding: 40px 64px 48px;
     border-radius: 4px;

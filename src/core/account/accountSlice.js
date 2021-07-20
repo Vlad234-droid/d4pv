@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchApi } from '../fetchApi';
+import lockr from 'lockr';
 
 const { REACT_APP_API_URL } = process.env;
 
@@ -28,8 +29,13 @@ const logInAcc = createAsyncThunk('account/authoriseAccount', async (body) => {
     formData.append(i, body[i]);
   }
   const headers = { Accept: 'application/json' };
-  const response = await fetchApi(`${REACT_APP_API_URL}/accounts/auth`, 'POST', headers, formData);
-  return response;
+  try {
+    const response = await fetchApi(`${REACT_APP_API_URL}/accounts/auth`, 'POST', headers, formData);
+    lockr.set('auth-token', response.token);
+    return response;
+  } catch (err) {
+    return Promise.reject(err);
+  }
 });
 
 const getInviteInfo = createAsyncThunk('account/getInviteInfo', async (id) => {

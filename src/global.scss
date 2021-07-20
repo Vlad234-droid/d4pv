@@ -18,9 +18,9 @@ code {
 }
 .wrapper {
   max-width: 1170px;
-  //height: 100vh;
-  //0% - 82%) 0px calc(100% - 82%);
+  width: 100%;
   margin: 0 auto;
+  overflow: hidden;
 }
 h1,
 h2,
