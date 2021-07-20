@@ -6,6 +6,7 @@
   height: 100vh;
   overflow-x: visible;
   .wrapper {
+    padding: 10px 5px;
     .container_info {
       .back {
         margin-top: 24px;
@@ -48,57 +49,6 @@
           .blocks_wrapper {
             display: flex;
             flex-direction: row;
-
-            // .selfi_wrapper {
-            //   width: 128px;
-            //   .centeredIMG {
-            //     display: flex;
-            //     align-items: center;
-            //     justify-content: center;
-            //     margin-bottom: 16px;
-            //   }
-            //   .selfi {
-            //     display: block;
-            //     position: relative;
-            //     width: 96px;
-            //     height: 96px;
-            //     overflow: hidden;
-            //     border-radius: 50%;
-            //     img {
-            //       width: auto;
-            //       height: 100%;
-            //       object-fit: contain;
-            //     }
-            //   }
-
-            //   .change {
-            //     width: 54%;
-            //     margin: 0px auto 16px auto;
-            //   }
-            //   .delete {
-            //     width: 46%;
-            //     margin: 0 auto;
-            //   }
-            //   .change,
-            //   .delete {
-            //     .SVG_reload,
-            //     .SVG_delete {
-            //       cursor: pointer;
-
-            //       display: flex;
-            //       flex-direction: row;
-            //       align-items: center;
-            //       p {
-            //         font-size: 13px;
-            //         font-weight: 600;
-            //         letter-spacing: -0.09px;
-            //         color: #ffb40a;
-            //         text-decoration: underline;
-            //       }
-            //     }
-            //   }
-            // }
-
             .form_password {
               margin-left: 20px;
               flex: auto;

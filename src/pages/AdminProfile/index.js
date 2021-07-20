@@ -4,6 +4,7 @@ import './style.scss';
 import { BackLeftSVG, SVGReload, SVGDelete } from '../../components/icons';
 import { Form, Input, Button, Row, Col } from 'antd';
 import { ShowPassword, CloseToShowPassword } from '../../components/icons';
+import UploadImg from './UploadImg';
 
 const AdminProfile = () => {
   const [formProfileInfo] = Form.useForm();
@@ -18,6 +19,9 @@ const AdminProfile = () => {
   const [valueFirstPass, setValueFirstPass] = useState('');
   const [valueSecondPass, setValueSecondPass] = useState('');
   const [valueThirdPass, setValueThirdPass] = useState('');
+
+  const [logoUrl, setLogoUrl] = useState(null);
+  const [editCompanyLogo, setEditCompanyLogo] = useState(false);
 
   const onFinishHandler = (values) => {
     console.log('values', values);
@@ -67,65 +71,57 @@ const AdminProfile = () => {
                 <h2>Profile information</h2>
               </div>
               <div className="blocks_wrapper">
-                <div className="selfi_wrapper">
-                  <div className="centeredIMG">
-                    <div className="selfi">
-                      <img
-                        src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-                        alt="selfi"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="change">
-                    <div className="SVG_reload">
-                      <SVGReload />
-                      <p>Change</p>
-                    </div>
-                  </div>
-                  <div className="delete">
-                    <div className="SVG_delete">
-                      <SVGDelete />
-                      <p>Delete</p>
-                    </div>
-                  </div>
-                </div>
                 <div className="form_password">
                   <Form className="form_FL_name" form={formProfileInfo} layout="vertical" onFinish={onFinishHandler}>
-                    <Col span={24} style={{ minHeight: '50px !important' }}>
-                      <Form.Item label="First Name" name="firstName">
-                        <Input placeholder="Goward" type="text" />
-                      </Form.Item>
-                    </Col>
-                    <Col span={24}>
-                      <Form.Item label="Last Name" name="lastName">
-                        <Input placeholder="Cooper" type="text" />
-                      </Form.Item>
-                    </Col>
-
-                    <Col span={24}>
-                      <Form.Item
-                        label="Email"
-                        name="email"
-                        rules={[
-                          {
-                            type: 'email',
-                            message: 'Please input your Email!',
-                          },
-                          {
-                            required: true,
-                            message: 'Email is required!',
-                          },
-                        ]}>
-                        <Input placeholder="test@mail.com" />
-                      </Form.Item>
-                    </Col>
-
-                    <Form.Item>
-                      <Button type="primary" htmlType="submit" className="btn_save_prof">
-                        Save
-                      </Button>
-                    </Form.Item>
+                    <Row gutter={20}>
+                      <Col span={7}>
+                        <Form.Item name="logo">
+                          <UploadImg
+                            form={formProfileInfo}
+                            logoUrl={logoUrl}
+                            setLogoUrl={setLogoUrl}
+                            editCompanyLogo={editCompanyLogo}
+                            setEditCompanyLogo={setEditCompanyLogo}
+                          />
+                        </Form.Item>
+                      </Col>
+                      <Col span={17}>
+                        <Col span={24} style={{ minHeight: '50px !important' }}>
+                          <Form.Item label="First Name" name="firstName">
+                            <Input placeholder="Goward" type="text" />
+                          </Form.Item>
+                        </Col>
+                        <Col span={24}>
+                          <Form.Item label="Last Name" name="lastName">
+                            <Input placeholder="Cooper" type="text" />
+                          </Form.Item>
+                        </Col>
+                        <Col span={24}>
+                          <Form.Item
+                            label="Email"
+                            name="email"
+                            rules={[
+                              {
+                                type: 'email',
+                                message: 'Please input your Email!',
+                              },
+                              {
+                                required: true,
+                                message: 'Email is required!',
+                              },
+                            ]}>
+                            <Input placeholder="test@mail.com" />
+                          </Form.Item>
+                        </Col>
+                        <Col span={24}>
+                          <Form.Item>
+                            <Button type="primary" htmlType="submit" className="btn_save_prof">
+                              Save
+                            </Button>
+                          </Form.Item>
+                        </Col>
+                      </Col>
+                    </Row>
                   </Form>
                 </div>
               </div>

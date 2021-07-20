@@ -177,29 +177,6 @@ const UserProfile = () => {
                 <h2>Profile information</h2>
               </div>
               <div className="blocks_wrapper">
-                {/* <div className="selfi_wrapper">
-                  <div className="centeredIMG">
-                    <div className="selfi">
-                      <img
-                        src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-                        alt=""
-                      />
-                    </div>
-                  </div>
-
-                  <div className="change">
-                    <div className="SVG_reload">
-                      <SVGReload />
-                      <p>Change</p>
-                    </div>
-                  </div>
-                  <div className="delete">
-                    <div className="SVG_delete">
-                      <SVGDelete />
-                      <p>Delete</p>
-                    </div>
-                  </div>
-                </div> */}
                 <div className="form_password">
                   <Form
                     name="form_FL_name"
