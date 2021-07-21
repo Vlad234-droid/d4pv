@@ -1,4 +1,4 @@
-.user_header {
+.admin_header {
   min-width: 100%;
   min-height: 56px;
   display: flex;
@@ -44,7 +44,7 @@
       .corner_container {
         position: relative;
         .dropMenuQuestion {
-          left: -196px !important;
+          left: -151px !important;
           top: 51px !important;
           .dropDown_block_question {
             width: 248px;
@@ -86,7 +86,7 @@
         }
 
         .dropMenuProfile {
-          left: -43px !important;
+          left: 2px !important;
           top: 51px !important;
         }
         .ant-dropdown {
@@ -106,6 +106,9 @@
                   font-weight: 500;
                   font-size: 12px;
                   letter-spacing: -0.1px;
+                  a {
+                    color: #00254d;
+                  }
                 }
               }
             }

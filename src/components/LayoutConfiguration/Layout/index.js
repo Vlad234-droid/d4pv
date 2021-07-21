@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../Header';
+import Header from '../../Header';
 import { BackLeftSVG } from '../../icons';
 import { Tabs } from 'antd';
 import { TapPaneConfig } from './config';
