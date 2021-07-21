@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { ArrowLeftBigSVG, ArrowDownSelectSVG } from '../../components/icons';
 import { Form, Input, Button, Row, Col, Select } from 'antd';
 import './style.scss';
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import UploadCompanyLogo from './UploadCompanyLogo';
 import LayoutConfiguration from '../../components/LayoutConfiguration/Layout';
 import { Link, useHistory } from 'react-router-dom';
-// import LocationSearchInput from '../../components/scooterok';
+import LocationSearchInput from '../../components/scooterok';
 
 const AdminCompanyInfoConf = () => {
   const [form] = Form.useForm();
@@ -101,9 +102,20 @@ const AdminCompanyInfoConf = () => {
                 <span>{`${!extraAddress ? 'Enter Manually' : 'Search Loaction'}`}</span>
               </div>
               <Form.Item label={`${!extraAddress ? 'Search Address' : 'Address Line #1'}`} name="searchaddress">
-                <Input placeholder="" type="text" />
-                {/* <GooglePlacesAutocomplete /> */}
-                {/* <LocationSearchInput /> */}
+                {extraAddress ? (
+                  <Input placeholder="" type="text" />
+                ) : (
+                  <div className="places-autocomplete">
+                    <GooglePlacesAutocomplete
+                      apiKey="AIzaSyC64Luyo5HsYvMO9uC4urUIydVbugILszw"
+                      selectProps={{
+                        onChange: (e) => {
+                          console.log(e);
+                        },
+                      }}
+                    />
+                  </div>
+                )}
               </Form.Item>
             </Col>
             {extraAddress && (

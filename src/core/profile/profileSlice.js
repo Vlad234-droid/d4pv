@@ -6,6 +6,7 @@ const { REACT_APP_API_URL } = process.env;
 
 const initialState = {
   data: null,
+  isloggedIn: null,
 };
 
 const getProfile = createAsyncThunk('profile/getProfile', async () => {
@@ -60,6 +61,7 @@ const profileSlice = createSlice({
     [getProfile.fulfilled]: (state, { payload }) => {
       state.getProfileStatus = 'succeeded';
       state.data = payload;
+      state.isloggedIn = true;
       // for (let item in payload) {
       //   state[item] = payload[item];
       // }

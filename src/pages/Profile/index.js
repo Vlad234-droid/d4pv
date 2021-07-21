@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import LayoutBoth from '../../components/LayoutBoth/Layout';
 import './style.scss';
 import { BackLeftSVG } from '../../components/icons';
-import { Form, Input, Button, Row, Col, Skeleton } from 'antd';
+import { Form, Input, Button, Row, Col, Skeleton, notification } from 'antd';
 import { ShowPassword, CloseToShowPassword } from '../../components/icons';
 import UploadImg from './UploadImg';
 import { actions, getRole } from '../../core/profile/profileSlice';
@@ -15,6 +15,8 @@ const AdminProfile = () => {
   const [formOrganization] = Form.useForm();
   const [formPassword] = Form.useForm();
   const [showFormPassword, setShowFormPassword] = useState(false);
+  const [loadingHandler, setLoadingHandler] = useState(false);
+  const [loadingOrganization, setLoadingOrganization] = useState(false);
 
   const [updatedRole, setUpdatedRole] = useState(null);
 
@@ -40,12 +42,28 @@ const AdminProfile = () => {
       if (values[item] === undefined) continue;
       body[item] = values[item];
     }
-    updateProfile(body);
+    setLoadingHandler(true);
+    updateProfile(body).then(() => {
+      setLoadingHandler(false);
+      notification.success({
+        //message: 'Notification Title',
+        description: 'Information has been updated',
+        duration: 3.5,
+      });
+    });
     update(body);
   };
 
   const onFinishHandlerOrganization = (values) => {
-    updateProfile(values);
+    const body = {
+      first_name: data.first_name,
+      last_name: data.last_name,
+      organisation: values.organisation,
+    };
+    setLoadingOrganization(true);
+    updateProfile(body).then(() => {
+      setLoadingOrganization(false);
+    });
     updateOrganisation(values.organisation);
   };
 
@@ -157,7 +175,11 @@ const AdminProfile = () => {
                           </Col>
                           <Col span={24}>
                             <Form.Item>
-                              <Button type="primary" htmlType="submit" className="btn_save_prof">
+                              <Button
+                                type="primary"
+                                htmlType="submit"
+                                className="btn_save_prof"
+                                loading={loadingHandler}>
                                 Save
                               </Button>
                             </Form.Item>
@@ -196,7 +218,7 @@ const AdminProfile = () => {
                       </Col>
                       <Col span={10} style={{ marginTop: '37px' }}>
                         <Form.Item>
-                          <Button type="primary" htmlType="submit">
+                          <Button type="primary" htmlType="submit" loading={loadingOrganization}>
                             Save
                           </Button>
                         </Form.Item>

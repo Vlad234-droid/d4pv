@@ -25,11 +25,11 @@ const routes = () => {
         <Route exact path="/forgot-password/" component={ForgotPassword} />
         <Route exact path="/accounts/invite/:id" component={SignUpToProject} />
         {/* <Route exact path="/test" component={Counter} /> */}
-        <Route exact path="/profile" component={Profile} />
-        <Route exact path="/admin-users-conf" component={AdminUsersConfigurations} />
-        <Route exact path="/admin-companies-conf/" component={AdminCompaniesConfigurations} />
-        <Route exact path="/admin-add-company-conf" component={AdminAddCompanyConfigurations} />
-        <Route exact path="/admin-company-info-conf/:id" component={AdminCompanyInfoConf} />
+        <PrivateRoute exact path="/profile" component={Profile} />
+        <PrivateRoute exact path="/admin-users-conf" component={AdminUsersConfigurations} />
+        <PrivateRoute exact path="/admin-companies-conf/" component={AdminCompaniesConfigurations} />
+        <PrivateRoute exact path="/admin-add-company-conf" component={AdminAddCompanyConfigurations} />
+        <PrivateRoute exact path="/admin-company-info-conf/:id" component={AdminCompanyInfoConf} />
 
         {/* <PrivateRoute exact path='/replies/' component={Login} /> */}
       </CoreRouter>

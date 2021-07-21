@@ -43,9 +43,9 @@ const Header = ({ data }) => {
           </div>
           <div className="corner_container">
             {data && data.role.split('.')[1] === 'OWNER' && (
-              <div className="pinion">
+              <Link to="/admin-users-conf/" className="pinion">
                 <Pinion />
-              </div>
+              </Link>
             )}
             <Dropdown
               overlay={
