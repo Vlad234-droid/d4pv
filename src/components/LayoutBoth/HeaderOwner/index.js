@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './style.scss';
-import { Question, ProfileDropDown, Logo4PV, Pinion, QuestionOpen } from '../../../components/icons';
+import { Question, ProfileDropDown, Logo4PV, Pinion, QuestionOpen } from '../../icons';
 import { Form, Input, Button, Col, Menu, Dropdown } from 'antd';
 import { SearchSVG } from '../../icons';
 

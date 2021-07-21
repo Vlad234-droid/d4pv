@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import LayoutAdmin from '../../components/LayoutAdmin/Layout';
+import LayoutBoth from '../../components/LayoutBoth/Layout';
 import './style.scss';
 import { BackLeftSVG } from '../../components/icons';
 import { Form, Input, Button, Row, Col, Skeleton } from 'antd';
 import { ShowPassword, CloseToShowPassword } from '../../components/icons';
 import UploadImg from './UploadImg';
-import { actions } from '../../core/profile/profileSlice';
+import { actions, getRole } from '../../core/profile/profileSlice';
 import { bindActionCreators } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
-import lockr from 'lockr';
 
 const AdminProfile = () => {
   const dispatch = useDispatch();
-  const [info, setInfo] = useState({});
   const [formProfileInfo] = Form.useForm();
   const [formOrganization] = Form.useForm();
   const [formPassword] = Form.useForm();
   const [showFormPassword, setShowFormPassword] = useState(false);
+
+  const [updatedRole, setUpdatedRole] = useState(null);
 
   const [showPassFirst, setShowPassFirst] = useState(false);
   const [showPassSecond, setShowPassSecond] = useState(false);
@@ -55,7 +55,14 @@ const AdminProfile = () => {
   };
 
   useEffect(() => {
-    getProfile();
+    getProfile().then((data) => {
+      const role = data.payload?.role.split('.');
+      const [_, last] = role;
+      setUpdatedRole(() => {
+        if (last === 'OWNER') return true;
+        return false;
+      });
+    });
   }, []);
 
   const suffixFirst = (
@@ -75,7 +82,7 @@ const AdminProfile = () => {
   );
 
   return (
-    <LayoutAdmin className={`admin_profile ${showFormPassword && 'allow_over'}`}>
+    <LayoutBoth className={`admin_profile ${showFormPassword && 'allow_over'}`}>
       <div className="wrapper">
         <div className="container_info">
           <div className="back">
@@ -163,38 +170,41 @@ const AdminProfile = () => {
               </div>
 
               <div className="wraper_2_blocks">
-                <div className="organisation">
-                  <h2>Organization information</h2>
-                  <Form
-                    className="form_profile_admin"
-                    form={formOrganization}
-                    layout="vertical"
-                    onFinish={onFinishHandlerOrganization}
-                    initialValues={{
-                      organisation: data?.organisation?.name,
-                    }}>
-                    <Col span={24}>
-                      <Form.Item
-                        label="Organization Name"
-                        name="organisation"
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Input organization name!',
-                          },
-                        ]}>
-                        <Input placeholder="Type your organization name" type="text" />
-                      </Form.Item>
-                    </Col>
-                    <Col span={10} style={{ marginTop: '37px' }}>
-                      <Form.Item>
-                        <Button type="primary" htmlType="submit">
-                          Save
-                        </Button>
-                      </Form.Item>
-                    </Col>
-                  </Form>
-                </div>
+                {updatedRole !== null && updatedRole && (
+                  <div className="organisation">
+                    <h2>Organization information</h2>
+                    <Form
+                      className="form_profile_admin"
+                      form={formOrganization}
+                      layout="vertical"
+                      onFinish={onFinishHandlerOrganization}
+                      initialValues={{
+                        organisation: data?.organisation?.name,
+                      }}>
+                      <Col span={24}>
+                        <Form.Item
+                          label="Organization Name"
+                          name="organisation"
+                          rules={[
+                            {
+                              required: true,
+                              message: 'Input organization name!',
+                            },
+                          ]}>
+                          <Input placeholder="Type your organization name" type="text" />
+                        </Form.Item>
+                      </Col>
+                      <Col span={10} style={{ marginTop: '37px' }}>
+                        <Form.Item>
+                          <Button type="primary" htmlType="submit">
+                            Save
+                          </Button>
+                        </Form.Item>
+                      </Col>
+                    </Form>
+                  </div>
+                )}
+
                 <div className={`change_password_block ${showFormPassword && 'full_form'}`}>
                   <h2>Change Password</h2>
                   {!showFormPassword ? (
@@ -288,7 +298,7 @@ const AdminProfile = () => {
           )}
         </div>
       </div>
-    </LayoutAdmin>
+    </LayoutBoth>
   );
 };
 export default AdminProfile;
