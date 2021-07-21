@@ -1,28 +1,35 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchApi } from '../fetchApi';
 import lockr from 'lockr';
-import LoginPage from '../../pages/Login';
 
 const { REACT_APP_API_URL } = process.env;
-
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmZDY5YzAzYS05ZjY2LTRjNzUtOGM1Yy1lODc2MGUyZDNmMTIiLCJleHAiOjE2MjY4NzY3MDV9.NkrAc3-A5Z9zClLRwoHg5VqumQz1Eox_fA0HpnuOZg0';
 
 const initialState = {
   data: null,
 };
 
 const getProfile = createAsyncThunk('profile/getProfile', async () => {
+  const token = lockr.get('auth-token');
   const headers = { 'Content-Type': 'application/json', Accept: 'application/json', Authorization: `bearer ${token}` };
-  const response = await fetchApi(`${REACT_APP_API_URL}/me`, null, headers, null);
-  // thunkAPI.dispatch(update(response));
-  return response;
+
+  try {
+    const response = await fetchApi(`${REACT_APP_API_URL}/me`, null, headers, null);
+    // thunkAPI.dispatch(update(response));
+    return response;
+  } catch (err) {
+    return Promise.reject(err);
+  }
 });
 
 const updateProfile = createAsyncThunk('profile/updateProfile', async (body) => {
+  const token = lockr.get('auth-token');
   const headers = { 'Content-Type': 'application/json', Accept: 'application/json', Authorization: `bearer ${token}` };
-  const response = await fetchApi(`${REACT_APP_API_URL}/me`, 'PUT', headers, JSON.stringify(body));
-  return response;
+  try {
+    const response = await fetchApi(`${REACT_APP_API_URL}/me`, 'PUT', headers, JSON.stringify(body));
+    return response;
+  } catch (err) {
+    return Promise.reject(err);
+  }
 });
 
 const profileSlice = createSlice({
