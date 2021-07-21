@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowLeftBigSVG, ArrowDownSelectSVG } from '../../components/icons';
 import { Form, Input, Button, Row, Col, Select } from 'antd';
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import './style.scss';
 import UploadCompanyLogo from './UploadCompanyLogo';
 import LayoutConfiguration from '../../components/LayoutConfiguration/Layout';
@@ -101,6 +102,7 @@ const AdminCompanyInfoConf = () => {
               </div>
               <Form.Item label={`${!extraAddress ? 'Search Address' : 'Address Line #1'}`} name="searchaddress">
                 <Input placeholder="" type="text" />
+                {/* <GooglePlacesAutocomplete /> */}
               </Form.Item>
             </Col>
             {extraAddress && (

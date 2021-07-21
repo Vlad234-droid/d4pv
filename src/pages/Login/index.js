@@ -80,7 +80,7 @@ const LoginPage = () => {
               </Form.Item>
             </Form>
             <h3 className="forgot_pass">
-              <Link to="/forgot-assword">Forgot your password?</Link>
+              <Link to="/forgot-password/">Forgot your password?</Link>
             </h3>
           </div>
         </div>

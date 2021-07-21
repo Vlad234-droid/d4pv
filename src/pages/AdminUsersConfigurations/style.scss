@@ -11,16 +11,32 @@
     }
   }
   .form_to_add {
-    .create_user {
-      .input_link {
-        .block_sufix {
-          cursor: pointer;
-        }
-        .ant-input-affix-wrapper {
-          border: solid 1px #b2beca;
-          &:hover {
-            border: solid 1px #b2beca !important;
-          }
+    .ant-row {
+      .ant-col {
+        transition: all 0.3s ease;
+      }
+    }
+    .input_link {
+      position: relative;
+      input {
+        border-color: #b2beca;
+      }
+      .suffix-search {
+        cursor: pointer;
+        position: absolute;
+        right: 16px;
+        top: 8px;
+        width: 24px;
+        height: 24px;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .ant-input-affix-wrapper {
+        border: solid 1px #b2beca;
+        &:hover {
+          border: solid 1px #b2beca !important;
         }
       }
     }

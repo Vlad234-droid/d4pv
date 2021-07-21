@@ -3,6 +3,7 @@ import './style.scss';
 import { Question, ProfileDropDown, Logo4PV, Pinion, QuestionOpen } from '../../../components/icons';
 import { Form, Input, Button, Col, Menu, Dropdown } from 'antd';
 import { SearchSVG } from '../../icons';
+import { Link } from 'react-router-dom';
 
 const menuProfile = (
   <Menu>
@@ -40,9 +41,9 @@ const Header = () => {
             <h2>Go Solar</h2>
           </div>
           <div className="corner_container">
-            <div className="pinion">
+            <Link to="/admin-users-conf/" className="pinion">
               <Pinion />
-            </div>
+            </Link>
             <Dropdown
               overlay={
                 <div className="dropDown_block_question">

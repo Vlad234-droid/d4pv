@@ -29,7 +29,7 @@ const routes = () => {
         <Route exact path="/profile" component={UserProfile} />
         <Route exact path="/admin-profile" component={AdminProfile} />
         <Route exact path="/admin-users-conf" component={AdminUsersConfigurations} />
-        <Route exact path="/admin-companies-conf" component={AdminCompaniesConfigurations} />
+        <Route exact path="/admin-companies-conf/" component={AdminCompaniesConfigurations} />
         <Route exact path="/admin-add-company-conf" component={AdminAddCompanyConfigurations} />
         <Route exact path="/admin-company-info-conf/:id" component={AdminCompanyInfoConf} />
 
