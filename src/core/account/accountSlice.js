@@ -45,41 +45,22 @@ const getInviteInfo = createAsyncThunk('account/getInviteInfo', async (id) => {
 const accountSlice = createSlice({
   name: 'account',
   initialState,
-  reducers: {
-    // reactionAdded(state, action) {
-    //   const { postId, reaction } = action.payload;
-    //   const existingPost = state.posts.find((post) => post.id === postId);
-    //   if (existingPost) {
-    //     existingPost.reactions[reaction]++;
-    //   }
-    // },
-    // postUpdated(state, action) {
-    //   const { id, title, content } = action.payload;
-    //   const existingPost = state.posts.find((post) => post.id === id);
-    //   if (existingPost) {
-    //     existingPost.title = title;
-    //     existingPost.content = content;
-    //   }
-    // },
-  },
+  reducers: {},
   extraReducers: {
     [createAccount.pending]: (state, action) => {
       state.status = 'loading';
     },
     [createAccount.fulfilled]: (state, action) => {
       state.status = 'succeeded';
-      // Add any fetched posts to the array
       console.log('action', action);
       state.account_id = action.payload.account_id;
     },
     [createAccount.rejected]: (state, action) => {
       state.status = 'failed';
       console.log('payload fropmhere', action);
-      //state.error = action.error;
     },
     [createAccountInvite.fulfilled]: (state, { payload }) => {
       state.status = 'succeeded';
-      // Add any fetched posts to the array
       state.account_id = payload.account_id;
     },
     [resetPassword.fulfilled]: (state, { payload }) => {

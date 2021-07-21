@@ -1,87 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table } from 'antd';
 import { EditSVG, DeleteSVG } from '../../../components/icons';
 import ModalEditUser from '../ModalEditUser';
+import { bindActionCreators } from 'redux';
+import { useDispatch } from 'react-redux';
+import { actions } from '../../../core/configurations/configurationsSlice';
 
 import './style.scss';
 const TableOfUsers = ({ setShowDeleteUser }) => {
+  const dispatch = useDispatch();
+  const { getMembersOfOrganisation } = bindActionCreators(actions, dispatch);
   const [showEditUser, setShowEditUser] = useState(false);
   const [currRecordRow, setCurrRecordRow] = useState({});
   const [tableLoading, setTableLoading] = useState(false);
-  const [dataSource, setDataSource] = useState([
-    {
-      key: 1,
-      name: (
-        <div className="wrapper_name">
-          <div className="wrapper_img">
-            <img
-              src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-              alt="Logo"
-            />
-          </div>
-          <h3 className="name">Vlad</h3>
-        </div>
-      ),
-      role: 'admin',
-      email: 'vladikvladvita2@gmail.com',
-    },
-    {
-      key: 2,
-      name: (
-        <div className="wrapper_name">
-          <div className="wrapper_img">
-            <img
-              src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-              alt="Logo"
-            />
-          </div>
-          <h3 className="name">Dima</h3>
-        </div>
-      ),
-      role: 'super admin',
-      email: 'scooterok@gmail.com',
-    },
-    {
-      key: 3,
-      name: (
-        <div className="wrapper_name">
-          <div className="wrapper_img">
-            <img
-              src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-              alt="Logo"
-            />
-          </div>
-          <h3 className="name">Rav</h3>
-        </div>
-      ),
-      role: 'super admin',
-      email: 'rav@gmail.com',
-    },
-    {
-      key: 4,
-      name: (
-        <div className="wrapper_name">
-          <div className="wrapper_img">
-            <img
-              src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-              alt="Logo"
-            />
-          </div>
-          <h3 className="name">Victor</h3>
-        </div>
-      ),
-      role: 'admin',
-      email: 'victor@gmail.com',
-      conf: 'confirmitation',
-      onCheck: true,
-    },
-  ]);
+  // const [dataSource, setDataSource] = useState([
+  //   {
+  //     key: 4,
+  //     name: (
+  //       <div className="wrapper_name">
+  //         <div className="wrapper_img">
+  //           <img
+  //             src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+  //             alt="Logo"
+  //           />
+  //         </div>
+  //         <h3 className="name">Victor</h3>
+  //       </div>
+  //     ),
+  //     role: 'admin',
+  //     email: 'victor@gmail.com',
+  //     onCheck: true,
+  //   },
+  // ]);
+  const [dataSource, setDataSource] = useState([]);
 
   const [columns, setColumns] = useState([
     {
       title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
+      dataIndex: 'first_name',
+      key: 'first_name',
     },
     {
       title: 'Role',
@@ -131,6 +88,34 @@ const TableOfUsers = ({ setShowDeleteUser }) => {
 
   const onChange = (prop) => {
     console.log('helo', prop);
+  };
+  useEffect(() => {
+    getMembersOfOrganisation().then((data) => {
+      setPageInfo(data.payload);
+    });
+  }, []);
+
+  const setPageInfo = (data) => {
+    const newData = [];
+    data.forEach((item) => {
+      newData.push({
+        key: item.id,
+        first_name: (
+          <div className="wrapper_name">
+            <div className="wrapper_img">
+              <img
+                src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                alt="Logo"
+              />
+            </div>
+            <h3 className="name">{item.first_name}</h3>
+          </div>
+        ),
+        role: item.role,
+        email: item.email,
+      });
+    });
+    setDataSource(() => newData);
   };
 
   return (

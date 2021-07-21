@@ -4,6 +4,7 @@ import notes from '../core/notes/notesSlice';
 import requirements from '../core/requirements/requirementsSlice';
 import account from '../core/account/accountSlice';
 import profile from '../core/profile/profileSlice';
+import configuration from '../core/configurations/configurationsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     requirements,
     account,
     profile,
+    configuration,
   },
   devTools: true,
 });

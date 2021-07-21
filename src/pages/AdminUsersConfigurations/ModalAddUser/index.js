@@ -1,13 +1,27 @@
 import React from 'react';
-import { Modal, Form, Input, Button, Col, Row, Radio } from 'antd';
+import { Modal, Form, Input, Button, Col, Row, Radio, notification } from 'antd';
 import './style.scss';
 import { CloseIconSVG } from '../../../components/icons';
+import { actions } from '../../../core/configurations/configurationsSlice';
+import { bindActionCreators } from 'redux';
+import { useDispatch } from 'react-redux';
 
 const ModalAddUser = ({ showAddUser, setShowAddUser }) => {
+  const dispatch = useDispatch();
+  const { inViteMemberToOrganisation } = bindActionCreators(actions, dispatch);
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    console.log('values', values);
+    inViteMemberToOrganisation({
+      email: values.email,
+    }).then((data) => {
+      const type = data.error ? 'error' : 'success';
+      return notification[type]({
+        message: data.error ? data.error.message : 'The invitation was successfully sent',
+        description: data.error ? 'Please try again! ' : '',
+        duration: 3.5,
+      });
+    });
     setShowAddUser(() => false);
   };
 
@@ -41,7 +55,11 @@ const ModalAddUser = ({ showAddUser, setShowAddUser }) => {
             rules={[
               {
                 required: true,
-                message: 'Type your email',
+                message: 'Email is required!',
+              },
+              {
+                type: 'email',
+                message: 'Please input your Email!',
               },
             ]}>
             <Input />
