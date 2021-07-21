@@ -1,10 +1,23 @@
 import React, { useState } from 'react';
 import './style.scss';
-import { Question, ProfileDropDown, Logo4PV, Pinion, QuestionOpen } from '../../../components/icons';
+import { Question, ProfileDropDown, Logo4PV, Pinion, QuestionOpen, SearchSVG } from '../icons';
 import { Form, Input, Button, Col, Menu, Dropdown } from 'antd';
-import { SearchSVG } from '../../icons';
+import { Link } from 'react-router-dom';
 
-const Header = () => {
+const menuProfile = (
+  <Menu>
+    <Menu.Item key="1">
+      <h4>
+        <Link to="/profile">View Profile</Link>
+      </h4>
+    </Menu.Item>
+    <Menu.Item key="2">
+      <h4>Sign Out</h4>
+    </Menu.Item>
+  </Menu>
+);
+
+const Header = ({ data }) => {
   const [questionOpen, setQuestionOpen] = useState(false);
   const suffix = (
     <div className="siffix_search_drop" style={{ cursor: 'pointer' }}>
@@ -16,18 +29,8 @@ const Header = () => {
     console.log('values', values);
     form.resetFields();
   };
-  const menuProfile = (
-    <Menu>
-      <Menu.Item key="1">
-        <h4>View Profile</h4>
-      </Menu.Item>
-      <Menu.Item key="2">
-        <h4>Sign Out</h4>
-      </Menu.Item>
-    </Menu>
-  );
   return (
-    <header className="header_wrapper_configuration">
+    <header className="admin_header">
       <div className="header_wrapper">
         <div className="logo">
           <div>
@@ -39,9 +42,11 @@ const Header = () => {
             <h2>Go Solar</h2>
           </div>
           <div className="corner_container">
-            <div className="pinion">
-              <Pinion />
-            </div>
+            {data && data.role.split('.')[1] === 'OWNER' && (
+              <div className="pinion">
+                <Pinion />
+              </div>
+            )}
             <Dropdown
               overlay={
                 <div className="dropDown_block_question">
