@@ -38,10 +38,6 @@ const UserProfile = () => {
 
   const { getProfile } = bindActionCreators(actions, dispatch);
 
-  useEffect(() => {
-    getProfile();
-  }, []);
-
   const PasswordFormChange = () => {
     return (
       <Form
