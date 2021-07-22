@@ -23,18 +23,20 @@ const SignUpToProject = () => {
   const [inviteId, setInviteId] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   getInviteInfo(id).then((data) => {
-  //     if (data.error) {
-  //       notification.error({
-  //         message: data.error.message,
-  //         duration: 3.5,
-  //       });
-  //       history.push('/');
-  //     }
-  //     if (data?.payload?.invite_id) setInviteId(() => data.payload.invite_id);
-  //   });
-  // }, []);
+  console.log('ID', id);
+
+  useEffect(() => {
+    getInviteInfo(id).then((data) => {
+      if (data.error) {
+        notification.error({
+          message: data.error.message,
+          duration: 3.5,
+        });
+        history.push('/');
+      }
+      if (data?.payload?.invite_id) setInviteId(() => data.payload.invite_id);
+    });
+  }, []);
 
   const onFinishHandler = ({ first_name, last_name, password, invite_id = inviteId }) => {
     setLoading(() => true);
