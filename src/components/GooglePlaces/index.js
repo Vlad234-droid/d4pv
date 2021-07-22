@@ -1,18 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Row, Col, Select } from 'antd';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
 import { ArrowDownSelectSVG } from '../../components/icons';
 
+import { statesList } from './config';
+
 const GooglePlaces = ({ extraAddress, setExtraAddress, onGenderChange }) => {
+  const [service, setService] = useState(null);
+
   const suffixIcon = (
     <div style={{ zIndex: '-2' }}>
       <ArrowDownSelectSVG />
     </div>
   );
 
+  // let map;
+  // let service;
+  // let infowindow;
+
+  useEffect(() => {
+    const places = new window.google.maps.places.PlacesService(document.getElementById('map'));
+    setService(places);
+    console.log('statesList', statesList);
+  }, []);
+
+  const onSelect = (e) => {
+    var request = {
+      placeId: e.value.place_id,
+    };
+    console.log('service', service);
+    service.getDetails(request, callback);
+  };
+
+  function callback(results, status) {
+    if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+      console.log(results);
+    }
+  }
+
   return (
     <>
+      <div id="map" style={{ display: 'none' }}></div>
       <Row gutter={33} style={{ marginTop: '11px' }} className="row_address">
         <Col span={16}>
           <div className="extra" onClick={() => setExtraAddress((prev) => !prev)}>
@@ -29,9 +58,7 @@ const GooglePlaces = ({ extraAddress, setExtraAddress, onGenderChange }) => {
                   //   types: ['address'],
                   // }}
                   selectProps={{
-                    onChange: (e) => {
-                      console.log(e);
-                    },
+                    onChange: onSelect,
                   }}
                 />
               </div>
@@ -56,9 +83,11 @@ const GooglePlaces = ({ extraAddress, setExtraAddress, onGenderChange }) => {
           <Col span={8}>
             <Form.Item label="State" name="state">
               <Select placeholder="Select State" onChange={onGenderChange} suffixIcon={suffixIcon}>
-                <Select.Option value="male">male</Select.Option>
-                <Select.Option value="female">female</Select.Option>
-                <Select.Option value="other">other</Select.Option>
+                {statesList.map((item) => (
+                  <Select.Option key={item['alpha-2']} value={item['alpha-2']}>
+                    {item.name}
+                  </Select.Option>
+                ))}
               </Select>
             </Form.Item>
           </Col>
