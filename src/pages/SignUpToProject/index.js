@@ -7,9 +7,10 @@ import { ShowPassword, CloseToShowPassword } from '../../components/icons';
 import { actions } from '../../core/account/accountSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 const SignUpToProject = () => {
+  const history = useHistory();
   const [valueFirstPass, setValueFirstPass] = useState('');
   const [valueSecondPass, setValueSecondPass] = useState('');
   const [showPassFirst, setShowPassFirst] = useState(false);
@@ -17,44 +18,44 @@ const SignUpToProject = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const status = useSelector((state) => state.account);
-  console.log('status', status);
   const { createAccountInvite, getInviteInfo } = bindActionCreators(actions, dispatch);
   const { id } = useParams();
+  const [inviteId, setInviteId] = useState('');
+  const [loading, setLoading] = useState(false);
 
   // useEffect(() => {
-  //   createAccountInvite({
-  //     first_name: 'string',
-  //     last_name: 'string',
-  //     invite_id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-  //     password: 'MacOs2020',
-  //   }).then((data) => {
+  //   getInviteInfo(id).then((data) => {
   //     if (data.error) {
-  //       return notification.error({
-  //         message: 'Notification Title',
-  //         description: data.error.message,
+  //       notification.error({
+  //         message: data.error.message,
   //         duration: 3.5,
   //       });
+  //       history.push('/');
   //     }
+  //     if (data?.payload?.invite_id) setInviteId(() => data.payload.invite_id);
   //   });
   // }, []);
-  useEffect(() => {
-    getInviteInfo(id);
-  }, []);
 
-  const onFinishHandler = ({ first_name, last_name, password, invite_id = '3fa85f64-5717-4562-b3fc-2c963f66afa6' }) => {
+  const onFinishHandler = ({ first_name, last_name, password, invite_id = inviteId }) => {
+    setLoading(() => true);
     createAccountInvite({
       first_name,
       last_name,
       password,
       invite_id,
     }).then((data) => {
+      setLoading(() => false);
       if (data.error) {
         return notification.error({
-          message: 'Notification Title',
-          description: data.error.message,
+          message: data.error.message,
           duration: 3.5,
         });
       }
+      notification.success({
+        message: 'You have been successfully registered',
+        duration: 3.5,
+      });
+      history.push('/sign-in');
     });
     form.resetFields();
   };
@@ -183,7 +184,7 @@ const SignUpToProject = () => {
               </Col>
 
               <Form.Item>
-                <Button type="primary" htmlType="submit" style={{ marginTop: '5px' }}>
+                <Button type="primary" htmlType="submit" style={{ marginTop: '5px' }} loading={loading}>
                   Sign Up
                 </Button>
               </Form.Item>

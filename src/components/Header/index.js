@@ -3,6 +3,7 @@ import './style.scss';
 import { Question, ProfileDropDown, Logo4PV, Pinion, QuestionOpen, SearchSVG } from '../icons';
 import { Form, Input, Button, Col, Menu, Dropdown } from 'antd';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const menuProfile = (
   <Menu>
@@ -17,7 +18,8 @@ const menuProfile = (
   </Menu>
 );
 
-const Header = ({ data }) => {
+const Header = () => {
+  const data = useSelector((state) => state?.profile?.data);
   const [questionOpen, setQuestionOpen] = useState(false);
   const suffix = (
     <div className="siffix_search_drop" style={{ cursor: 'pointer' }}>
@@ -26,7 +28,6 @@ const Header = ({ data }) => {
   );
   const [form] = Form.useForm();
   const onFinishHandler = (values) => {
-    console.log('values', values);
     form.resetFields();
   };
   return (

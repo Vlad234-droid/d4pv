@@ -134,7 +134,7 @@ const AdminProfile = () => {
                       layout="vertical"
                       onFinish={onFinishHandler}>
                       <Row gutter={20}>
-                        <Col span={7}>
+                        <Col span={7} style={{ paddingLeft: '0px' }}>
                           <Form.Item name="logo">
                             <UploadImg
                               form={formProfileInfo}
@@ -254,7 +254,17 @@ const AdminProfile = () => {
                         </Form.Item>
                       </Col>
                       <Col span={24}>
-                        <Form.Item label="Password" name="new_password" className="new_password">
+                        <Form.Item
+                          label="Password"
+                          name="new_password"
+                          className="new_password"
+                          rules={[
+                            {
+                              pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
+                              message:
+                                'Invalid password. Valid password must be at least 8 characters long and contain both lower and uppercase characters and at least one number',
+                            },
+                          ]}>
                           <Input
                             suffix={suffixSecond}
                             value={valueSecondPass}
