@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table } from 'antd';
 import { EditSVG, DeleteSVG } from '../../../components/icons';
 import './style.scss';
 import { useHistory } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { useDispatch } from 'react-redux';
+import { actions } from '../../../core/configurations/configurationsSlice';
 
 const TableOfCompanies = ({ setShowDeleteCompany }) => {
+  const dispatch = useDispatch();
+  const { getConfCompanies } = bindActionCreators(actions, dispatch);
+
   //const [tableLoading, setTableLoading] = useState(false);
   const history = useHistory();
   const [dataSource, setDataSource] = useState([
@@ -113,6 +119,10 @@ const TableOfCompanies = ({ setShowDeleteCompany }) => {
   const onChange = (prop) => {
     console.log('helo', prop);
   };
+
+  useEffect(() => {
+    getConfCompanies().then((data) => console.log('data from front from companies', data));
+  }, []);
 
   return (
     <Table
