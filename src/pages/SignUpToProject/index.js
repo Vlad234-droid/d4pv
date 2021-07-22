@@ -23,8 +23,6 @@ const SignUpToProject = () => {
   const [inviteId, setInviteId] = useState('');
   const [loading, setLoading] = useState(false);
 
-  console.log('ID', id);
-
   useEffect(() => {
     getInviteInfo(id).then((data) => {
       if (data.error) {
