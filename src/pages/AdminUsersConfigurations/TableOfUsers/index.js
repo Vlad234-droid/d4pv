@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table } from 'antd';
+import { Table, Skeleton } from 'antd';
 import { EditSVG, DeleteSVG } from '../../../components/icons';
 import ModalEditUser from '../ModalEditUser';
 import { bindActionCreators } from 'redux';
@@ -32,7 +32,7 @@ const TableOfUsers = ({ setShowDeleteUser }) => {
   //     onCheck: true,
   //   },
   // ]);
-  const [dataSource, setDataSource] = useState([]);
+  const [dataSource, setDataSource] = useState(null);
 
   const [columns, setColumns] = useState([
     {
@@ -90,8 +90,10 @@ const TableOfUsers = ({ setShowDeleteUser }) => {
     console.log('helo', prop);
   };
   useEffect(() => {
+    setTableLoading(() => true);
     getMembersOfOrganisation().then((data) => {
       setPageInfo(data.payload);
+      setTableLoading(() => false);
     });
   }, []);
 
@@ -123,18 +125,27 @@ const TableOfUsers = ({ setShowDeleteUser }) => {
 
   return (
     <>
-      <Table
-        className="table_users"
-        loading={tableLoading}
-        dataSource={dataSource}
-        columns={columns}
-        onChange={onChange}
-        pagination={false}
-        rowClassName={(record) => {
-          return record.onCheck ? 'onCheck' : '';
-        }}
-      />
-      <ModalEditUser record={currRecordRow} showEditUser={showEditUser} setShowEditUser={setShowEditUser} />
+      {dataSource === null ? (
+        <>
+          <Skeleton active />
+          <Skeleton active />
+        </>
+      ) : (
+        <>
+          <Table
+            className="table_users"
+            loading={tableLoading}
+            dataSource={dataSource}
+            columns={columns}
+            onChange={onChange}
+            pagination={false}
+            rowClassName={(record) => {
+              return record.onCheck ? 'onCheck' : '';
+            }}
+          />
+          <ModalEditUser record={currRecordRow} showEditUser={showEditUser} setShowEditUser={setShowEditUser} />
+        </>
+      )}
     </>
   );
 };

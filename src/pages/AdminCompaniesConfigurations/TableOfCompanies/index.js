@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table } from 'antd';
+import { Table, Skeleton } from 'antd';
 import { EditSVG, DeleteSVG } from '../../../components/icons';
 import './style.scss';
 import { useHistory } from 'react-router-dom';
@@ -13,7 +13,7 @@ const TableOfCompanies = ({ setShowDeleteCompany }) => {
 
   const [tableLoading, setTableLoading] = useState(false);
   const history = useHistory();
-  const [dataSource, setDataSource] = useState([]);
+  const [dataSource, setDataSource] = useState(null);
 
   const [columns, setColumns] = useState([
     {
@@ -107,16 +107,25 @@ const TableOfCompanies = ({ setShowDeleteCompany }) => {
   };
 
   return (
-    <Table
-      className="table_companies"
-      loading={tableLoading}
-      dataSource={dataSource}
-      columns={columns}
-      onChange={onChange}
-      pagination={false}
-      ellipsis={true}
-      expandable={true}
-    />
+    <>
+      {dataSource === null ? (
+        <>
+          <Skeleton active />
+          <Skeleton active />
+        </>
+      ) : (
+        <Table
+          className="table_companies"
+          loading={tableLoading}
+          dataSource={dataSource}
+          columns={columns}
+          onChange={onChange}
+          pagination={false}
+          ellipsis={true}
+          expandable={true}
+        />
+      )}
+    </>
   );
 };
 

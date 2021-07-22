@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowLeftBigSVG, EditCompanySVG } from '../../components/icons';
 import './style.scss';
 import LayoutConfiguration from '../../components/LayoutConfiguration/Layout';
@@ -8,26 +8,54 @@ import GeneralInformationTab from './GeneralInformationTab';
 import PreferencesTab from './PreferencesTab';
 import NotesTab from './NotesTab';
 import RequirementsTab from './RequirementsTab';
+import { bindActionCreators } from 'redux';
+import { useDispatch } from 'react-redux';
+import { actions } from '../../core/configurations/configurationsSlice';
+import { useParams } from 'react-router-dom';
 
 const { TabPane } = Tabs;
 
 const AdminCompanyInfoConf = () => {
   const [editMode, setEditMode] = useState(false);
   const [activeTabsKey, setActiveTabsKey] = useState('1');
-  const [testArray, setTestArray] = useState({});
   const callback = (key) => setActiveTabsKey(() => key);
+  const dispatch = useDispatch();
+  const { getConfCompanies } = bindActionCreators(actions, dispatch);
+  const { id } = useParams();
+  const [dataSource, setDataSource] = useState(null);
+  const [tableLoading, setTableLoading] = useState(false);
+
+  useEffect(() => {
+    setTableLoading(() => true);
+    getConfCompanies().then((data) => {
+      const dataFiltered = data.payload.filter((item) => item.id === id);
+      setPageInfo(dataFiltered[0]);
+      setTableLoading(() => false);
+    });
+  }, [id]);
+
+  const setPageInfo = (data) => {
+    const newData = {
+      id: data.id,
+      logo: undefined,
+      name: data.name,
+      phone: data.phone,
+      address: `${data.address.state} ${data.address.city} ${data.address.address_line1} ${data.address.zip}`,
+    };
+    setDataSource(() => newData);
+  };
 
   const config = [
     {
       tab: 'General Information',
       key: '1',
       clasname: 'general_info tab',
-      component: (
+      component: dataSource !== null && (
         <GeneralInformationTab
-          setTestArray={setTestArray}
           editMode={editMode}
-          testArray={testArray}
           setEditMode={setEditMode}
+          dataSource={dataSource}
+          setDataSource={setDataSource}
         />
       ),
     },
@@ -70,7 +98,7 @@ const AdminCompanyInfoConf = () => {
           </Link>
 
           <div>
-            <h2>{!editMode ? testArray.compname : 'Edit Contractor Company'}</h2>
+            <h2>{!editMode ? dataSource !== null && dataSource.name : 'Edit Contractor Company'}</h2>
           </div>
         </div>
         {!editMode && (
@@ -85,12 +113,12 @@ const AdminCompanyInfoConf = () => {
           </div>
         )}
       </div>
-      {editMode && (
+      {dataSource !== null && editMode && (
         <GeneralInformationTab
-          setTestArray={setTestArray}
           editMode={editMode}
-          testArray={testArray}
           setEditMode={setEditMode}
+          dataSource={dataSource}
+          setDataSource={setDataSource}
         />
       )}
     </LayoutConfiguration>

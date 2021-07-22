@@ -3,75 +3,17 @@ import { ArrowDownSelectSVG } from '../../../components/icons';
 import { Form, Input, Button, Row, Col, Select } from 'antd';
 import './style.scss';
 import UploadCompanyLogo from '../UploadCompanyLogo';
-import { useParams } from 'react-router-dom';
 
-const GeneralInformationTab = ({ setTestArray, editMode, testArray, setEditMode }) => {
+const GeneralInformationTab = ({ editMode, dataSource, setDataSource, setEditMode }) => {
   const [form] = Form.useForm();
   const [logoUrl, setLogoUrl] = useState(null);
   const [editCompanyLogo, setEditCompanyLogo] = useState(false);
-  const { id } = useParams();
-  const [dataSource, setDataSource] = useState([
-    {
-      key: 1,
-      logo: (
-        <div className="logo">
-          <img
-            src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-            alt="logo"
-          />
-        </div>
-      ),
-      company_name: 'SunPower by Test',
-      company_phone: '+46328746',
-      address: 'Lviv Leniana 49 SunPower by Test SunPower by Test',
-    },
-    {
-      key: 2,
-      logo: (
-        <div className="logo">
-          <img
-            src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-            alt="logo"
-          />
-        </div>
-      ),
-      company_name: 'SunPower by Kamtech Solar',
-      company_phone: '+243123412',
-      address: 'Kyiv lomonosova 678',
-    },
-    {
-      key: 3,
-      logo: (
-        <div className="logo">
-          <img
-            src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-            alt="logo"
-          />
-        </div>
-      ),
-      company_name: 'Sun Royale shine ',
-      company_phone: '+467839',
-      address: 'The center of City',
-    },
-  ]);
 
   const [extraAddress, setExtraAddress] = useState(false);
 
-  useEffect(() => {
-    const data = dataSource
-      .filter((item) => item.key === Number(id))
-      .map((item) => ({
-        compname: item.company_name,
-        compphone: item.company_phone,
-        searchaddress: item.address,
-      }));
-    setTestArray(() => ({
-      ...data[0],
-    }));
-  }, [dataSource, id, setTestArray]);
-
   const onFinishHandler = (values) => {
-    setTestArray(() => ({
+    console.log('values', values);
+    setDataSource(() => ({
       ...values,
     }));
     form.resetFields();
@@ -108,7 +50,7 @@ const GeneralInformationTab = ({ setTestArray, editMode, testArray, setEditMode 
       onFinish={onFinishHandler}>
       <Form.Item label="Logo" name="logo">
         <UploadCompanyLogo
-          testArray={testArray}
+          dataSource={dataSource}
           form={form}
           logoUrl={logoUrl}
           setLogoUrl={setLogoUrl}
@@ -121,18 +63,18 @@ const GeneralInformationTab = ({ setTestArray, editMode, testArray, setEditMode 
       {/* //????//// */}
       <Row gutter={33}>
         <Col span={8}>
-          <Form.Item label="Company Name" {...attr('compname')}>
-            {editMode ? <Input placeholder="" type="text" /> : <h3>{dashCheck(testArray.compname)}</h3>}
+          <Form.Item label="Company Name" {...attr('name')}>
+            {editMode ? <Input placeholder="" type="text" /> : <h3>{dashCheck(dataSource.name)}</h3>}
           </Form.Item>
         </Col>
         <Col span={8}>
-          <Form.Item label="Company Phone" {...attr('compphone')}>
-            {editMode ? <Input placeholder="" type="number" /> : <h3>{dashCheck(testArray.compphone)}</h3>}
+          <Form.Item label="Company Phone" {...attr('phone')}>
+            {editMode ? <Input placeholder="" type="number" /> : <h3>{dashCheck(dataSource.phone)}</h3>}
           </Form.Item>
         </Col>
         <Col span={8}>
-          <Form.Item label="License Number" {...attr('licnumber')}>
-            {editMode ? <Input placeholder="" type="text" /> : <h3>{dashCheck(testArray.licnumber)}</h3>}
+          <Form.Item label="License Number" {...attr('license')}>
+            {editMode ? <Input placeholder="" type="text" /> : <h3>{dashCheck(dataSource.license)}</h3>}
           </Form.Item>
         </Col>
       </Row>
@@ -140,13 +82,13 @@ const GeneralInformationTab = ({ setTestArray, editMode, testArray, setEditMode 
       {/* //????//// */}
       <Row gutter={33}>
         <Col span={8}>
-          <Form.Item label="Project Manager Full Name" {...attr('p_m__name')}>
-            {editMode ? <Input placeholder="" type="text" /> : <h3>{dashCheck(testArray.p_m__name)}</h3>}
+          <Form.Item label="Project Manager Full Name" {...attr('pm_name')}>
+            {editMode ? <Input placeholder="" type="text" /> : <h3>{dashCheck(dataSource.pm_name)}</h3>}
           </Form.Item>
         </Col>
         <Col span={8}>
-          <Form.Item label="Project Manager Phone Number" {...attr('p_m_phone')}>
-            {editMode ? <Input placeholder="" type="number" /> : <h3>{dashCheck(testArray.p_m_phone)}</h3>}
+          <Form.Item label="Project Manager Phone Number" {...attr('pm_phone')}>
+            {editMode ? <Input placeholder="" type="number" /> : <h3>{dashCheck(dataSource.pm_phone)}</h3>}
           </Form.Item>
         </Col>
       </Row>
@@ -165,20 +107,20 @@ const GeneralInformationTab = ({ setTestArray, editMode, testArray, setEditMode 
           </div>
           <Form.Item
             label={`${!editMode ? 'Address' : !extraAddress ? 'Search Address' : 'Address Line #1'}`}
-            {...attr('searchaddress')}>
+            {...attr('address')}>
             {editMode ? (
               <Input placeholder="" type="text" />
             ) : extraAddress ? (
               <div className="address_column">
                 <h3>
-                  Address: {testArray.searchaddress} {testArray.address_l_2}
+                  Address: {dataSource.address.state} {dataSource.address.city}
                 </h3>
                 <h3>
-                  {testArray.state} {testArray.zip} {testArray.city}
+                  {dataSource.address.address_line1} {dataSource.address.zip}
                 </h3>
               </div>
             ) : (
-              <h3>{testArray.searchaddress}</h3>
+              <h3>{dataSource.address}</h3>
             )}
           </Form.Item>
         </Col>

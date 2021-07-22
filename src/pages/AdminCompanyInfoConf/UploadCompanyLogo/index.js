@@ -5,7 +5,15 @@ import { SVGReload, CloseSmallSVG, StarSVG } from '../../../components/icons';
 
 const { Dragger } = Upload;
 
-const UploadCompanyLogo = ({ editMode, testArray, form, editCompanyLogo, setEditCompanyLogo, setLogoUrl, logoUrl }) => {
+const UploadCompanyLogo = ({
+  editMode,
+  dataSource,
+  form,
+  editCompanyLogo,
+  setEditCompanyLogo,
+  setLogoUrl,
+  logoUrl,
+}) => {
   const customRequest = (e) => {
     form.setFieldsValue({
       logo: e.file,
@@ -60,7 +68,7 @@ const UploadCompanyLogo = ({ editMode, testArray, form, editCompanyLogo, setEdit
         {/* <div className="upload-loading">
           <Spin />
         </div> */}
-        {testArray.logo === undefined ? (
+        {dataSource.logo === undefined ? (
           <div className="upload-title">
             <div>
               <StarSVG />
@@ -69,7 +77,7 @@ const UploadCompanyLogo = ({ editMode, testArray, form, editCompanyLogo, setEdit
           </div>
         ) : (
           <div className="img_logo__block">
-            <img src={URL.createObjectURL(testArray.logo)} alt="logo" />
+            <img src={URL.createObjectURL(dataSource.logo)} alt="logo" />
           </div>
         )}
       </Dragger>
