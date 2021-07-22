@@ -23,7 +23,7 @@ const AdminCompanyInfoConf = () => {
   const [extraAddress, setExtraAddress] = useState(false);
 
   const onFinishHandler = (values) => {
-    console.log(values);
+    console.log('values,', values);
     const result = {
       name: values.name,
       phone: values.phone,
@@ -44,6 +44,7 @@ const AdminCompanyInfoConf = () => {
     //   zip_code: '12345',
     //   address_line1: 'Pushkinskaya 49',
     // },
+
     setLoading(true);
     createCompany(result).then((data) => {
       setLoading(false);
@@ -112,9 +113,22 @@ const AdminCompanyInfoConf = () => {
                     required: true,
                     message: 'Please input Company Phone',
                   },
+                  () => ({
+                    validator(_, value) {
+                      if (value.replace(/\s/g, '').length > 12) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(new Error('Please input current Company Phone'));
+                    },
+                  }),
                 ]}>
-                {/* <Input type="text" /> */}
-                <InputMask className="ant-input" mask="+999999999999" maskChar=" " />
+                <InputMask
+                  className="ant-input"
+                  mask="+999999999999"
+                  maskChar=" "
+                  onChange={(e) => console.log(e.target.value)}>
+                  {(inputProps) => <Input {...inputProps} type="tel" />}
+                </InputMask>
               </Form.Item>
             </Col>
             <Col span={8}>
@@ -156,9 +170,18 @@ const AdminCompanyInfoConf = () => {
                     required: true,
                     message: 'Please input Project Manager Phone Number',
                   },
+                  () => ({
+                    validator(_, value) {
+                      if (value.replace(/\s/g, '').length > 12) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(new Error('Please input current Project Manager Phone Number'));
+                    },
+                  }),
                 ]}>
-                {/* <Input placeholder="" type="text" /> */}
-                <InputMask className="ant-input" mask="+999999999999" maskChar=" " />
+                <InputMask className="ant-input" mask="+999999999999" maskChar=" ">
+                  {(inputProps) => <Input {...inputProps} type="tel" />}
+                </InputMask>
               </Form.Item>
             </Col>
           </Row>

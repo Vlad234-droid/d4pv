@@ -23,7 +23,7 @@ const UploadCompanyLogo = ({ form, editCompanyLogo, setEditCompanyLogo, setLogoU
           name="file"
           customRequest={customRequest}
           accept=".jpg,.jpeg,.png"
-          className={`upload-logo edit ${false ? 'loading' : ''} `}
+          className={`upload-logo-add edit ${false ? 'loading' : ''} `}
           showUploadList={false}>
           <div className="img_logo__block">
             <img src={logoUrl !== null ? logoUrl : ''} alt="logo" />
@@ -51,24 +51,26 @@ const UploadCompanyLogo = ({ form, editCompanyLogo, setEditCompanyLogo, setLogoU
     );
   }
   return (
-    <Tooltip placement="rightTop" title={'Upload PNG, JPG, JPEG'}>
-      <Dragger
-        name="file"
-        customRequest={customRequest}
-        accept=".jpg,.jpeg,.png"
-        className={`upload-logo ${false ? 'loading' : ''}  `}
-        showUploadList={false}>
-        {/* <div className="upload-loading">
+    <div className="edit_dragger">
+      <Tooltip placement="rightTop" title={'Upload PNG, JPG, JPEG'}>
+        <Dragger
+          name="file"
+          customRequest={customRequest}
+          accept=".jpg,.jpeg,.png"
+          className={`upload-logo-add ${false ? 'loading' : ''}  `}
+          showUploadList={false}>
+          {/* <div className="upload-loading">
           <Spin />
         </div> */}
-        <div className="upload-title">
-          <div>
-            <StarSVG />
+          <div className="upload-title">
+            <div>
+              <StarSVG />
+            </div>
+            <span className="upload_photo">Upload logo</span>
           </div>
-          <span className="upload_photo">Upload logo</span>
-        </div>
-      </Dragger>
-    </Tooltip>
+        </Dragger>
+      </Tooltip>
+    </div>
   );
 };
 
