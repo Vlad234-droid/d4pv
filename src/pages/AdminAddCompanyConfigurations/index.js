@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeftBigSVG } from '../../components/icons';
-import { Form, Input, Button, Row, Col, Select } from 'antd';
+import { Form, Input, Button, Row, Col, Select, notification } from 'antd';
+import InputMask from 'react-input-mask';
 import './style.scss';
 import UploadCompanyLogo from './UploadCompanyLogo';
 import LayoutConfiguration from '../../components/LayoutConfiguration/Layout';
@@ -15,14 +16,46 @@ const AdminCompanyInfoConf = () => {
   const { createCompany } = bindActionCreators(actions, dispatch);
   const [form] = Form.useForm();
   const [logoUrl, setLogoUrl] = useState(null);
+  const [phone, setPhone] = useState();
+  const [loading, setLoading] = useState(false);
   const [editCompanyLogo, setEditCompanyLogo] = useState(false);
   const history = useHistory();
   const [extraAddress, setExtraAddress] = useState(false);
 
   const onFinishHandler = (values) => {
-    form.resetFields();
-    setEditCompanyLogo(() => false);
-    history.push('/admin-companies-conf');
+    console.log(values);
+    const result = {
+      name: values.name,
+      phone: values.phone,
+      license: values.license,
+      pm_name: values.pm_name,
+      pm_phone: values.pm_phone,
+      address: {
+        city: values.city,
+        state: values.state,
+        zip_code: values.zip_code,
+        address_line1: values.address_line1,
+        address_line2: values.address_line2,
+      },
+    };
+    // address: {
+    //   city: 'Phoenix',
+    //   state: 'Arizona',
+    //   zip_code: '12345',
+    //   address_line1: 'Pushkinskaya 49',
+    // },
+    setLoading(true);
+    createCompany(result).then((data) => {
+      setLoading(false);
+      if (!data.error) {
+        notification.success({
+          //message: 'Notification Title',
+          description: 'The company was added successfully',
+          duration: 3.5,
+        });
+        history.push('/admin-companies-conf/');
+      }
+    });
   };
 
   const onGenderChange = (value) => {
@@ -43,53 +76,57 @@ const AdminCompanyInfoConf = () => {
             <h2>Add Contractor Company</h2>
           </div>
           {/* //////// */}
-          <div>
-            <button
-              onClick={() => {
-                createCompany({
-                  name: 'Test Company',
-                  phone: '+380990999999',
-                  license: 'Good',
-                  pm_name: 'Dima',
-                  pm_phone: '+380990999999',
-                  address: {
-                    city: 'Phoenix',
-                    state: 'Arizona',
-                    zip_code: '12345',
-                    address_line1: 'Pushkinskaya 49',
-                  },
-                }).then((data) => console.log('data from company', data));
-              }}>
-              this is test button ( because google maps not done yet ), click to add company, values are mocked already
-            </button>
-          </div>
+
           {/* //////// */}
         </div>
         <Form className="form_add_company add_comp" form={form} layout="vertical" onFinish={onFinishHandler}>
-          <Form.Item label="Logo" name="logo">
-            <UploadCompanyLogo
-              form={form}
-              logoUrl={logoUrl}
-              setLogoUrl={setLogoUrl}
-              editCompanyLogo={editCompanyLogo}
-              setEditCompanyLogo={setEditCompanyLogo}
-            />
-          </Form.Item>
+          <UploadCompanyLogo
+            form={form}
+            logoUrl={logoUrl}
+            setLogoUrl={setLogoUrl}
+            editCompanyLogo={editCompanyLogo}
+            setEditCompanyLogo={setEditCompanyLogo}
+          />
 
           {/* //????//// */}
           <Row gutter={33}>
             <Col span={8}>
-              <Form.Item label="Company Name" name="compname">
+              <Form.Item
+                label="Company Name"
+                name="name"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input Company Name',
+                  },
+                ]}>
                 <Input placeholder="" type="text" />
               </Form.Item>
             </Col>
             <Col span={8}>
-              <Form.Item label="Company Phone" name="compphone">
-                <Input placeholder="" type="number" />
+              <Form.Item
+                label="Company Phone"
+                name="phone"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input Company Phone',
+                  },
+                ]}>
+                {/* <Input type="text" /> */}
+                <InputMask className="ant-input" mask="+999999999999" maskChar=" " />
               </Form.Item>
             </Col>
             <Col span={8}>
-              <Form.Item label="License Number" name="licnumber">
+              <Form.Item
+                label="License Number"
+                name="license"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input License Number',
+                  },
+                ]}>
                 <Input placeholder="" type="text" />
               </Form.Item>
             </Col>
@@ -98,13 +135,30 @@ const AdminCompanyInfoConf = () => {
           {/* //????//// */}
           <Row gutter={33}>
             <Col span={8}>
-              <Form.Item label="Project Manager Full Name" name="p_m__name">
+              <Form.Item
+                label="Project Manager Full Name"
+                name="pm_name"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input Project Manager Full Name',
+                  },
+                ]}>
                 <Input placeholder="" type="text" />
               </Form.Item>
             </Col>
             <Col span={8}>
-              <Form.Item label="Project Manager Phone Number" name="p_m_phone">
-                <Input placeholder="" type="number" />
+              <Form.Item
+                label="Project Manager Phone Number"
+                name="pm_phone"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input Project Manager Phone Number',
+                  },
+                ]}>
+                {/* <Input placeholder="" type="text" /> */}
+                <InputMask className="ant-input" mask="+999999999999" maskChar=" " />
               </Form.Item>
             </Col>
           </Row>
@@ -115,7 +169,12 @@ const AdminCompanyInfoConf = () => {
             <h2>Contractor Company Address</h2>
           </div>
           {/* //????//// */}
-          <GooglePlaces extraAddress={extraAddress} setExtraAddress={setExtraAddress} onGenderChange={onGenderChange} />
+          <GooglePlaces
+            extraAddress={extraAddress}
+            setExtraAddress={setExtraAddress}
+            onGenderChange={onGenderChange}
+            form={form}
+          />
           {/* //????//// */}
           <Form.Item className="btns">
             <Row gutter={16}>
@@ -123,14 +182,13 @@ const AdminCompanyInfoConf = () => {
                 <Button
                   type="button"
                   onClick={() => {
-                    setExtraAddress(() => false);
-                    setEditCompanyLogo(() => false);
+                    history.push('/admin-companies-conf/');
                   }}>
                   Cancel
                 </Button>
               </Col>
               <Col span={6}>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" loading={loading}>
                   Save
                 </Button>
               </Col>
