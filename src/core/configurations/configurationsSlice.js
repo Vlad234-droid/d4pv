@@ -37,6 +37,19 @@ const getMembersOfOrganisation = createAsyncThunk('configuration/getMembersOfOrg
   }
 });
 
+const getConfCompanies = createAsyncThunk('configuration/getConfCompanies', async () => {
+  const token = lockr.get('auth-token');
+
+  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+
+  try {
+    const response = await fetchApi(`${REACT_APP_API_URL}/me/organisation/companies`, null, headers, null);
+    return response;
+  } catch (err) {
+    return Promise.reject(err);
+  }
+});
+
 const configurationSlice = createSlice({
   name: 'configuration',
   initialState,
@@ -50,6 +63,7 @@ export const actions = {
   ...configurationSlice.actions,
   inViteMemberToOrganisation,
   getMembersOfOrganisation,
+  getConfCompanies,
 };
 
 export default configurationSlice.reducer;
