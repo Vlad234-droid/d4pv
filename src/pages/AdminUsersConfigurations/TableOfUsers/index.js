@@ -95,6 +95,9 @@ const TableOfUsers = ({ setShowDeleteUser }) => {
     });
   }, []);
 
+  const getProperRole = (role) =>
+    role.split('.')[1] === 'MEMBER' ? 'User' : role.split('.')[1] === 'OWNER' && 'Admin';
+
   const setPageInfo = (data) => {
     const newData = [];
     data.forEach((item) => {
@@ -111,7 +114,7 @@ const TableOfUsers = ({ setShowDeleteUser }) => {
             <h3 className="name">{item.first_name}</h3>
           </div>
         ),
-        role: item.role,
+        role: getProperRole(item.role),
         email: item.email,
       });
     });

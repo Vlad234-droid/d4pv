@@ -54,7 +54,7 @@
             flex-direction: row;
 
             .form_password {
-              margin-left: 20px;
+              margin-left: 17px;
               flex: auto;
               .form_FL_name {
                 .ant-row.ant-form-item {
@@ -68,6 +68,11 @@
           }
         }
         .change_password_block {
+          .new_password {
+            .ant-form-item-explain {
+              font-size: 8.5px;
+            }
+          }
           margin-bottom: 40px;
           width: 572px;
           //min-width: 572px;

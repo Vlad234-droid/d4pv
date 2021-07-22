@@ -11,52 +11,9 @@ const TableOfCompanies = ({ setShowDeleteCompany }) => {
   const dispatch = useDispatch();
   const { getConfCompanies } = bindActionCreators(actions, dispatch);
 
-  //const [tableLoading, setTableLoading] = useState(false);
+  const [tableLoading, setTableLoading] = useState(false);
   const history = useHistory();
-  const [dataSource, setDataSource] = useState([
-    {
-      key: 1,
-      logo: (
-        <div className="logo">
-          <img
-            src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-            alt="logo"
-          />
-        </div>
-      ),
-      company_name: 'SunPower by Test',
-      company_phone: '+46328746',
-      address: 'Lviv Leniana 49 SunPower by Test SunPower by Test',
-    },
-    {
-      key: 2,
-      logo: (
-        <div className="logo">
-          <img
-            src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-            alt="logo"
-          />
-        </div>
-      ),
-      company_name: 'SunPower by Kamtech Solar',
-      company_phone: '+243123412',
-      address: 'Kyiv lomonosova 678',
-    },
-    {
-      key: 3,
-      logo: (
-        <div className="logo">
-          <img
-            src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-            alt="logo"
-          />
-        </div>
-      ),
-      company_name: 'Sun Royale shine ',
-      company_phone: '+467839',
-      address: 'The center of City',
-    },
-  ]);
+  const [dataSource, setDataSource] = useState([]);
 
   const [columns, setColumns] = useState([
     {
@@ -121,13 +78,38 @@ const TableOfCompanies = ({ setShowDeleteCompany }) => {
   };
 
   useEffect(() => {
-    getConfCompanies().then((data) => console.log('data from front from companies', data));
+    setTableLoading(() => true);
+    getConfCompanies().then((data) => {
+      setPageInfo(data.payload);
+      setTableLoading(() => false);
+    });
   }, []);
+
+  const setPageInfo = (data) => {
+    const newData = [];
+    data.forEach((item) => {
+      newData.push({
+        key: item.id,
+        logo: (
+          <div className="logo">
+            <img
+              src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+              alt="logo"
+            />
+          </div>
+        ),
+        company_name: item.name,
+        company_phone: item.phone,
+        address: `${item.address.state} ${item.address.city} ${item.address.state} ${item.address.address_line1} ${item.address.zip}`,
+      });
+    });
+    setDataSource(() => newData);
+  };
 
   return (
     <Table
       className="table_companies"
-      //loading={tableLoading}
+      loading={tableLoading}
       dataSource={dataSource}
       columns={columns}
       onChange={onChange}

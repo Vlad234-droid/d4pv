@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowLeftBigSVG } from '../../components/icons';
 import { Form, Input, Button, Row, Col, Select } from 'antd';
 import './style.scss';
-
 import UploadCompanyLogo from './UploadCompanyLogo';
 import LayoutConfiguration from '../../components/LayoutConfiguration/Layout';
 import { Link, useHistory } from 'react-router-dom';
 import GooglePlaces from '../../components/GooglePlaces';
+import { bindActionCreators } from 'redux';
+import { useDispatch } from 'react-redux';
+import { actions } from '../../core/configurations/configurationsSlice';
 
 const AdminCompanyInfoConf = () => {
+  const dispatch = useDispatch();
+  const { createCompany } = bindActionCreators(actions, dispatch);
   const [form] = Form.useForm();
   const [logoUrl, setLogoUrl] = useState(null);
   const [editCompanyLogo, setEditCompanyLogo] = useState(false);
@@ -38,6 +42,28 @@ const AdminCompanyInfoConf = () => {
           <div>
             <h2>Add Contractor Company</h2>
           </div>
+          {/* //////// */}
+          <div>
+            <button
+              onClick={() => {
+                createCompany({
+                  name: 'Test Company',
+                  phone: '+380990999999',
+                  license: 'Good',
+                  pm_name: 'Dima',
+                  pm_phone: '+380990999999',
+                  address: {
+                    city: 'Phoenix',
+                    state: 'Arizona',
+                    zip_code: '12345',
+                    address_line1: 'Pushkinskaya 49',
+                  },
+                }).then((data) => console.log('data from company', data));
+              }}>
+              this is test button ( because google maps not done yet ), click to add company, values are mocked already
+            </button>
+          </div>
+          {/* //////// */}
         </div>
         <Form className="form_add_company add_comp" form={form} layout="vertical" onFinish={onFinishHandler}>
           <Form.Item label="Logo" name="logo">

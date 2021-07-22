@@ -16,8 +16,12 @@ const createAccount = createAsyncThunk('account/createAccount', async (body) => 
   return response;
 });
 const createAccountInvite = createAsyncThunk('account/createAccountInvite', async (body) => {
-  const response = await fetchApi(`${REACT_APP_API_URL}/accounts/invite`, 'POST', null, JSON.stringify(body));
-  return response;
+  try {
+    const response = await fetchApi(`${REACT_APP_API_URL}/accounts/invite`, 'POST', null, JSON.stringify(body));
+    return response;
+  } catch (err) {
+    return Promise.reject(err);
+  }
 });
 const resetPassword = createAsyncThunk('account/resetPassword', async (body) => {
   const response = await fetchApi(`${REACT_APP_API_URL}/accounts/reset-password`, 'POST', null, JSON.stringify(body));
@@ -52,12 +56,10 @@ const accountSlice = createSlice({
     },
     [createAccount.fulfilled]: (state, action) => {
       state.status = 'succeeded';
-      console.log('action', action);
       state.account_id = action.payload.account_id;
     },
     [createAccount.rejected]: (state, action) => {
       state.status = 'failed';
-      console.log('payload fropmhere', action);
     },
     [createAccountInvite.fulfilled]: (state, { payload }) => {
       state.status = 'succeeded';

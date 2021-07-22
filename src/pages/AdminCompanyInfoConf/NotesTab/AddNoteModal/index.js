@@ -22,7 +22,6 @@ const AddNoteModal = ({ keyTab, addNoteModal, setAddNoteModal }) => {
 
   const onFinish = ({ reference, requested }) => {
     let currentContentAsHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
-    console.log('currentContentAsHTML', currentContentAsHTML);
     addNote({ keyTab, text: currentContentAsHTML, reference, requested });
     form.resetFields();
     setAddNoteModal(() => false);
