@@ -3,11 +3,11 @@ import { Modal, Form, Button, Col, Row, Radio } from 'antd';
 import './style.scss';
 import { CloseIconSVG } from '../../../components/icons';
 
-const ModalEditUser = ({ record, showEditUser, setShowEditUser }) => {
+const ModalEditUser = ({ setCurrRecordRow, record, showEditUser, setShowEditUser }) => {
   const [form] = Form.useForm();
-  console.log('record', record);
   const onFinish = (values) => {
     console.log('values', values);
+    setCurrRecordRow(() => null);
     //setShowEditUser(() => false);
   };
 
@@ -17,6 +17,7 @@ const ModalEditUser = ({ record, showEditUser, setShowEditUser }) => {
       closeIcon={<CloseIconSVG />}
       onCancel={() => {
         setShowEditUser(() => false);
+        setCurrRecordRow(() => null);
       }}
       cancelButtonProps={{ style: { display: 'none' } }}
       okButtonProps={{ style: { display: 'none' } }}
@@ -30,7 +31,7 @@ const ModalEditUser = ({ record, showEditUser, setShowEditUser }) => {
         requiredMark={true}
         onFinish={onFinish}
         initialValues={{
-          option__user__admin: 'admin',
+          option__user__admin: record.role === 'Admin' ? 'admin' : 'user',
         }}>
         <h2>Edit User</h2>
         <Col span={24}>
@@ -79,6 +80,7 @@ const ModalEditUser = ({ record, showEditUser, setShowEditUser }) => {
                 type="button"
                 onClick={() => {
                   setShowEditUser(() => false);
+                  setCurrRecordRow(() => null);
                 }}>
                 Cancel
               </Button>

@@ -11,7 +11,7 @@ const TableOfUsers = ({ setShowDeleteUser }) => {
   const dispatch = useDispatch();
   const { getMembersOfOrganisation } = bindActionCreators(actions, dispatch);
   const [showEditUser, setShowEditUser] = useState(false);
-  const [currRecordRow, setCurrRecordRow] = useState({});
+  const [currRecordRow, setCurrRecordRow] = useState(null);
   const [tableLoading, setTableLoading] = useState(false);
   // const [dataSource, setDataSource] = useState([
   //   {
@@ -32,6 +32,8 @@ const TableOfUsers = ({ setShowDeleteUser }) => {
   //     onCheck: true,
   //   },
   // ]);
+
+  console.log('currRecordRow', currRecordRow);
   const [dataSource, setDataSource] = useState(null);
 
   const [columns, setColumns] = useState([
@@ -64,9 +66,7 @@ const TableOfUsers = ({ setShowDeleteUser }) => {
                 //console.log('e', e.target.dataset.action);
                 //console.log('record', record);
                 //console.log('index', index);
-                setCurrRecordRow(() => ({
-                  ...record,
-                }));
+                setCurrRecordRow(() => record);
                 setShowEditUser(() => true);
               }}>
               <EditSVG />
@@ -143,7 +143,14 @@ const TableOfUsers = ({ setShowDeleteUser }) => {
               return record.onCheck ? 'onCheck' : '';
             }}
           />
-          <ModalEditUser record={currRecordRow} showEditUser={showEditUser} setShowEditUser={setShowEditUser} />
+          {currRecordRow !== null && (
+            <ModalEditUser
+              setCurrRecordRow={setCurrRecordRow}
+              record={currRecordRow}
+              showEditUser={showEditUser}
+              setShowEditUser={setShowEditUser}
+            />
+          )}
         </>
       )}
     </>
