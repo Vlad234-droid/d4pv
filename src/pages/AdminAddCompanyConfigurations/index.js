@@ -108,6 +108,9 @@ const AdminCompanyInfoConf = () => {
                   <div className="places-autocomplete">
                     <GooglePlacesAutocomplete
                       apiKey="AIzaSyC64Luyo5HsYvMO9uC4urUIydVbugILszw"
+                      // autocompletionRequest={{
+                      //   types: ['address'],
+                      // }}
                       selectProps={{
                         onChange: (e) => {
                           console.log(e);
