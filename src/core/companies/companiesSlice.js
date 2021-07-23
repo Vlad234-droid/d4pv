@@ -40,24 +40,52 @@ const deleteCompany = createAsyncThunk('companies/deleteCompany', async (company
   return response;
 });
 
-const addCompanyNote = createAsyncThunk('companies/addCompanyNote', async (company_id, data) => {
+const addCompanyNote = createAsyncThunk('companies/addCompanyNote', async (data) => {
   const token = lockr.get('auth-token');
   const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
-  const body = JSON.stringify(data);
   const response = await fetchApi(
-    `${REACT_APP_API_URL}/me/organisation/companies/${company_id}/notes`,
+    `${REACT_APP_API_URL}/me/organisation/companies/${data.company_id}/notes`,
     'POST',
     headers,
-    body,
+    JSON.stringify(data.body),
   );
   return response;
 });
 
-const updateCompanyNote = createAsyncThunk('companies/updateCompanyNote', async (note_id, data) => {
+const addCompanyRequirement = createAsyncThunk('companies/addCompanyRequirement', async (data) => {
   const token = lockr.get('auth-token');
   const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
-  const body = JSON.stringify(data);
-  const response = await fetchApi(`${REACT_APP_API_URL}/me/organisation/notes/${note_id}`, 'PUT', headers, body);
+  const response = await fetchApi(
+    `${REACT_APP_API_URL}/me/organisation/companies/${data.company_id}/requirements`,
+    'POST',
+    headers,
+    JSON.stringify(data.body),
+  );
+  return response;
+});
+
+const updateCompanyNote = createAsyncThunk('companies/updateCompanyNote', async (data) => {
+  const token = lockr.get('auth-token');
+  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+  const response = await fetchApi(
+    `${REACT_APP_API_URL}/me/organisation/notes/${data.note_id}`,
+    'PUT',
+    headers,
+    JSON.stringify(data.body),
+  );
+  return response;
+});
+
+const updateCompanyRequirement = createAsyncThunk('companies/updateCompanyRequirement', async (data) => {
+  const token = lockr.get('auth-token');
+  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+
+  const response = await fetchApi(
+    `${REACT_APP_API_URL}/me/organisation/requirements/${data.requirement_id}`,
+    'PUT',
+    headers,
+    JSON.stringify(data.body),
+  );
   return response;
 });
 
@@ -68,12 +96,37 @@ const deleteCompanyNote = createAsyncThunk('companies/deleteCompanyNote', async 
   return response;
 });
 
+const deleteCompanyRequirements = createAsyncThunk('companies/deleteCompanyRequirements', async (requirement_id) => {
+  const token = lockr.get('auth-token');
+  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+  const response = await fetchApi(
+    `${REACT_APP_API_URL}/me/organisation/requirements/${requirement_id}`,
+    'DELETE',
+    headers,
+  );
+  return response;
+});
+
 const visibilityCompanyNote = createAsyncThunk('companies/visibilityCompanyNote', async (note_id) => {
   const token = lockr.get('auth-token');
   const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
   const response = await fetchApi(`${REACT_APP_API_URL}/me/organisation/notes/${note_id}/visibility`, 'PATCH', headers);
   return response;
 });
+
+const visibilityCompanyRequirements = createAsyncThunk(
+  'companies/visibilityCompanyRequirements',
+  async (requirement_id) => {
+    const token = lockr.get('auth-token');
+    const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+    const response = await fetchApi(
+      `${REACT_APP_API_URL}/me/organisation/requirements/${requirement_id}/visibility`,
+      'PATCH',
+      headers,
+    );
+    return response;
+  },
+);
 
 const companiesSlice = createSlice({
   name: 'companies',
@@ -115,6 +168,10 @@ export const actions = {
   updateCompanyNote,
   deleteCompanyNote,
   visibilityCompanyNote,
+  addCompanyRequirement,
+  updateCompanyRequirement,
+  visibilityCompanyRequirements,
+  deleteCompanyRequirements,
 };
 
 export default companiesSlice.reducer;

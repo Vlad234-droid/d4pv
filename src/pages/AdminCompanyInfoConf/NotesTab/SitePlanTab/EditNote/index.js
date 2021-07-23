@@ -5,7 +5,7 @@ import { Editor } from 'react-draft-wysiwyg';
 import { EditorState } from 'draft-js';
 import { CloseIconSVG } from '../../../../../components/icons';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { actions } from '../../../../../core/notes/notesSlice';
+import { actions } from '../../../../../core/companies/companiesSlice';
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
 import bold from '../../../../../components/icons/icons-type-bold@3x.png';
@@ -13,17 +13,24 @@ import underline from '../../../../../components/icons/icons-type-underline@3x.p
 import { convertToRaw, ContentState } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
+import { useParams } from 'react-router-dom';
 
 const EditNote = ({ setEditModal, editModal, toEdit }) => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
-  const { changeTextNote, changeReferenceNote, changeRequestedNote } = bindActionCreators(actions, dispatch);
+  const { updateCompanyNote, getCompanieData } = bindActionCreators(actions, dispatch);
+  const { id } = useParams();
+
   const onFinish = ({ reference, requested, wysiwyg }) => {
     let currentContentAsHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
-    changeTextNote({ key: toEdit.key, note: toEdit.note, text: currentContentAsHTML });
-    if (reference !== undefined) changeReferenceNote({ key: toEdit.key, note: toEdit.note, text: reference });
-    if (requested !== undefined) changeRequestedNote({ key: toEdit.key, note: toEdit.note, text: requested });
-    form.resetFields();
+
+    const body = {
+      text: currentContentAsHTML,
+      reference: reference,
+      requested_by: requested,
+    };
+
+    updateCompanyNote({ note_id: toEdit.id, body }).then(() => getCompanieData(id));
     setEditModal(() => false);
   };
 
@@ -62,7 +69,16 @@ const EditNote = ({ setEditModal, editModal, toEdit }) => {
 
       {/* // ????//////?????* */}
 
-      <Form name="form_edit_note" layout="vertical" form={form} requiredMark={true} onFinish={onFinish}>
+      <Form
+        name="form_edit_note"
+        layout="vertical"
+        form={form}
+        requiredMark={true}
+        onFinish={onFinish}
+        initialValues={{
+          requested: toEdit.requested_by,
+          reference: toEdit.reference,
+        }}>
         <Col span={24}>
           <Form.Item name="wysiwyg">
             <Editor
@@ -86,12 +102,28 @@ const EditNote = ({ setEditModal, editModal, toEdit }) => {
 
         <Row gutter={24}>
           <Col span={12}>
-            <Form.Item label="Requested By" name="requested">
+            <Form.Item
+              label="Requested By"
+              name="requested"
+              rules={[
+                {
+                  required: true,
+                  message: 'Requested By is required!',
+                },
+              ]}>
               <Input placeholder="" type="text" />
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item label="Reference" name="reference">
+            <Form.Item
+              label="Reference"
+              name="reference"
+              rules={[
+                {
+                  required: true,
+                  message: 'Reference By is required!',
+                },
+              ]}>
               <Input placeholder="" type="text" />
             </Form.Item>
           </Col>
