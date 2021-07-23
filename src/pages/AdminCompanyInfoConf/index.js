@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowLeftBigSVG, EditCompanySVG } from '../../components/icons';
 import './style.scss';
 import LayoutConfiguration from '../../components/LayoutConfiguration/Layout';
-import { Skeleton, Tabs } from 'antd';
+import { Tabs, Skeleton } from 'antd';
 import GeneralInformationTab from './GeneralInformationTab';
 import PreferencesTab from './PreferencesTab';
 import NotesTab from './NotesTab';
@@ -10,7 +10,8 @@ import RequirementsTab from './RequirementsTab';
 import { bindActionCreators } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../core/companies/companiesSlice';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const { TabPane } = Tabs;
 
