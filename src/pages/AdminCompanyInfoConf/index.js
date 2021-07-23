@@ -3,7 +3,7 @@ import { ArrowLeftBigSVG, EditCompanySVG } from '../../components/icons';
 import './style.scss';
 import LayoutConfiguration from '../../components/LayoutConfiguration/Layout';
 import { Link } from 'react-router-dom';
-import { Tabs } from 'antd';
+import { Tabs, Button } from 'antd';
 import GeneralInformationTab from './GeneralInformationTab';
 import PreferencesTab from './PreferencesTab';
 import NotesTab from './NotesTab';
@@ -91,11 +91,9 @@ const AdminCompanyInfoConf = () => {
         )}
 
         <div className="head_block">
-          <Link to="/admin-companies-conf">
-            <div className="arrow_left">
-              <ArrowLeftBigSVG />
-            </div>
-          </Link>
+          <div className="arrow_left">
+            <ArrowLeftBigSVG />
+          </div>
 
           <div>
             <h2>{!editMode ? dataSource !== null && dataSource.name : 'Edit Contractor Company'}</h2>

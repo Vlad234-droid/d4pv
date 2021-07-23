@@ -13,6 +13,7 @@ export const store = configureStore({
     account,
     profile,
     configuration,
+    notes,
   },
   devTools: true,
 });

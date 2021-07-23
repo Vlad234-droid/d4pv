@@ -7,12 +7,15 @@ import { useDispatch } from 'react-redux';
 import { actions } from '../../../core/configurations/configurationsSlice';
 
 import './style.scss';
-const TableOfUsers = ({ setShowDeleteUser }) => {
+const TableOfUsers = ({ searchValue, setShowDeleteUser }) => {
   const dispatch = useDispatch();
   const { getMembersOfOrganisation } = bindActionCreators(actions, dispatch);
   const [showEditUser, setShowEditUser] = useState(false);
   const [currRecordRow, setCurrRecordRow] = useState(null);
   const [tableLoading, setTableLoading] = useState(false);
+  const [dataSource, setDataSource] = useState(null);
+  const [copyOfDataSource, setCopyOfDataSource] = useState(null);
+
   // const [dataSource, setDataSource] = useState([
   //   {
   //     key: 4,
@@ -32,9 +35,6 @@ const TableOfUsers = ({ setShowDeleteUser }) => {
   //     onCheck: true,
   //   },
   // ]);
-
-  console.log('currRecordRow', currRecordRow);
-  const [dataSource, setDataSource] = useState(null);
 
   const [columns, setColumns] = useState([
     {
@@ -121,7 +121,26 @@ const TableOfUsers = ({ setShowDeleteUser }) => {
       });
     });
     setDataSource(() => newData);
+    setCopyOfDataSource(() => newData);
   };
+
+  useEffect(() => {
+    if (dataSource !== null) {
+      if (searchValue.length > 2) {
+        const newData = [];
+        dataSource.forEach((item) => {
+          if (item.first_name.props.children[1].props.children.toLowerCase().includes(searchValue.toLowerCase())) {
+            newData.push(item);
+            setDataSource(() => newData);
+          }
+        });
+      } else if (searchValue.length === 0 && searchValue.trim() === '') {
+        if (copyOfDataSource !== null) {
+          setDataSource(() => copyOfDataSource);
+        }
+      }
+    }
+  }, [searchValue]);
 
   return (
     <>
