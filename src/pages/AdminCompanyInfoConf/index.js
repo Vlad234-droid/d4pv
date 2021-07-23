@@ -92,58 +92,58 @@ const AdminCompanyInfoConf = () => {
         </>
       ) : (
         <>
-          <div className="container_edit__company">
-            {!editMode && activeTabsKey === '1' && (
-              <div className="switch_mode" onClick={() => setEditMode(() => true)}>
-                <div>
-                  <EditCompanySVG />
-                </div>
-              </div>
-            )}
+      <div className="container_edit__company">
+        {!editMode && activeTabsKey === '1' && (
+          <div className="switch_mode" onClick={() => setEditMode(() => true)}>
+            <div>
+              <EditCompanySVG />
+            </div>
+          </div>
+        )}
 
-            <div className="head_block">
+        <div className="head_block">
               {editMode ? (
                 <button
                   onClick={() => {
                     setEditMode(false);
                   }}>
-                  <div className="arrow_left">
-                    <ArrowLeftBigSVG />
-                  </div>
+          <div className="arrow_left">
+            <ArrowLeftBigSVG />
+          </div>
                 </button>
               ) : (
-                <Link to="/admin-companies-conf">
-                  <div className="arrow_left">
-                    <ArrowLeftBigSVG />
-                  </div>
-                </Link>
+          <Link to="/admin-companies-conf">
+            <div className="arrow_left">
+              <ArrowLeftBigSVG />
+            </div>
+          </Link>
               )}
 
-              <div>
-                <h2>{!editMode ? dataSource !== null && dataSource.name : 'Edit Contractor Company'}</h2>
-              </div>
-            </div>
-            {!editMode && (
-              <div className="tabs_companies">
-                <Tabs activetabskey={activeTabsKey} onChange={callback} defaultActiveKey={activeTabsKey}>
-                  {config.map((item) => (
-                    <TabPane tab={item.tab} key={item.key} className={item.clasname}>
-                      {item.component}
-                    </TabPane>
-                  ))}
-                </Tabs>
-              </div>
-            )}
+          <div>
+            <h2>{!editMode ? dataSource !== null && dataSource.name : 'Edit Contractor Company'}</h2>
           </div>
+        </div>
+        {!editMode && (
+          <div className="tabs_companies">
+            <Tabs activetabskey={activeTabsKey} onChange={callback} defaultActiveKey={activeTabsKey}>
+              {config.map((item) => (
+                <TabPane tab={item.tab} key={item.key} className={item.clasname}>
+                  {item.component}
+                </TabPane>
+              ))}
+            </Tabs>
+          </div>
+        )}
+      </div>
 
-          {dataSource !== null && editMode && (
-            <GeneralInformationTab
-              editMode={editMode}
-              setEditMode={setEditMode}
-              dataSource={dataSource}
-              setDataSource={setDataSource}
-            />
-          )}
+      {dataSource !== null && editMode && (
+        <GeneralInformationTab
+          editMode={editMode}
+          setEditMode={setEditMode}
+          dataSource={dataSource}
+          setDataSource={setDataSource}
+        />
+      )}
         </>
       )}
     </LayoutConfiguration>

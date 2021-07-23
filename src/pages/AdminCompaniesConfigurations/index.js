@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { Form, Button, Input, Row, Col } from 'antd';
+import React, { useState } from 'react';
+import { Button, Input, Row, Col } from 'antd';
 import { SearchSVG, CloseSVG } from '../../components/icons';
 import ModalDeleteCompany from './ModalDeleteCompany';
 import TableOfCompanies from './TableOfCompanies';
@@ -10,9 +10,8 @@ import './style.scss';
 const AdminCompaniesConfigurations = () => {
   const [searchValue, setSearchValue] = useState('');
   const [showDeleteCompany, setShowDeleteCompany] = useState(false);
-  const [serchToggle, setSearchToggle] = useState(false);
+  const [serchToggle, setSearchToggle] = useState(null);
   const history = useHistory();
-  const searchInput = useRef();
 
   const SuffixSearch = <div className="suffix-search">{!serchToggle ? <SearchSVG /> : <CloseSVG />}</div>;
 
@@ -39,11 +38,12 @@ const AdminCompaniesConfigurations = () => {
               <div className="input_link">
                 {SuffixSearch}
                 <Input
-                  ref={searchInput}
                   placeholder="Search"
                   value={searchValue}
                   onChange={(e) => {
-                    setSearchValue(e.target.value);
+                    let value = e.target.value.replace(/\s/g, '');
+
+                    setSearchValue(value);
                   }}
                   onBlur={() => {
                     setSearchToggle(() => false);
@@ -57,7 +57,7 @@ const AdminCompaniesConfigurations = () => {
           </Row>
         </div>
         <div>
-          <TableOfCompanies setShowDeleteCompany={setShowDeleteCompany} />
+          <TableOfCompanies setShowDeleteCompany={setShowDeleteCompany} searchValue={searchValue} />
         </div>
       </div>
     </LayoutConfiguration>

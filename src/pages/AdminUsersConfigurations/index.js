@@ -12,7 +12,7 @@ const AdminUsersConfigurations = () => {
   const [searchValue, setSearchValue] = useState('');
   const [showAddUser, setShowAddUser] = useState(false);
   const [showDeleteUser, setShowDeleteUser] = useState(false);
-  const [serchToggle, setSearchToggle] = useState(false);
+  const [serchToggle, setSearchToggle] = useState(null);
 
   const onFinish = (values) => {
     console.log('values', values);
@@ -46,7 +46,9 @@ const AdminUsersConfigurations = () => {
                   placeholder="Search"
                   value={searchValue}
                   onChange={(e) => {
-                    setSearchValue(e.target.value);
+                    let value = e.target.value.replace(/\s/g, '');
+
+                    setSearchValue(value);
                   }}
                   onBlur={() => {
                     setSearchToggle(() => false);
@@ -60,7 +62,7 @@ const AdminUsersConfigurations = () => {
           </Row>
         </div>
         <div>
-          <TableOfUsers setShowDeleteUser={setShowDeleteUser} />
+          <TableOfUsers setShowDeleteUser={setShowDeleteUser} searchValue={searchValue} />
         </div>
       </div>
     </LayoutConfiguration>
