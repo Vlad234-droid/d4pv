@@ -28,14 +28,7 @@ const AdminCompanyInfoConf = () => {
   const dataSource = useSelector((state) => state.companies.companieData);
 
   useEffect(() => {
-    console.log('dataSource', dataSource);
-
     getCompanieData(id);
-    // getConfCompanies().then((data) => {
-    //   const dataFiltered = data.payload.filter((item) => item.id === id);
-    //   setPageInfo(dataFiltered[0]);
-    //   setTableLoading(() => false);
-    // });
   }, [id]);
 
   const config = [

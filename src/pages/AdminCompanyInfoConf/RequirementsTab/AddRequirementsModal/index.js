@@ -4,7 +4,7 @@ import { Editor } from 'react-draft-wysiwyg';
 import { EditorState } from 'draft-js';
 import { CloseIconSVG } from '../../../../components/icons';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { actions } from '../../../../core/requirements/requirementsSlice';
+import { actions } from '../../../../core/companies/companiesSlice';
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
 import bold from '../../../../components/icons/icons-type-bold@3x.png';
@@ -14,17 +14,30 @@ import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import './style.scss';
 import iconIMG from '../../../../components/icons/icon-img.png';
+import { useParams } from 'react-router-dom';
 
 const AddRequirementsModal = ({ fileUrl, setFileUrl, keyTab, addRequirements, setAddRequirements }) => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
-  const { addRequirement } = bindActionCreators(actions, dispatch);
+  const { addCompanyRequirement, getCompanieData } = bindActionCreators(actions, dispatch);
   const [editorState, setEditorState] = useState();
+  const { id } = useParams();
 
-  const onFinish = ({ reference, requested }) => {
+  const onFinish = ({ reference }) => {
+    const getProperGroup = () => {
+      if (keyTab === 0) return 'SitePlan';
+      if (keyTab === 1) return 'AttachmentPlan';
+      if (keyTab === 2) return 'LineDiagram';
+      if (keyTab === 3) return 'AssemblyDetails';
+    };
     let currentContentAsHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
-    console.log('currentContentAsHTML', currentContentAsHTML);
-    addRequirement({ keyTab, text: currentContentAsHTML, reference, requested });
+    const body = {
+      text: currentContentAsHTML,
+      reference,
+      group: getProperGroup(),
+    };
+    addCompanyRequirement({ company_id: id, body }).then(() => getCompanieData(id));
+
     form.resetFields();
     setAddRequirements(() => false);
   };
@@ -120,7 +133,15 @@ const AddRequirementsModal = ({ fileUrl, setFileUrl, keyTab, addRequirements, se
 
         <Row gutter={24}>
           <Col span={12}>
-            <Form.Item label="Requested By" name="requested">
+            <Form.Item
+              label="Reference"
+              name="reference"
+              rules={[
+                {
+                  required: true,
+                  message: 'Reference By is required!',
+                },
+              ]}>
               <Input placeholder="" type="text" />
             </Form.Item>
           </Col>

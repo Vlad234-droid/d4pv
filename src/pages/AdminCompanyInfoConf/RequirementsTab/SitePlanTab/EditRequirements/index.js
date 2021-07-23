@@ -5,7 +5,8 @@ import { Editor } from 'react-draft-wysiwyg';
 import { EditorState } from 'draft-js';
 import { CloseIconSVG } from '../../../../../components/icons';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { actions } from '../../../../../core/requirements/requirementsSlice';
+import { actions } from '../../../../../core/companies/companiesSlice';
+
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
 import bold from '../../../../../components/icons/icons-type-bold@3x.png';
@@ -13,16 +14,24 @@ import underline from '../../../../../components/icons/icons-type-underline@3x.p
 import { convertToRaw, ContentState } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
+import { useParams } from 'react-router-dom';
 
 const EditRequirements = ({ setEditModal, editModal, toEdit }) => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
-  const { changeTextRequirement, changeReferenceRequirement } = bindActionCreators(actions, dispatch);
+  const { id } = useParams();
+
+  const { updateCompanyRequirement, getCompanieData } = bindActionCreators(actions, dispatch);
+
   const onFinish = ({ reference, wysiwyg }) => {
     let currentContentAsHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
-    changeTextRequirement({ key: toEdit.key, note: toEdit.note, text: currentContentAsHTML });
-    if (reference !== undefined) changeReferenceRequirement({ key: toEdit.key, note: toEdit.note, text: reference });
-    form.resetFields();
+
+    const body = {
+      text: currentContentAsHTML,
+      reference: reference,
+    };
+
+    updateCompanyRequirement({ requirement_id: toEdit.id, body }).then(() => getCompanieData(id));
     setEditModal(() => false);
   };
 
@@ -61,7 +70,16 @@ const EditRequirements = ({ setEditModal, editModal, toEdit }) => {
 
       {/* // ????//////?????* */}
 
-      <Form name="form_edit_requirements" layout="vertical" form={form} requiredMark={true} onFinish={onFinish}>
+      <Form
+        name="form_edit_requirements"
+        layout="vertical"
+        form={form}
+        requiredMark={true}
+        onFinish={onFinish}
+        initialValues={{
+          requested: toEdit.requested_by,
+          reference: toEdit.reference,
+        }}>
         <Col span={24}>
           <Form.Item name="wysiwyg">
             <Editor
@@ -88,7 +106,15 @@ const EditRequirements = ({ setEditModal, editModal, toEdit }) => {
 
         <Row gutter={24}>
           <Col span={12}>
-            <Form.Item label="Reference" name="reference">
+            <Form.Item
+              label="Reference"
+              name="reference"
+              rules={[
+                {
+                  required: true,
+                  message: 'Reference By is required!',
+                },
+              ]}>
               <Input placeholder="" type="text" />
             </Form.Item>
           </Col>
