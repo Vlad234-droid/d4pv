@@ -14,9 +14,6 @@ const AdminCompaniesConfigurations = () => {
   const history = useHistory();
   const searchInput = useRef();
 
-  let timeout;
-  const scooterok = 'scooterok';
-
   const SuffixSearch = <div className="suffix-search">{!serchToggle ? <SearchSVG /> : <CloseSVG />}</div>;
 
   return (

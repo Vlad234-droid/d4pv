@@ -35,6 +35,17 @@ p {
   font-style: normal;
 }
 
+button:not(.ant-btn) {
+  background: none;
+  border: none;
+  outline: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
 .ant-btn {
   display: inline-flex;
   justify-content: center;
