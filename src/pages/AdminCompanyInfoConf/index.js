@@ -8,7 +8,7 @@ import PreferencesTab from './PreferencesTab';
 import NotesTab from './NotesTab';
 import RequirementsTab from './RequirementsTab';
 import { bindActionCreators } from 'redux';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../core/companies/companiesSlice';
 import { Link, useParams } from 'react-router-dom';
 
@@ -21,15 +21,15 @@ const AdminCompanyInfoConf = () => {
   const dispatch = useDispatch();
   const { getCompanieData } = bindActionCreators(actions, dispatch);
   const { id } = useParams();
-  const [dataSource, setDataSource] = useState(null); /// useSelect
+  // const [dataSource, setDataSource] = useState(null);
   const [tableLoading, setTableLoading] = useState(false);
 
+  const dataSource = useSelector((state) => state.companies.companieData);
+
   useEffect(() => {
-    setTableLoading(() => true);
-    getCompanieData(id).then((data) => {
-      setPageInfo(data.payload);
-      setTableLoading(() => false);
-    });
+    console.log('dataSource', dataSource);
+
+    getCompanieData(id);
     // getConfCompanies().then((data) => {
     //   const dataFiltered = data.payload.filter((item) => item.id === id);
     //   setPageInfo(dataFiltered[0]);
@@ -37,32 +37,13 @@ const AdminCompanyInfoConf = () => {
     // });
   }, [id]);
 
-  const setPageInfo = (data) => {
-    const newData = {
-      id: data.id,
-      logo: undefined,
-      name: data.name,
-      phone: data.phone,
-      pm_name: data.pm_name,
-      pm_phone: data.pm_phone,
-      license: data.license,
-      address: `${data.address.state} ${data.address.city} ${data.address.address_line1} ${data.address.zip}`,
-    };
-    setDataSource(() => newData);
-  };
-
   const config = [
     {
       tab: 'General Information',
       key: '1',
       clasname: 'general_info tab',
       component: dataSource !== null && (
-        <GeneralInformationTab
-          editMode={editMode}
-          setEditMode={setEditMode}
-          dataSource={dataSource}
-          setDataSource={setDataSource}
-        />
+        <GeneralInformationTab editMode={editMode} setEditMode={setEditMode} dataSource={dataSource} />
       ),
     },
     {
@@ -139,12 +120,7 @@ const AdminCompanyInfoConf = () => {
           </div>
 
           {dataSource !== null && editMode && (
-            <GeneralInformationTab
-              editMode={editMode}
-              setEditMode={setEditMode}
-              dataSource={dataSource}
-              setDataSource={setDataSource}
-            />
+            <GeneralInformationTab editMode={editMode} setEditMode={setEditMode} dataSource={dataSource} />
           )}
         </>
       )}

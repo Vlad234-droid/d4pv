@@ -4,7 +4,7 @@ import { Form, Input, Button, Row, Col, Select } from 'antd';
 import './style.scss';
 import UploadCompanyLogo from '../UploadCompanyLogo';
 
-const GeneralInformationTab = ({ editMode, dataSource, setDataSource, setEditMode }) => {
+const GeneralInformationTab = ({ editMode, dataSource, setEditMode }) => {
   const [form] = Form.useForm();
   const [logoUrl, setLogoUrl] = useState(null);
   const [editCompanyLogo, setEditCompanyLogo] = useState(false);
@@ -13,9 +13,9 @@ const GeneralInformationTab = ({ editMode, dataSource, setDataSource, setEditMod
 
   const onFinishHandler = (values) => {
     console.log('values', values);
-    setDataSource(() => ({
-      ...values,
-    }));
+    // setDataSource(() => ({
+    //   ...values,
+    // }));
     form.resetFields();
     setEditMode(() => false);
     setEditCompanyLogo(() => false);
@@ -47,6 +47,20 @@ const GeneralInformationTab = ({ editMode, dataSource, setDataSource, setEditMod
       className={`form_info_company info ${editMode && 'editMode'}`}
       form={form}
       layout="vertical"
+      initialValues={{
+        name: dataSource.name,
+        phone: dataSource.phone,
+        license: dataSource.license,
+        pm_name: dataSource.pm_name,
+        pm_phone: dataSource.pm_phone,
+        address: {
+          city: dataSource.address.city,
+          state: dataSource.address.state,
+          zip: dataSource.address.zip,
+          address_line1: dataSource.address.address_line1,
+          address_line2: dataSource.address.address_line2,
+        },
+      }}
       onFinish={onFinishHandler}>
       <Form.Item label="Logo" name="logo">
         <UploadCompanyLogo
@@ -120,7 +134,10 @@ const GeneralInformationTab = ({ editMode, dataSource, setDataSource, setEditMod
                 </h3>
               </div>
             ) : (
-              <h3>{dataSource.address}</h3>
+              <h3>
+                {dataSource.address.state} {dataSource.address.city} {dataSource.address.address_line1}
+                {dataSource.address.zip}
+              </h3>
             )}
           </Form.Item>
         </Col>
