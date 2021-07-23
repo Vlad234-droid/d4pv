@@ -83,7 +83,6 @@ export const actions = {
   getMembersOfOrganisation,
   getConfCompanies,
   createCompany,
-  getInfoOfCompanyById,
 };
 
 export default configurationSlice.reducer;
