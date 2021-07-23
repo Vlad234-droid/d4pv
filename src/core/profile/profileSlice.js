@@ -33,11 +33,30 @@ const updateProfile = createAsyncThunk('profile/updateProfile', async (body) => 
   }
 });
 
-const updateImage = createAsyncThunk('profile/updateImage', async (body) => {
+const uploadProfileImage = createAsyncThunk('profile/uploadProfileImage', async (file) => {
+  const formData = new FormData();
+  console.log('file', file);
+
+  formData.append('file', file);
+
+  const token = lockr.get('auth-token');
+  const headers = {
+    Accept: 'application/json',
+    Authorization: `bearer ${token}`,
+  };
+  try {
+    const response = await fetchApi(`${REACT_APP_API_URL}/me/image`, 'PATCH', headers, formData);
+    return response;
+  } catch (err) {
+    return Promise.reject(err);
+  }
+});
+
+const deleteProfileImage = createAsyncThunk('profile/deleteProfileImage', async () => {
   const token = lockr.get('auth-token');
   const headers = { 'Content-Type': 'application/json', Accept: 'application/json', Authorization: `bearer ${token}` };
   try {
-    const response = await fetchApi(`${REACT_APP_API_URL}/me/image`, 'PATCH', headers, JSON.stringify(body));
+    const response = await fetchApi(`${REACT_APP_API_URL}/me/image`, 'DELETE', headers, null);
     return response;
   } catch (err) {
     return Promise.reject(err);
@@ -95,7 +114,8 @@ export const actions = {
   ...profileSlice.actions,
   getProfile,
   updateProfile,
-  updateImage,
+  uploadProfileImage,
+  deleteProfileImage,
 };
 
 export default profileSlice.reducer;

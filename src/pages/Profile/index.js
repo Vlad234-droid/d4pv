@@ -28,8 +28,6 @@ const AdminProfile = () => {
   const [valueSecondPass, setValueSecondPass] = useState('');
   const [valueThirdPass, setValueThirdPass] = useState('');
 
-  const [logoUrl, setLogoUrl] = useState(null);
-
   const [editCompanyLogo, setEditCompanyLogo] = useState(false);
 
   const { getProfile, updateProfile, update, updateOrganisation } = bindActionCreators(actions, dispatch);
@@ -138,8 +136,6 @@ const AdminProfile = () => {
                           <Form.Item name="logo">
                             <UploadImg
                               form={formProfileInfo}
-                              logoUrl={logoUrl}
-                              setLogoUrl={setLogoUrl}
                               editCompanyLogo={editCompanyLogo}
                               setEditCompanyLogo={setEditCompanyLogo}
                             />
