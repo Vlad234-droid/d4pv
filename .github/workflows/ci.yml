@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [ '*' ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Fetch codebase'
+        uses: actions/checkout@v2
+      - name: 'Build production ready application'
+        uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+      - run: npm install
+      - run: npm run build
+
+      - name: 'Store build'
+        uses: actions/upload-artifact@v2
+        with:
+          name: production-build
+          path: build/
+
+  deploy_dev:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: production-build
+      - name: push code to server
+        run: |
+          eval $(ssh-agent -s)
+          echo "${{ secrets.DEVDEPLOYMENTKEY }}" | tr -d '\r' | ssh-add -
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          ssh-keyscan ${{ secrets.DEVDEPLOYMENTHOST }} >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+          rsync -a --chmod=D2775,F664 --delete "$GITHUB_WORKSPACE"/ ${{ secrets.DEVDEPLOYMENTUSER }}@${{ secrets.DEVDEPLOYMENTHOST }}:${{ DEV_DEPLOYMENT_PATH }}
