@@ -15,7 +15,42 @@ const getCompanieData = createAsyncThunk('companies/getCompanieData', async (com
   return response;
 });
 
-const accountSlice = createSlice({
+const addCompanyNote = createAsyncThunk('companies/addCompanyNote', async (company_id, data) => {
+  const token = lockr.get('auth-token');
+  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+  const body = JSON.stringify(data);
+  const response = await fetchApi(
+    `${REACT_APP_API_URL}/me/organisation/companies/${company_id}/notes`,
+    'POST',
+    headers,
+    body,
+  );
+  return response;
+});
+
+const updateCompanyNote = createAsyncThunk('companies/updateCompanyNote', async (note_id, data) => {
+  const token = lockr.get('auth-token');
+  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+  const body = JSON.stringify(data);
+  const response = await fetchApi(`${REACT_APP_API_URL}/me/organisation/notes/${note_id}`, 'PUT', headers, body);
+  return response;
+});
+
+const deleteCompanyNote = createAsyncThunk('companies/deleteCompanyNote', async (note_id) => {
+  const token = lockr.get('auth-token');
+  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+  const response = await fetchApi(`${REACT_APP_API_URL}/me/organisation/notes/${note_id}`, 'DELETE', headers);
+  return response;
+});
+
+const visibilityCompanyNote = createAsyncThunk('companies/visibilityCompanyNote', async (note_id) => {
+  const token = lockr.get('auth-token');
+  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+  const response = await fetchApi(`${REACT_APP_API_URL}/me/organisation/notes/${note_id}/visibility`, 'PATCH', headers);
+  return response;
+});
+
+const companiesSlice = createSlice({
   name: 'companies',
   initialState,
   reducers: {},
@@ -40,13 +75,17 @@ const accountSlice = createSlice({
   },
 });
 
-const {} = accountSlice.actions;
+const {} = companiesSlice.actions;
 
 export const actions = {
-  ...accountSlice.actions,
+  ...companiesSlice.actions,
   getCompanieData,
+  addCompanyNote,
+  updateCompanyNote,
+  deleteCompanyNote,
+  visibilityCompanyNote,
 };
 
-export default accountSlice.reducer;
+export default companiesSlice.reducer;
 
 // export const selectPostById = (state, postId) => state.posts.posts.find((post) => post.id === postId);
