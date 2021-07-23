@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './style.scss';
-import { Form, Input, Button, Row, Col } from 'antd';
-import { EditCompanySVG } from '../../../components/icons';
+import { Form, Select, Button, Row, Col, Input } from 'antd';
+import { EditCompanySVG, ArrowDownSelectSVG } from '../../../components/icons';
+
 import { useEffect } from 'react';
 
 import { preferences } from './config';
@@ -13,6 +14,12 @@ const PreferencesTab = () => {
   const [modePVSystem, setModePVSystem] = useState(false);
   const [testArray, setTestArray] = useState({});
   const [time, setTime] = useState('');
+
+  const suffixIcon = (
+    <div style={{ zIndex: '-2' }}>
+      <ArrowDownSelectSVG />
+    </div>
+  );
 
   useEffect(() => {
     const now = Date.now();
@@ -88,7 +95,19 @@ const PreferencesTab = () => {
               {item.params.map((param) => (
                 <Col span={12} key={param.name}>
                   <Form.Item label={param.title} name={param.name}>
-                    {modeProperty ? <Input placeholder="" type="text" /> : <h3>{dashCheck(testArray.ahj)}</h3>}
+                    {modeProperty ? (
+                      param.options ? (
+                        <Select placeholder={param.placeholder} suffixIcon={suffixIcon}>
+                          {param.options?.map((option) => (
+                            <Select.Option value={option.value}>{option.label}</Select.Option>
+                          ))}
+                        </Select>
+                      ) : (
+                        <Input placeholder={param.placeholder} type="number" />
+                      )
+                    ) : (
+                      <h3>{dashCheck(testArray.ahj)}</h3>
+                    )}
                   </Form.Item>
                 </Col>
               ))}

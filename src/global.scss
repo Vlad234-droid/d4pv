@@ -296,6 +296,20 @@ button:not(.ant-btn) {
     }
   }
 }
+.ant-select-item {
+  min-height: 42px;
+  &.ant-select-item-option-selected {
+    background: rgba(178, 190, 202, 0.25);
+    font-weight: bold;
+  }
+  &:hover {
+    background: rgba(255, 180, 10, 0.1);
+  }
+  .ant-select-item-option-content {
+    align-items: center;
+    display: flex;
+  }
+}
 
 .ant-input-affix-wrapper {
   padding: 0px 11px;

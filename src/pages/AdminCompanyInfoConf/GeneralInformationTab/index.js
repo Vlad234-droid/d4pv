@@ -86,7 +86,7 @@ const GeneralInformationTab = ({ editMode, dataSource, setEditMode }) => {
         pm_phone: dataSource.pm_phone,
         city: dataSource.address.city,
         state: dataSource.address.state,
-        zip: dataSource.address.zip,
+        zip_code: dataSource.address.zip_code,
         address_line1: dataSource.address.address_line1,
         address_line2: dataSource.address.address_line2,
       }}
