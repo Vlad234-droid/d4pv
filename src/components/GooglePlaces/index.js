@@ -88,6 +88,7 @@ const GooglePlaces = ({ extraAddress, setExtraAddress, onGenderChange, form }) =
                   // }}
                   selectProps={{
                     onChange: onSelect,
+                    menuPlacement: 'top',
                   }}
                 />
               </div>

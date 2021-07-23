@@ -18,7 +18,6 @@
           color: #b2beca;
           text-transform: uppercase;
           height: 33px;
-
           &:first-child {
             white-space: nowrap;
             width: calc(100% - 90%);
@@ -46,7 +45,7 @@
         }
         &:hover {
           td {
-            background-color: unset;
+            background-color: rgba(255, 180, 10, 0.1);
           }
         }
         td {

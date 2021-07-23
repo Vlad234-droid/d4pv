@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CloseIconSVG } from '../../../components/icons';
 import { Modal, Form, Button, Col, Row } from 'antd';
+import { actions } from '../../../core/companies/companiesSlice';
 import './style.scss';
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-const ModalDeleteCompany = ({ showDeleteCompany, setShowDeleteCompany }) => {
+const ModalDeleteCompany = ({ showDeleteCompany, setShowDeleteCompany, deleteCompanyId, setDeleteCompanyId }) => {
+  const [loading, setloading] = useState(false);
   const [form] = Form.useForm();
-  const onFinish = (values) => {
-    console.log('values', values);
+  const dispatch = useDispatch();
+  const { deleteCompany } = bindActionCreators(actions, dispatch);
+
+  const onFinish = () => {
+    setloading(true);
+    deleteCompany(deleteCompanyId).then((data) => {
+      if (!data.error) {
+        setShowDeleteCompany(false);
+        setDeleteCompanyId(null);
+      }
+      setloading(false);
+    });
   };
   return (
     <Modal
@@ -37,7 +51,7 @@ const ModalDeleteCompany = ({ showDeleteCompany, setShowDeleteCompany }) => {
               </Button>
             </Col>
             <Col span={15}>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit" loading={loading}>
                 Confirm
               </Button>
             </Col>

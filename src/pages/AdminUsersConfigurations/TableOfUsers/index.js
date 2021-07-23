@@ -16,26 +16,6 @@ const TableOfUsers = ({ searchValue, setShowDeleteUser }) => {
   const [dataSource, setDataSource] = useState(null);
   const [copyOfDataSource, setCopyOfDataSource] = useState(null);
 
-  // const [dataSource, setDataSource] = useState([
-  //   {
-  //     key: 4,
-  //     name: (
-  //       <div className="wrapper_name">
-  //         <div className="wrapper_img">
-  //           <img
-  //             src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-  //             alt="Logo"
-  //           />
-  //         </div>
-  //         <h3 className="name">Victor</h3>
-  //       </div>
-  //     ),
-  //     role: 'admin',
-  //     email: 'victor@gmail.com',
-  //     onCheck: true,
-  //   },
-  // ]);
-
   const [columns, setColumns] = useState([
     {
       title: 'Name',
@@ -108,10 +88,14 @@ const TableOfUsers = ({ searchValue, setShowDeleteUser }) => {
         first_name: (
           <div className="wrapper_name">
             <div className="wrapper_img">
-              <img
-                src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-                alt="Logo"
-              />
+              {item.image?.length ? (
+                <img src={item.image} alt="Logo" />
+              ) : (
+                <div className="noimage sm">
+                  {item.first_name[0]}
+                  {item.last_name[0]}
+                </div>
+              )}
             </div>
             <h3 className="name">{item.first_name}</h3>
           </div>

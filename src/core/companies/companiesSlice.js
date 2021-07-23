@@ -15,6 +15,31 @@ const getCompanieData = createAsyncThunk('companies/getCompanieData', async (com
   return response;
 });
 
+const updateCompanieData = createAsyncThunk('companies/updateCompanieData', async (data) => {
+  const token = lockr.get('auth-token');
+  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+  const body = JSON.stringify(data.body);
+  const response = await fetchApi(
+    `${REACT_APP_API_URL}/me/organisation/companies/${data.company_id}`,
+    'PUT',
+    headers,
+    body,
+  );
+  return response;
+});
+
+const deleteCompany = createAsyncThunk('companies/deleteCompany', async (company_id) => {
+  const token = lockr.get('auth-token');
+  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+  const response = await fetchApi(
+    `${REACT_APP_API_URL}/me/organisation/companies/${company_id}`,
+    'DELETE',
+    headers,
+    null,
+  );
+  return response;
+});
+
 const addCompanyNote = createAsyncThunk('companies/addCompanyNote', async (company_id, data) => {
   const token = lockr.get('auth-token');
   const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
@@ -53,7 +78,11 @@ const visibilityCompanyNote = createAsyncThunk('companies/visibilityCompanyNote'
 const companiesSlice = createSlice({
   name: 'companies',
   initialState,
-  reducers: {},
+  reducers: {
+    clearCompanyData(state, { payload }) {
+      state.companieData = null;
+    },
+  },
   extraReducers: {
     [getCompanieData.fulfilled]: (state, action) => {
       state.companieData = action.payload;
@@ -80,6 +109,8 @@ const {} = companiesSlice.actions;
 export const actions = {
   ...companiesSlice.actions,
   getCompanieData,
+  updateCompanieData,
+  deleteCompany,
   addCompanyNote,
   updateCompanyNote,
   deleteCompanyNote,

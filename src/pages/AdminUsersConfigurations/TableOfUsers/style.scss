@@ -84,12 +84,17 @@
             opacity: 0;
           }
         }
+        &:nth-child(odd) {
+          .noimage {
+            background: #ffb40a;
+          }
+        }
         &:nth-child(even) {
           background-color: rgba(178, 190, 202, 0.1);
         }
         &:hover {
           td {
-            background-color: unset;
+            background-color: rgba(255, 180, 10, 0.1);
           }
         }
         td {

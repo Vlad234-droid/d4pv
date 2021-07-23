@@ -1,4 +1,46 @@
+.companie__details_adress {
+  margin-top: 26px;
+}
 .tabs_companies {
+  .row_address {
+    .places-autocomplete {
+      .css-1wy0on6 {
+        display: none;
+      }
+      .css-yk16xz-control {
+        border-color: rgba(178, 190, 202, 0.4);
+        transition: border-color 0.3s ease;
+      }
+      .css-1pahdxg-control {
+        border-color: #b2beca;
+        box-shadow: none;
+        transition: border-color 0.3s ease;
+      }
+    }
+    .extra {
+      span {
+        position: absolute;
+        cursor: pointer;
+        top: 0px;
+        right: 18px;
+        font-family: Montserrat;
+        font-size: 11px;
+        font-weight: 600;
+        font-stretch: normal;
+        font-style: normal;
+        letter-spacing: -0.1px;
+        color: #ffb40a;
+        z-index: 1;
+      }
+    }
+    .address_column {
+      margin-top: 13px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+  }
   .ant-tabs {
     .form_info_company {
       .after_line_block {
@@ -31,6 +73,10 @@
 .info_from_tab {
   .form_info_company.editMode.info {
     margin-top: 32px;
+    .ant-form-item-explain {
+      font-size: 12px;
+      position: static;
+    }
     .line {
       hr {
         margin-top: 11.5px;

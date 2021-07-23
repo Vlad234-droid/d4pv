@@ -11,6 +11,8 @@ const AdminCompaniesConfigurations = () => {
   const [searchValue, setSearchValue] = useState('');
   const [showDeleteCompany, setShowDeleteCompany] = useState(false);
   const [serchToggle, setSearchToggle] = useState(null);
+  const [deleteCompanyId, setDeleteCompanyId] = useState(null);
+
   const history = useHistory();
 
   const SuffixSearch = <div className="suffix-search">{!serchToggle ? <SearchSVG /> : <CloseSVG />}</div>;
@@ -18,7 +20,12 @@ const AdminCompaniesConfigurations = () => {
   return (
     <LayoutConfiguration>
       <div className="block_companies" id="block_companies">
-        <ModalDeleteCompany showDeleteCompany={showDeleteCompany} setShowDeleteCompany={setShowDeleteCompany} />
+        <ModalDeleteCompany
+          showDeleteCompany={showDeleteCompany}
+          setShowDeleteCompany={setShowDeleteCompany}
+          deleteCompanyId={deleteCompanyId}
+          setDeleteCompanyId={setDeleteCompanyId}
+        />
 
         <div className="title_users">
           <h2>Saved Companies</h2>
@@ -57,7 +64,11 @@ const AdminCompaniesConfigurations = () => {
           </Row>
         </div>
         <div>
-          <TableOfCompanies setShowDeleteCompany={setShowDeleteCompany} searchValue={searchValue} />
+          <TableOfCompanies
+            setShowDeleteCompany={setShowDeleteCompany}
+            searchValue={searchValue}
+            setDeleteCompanyId={setDeleteCompanyId}
+          />
         </div>
       </div>
     </LayoutConfiguration>

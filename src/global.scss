@@ -168,6 +168,46 @@ button:not(.ant-btn) {
   border-radius: 4px;
 }
 
+.places-autocomplete {
+  .css-1wy0on6 {
+    display: none;
+  }
+  .css-yk16xz-control {
+    border-color: rgba(178, 190, 202, 0.4);
+    transition: border-color 0.3s ease;
+  }
+  .css-1pahdxg-control {
+    border-color: #b2beca;
+    box-shadow: none;
+    transition: border-color 0.3s ease;
+  }
+}
+
+.noimage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Montserrat;
+  font-size: 13px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.38;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+  background-color: #ff6a29;
+  border-radius: 50%;
+  &.lg {
+    width: 40px;
+    height: 40px;
+  }
+  &.sm {
+    width: 32px;
+    height: 32px;
+  }
+}
+
 // .ant-input-affix-wrapper.ant-input-affix-wrapper-focused {
 //   span {
 //     svg {

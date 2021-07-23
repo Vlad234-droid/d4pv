@@ -21,7 +21,7 @@ const UploadImg = ({ form, editCompanyLogo, setEditCompanyLogo, setLogoUrl, logo
         <Dragger
           name="file"
           customRequest={customRequest}
-          accept=".jpg,.jpeg,.png"
+          accept="image/png, image/jpeg"
           className={`upload-img edit ${false ? 'loading' : ''} `}
           showUploadList={false}>
           <div className="img_logo__block">

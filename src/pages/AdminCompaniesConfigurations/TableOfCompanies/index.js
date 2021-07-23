@@ -7,7 +7,9 @@ import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
 import { actions } from '../../../core/configurations/configurationsSlice';
 
-const TableOfCompanies = ({ searchValue, setShowDeleteCompany }) => {
+import noLogo from '../../../assets/img/no-comany-logo.svg';
+
+const TableOfCompanies = ({ searchValue, setShowDeleteCompany, setDeleteCompanyId }) => {
   const dispatch = useDispatch();
   const { getConfCompanies } = bindActionCreators(actions, dispatch);
 
@@ -65,6 +67,7 @@ const TableOfCompanies = ({ searchValue, setShowDeleteCompany }) => {
                 console.log('record', record);
                 console.log('index', index);
                 setShowDeleteCompany(() => true);
+                setDeleteCompanyId(record.key);
               }}>
               <DeleteSVG />
             </div>
@@ -93,15 +96,12 @@ const TableOfCompanies = ({ searchValue, setShowDeleteCompany }) => {
         key: item.id,
         logo: (
           <div className="logo">
-            <img
-              src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-              alt="logo"
-            />
+            <img src={item.image?.length ? item.image : noLogo} alt="logo" />
           </div>
         ),
         company_name: item.name,
         company_phone: item.phone,
-        address: `${item.address.state} ${item.address.city} ${item.address.state} ${item.address.address_line1} ${item.address.zip}`,
+        address: `${item.address.address_line1} ${item.address.city} ${item.address.state} `,
       });
     });
     setDataSource(() => newData);

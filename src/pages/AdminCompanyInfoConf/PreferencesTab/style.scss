@@ -6,6 +6,8 @@
   }
   .information {
     position: relative;
+    border-bottom: 1px solid rgba(178, 190, 202, 0.4);
+    margin-bottom: 32px;
     .switch_mode {
       top: -7px;
     }
@@ -14,6 +16,7 @@
       letter-spacing: normal;
       margin-top: 10px;
       margin-bottom: 0px;
+      font-weight: bold;
     }
     p {
       opacity: 0.5;

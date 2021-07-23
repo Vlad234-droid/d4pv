@@ -88,10 +88,17 @@ const Header = () => {
               <Button>
                 <div className="photo_drop">
                   <div className="user_photo">
-                    <img
-                      src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-                      alt="photoOfUser"
-                    />
+                    {!data.image.length ? (
+                      <div className="noimage lg">
+                        {data.first_name[0]}
+                        {data.last_name[0]}
+                      </div>
+                    ) : (
+                      <img
+                        src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                        alt="photoOfUser"
+                      />
+                    )}
                   </div>
                   <div className="drop">
                     <ProfileDropDown />

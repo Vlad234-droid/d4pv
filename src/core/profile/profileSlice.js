@@ -33,6 +33,17 @@ const updateProfile = createAsyncThunk('profile/updateProfile', async (body) => 
   }
 });
 
+const updateImage = createAsyncThunk('profile/updateImage', async (body) => {
+  const token = lockr.get('auth-token');
+  const headers = { 'Content-Type': 'application/json', Accept: 'application/json', Authorization: `bearer ${token}` };
+  try {
+    const response = await fetchApi(`${REACT_APP_API_URL}/me/image`, 'PATCH', headers, JSON.stringify(body));
+    return response;
+  } catch (err) {
+    return Promise.reject(err);
+  }
+});
+
 const profileSlice = createSlice({
   name: 'profile',
   initialState,
@@ -84,6 +95,7 @@ export const actions = {
   ...profileSlice.actions,
   getProfile,
   updateProfile,
+  updateImage,
 };
 
 export default profileSlice.reducer;

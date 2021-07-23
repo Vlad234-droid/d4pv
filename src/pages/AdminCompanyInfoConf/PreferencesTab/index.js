@@ -4,6 +4,8 @@ import { Form, Input, Button, Row, Col } from 'antd';
 import { EditCompanySVG } from '../../../components/icons';
 import { useEffect } from 'react';
 
+import { preferences } from './config';
+
 const PreferencesTab = () => {
   const [formProperty] = Form.useForm();
   const [formPVSystem] = Form.useForm();
@@ -64,119 +66,53 @@ const PreferencesTab = () => {
 
   return (
     <div className="preferences_tab">
-      <div className="information">
-        {!modeProperty && (
-          <div className="switch_mode" onClick={() => setModePropert(() => true)}>
-            <div>
-              <EditCompanySVG />
-            </div>
-          </div>
-        )}
-        <h3>Property Information</h3>
-        <p className="updated">{time} by James Smith</p>
-        <Form
-          className={`form_property_information`}
-          name="form_property_information"
-          form={formProperty}
-          layout="vertical"
-          onFinish={onFinishProperty}>
-          <Row gutter={33}>
-            <Col>
-              <Form.Item label="AHJ" {...attr('ahj', formProperty)}>
-                {modeProperty ? <Input placeholder="" type="text" /> : <h3>{dashCheck(testArray.ahj)}</h3>}
-              </Form.Item>
-            </Col>
-            <Col>
-              <Form.Item label="Project’s Assesssor’s Parcel Number" {...attr('parcel_number', formProperty)}>
-                {modeProperty ? <Input placeholder="" type="text" /> : <h3>{dashCheck(testArray.parcel_number)}</h3>}
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Form.Item label="Utility" {...attr('utility', formProperty)}>
-                {modeProperty ? <Input placeholder="" type="text" /> : <h3>{dashCheck(testArray.utility)}</h3>}
-              </Form.Item>
-            </Col>
-          </Row>
-          {modeProperty && (
-            <Form.Item className="btns">
-              <Row gutter={16}>
-                <Col span={4}>
-                  <Button type="button" onClick={() => setModePropert(() => false)}>
-                    Cancel
-                  </Button>
-                </Col>
-                <Col span={6}>
-                  <Button type="primary" htmlType="submit">
-                    Save
-                  </Button>
-                </Col>
-              </Row>
-            </Form.Item>
-          )}
-        </Form>
-      </div>
-      <div className="line" style={{ marginTop: `${modeProperty ? '25.5px' : '0px'}` }}>
-        <hr />
-      </div>
+      <Form
+        className={`form_property_information`}
+        name="form_property_information"
+        form={formProperty}
+        layout="vertical"
+        onFinish={onFinishProperty}>
+        {preferences.map((item, index) => (
+          <div className="information" key={`information-${item.id}`}>
+            {index === 0 && !modeProperty && (
+              <div className="switch_mode" onClick={() => setModePropert(() => true)}>
+                <div>
+                  <EditCompanySVG />
+                </div>
+              </div>
+            )}
+            <h3>{item.title}</h3>
+            <p className="updated">????{time} by James Smith????</p>
 
-      <div className="information">
-        {!modePVSystem && (
-          <div className="switch_mode" onClick={() => setModePVSystem(() => true)}>
-            <div>
-              <EditCompanySVG />
-            </div>
+            <Row gutter={33}>
+              {item.params.map((param) => (
+                <Col span={12} key={param.name}>
+                  <Form.Item label={param.title} name={param.name}>
+                    {modeProperty ? <Input placeholder="" type="text" /> : <h3>{dashCheck(testArray.ahj)}</h3>}
+                  </Form.Item>
+                </Col>
+              ))}
+            </Row>
           </div>
+        ))}
+
+        {modeProperty && (
+          <Form.Item className="btns">
+            <Row gutter={16}>
+              <Col span={4}>
+                <Button type="button" onClick={() => setModePropert(() => false)}>
+                  Cancel
+                </Button>
+              </Col>
+              <Col span={6}>
+                <Button type="primary" htmlType="submit">
+                  Save
+                </Button>
+              </Col>
+            </Row>
+          </Form.Item>
         )}
-        <h3>PV System Parameters</h3>
-        <p className="updated">{time} by James Smith</p>
-        <Form
-          className={`form_system_information`}
-          form={formPVSystem}
-          layout="vertical"
-          onFinish={onFinishPVSystem}
-          name="form_system_information">
-          <Row gutter={33}>
-            <Col>
-              <Form.Item label="Grid Type" {...attr('grid_type', formPVSystem)}>
-                {modePVSystem ? <Input placeholder="" type="text" /> : <h3>{dashCheck(testArray.grid_type)}</h3>}
-              </Form.Item>
-            </Col>
-            <Col>
-              <Form.Item label="Project’s Assesssor’s Parcel Number" {...attr('service_voltage', formPVSystem)}>
-                {modePVSystem ? <Input placeholder="" type="text" /> : <h3>{dashCheck(testArray.service_voltage)}</h3>}
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Form.Item label="Grounding Electrode Conductor" {...attr('conductor', formPVSystem)}>
-                {modePVSystem ? <Input placeholder="" type="text" /> : <h3>{dashCheck(testArray.conductor)}</h3>}
-              </Form.Item>
-            </Col>
-          </Row>
-          {modePVSystem && (
-            <Form.Item className="btns">
-              <Row gutter={16}>
-                <Col span={4}>
-                  <Button type="button" onClick={() => setModePVSystem(() => false)}>
-                    Cancel
-                  </Button>
-                </Col>
-                <Col span={6}>
-                  <Button type="primary" htmlType="submit">
-                    Save
-                  </Button>
-                </Col>
-              </Row>
-            </Form.Item>
-          )}
-        </Form>
-      </div>
-      <div className="line" style={{ marginTop: `${modePVSystem ? '25.5px' : '0px'}` }}>
-        <hr />
-      </div>
+      </Form>
     </div>
   );
 };

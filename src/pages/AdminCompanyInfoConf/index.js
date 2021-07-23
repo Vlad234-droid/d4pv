@@ -20,7 +20,7 @@ const AdminCompanyInfoConf = () => {
   const [activeTabsKey, setActiveTabsKey] = useState('1');
   const callback = (key) => setActiveTabsKey(() => key);
   const dispatch = useDispatch();
-  const { getCompanieData } = bindActionCreators(actions, dispatch);
+  const { getCompanieData, clearCompanyData } = bindActionCreators(actions, dispatch);
   const { id } = useParams();
   // const [dataSource, setDataSource] = useState(null);
   const [tableLoading, setTableLoading] = useState(false);
@@ -28,8 +28,7 @@ const AdminCompanyInfoConf = () => {
   const dataSource = useSelector((state) => state.companies.companieData);
 
   useEffect(() => {
-    console.log('dataSource', dataSource);
-
+    clearCompanyData();
     getCompanieData(id);
     // getConfCompanies().then((data) => {
     //   const dataFiltered = data.payload.filter((item) => item.id === id);
