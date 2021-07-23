@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowLeftBigSVG, EditCompanySVG } from '../../components/icons';
 import './style.scss';
 import LayoutConfiguration from '../../components/LayoutConfiguration/Layout';
-import { Tabs } from 'antd';
+import { Skeleton, Tabs } from 'antd';
 import GeneralInformationTab from './GeneralInformationTab';
 import PreferencesTab from './PreferencesTab';
 import NotesTab from './NotesTab';
@@ -10,7 +10,7 @@ import RequirementsTab from './RequirementsTab';
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
 import { actions } from '../../core/companies/companiesSlice';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const { TabPane } = Tabs;
 
@@ -19,14 +19,14 @@ const AdminCompanyInfoConf = () => {
   const [activeTabsKey, setActiveTabsKey] = useState('1');
   const callback = (key) => setActiveTabsKey(() => key);
   const dispatch = useDispatch();
-  const { getInfoOfCompanyById } = bindActionCreators(actions, dispatch);
+  const { getCompanieData } = bindActionCreators(actions, dispatch);
   const { id } = useParams();
   const [dataSource, setDataSource] = useState(null); /// useSelect
   const [tableLoading, setTableLoading] = useState(false);
 
   useEffect(() => {
     setTableLoading(() => true);
-    getInfoOfCompanyById(id).then((data) => {
+    getCompanieData(id).then((data) => {
       setPageInfo(data.payload);
       setTableLoading(() => false);
     });
