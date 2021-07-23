@@ -7,13 +7,14 @@ import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
 import { actions } from '../../../core/configurations/configurationsSlice';
 
-const TableOfCompanies = ({ setShowDeleteCompany }) => {
+const TableOfCompanies = ({ searchValue, setShowDeleteCompany }) => {
   const dispatch = useDispatch();
   const { getConfCompanies } = bindActionCreators(actions, dispatch);
 
   const [tableLoading, setTableLoading] = useState(false);
   const history = useHistory();
   const [dataSource, setDataSource] = useState(null);
+  const [copyOfDataSource, setCopyOfDataSource] = useState(null);
 
   const [columns, setColumns] = useState([
     {
@@ -104,7 +105,26 @@ const TableOfCompanies = ({ setShowDeleteCompany }) => {
       });
     });
     setDataSource(() => newData);
+    setCopyOfDataSource(() => newData);
   };
+
+  useEffect(() => {
+    if (dataSource !== null) {
+      if (searchValue.length > 2) {
+        const newData = [];
+        dataSource.forEach((item) => {
+          if (item.company_name.toLowerCase().trim().replace(/\s/g, '').includes(searchValue.toLowerCase())) {
+            newData.push(item);
+            setDataSource(() => newData);
+          }
+        });
+      } else if (searchValue.length === 0 && searchValue.trim() === '') {
+        if (copyOfDataSource !== null) {
+          setDataSource(() => copyOfDataSource);
+        }
+      }
+    }
+  }, [searchValue]);
 
   return (
     <>
