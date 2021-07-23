@@ -50,6 +50,19 @@ const getConfCompanies = createAsyncThunk('configuration/getConfCompanies', asyn
   }
 });
 
+const getInfoOfCompanyById = createAsyncThunk('configuration/getInfoOfCompanyById', async (id) => {
+  const token = lockr.get('auth-token');
+
+  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+
+  try {
+    const response = await fetchApi(`${REACT_APP_API_URL}/me/organisation/companies/${id}`, null, headers, null);
+    return response;
+  } catch (err) {
+    return Promise.reject(err);
+  }
+});
+
 const createCompany = createAsyncThunk('configuration/createCompany', async (body) => {
   const token = lockr.get('auth-token');
 
@@ -83,6 +96,7 @@ export const actions = {
   getMembersOfOrganisation,
   getConfCompanies,
   createCompany,
+  getInfoOfCompanyById,
 };
 
 export default configurationSlice.reducer;

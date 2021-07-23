@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowLeftBigSVG, EditCompanySVG } from '../../components/icons';
 import './style.scss';
 import LayoutConfiguration from '../../components/LayoutConfiguration/Layout';
-import { Link } from 'react-router-dom';
-import { Skeleton, Tabs } from 'antd';
+import { Tabs } from 'antd';
 import GeneralInformationTab from './GeneralInformationTab';
 import PreferencesTab from './PreferencesTab';
 import NotesTab from './NotesTab';
@@ -20,16 +19,16 @@ const AdminCompanyInfoConf = () => {
   const [activeTabsKey, setActiveTabsKey] = useState('1');
   const callback = (key) => setActiveTabsKey(() => key);
   const dispatch = useDispatch();
-  const { getCompanieData } = bindActionCreators(actions, dispatch);
+  const { getInfoOfCompanyById } = bindActionCreators(actions, dispatch);
   const { id } = useParams();
-  const [dataSource, setDataSource] = useState(null);
+  const [dataSource, setDataSource] = useState(null); /// useSelect
   const [tableLoading, setTableLoading] = useState(false);
 
   useEffect(() => {
     setTableLoading(() => true);
-    getCompanieData(id).then((data) => {
-      console.log('data', data);
+    getInfoOfCompanyById(id).then((data) => {
       setPageInfo(data.payload);
+      setTableLoading(() => false);
     });
     // getConfCompanies().then((data) => {
     //   const dataFiltered = data.payload.filter((item) => item.id === id);
@@ -44,6 +43,9 @@ const AdminCompanyInfoConf = () => {
       logo: undefined,
       name: data.name,
       phone: data.phone,
+      pm_name: data.pm_name,
+      pm_phone: data.pm_phone,
+      license: data.license,
       address: `${data.address.state} ${data.address.city} ${data.address.address_line1} ${data.address.zip}`,
     };
     setDataSource(() => newData);
@@ -92,58 +94,58 @@ const AdminCompanyInfoConf = () => {
         </>
       ) : (
         <>
-      <div className="container_edit__company">
-        {!editMode && activeTabsKey === '1' && (
-          <div className="switch_mode" onClick={() => setEditMode(() => true)}>
-            <div>
-              <EditCompanySVG />
-            </div>
-          </div>
-        )}
+          <div className="container_edit__company">
+            {!editMode && activeTabsKey === '1' && (
+              <div className="switch_mode" onClick={() => setEditMode(() => true)}>
+                <div>
+                  <EditCompanySVG />
+                </div>
+              </div>
+            )}
 
-        <div className="head_block">
+            <div className="head_block">
               {editMode ? (
                 <button
                   onClick={() => {
                     setEditMode(false);
                   }}>
-          <div className="arrow_left">
-            <ArrowLeftBigSVG />
-          </div>
+                  <div className="arrow_left">
+                    <ArrowLeftBigSVG />
+                  </div>
                 </button>
               ) : (
-          <Link to="/admin-companies-conf">
-            <div className="arrow_left">
-              <ArrowLeftBigSVG />
-            </div>
-          </Link>
+                <Link to="/admin-companies-conf">
+                  <div className="arrow_left">
+                    <ArrowLeftBigSVG />
+                  </div>
+                </Link>
               )}
 
-          <div>
-            <h2>{!editMode ? dataSource !== null && dataSource.name : 'Edit Contractor Company'}</h2>
+              <div>
+                <h2>{!editMode ? dataSource !== null && dataSource.name : 'Edit Contractor Company'}</h2>
+              </div>
+            </div>
+            {!editMode && (
+              <div className="tabs_companies">
+                <Tabs activetabskey={activeTabsKey} onChange={callback} defaultActiveKey={activeTabsKey}>
+                  {config.map((item) => (
+                    <TabPane tab={item.tab} key={item.key} className={item.clasname}>
+                      {item.component}
+                    </TabPane>
+                  ))}
+                </Tabs>
+              </div>
+            )}
           </div>
-        </div>
-        {!editMode && (
-          <div className="tabs_companies">
-            <Tabs activetabskey={activeTabsKey} onChange={callback} defaultActiveKey={activeTabsKey}>
-              {config.map((item) => (
-                <TabPane tab={item.tab} key={item.key} className={item.clasname}>
-                  {item.component}
-                </TabPane>
-              ))}
-            </Tabs>
-          </div>
-        )}
-      </div>
 
-      {dataSource !== null && editMode && (
-        <GeneralInformationTab
-          editMode={editMode}
-          setEditMode={setEditMode}
-          dataSource={dataSource}
-          setDataSource={setDataSource}
-        />
-      )}
+          {dataSource !== null && editMode && (
+            <GeneralInformationTab
+              editMode={editMode}
+              setEditMode={setEditMode}
+              dataSource={dataSource}
+              setDataSource={setDataSource}
+            />
+          )}
         </>
       )}
     </LayoutConfiguration>
