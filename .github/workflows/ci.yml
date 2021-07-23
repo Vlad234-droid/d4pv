@@ -41,4 +41,4 @@ jobs:
           chmod 700 ~/.ssh
           ssh-keyscan ${{ secrets.DEVDEPLOYMENTHOST }} >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
-          rsync -a --chmod=D2775,F664 --delete "$GITHUB_WORKSPACE"/ ${{ secrets.DEVDEPLOYMENTUSER }}@${{ secrets.DEVDEPLOYMENTHOST }}:${{ DEV_DEPLOYMENT_PATH }}
+          rsync -a --chmod=D2775,F664 --delete "$GITHUB_WORKSPACE"/ ${{ secrets.DEVDEPLOYMENTUSER }}@${{ secrets.DEVDEPLOYMENTHOST }}:${{ secrets.DEV_DEPLOYMENT_PATH }}
