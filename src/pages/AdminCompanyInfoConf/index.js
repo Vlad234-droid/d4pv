@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowLeftBigSVG, EditCompanySVG } from '../../components/icons';
 import './style.scss';
 import LayoutConfiguration from '../../components/LayoutConfiguration/Layout';
-import { Link } from 'react-router-dom';
-import { Tabs, Button } from 'antd';
+import { Tabs } from 'antd';
 import GeneralInformationTab from './GeneralInformationTab';
 import PreferencesTab from './PreferencesTab';
 import NotesTab from './NotesTab';
@@ -20,16 +19,15 @@ const AdminCompanyInfoConf = () => {
   const [activeTabsKey, setActiveTabsKey] = useState('1');
   const callback = (key) => setActiveTabsKey(() => key);
   const dispatch = useDispatch();
-  const { getConfCompanies } = bindActionCreators(actions, dispatch);
+  const { getInfoOfCompanyById } = bindActionCreators(actions, dispatch);
   const { id } = useParams();
-  const [dataSource, setDataSource] = useState(null);
+  const [dataSource, setDataSource] = useState(null); /// useSelect
   const [tableLoading, setTableLoading] = useState(false);
 
   useEffect(() => {
     setTableLoading(() => true);
-    getConfCompanies().then((data) => {
-      const dataFiltered = data.payload.filter((item) => item.id === id);
-      setPageInfo(dataFiltered[0]);
+    getInfoOfCompanyById(id).then((data) => {
+      setPageInfo(data.payload);
       setTableLoading(() => false);
     });
   }, [id]);
@@ -40,6 +38,9 @@ const AdminCompanyInfoConf = () => {
       logo: undefined,
       name: data.name,
       phone: data.phone,
+      pm_name: data.pm_name,
+      pm_phone: data.pm_phone,
+      license: data.license,
       address: `${data.address.state} ${data.address.city} ${data.address.address_line1} ${data.address.zip}`,
     };
     setDataSource(() => newData);
