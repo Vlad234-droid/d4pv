@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
 import './style.scss';
-import { Form, Select, Button, Row, Col, Input } from 'antd';
+import { Form, Select, Button, Row, Col, Input, Skeleton, notification } from 'antd';
 import { EditCompanySVG, ArrowDownSelectSVG } from '../../../components/icons';
+
+import { actions } from '../../../core/companies/companiesSlice';
 
 import { useEffect } from 'react';
 
 import { preferences } from './config';
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-const PreferencesTab = () => {
-  const [formProperty] = Form.useForm();
-  const [formPVSystem] = Form.useForm();
-  const [modeProperty, setModePropert] = useState(false);
-  const [modePVSystem, setModePVSystem] = useState(false);
-  const [testArray, setTestArray] = useState({});
+const PreferencesTab = ({ companyId }) => {
+  const [form] = Form.useForm();
+  const [initialValues, setInitialValues] = useState(null);
+  const [mode, setModePropert] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [time, setTime] = useState('');
+  const dispatch = useDispatch();
+  const { getCompanyPreferences, updateCompanyPreferences } = bindActionCreators(actions, dispatch);
 
   const suffixIcon = (
     <div style={{ zIndex: '-2' }}>
@@ -22,48 +27,41 @@ const PreferencesTab = () => {
   );
 
   useEffect(() => {
-    const now = Date.now();
-    const data = new Date(now);
-    let year = data.getFullYear();
-    let day = data.getDate();
-    let month = data.getMonth();
-    day = day < 10 ? '0' + day : day;
-    month = month < 10 ? '0' + month : month;
-    let fullTime = `${day}.${month}.${year}`;
-
-    setTime(() => fullTime);
+    getCompanyPreferences(companyId).then((data) => {
+      const result = {};
+      if (!data.error) {
+        data.payload.forEach((item) => {
+          result[item.key] = item.value;
+        });
+      }
+      setInitialValues(result);
+    });
   }, []);
 
-  const onFinishProperty = ({ ahj, parcel_number, utility }) => {
-    setTestArray((prev) => ({
-      ...prev,
-      ahj,
-      parcel_number,
-      utility,
-    }));
-    formProperty.resetFields();
-    setModePropert(() => false);
-  };
-
-  const onFinishPVSystem = ({ grid_type, service_voltage, conductor }) => {
-    setTestArray((prev) => ({
-      ...prev,
-      grid_type,
-      service_voltage,
-      conductor,
-    }));
-    formPVSystem.resetFields();
-    setModePVSystem(() => false);
-  };
-  const attr = (value, form) => {
-    if (form !== undefined && form.__INTERNAL__.name === 'form_property_information' && modeProperty)
-      return {
-        name: value,
-      };
-    if (form !== undefined && form.__INTERNAL__.name === 'form_system_information' && modePVSystem)
-      return {
-        name: value,
-      };
+  const onFinish = (values) => {
+    const results = [];
+    for (let i in values) {
+      if (values[i]) {
+        results.push({
+          key: i,
+          value: values[i],
+        });
+      }
+    }
+    setLoading(true);
+    updateCompanyPreferences({
+      company_id: companyId,
+      body: results,
+    }).then((data) => {
+      if (!data.error) {
+        notification.success({
+          description: 'Information has been updated',
+          duration: 3.5,
+        });
+        setModePropert(false);
+      }
+      setLoading(false);
+    });
   };
 
   const dashCheck = (value) => {
@@ -73,65 +71,75 @@ const PreferencesTab = () => {
 
   return (
     <div className="preferences_tab">
-      <Form
-        className={`form_property_information`}
-        name="form_property_information"
-        form={formProperty}
-        layout="vertical"
-        onFinish={onFinishProperty}>
-        {preferences.map((item, index) => (
-          <div className="information" key={`information-${item.id}`}>
-            {index === 0 && !modeProperty && (
-              <div className="switch_mode" onClick={() => setModePropert(() => true)}>
-                <div>
-                  <EditCompanySVG />
+      {!initialValues ? (
+        <>
+          <Skeleton active />
+          <Skeleton active />
+        </>
+      ) : (
+        <Form
+          className={`form_property_information`}
+          name="form_property_information"
+          form={form}
+          initialValues={initialValues}
+          layout="vertical"
+          onFinish={onFinish}>
+          {preferences.map((item, index) => (
+            <div className="information" key={`information-${item.id}`}>
+              {index === 0 && !mode && (
+                <div className="switch_mode" onClick={() => setModePropert(() => true)}>
+                  <div>
+                    <EditCompanySVG />
+                  </div>
                 </div>
-              </div>
-            )}
-            <h3>{item.title}</h3>
-            <p className="updated">????{time} by James Smith????</p>
+              )}
+              <h3>{item.title}</h3>
+              {/* <p className="updated">????{time} by James Smith????</p> */}
 
-            <Row gutter={33}>
-              {item.params.map((param) => (
-                <Col span={12} key={param.name}>
-                  <Form.Item label={param.title} name={param.name}>
-                    {modeProperty ? (
-                      param.options ? (
-                        <Select placeholder={param.placeholder} suffixIcon={suffixIcon}>
-                          {param.options?.map((option) => (
-                            <Select.Option value={option.value}>{option.label}</Select.Option>
-                          ))}
-                        </Select>
+              <Row gutter={33}>
+                {item.params.map((param) => (
+                  <Col span={12} key={param.name}>
+                    <Form.Item label={param.title} name={param.name}>
+                      {mode ? (
+                        param.options ? (
+                          <Select placeholder={param.placeholder} suffixIcon={suffixIcon}>
+                            {param.options?.map((option) => (
+                              <Select.Option key={option.value} value={option.value}>
+                                {option.label}
+                              </Select.Option>
+                            ))}
+                          </Select>
+                        ) : (
+                          <Input placeholder={param.placeholder} type="number" />
+                        )
                       ) : (
-                        <Input placeholder={param.placeholder} type="number" />
-                      )
-                    ) : (
-                      <h3>{dashCheck(testArray.ahj)}</h3>
-                    )}
-                  </Form.Item>
-                </Col>
-              ))}
-            </Row>
-          </div>
-        ))}
+                        <h3>{initialValues[param.name] ? initialValues[param.name] : '--'}</h3>
+                      )}
+                    </Form.Item>
+                  </Col>
+                ))}
+              </Row>
+            </div>
+          ))}
 
-        {modeProperty && (
-          <Form.Item className="btns">
-            <Row gutter={16}>
-              <Col span={4}>
-                <Button type="button" onClick={() => setModePropert(() => false)}>
-                  Cancel
-                </Button>
-              </Col>
-              <Col span={6}>
-                <Button type="primary" htmlType="submit">
-                  Save
-                </Button>
-              </Col>
-            </Row>
-          </Form.Item>
-        )}
-      </Form>
+          {mode && (
+            <Form.Item className="btns">
+              <Row gutter={16}>
+                <Col span={4}>
+                  <Button type="button" onClick={() => setModePropert(() => false)}>
+                    Cancel
+                  </Button>
+                </Col>
+                <Col span={6}>
+                  <Button type="primary" htmlType="submit" loading={loading}>
+                    Save
+                  </Button>
+                </Col>
+              </Row>
+            </Form.Item>
+          )}
+        </Form>
+      )}
     </div>
   );
 };

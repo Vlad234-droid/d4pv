@@ -5,6 +5,7 @@ import { Logo4PV } from '../../components/icons';
 import { Link, useHistory } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { actions } from '../../core/account/accountSlice';
+import { actions as profileActions } from '../../core/profile/profileSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './style.scss';
@@ -15,6 +16,7 @@ const LoginPage = () => {
   const history = useHistory();
   const [form] = Form.useForm();
   const { logInAcc } = bindActionCreators(actions, dispatch);
+  const { login } = bindActionCreators(profileActions, dispatch);
 
   const onFinishHandler = ({ email, password }) => {
     setLoader(true);
@@ -31,6 +33,7 @@ const LoginPage = () => {
         });
         return;
       }
+      login();
       history.push('/profile');
     });
   };

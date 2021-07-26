@@ -3,24 +3,15 @@ import './style.scss';
 import { Question, ProfileDropDown, Logo4PV, Pinion, QuestionOpen, SearchSVG } from '../icons';
 import { Form, Input, Button, Col, Menu, Dropdown } from 'antd';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-
-const menuProfile = (
-  <Menu>
-    <Menu.Item key="1">
-      <h4>
-        <Link to="/profile">View Profile</Link>
-      </h4>
-    </Menu.Item>
-    <Menu.Item key="2">
-      <h4>Sign Out</h4>
-    </Menu.Item>
-  </Menu>
-);
+import { useDispatch, useSelector } from 'react-redux';
+import { actions } from '../../core/profile/profileSlice';
+import { bindActionCreators } from 'redux';
 
 const Header = () => {
   const data = useSelector((state) => state?.profile?.data);
   const [questionOpen, setQuestionOpen] = useState(false);
+  const dispatch = useDispatch();
+  const { logout } = bindActionCreators(actions, dispatch);
   const suffix = (
     <div className="siffix_search_drop" style={{ cursor: 'pointer' }}>
       <SearchSVG />
@@ -30,6 +21,23 @@ const Header = () => {
   const onFinishHandler = (values) => {
     form.resetFields();
   };
+
+  const logOut = () => {
+    logout();
+  };
+
+  const menuProfile = (
+    <Menu>
+      <Menu.Item key="1">
+        <h4>
+          <Link to="/profile">View Profile</Link>
+        </h4>
+      </Menu.Item>
+      <Menu.Item key="2">
+        <h4 onClick={logOut}>Sign Out</h4>
+      </Menu.Item>
+    </Menu>
+  );
   return (
     <header className="admin_header">
       <div className="header_wrapper">

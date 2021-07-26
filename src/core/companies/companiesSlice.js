@@ -144,6 +144,31 @@ const uploadTempStorage = createAsyncThunk('profile/uploadTempStorage', async (f
   }
 });
 
+const getCompanyPreferences = createAsyncThunk('companies/getCompanyPreferences', async (company_id) => {
+  const token = lockr.get('auth-token');
+  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+  const response = await fetchApi(
+    `${REACT_APP_API_URL}/me/organisation/companies/${company_id}/preferences`,
+    'GET',
+    headers,
+    null,
+  );
+  return response;
+});
+
+const updateCompanyPreferences = createAsyncThunk('companies/updateCompanyPreferences', async (data) => {
+  const token = lockr.get('auth-token');
+  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+
+  const response = await fetchApi(
+    `${REACT_APP_API_URL}/me/organisation/companies/${data.company_id}/preferences`,
+    'PUT',
+    headers,
+    JSON.stringify(data.body),
+  );
+  return response;
+});
+
 const companiesSlice = createSlice({
   name: 'companies',
   initialState,
@@ -189,6 +214,8 @@ export const actions = {
   visibilityCompanyRequirements,
   deleteCompanyRequirements,
   uploadTempStorage,
+  getCompanyPreferences,
+  updateCompanyPreferences,
 };
 
 export default companiesSlice.reducer;

@@ -15,9 +15,10 @@ const getProfile = createAsyncThunk('profile/getProfile', async () => {
 
   try {
     const response = await fetchApi(`${REACT_APP_API_URL}/me`, null, headers, null);
-    // thunkAPI.dispatch(update(response));
     return response;
   } catch (err) {
+    console.log('ERROR', err);
+
     return Promise.reject(err);
   }
 });
@@ -86,6 +87,14 @@ const profileSlice = createSlice({
     updateOrganisation(state, { payload }) {
       state.data.organisation.name = payload;
     },
+    login(state) {
+      state.isloggedIn = true;
+    },
+    logout(state) {
+      lockr.rm('auth-token');
+      state.isloggedIn = false;
+      state.data = null;
+    },
     // postUpdated(state, action) {
     //   const { id, title, content } = action.payload;
     //   const existingPost = state.posts.find((post) => post.id === id);
@@ -120,6 +129,7 @@ const profileSlice = createSlice({
 });
 
 const { update, updateOrganisation } = profileSlice.actions;
+console.log('profileSlice', profileSlice);
 
 export const actions = {
   ...profileSlice.actions,

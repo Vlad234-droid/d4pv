@@ -57,7 +57,7 @@ const AdminCompanyInfoConf = () => {
       tab: 'Preferences',
       key: '4',
       clasname: 'preferences tab',
-      component: <PreferencesTab />,
+      component: <PreferencesTab companyId={dataSource?.id} />,
     },
   ];
 

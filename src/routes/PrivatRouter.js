@@ -12,18 +12,28 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const { getProfile } = bindActionCreators(actions, dispatch);
 
   useEffect(() => {
-    if (user.isloggedIn === null) {
+    if (!user.data) {
       getProfile().then((data) => {
         console.log('getProfile', data);
       });
     }
   }, []);
 
-  console.log('user', user);
+  console.log('userrrrr', user);
 
   // const CurrentComponent = !user.isloggedIn ? <Component /> : <Redirect to="/sign-in/" />;
+  // const CurrentComponent =
+  //   user.isloggedIn === null ? <LoaderPage /> : user.isloggedIn ? <Component /> : <Redirect to="/sign-in/" />;
   const CurrentComponent =
-    user.isloggedIn === null ? <LoaderPage /> : user.isloggedIn ? <Component /> : <Redirect to="/sign-in/" />;
+    user.isloggedIn === null ? (
+      <LoaderPage />
+    ) : !user.isloggedIn ? (
+      <Redirect to="/sign-in/" />
+    ) : !user.data ? (
+      <LoaderPage />
+    ) : (
+      <Component />
+    );
 
   return <Route {...rest} render={(props) => CurrentComponent} />;
 };
