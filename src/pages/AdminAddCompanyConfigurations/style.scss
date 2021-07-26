@@ -60,6 +60,11 @@
     }
   }
   .form_add_company {
+    .ant-row.ant-form-item.ant-form-item-with-help {
+      .ant-form-item-explain {
+        position: static;
+      }
+    }
     margin-top: 21px;
     .ant-form-item-explain {
       font-size: 12px;

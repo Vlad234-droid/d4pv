@@ -128,6 +128,22 @@ const visibilityCompanyRequirements = createAsyncThunk(
   },
 );
 
+const uploadTempStorage = createAsyncThunk('profile/uploadTempStorage', async (file) => {
+  const formData = new FormData();
+  formData.append('file', file);
+  const token = lockr.get('auth-token');
+  const headers = {
+    Accept: 'application/json',
+    Authorization: `bearer ${token}`,
+  };
+  try {
+    const response = await fetchApi(`${REACT_APP_API_URL}/me/temporary_storage`, 'POST', headers, formData);
+    return response;
+  } catch (err) {
+    return Promise.reject(err);
+  }
+});
+
 const companiesSlice = createSlice({
   name: 'companies',
   initialState,
@@ -172,6 +188,7 @@ export const actions = {
   updateCompanyRequirement,
   visibilityCompanyRequirements,
   deleteCompanyRequirements,
+  uploadTempStorage,
 };
 
 export default companiesSlice.reducer;

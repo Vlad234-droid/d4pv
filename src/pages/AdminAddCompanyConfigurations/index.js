@@ -37,6 +37,7 @@ const AdminCompanyInfoConf = () => {
         address_line1: values.address_line1,
         address_line2: values.address_line2,
       },
+      image: values.image,
     };
 
     setLoading(true);
@@ -75,13 +76,22 @@ const AdminCompanyInfoConf = () => {
           {/* //////// */}
         </div>
         <Form className="form_add_company add_comp" form={form} layout="vertical" onFinish={onFinishHandler}>
-          <UploadCompanyLogo
-            form={form}
-            logoUrl={logoUrl}
-            setLogoUrl={setLogoUrl}
-            editCompanyLogo={editCompanyLogo}
-            setEditCompanyLogo={setEditCompanyLogo}
-          />
+          <Form.Item
+            name="image"
+            rules={[
+              {
+                required: true,
+                message: 'Please upload your image',
+              },
+            ]}>
+            <UploadCompanyLogo
+              form={form}
+              logoUrl={logoUrl}
+              setLogoUrl={setLogoUrl}
+              editCompanyLogo={editCompanyLogo}
+              setEditCompanyLogo={setEditCompanyLogo}
+            />
+          </Form.Item>
 
           {/* //????//// */}
           <Row gutter={33}>

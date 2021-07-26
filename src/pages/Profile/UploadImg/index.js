@@ -12,7 +12,7 @@ const UploadImg = () => {
   const [logoUrl, setLogoUrl] = useState(null);
   const image = useSelector((state) => state.profile.data.image);
   const dispatch = useDispatch();
-  const { uploadProfileImage, deleteProfileImage } = bindActionCreators(actions, dispatch);
+  const { uploadProfileImage, deleteProfileImage, getProfile } = bindActionCreators(actions, dispatch);
   const customRequest = (e) => {
     uploadProfileImage(e.file).then((data) => {
       if (!data.error) {
@@ -21,6 +21,7 @@ const UploadImg = () => {
           duration: 3.5,
         });
       }
+      getProfile();
     });
     setLogoUrl(() => URL.createObjectURL(e.file));
     e.onSuccess('ok');
@@ -47,7 +48,9 @@ const UploadImg = () => {
               <div
                 onClick={(e) => {
                   e.stopPropagation();
-                  deleteProfileImage();
+                  deleteProfileImage().then((data) => {
+                    if (!data.error) getProfile();
+                  });
                   setLogoUrl(() => null);
                 }}>
                 <div>

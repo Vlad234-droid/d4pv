@@ -94,10 +94,7 @@ const Header = () => {
                         {data.last_name[0]}
                       </div>
                     ) : (
-                      <img
-                        src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-                        alt="photoOfUser"
-                      />
+                      <img src={data?.image} alt="photoOfUser" />
                     )}
                   </div>
                   <div className="drop">

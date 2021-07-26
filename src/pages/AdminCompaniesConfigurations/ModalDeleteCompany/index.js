@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CloseIconSVG } from '../../../components/icons';
-import { Modal, Form, Button, Col, Row } from 'antd';
+import { Modal, Form, Button, Col, Row, notification } from 'antd';
 import { actions } from '../../../core/companies/companiesSlice';
 import './style.scss';
 import { useDispatch } from 'react-redux';
@@ -15,10 +15,12 @@ const ModalDeleteCompany = ({ showDeleteCompany, setShowDeleteCompany, deleteCom
   const onFinish = () => {
     setloading(true);
     deleteCompany(deleteCompanyId).then((data) => {
-      if (!data.error) {
-        setShowDeleteCompany(false);
-        setDeleteCompanyId(null);
-      }
+      notification[data.error ? 'error' : 'success']({
+        message: data.error ? 'An Error Occurred, Please Try Again' : 'Company has been deleted successfully',
+        duration: 3.5,
+      });
+      setShowDeleteCompany(() => false);
+      setDeleteCompanyId(null);
       setloading(false);
     });
   };

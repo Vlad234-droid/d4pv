@@ -415,3 +415,15 @@ button:not(.ant-btn) {
     height: 1px;
   }
 }
+
+// spinner
+.ant-spin {
+  .ant-spin-dot.ant-spin-dot-spin {
+    font-size: 30px;
+    .ant-spin-dot-item {
+      width: 12px;
+      height: 12px;
+      background-color: #ffb40a;
+    }
+  }
+}

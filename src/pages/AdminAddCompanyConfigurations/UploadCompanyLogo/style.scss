@@ -47,6 +47,9 @@
       height: 120px;
       transform: translate(-50%, -50%);
       display: block;
+      .ant-spin.ant-spin-spinning.custom_spinner_add_company {
+        font-size: 65px;
+      }
       img {
         object-fit: cover;
         width: 100%;
@@ -54,7 +57,7 @@
       }
     }
 
-    span {
+    & > span {
       padding: 0px;
       font-family: Montserrat;
       font-size: 13px;

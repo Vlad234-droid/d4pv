@@ -68,6 +68,7 @@ const AdminCompaniesConfigurations = () => {
             setShowDeleteCompany={setShowDeleteCompany}
             searchValue={searchValue}
             setDeleteCompanyId={setDeleteCompanyId}
+            deleteCompanyId={deleteCompanyId}
           />
         </div>
       </div>

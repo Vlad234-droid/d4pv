@@ -9,7 +9,7 @@ import { actions } from '../../../core/configurations/configurationsSlice';
 
 import noLogo from '../../../assets/img/no-comany-logo.svg';
 
-const TableOfCompanies = ({ searchValue, setShowDeleteCompany, setDeleteCompanyId }) => {
+const TableOfCompanies = ({ searchValue, setShowDeleteCompany, setDeleteCompanyId, deleteCompanyId }) => {
   const dispatch = useDispatch();
   const { getConfCompanies } = bindActionCreators(actions, dispatch);
 
@@ -63,11 +63,9 @@ const TableOfCompanies = ({ searchValue, setShowDeleteCompany, setDeleteCompanyI
             </div>
             <div
               onClick={(e) => {
-                console.log('e', e.target.dataset.action);
                 console.log('record', record);
-                console.log('index', index);
                 setShowDeleteCompany(() => true);
-                setDeleteCompanyId(record.key);
+                setDeleteCompanyId(() => record.key);
               }}>
               <DeleteSVG />
             </div>
@@ -87,7 +85,7 @@ const TableOfCompanies = ({ searchValue, setShowDeleteCompany, setDeleteCompanyI
       setPageInfo(data.payload);
       setTableLoading(() => false);
     });
-  }, []);
+  }, [deleteCompanyId]);
 
   const setPageInfo = (data) => {
     const newData = [];
