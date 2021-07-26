@@ -13,8 +13,8 @@ import './style.scss';
 const GeneralInformationTab = ({ editMode, dataSource, setEditMode }) => {
   const [form] = Form.useForm();
   const [logoUrl, setLogoUrl] = useState(null);
+
   const [loading, setLoading] = useState(false);
-  const [editCompanyLogo, setEditCompanyLogo] = useState(false);
   const [extraAddress, setExtraAddress] = useState(true);
   const dispatch = useDispatch();
   const { updateCompanieData, getCompanieData } = bindActionCreators(actions, dispatch);
@@ -91,16 +91,8 @@ const GeneralInformationTab = ({ editMode, dataSource, setEditMode }) => {
         address_line2: dataSource.address.address_line2,
       }}
       onFinish={onFinishHandler}>
-      <Form.Item label="Logo" name="logo">
-        <UploadCompanyLogo
-          dataSource={dataSource}
-          form={form}
-          logoUrl={logoUrl}
-          setLogoUrl={setLogoUrl}
-          editCompanyLogo={editCompanyLogo}
-          setEditCompanyLogo={setEditCompanyLogo}
-          editMode={editMode}
-        />
+      <Form.Item label="Logo" name="image">
+        <UploadCompanyLogo editMode={editMode} setLogoUrl={setLogoUrl} logoUrl={logoUrl} />
       </Form.Item>
 
       {/* //????//// */}
@@ -302,7 +294,6 @@ const GeneralInformationTab = ({ editMode, dataSource, setEditMode }) => {
                 onClick={() => {
                   setExtraAddress(() => false);
                   setEditMode(() => false);
-                  setEditCompanyLogo(() => false);
                 }}>
                 Cancel
               </Button>

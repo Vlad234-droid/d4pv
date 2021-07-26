@@ -22,6 +22,7 @@ const SignUpToProject = () => {
   const { id } = useParams();
   const [inviteId, setInviteId] = useState('');
   const [loading, setLoading] = useState(false);
+  const [info, setInfo] = useState(null);
 
   useEffect(() => {
     getInviteInfo(id).then((data) => {
@@ -32,6 +33,10 @@ const SignUpToProject = () => {
         });
         history.push('/');
       }
+      form.setFieldsValue({
+        email: data.payload.email,
+      });
+      setInfo(() => data?.payload?.organisation);
       if (data?.payload?.invite_id) setInviteId(() => data.payload.invite_id);
     });
   }, []);
@@ -79,7 +84,7 @@ const SignUpToProject = () => {
               <Logo4PV />
             </div>
             <div className="goSolar">
-              <h2>Sign Up to GO Solar</h2>
+              <h2>{`Sign Up to ${info}`}</h2>
             </div>
             <Form className="form_sign_up_toProject" form={form} layout="vertical" onFinish={onFinishHandler}>
               <Row gutter={24}>

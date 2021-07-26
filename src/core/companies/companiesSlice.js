@@ -128,22 +128,6 @@ const visibilityCompanyRequirements = createAsyncThunk(
   },
 );
 
-const uploadTempStorage = createAsyncThunk('profile/uploadTempStorage', async (file) => {
-  const formData = new FormData();
-  formData.append('file', file);
-  const token = lockr.get('auth-token');
-  const headers = {
-    Accept: 'application/json',
-    Authorization: `bearer ${token}`,
-  };
-  try {
-    const response = await fetchApi(`${REACT_APP_API_URL}/me/temporary_storage`, 'POST', headers, formData);
-    return response;
-  } catch (err) {
-    return Promise.reject(err);
-  }
-});
-
 const getCompanyPreferences = createAsyncThunk('companies/getCompanyPreferences', async (company_id) => {
   const token = lockr.get('auth-token');
   const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
@@ -167,6 +151,62 @@ const updateCompanyPreferences = createAsyncThunk('companies/updateCompanyPrefer
     JSON.stringify(data.body),
   );
   return response;
+});
+
+const uploadTempStorage = createAsyncThunk('companies/uploadTempStorage', async (file) => {
+  const formData = new FormData();
+  formData.append('file', file);
+  const token = lockr.get('auth-token');
+  const headers = {
+    Accept: 'application/json',
+    Authorization: `bearer ${token}`,
+  };
+  try {
+    const response = await fetchApi(`${REACT_APP_API_URL}/me/temporary_storage`, 'POST', headers, formData);
+    return response;
+  } catch (err) {
+    return Promise.reject(err);
+  }
+});
+
+const updateCompanyImage = createAsyncThunk('profile/updateCompanyImage', async (data) => {
+  const formData = new FormData();
+  formData.append('file', data.file);
+  const token = lockr.get('auth-token');
+  const headers = {
+    Accept: 'application/json',
+    Authorization: `bearer ${token}`,
+  };
+  try {
+    const response = await fetchApi(
+      `${REACT_APP_API_URL}/me/organisation/companies/${data.company_id}/image`,
+      'PATCH',
+      headers,
+      formData,
+    );
+    return response;
+  } catch (err) {
+    return Promise.reject(err);
+  }
+});
+
+const removeCompanyImage = createAsyncThunk('profile/removeCompanyImage', async (company_id) => {
+  const token = lockr.get('auth-token');
+  const headers = {
+    Accept: 'application/json',
+    Authorization: `bearer ${token}`,
+  };
+  try {
+    const response = await fetchApi(
+      `${REACT_APP_API_URL}/me/organisation/companies/${company_id}/image`,
+      'DELETE',
+      headers,
+      null,
+    );
+    return response;
+  } catch (err) {
+    return Promise.reject(err);
+  }
 });
 
 const companiesSlice = createSlice({
@@ -213,9 +253,11 @@ export const actions = {
   updateCompanyRequirement,
   visibilityCompanyRequirements,
   deleteCompanyRequirements,
-  uploadTempStorage,
   getCompanyPreferences,
   updateCompanyPreferences,
+  uploadTempStorage,
+  updateCompanyImage,
+  removeCompanyImage,
 };
 
 export default companiesSlice.reducer;
