@@ -649,6 +649,46 @@ const UserForCheck = () => {
   );
 };
 
+const LoaderSVG = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 72 72">
+      <defs>
+        <linearGradient id="4nlrfzafza" x1="50%" x2="50%" y1="0%" y2="100%">
+          <stop offset=".022%" stopColor="#F94848" stopOpacity="0" />
+          <stop offset="100%" stopColor="#FBD22B" />
+        </linearGradient>
+        <linearGradient id="s3f0m5nzjb" x1="50%" x2="50%" y1="0%" y2="100%">
+          <stop offset="0%" stopColor="#F94848" />
+          <stop offset="100%" stopColor="#FBD22B" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <g fill="none" fillRule="evenodd">
+        <g>
+          <g>
+            <path d="M0 0H72V72H0z" transform="translate(-384.000000, -344.000000) translate(384.000000, 344.000000)" />
+            <path
+              stroke="url(#4nlrfzafza)"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="6"
+              d="M36 64c15.464 0 28-12.536 28-28S51.464 8 36 8"
+              transform="translate(-384.000000, -344.000000) translate(384.000000, 344.000000)"
+            />
+            <path
+              stroke="url(#s3f0m5nzjb)"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="6"
+              d="M8 64c15.464 0 28-12.536 28-28S23.464 8 8 8"
+              transform="translate(-384.000000, -344.000000) translate(384.000000, 344.000000) translate(22.000000, 36.000000) scale(-1, 1) translate(-22.000000, -36.000000)"
+            />
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
 export {
   IconInfo,
   Logo4PV,
@@ -676,4 +716,5 @@ export {
   IconToShow,
   HideNotesSVG,
   UserForCheck,
+  LoaderSVG,
 };
