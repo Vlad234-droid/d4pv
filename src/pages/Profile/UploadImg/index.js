@@ -22,7 +22,6 @@ const UploadImg = () => {
         });
       }
     });
-    console.log('helo');
     setLogoUrl(() => URL.createObjectURL(e.file));
     e.onSuccess('ok');
   };

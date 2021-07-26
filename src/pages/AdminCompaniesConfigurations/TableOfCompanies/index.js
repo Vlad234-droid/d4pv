@@ -110,14 +110,14 @@ const TableOfCompanies = ({ searchValue, setShowDeleteCompany, setDeleteCompanyI
 
   useEffect(() => {
     if (dataSource !== null) {
-      if (searchValue.length > 2) {
+      if (searchValue.length >= 1) {
         const newData = [];
         dataSource.forEach((item) => {
           if (item.company_name.toLowerCase().trim().replace(/\s/g, '').includes(searchValue.toLowerCase())) {
             newData.push(item);
-            setDataSource(() => newData);
           }
         });
+        setDataSource(() => newData);
       } else if (searchValue.length === 0 && searchValue.trim() === '') {
         if (copyOfDataSource !== null) {
           setDataSource(() => copyOfDataSource);

@@ -38,12 +38,6 @@ const AdminCompanyInfoConf = () => {
         address_line2: values.address_line2,
       },
     };
-    // address: {
-    //   city: 'Phoenix',
-    //   state: 'Arizona',
-    //   zip_code: '12345',
-    //   address_line1: 'Pushkinskaya 49',
-    // },
 
     setLoading(true);
     createCompany(result).then((data) => {

@@ -112,14 +112,14 @@ const TableOfUsers = ({ searchValue, setShowDeleteUser }) => {
 
   useEffect(() => {
     if (dataSource !== null) {
-      if (searchValue.length > 2) {
+      if (searchValue.length >= 1) {
         const newData = [];
         dataSource.forEach((item) => {
           if (item.first_name.props.children[1].props.children.toLowerCase().includes(searchValue.toLowerCase())) {
             newData.push(item);
-            setDataSource(() => newData);
           }
         });
+        setDataSource(() => newData);
       } else if (searchValue.length === 0 && searchValue.trim() === '') {
         if (copyOfDataSource !== null) {
           setDataSource(() => copyOfDataSource);
