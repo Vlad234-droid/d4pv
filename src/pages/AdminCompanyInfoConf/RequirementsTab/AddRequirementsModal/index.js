@@ -139,7 +139,7 @@ const AddRequirementsModal = ({ fileUrl, setFileUrl, keyTab, addRequirements, se
               rules={[
                 {
                   required: true,
-                  message: 'Reference By is required!',
+                  message: 'Reference By is required',
                 },
               ]}>
               <Input placeholder="" type="text" />

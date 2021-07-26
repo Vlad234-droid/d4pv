@@ -8,9 +8,11 @@ import UploadImg from './UploadImg';
 import { actions, getRole } from '../../core/profile/profileSlice';
 import { bindActionCreators } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const AdminProfile = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [formProfileInfo] = Form.useForm();
   const [formOrganization] = Form.useForm();
   const [formPassword] = Form.useForm();
@@ -28,9 +30,12 @@ const AdminProfile = () => {
   const [valueSecondPass, setValueSecondPass] = useState('');
   const [valueThirdPass, setValueThirdPass] = useState('');
 
-  const [editCompanyLogo, setEditCompanyLogo] = useState(false);
+  const [loadingPassword, setLoadingPassword] = useState(false);
 
-  const { getProfile, updateProfile, update, updateOrganisation } = bindActionCreators(actions, dispatch);
+  const { getProfile, updateProfile, update, updateOrganisation, changePassword } = bindActionCreators(
+    actions,
+    dispatch,
+  );
 
   const { data } = useSelector((state) => state.profile);
 
@@ -41,13 +46,14 @@ const AdminProfile = () => {
       body[item] = values[item];
     }
     setLoadingHandler(true);
-    updateProfile(body).then(() => {
+    updateProfile(body).then((data) => {
       setLoadingHandler(false);
-      notification.success({
-        //message: 'Notification Title',
-        description: 'Information has been updated',
-        duration: 3.5,
-      });
+      if (!data.error) {
+        notification.success({
+          description: 'Information has been updated',
+          duration: 3.5,
+        });
+      }
     });
     update(body);
   };
@@ -59,14 +65,32 @@ const AdminProfile = () => {
       organisation: values.organisation,
     };
     setLoadingOrganization(true);
-    updateProfile(body).then(() => {
+    updateProfile(body).then((data) => {
+      if (!data.error) {
+        notification.success({
+          description: 'Information has been updated',
+          duration: 3.5,
+        });
+      }
       setLoadingOrganization(false);
     });
     updateOrganisation(values.organisation);
   };
 
   const onFinishPasswordHandler = (values) => {
-    console.log('values password', values);
+    setLoadingPassword(() => true);
+    const body = {
+      password: values.old_password,
+      new_password: values.new_password_approved,
+    };
+    changePassword(body).then((data) => {
+      notification[data.error ? 'error' : 'success']({
+        message: data.error ? 'The password is incorrect. Try again' : 'Your password has been changed successfully',
+        duration: 3.5,
+      });
+    });
+    setLoadingPassword(() => false);
+
     formPassword.resetFields();
   };
 
@@ -102,7 +126,11 @@ const AdminProfile = () => {
       <div className="wrapper">
         <div className="container_info">
           <div className="back">
-            <div className="SVG_back" onClick={() => {}}>
+            <div
+              className="SVG_back"
+              onClick={() => {
+                history.goBack();
+              }}>
               <BackLeftSVG />
             </div>
             <p>back</p>
@@ -134,11 +162,7 @@ const AdminProfile = () => {
                       <Row gutter={20}>
                         <Col span={7} style={{ paddingLeft: '0px' }}>
                           <Form.Item name="logo">
-                            <UploadImg
-                              form={formProfileInfo}
-                              editCompanyLogo={editCompanyLogo}
-                              setEditCompanyLogo={setEditCompanyLogo}
-                            />
+                            <UploadImg />
                           </Form.Item>
                         </Col>
                         <Col span={17}>
@@ -159,11 +183,11 @@ const AdminProfile = () => {
                               rules={[
                                 {
                                   type: 'email',
-                                  message: 'Please input your Email!',
+                                  message: 'Please input your Email',
                                 },
                                 {
                                   required: true,
-                                  message: 'Email is required!',
+                                  message: 'Email is required',
                                 },
                               ]}>
                               <Input placeholder="test@mail.com" />
@@ -238,7 +262,7 @@ const AdminProfile = () => {
                           label="Current Password"
                           name="old_password"
                           className="passwordFirst"
-                          rules={[{ required: true, message: 'Please input your current password!' }]}>
+                          rules={[{ required: true, message: 'Please input your current password' }]}>
                           <Input
                             suffix={suffixFirst}
                             value={valueFirstPass}
@@ -280,7 +304,7 @@ const AdminProfile = () => {
                           rules={[
                             {
                               required: true,
-                              message: 'Please confirm your password!',
+                              message: 'Please confirm your password',
                             },
                             ({ getFieldValue }) => ({
                               validator(_, value) {
@@ -312,7 +336,7 @@ const AdminProfile = () => {
                         </Col>
                         <Col span={13}>
                           <Form.Item>
-                            <Button type="primary" htmlType="submit">
+                            <Button type="primary" htmlType="submit" loading={loadingPassword}>
                               Confirm
                             </Button>
                           </Form.Item>

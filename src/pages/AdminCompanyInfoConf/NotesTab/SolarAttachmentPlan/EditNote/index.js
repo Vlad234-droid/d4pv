@@ -110,7 +110,7 @@ const EditNote = ({ setEditModal, editModal, toEdit }) => {
               rules={[
                 {
                   required: true,
-                  message: 'Requested By is required!',
+                  message: 'Requested By is required',
                 },
               ]}>
               <Input placeholder="" type="text" />
@@ -123,7 +123,7 @@ const EditNote = ({ setEditModal, editModal, toEdit }) => {
               rules={[
                 {
                   required: true,
-                  message: 'Reference By is required!',
+                  message: 'Reference By is required',
                 },
               ]}>
               <Input placeholder="" type="text" />

@@ -79,7 +79,7 @@ const AddNoteModal = ({ keyTab, addNoteModal, setAddNoteModal }) => {
             rules={[
               {
                 required: true,
-                message: 'Text is required!',
+                message: 'Text is required',
               },
             ]}>
             <Editor
@@ -109,7 +109,7 @@ const AddNoteModal = ({ keyTab, addNoteModal, setAddNoteModal }) => {
               rules={[
                 {
                   required: true,
-                  message: 'Requested By is required!',
+                  message: 'Requested By is required',
                 },
               ]}>
               <Input placeholder="" type="text" />
@@ -122,7 +122,7 @@ const AddNoteModal = ({ keyTab, addNoteModal, setAddNoteModal }) => {
               rules={[
                 {
                   required: true,
-                  message: 'Reference By is required!',
+                  message: 'Reference By is required',
                 },
               ]}>
               <Input placeholder="" type="text" />
