@@ -427,3 +427,18 @@ button:not(.ant-btn) {
     }
   }
 }
+.wrapper_spinner {
+  display: inline-block;
+  width: 72px;
+  height: 72px;
+  animation: spin 5s infinite linear;
+  transform-origin: center center;
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(1800deg);
+    }
+  }
+}

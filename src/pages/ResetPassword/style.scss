@@ -1,0 +1,68 @@
+.login-page {
+  .wrapper {
+    .fl_recover {
+      padding: 13vh 0 5vh 0;
+      //padding-left: 140px;
+      .wrapp_form_back {
+        width: 512px;
+        height: 415px;
+        padding: 40px 64px 20px;
+        border-radius: 4px;
+        box-shadow: 0 4px 8px 0 rgba(0, 25, 94, 0.1);
+        background-color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  }
+  .form_reset_block {
+    height: 88%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    .ant-form-item-explain {
+      position: static !important;
+    }
+    .form-resetPassword_hash {
+      .ant-row.ant-form-item.ant-form-item-with-help.new_password.ant-form-item-has-error {
+        margin-bottom: 0px;
+      }
+      .ant-input-suffix {
+        div {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: auto;
+          position: absolute;
+          top: 50%;
+          right: 0px;
+          transform: translateY(-50%);
+          margin-right: 16px;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .rec_pas {
+      h2 {
+        font-size: 20px;
+        margin-bottom: 0px;
+        margin-top: 20px;
+      }
+    }
+  }
+}
+@media (max-width: 1440px) {
+  .login-page {
+    .wrapper {
+      .fl_recover {
+        .wrapp_form_back {
+          width: 428px;
+        }
+      }
+    }
+  }
+}

@@ -27,6 +27,7 @@ const resetPassword = createAsyncThunk('account/resetPassword', async (body) => 
   const response = await fetchApi(`${REACT_APP_API_URL}/accounts/reset-password`, 'POST', null, JSON.stringify(body));
   return response;
 });
+
 const logInAcc = createAsyncThunk('account/authoriseAccount', async (body) => {
   const formData = new FormData();
   for (let i in body) {
@@ -46,6 +47,16 @@ const getInviteInfo = createAsyncThunk('account/getInviteInfo', async (id) => {
   const response = await fetchApi(`${REACT_APP_API_URL}/accounts/invite/${id}`, null, null, null);
   return response;
 });
+
+const verifyEmail = createAsyncThunk('account/verifyEmail', async (body) => {
+  const response = await fetchApi(`${REACT_APP_API_URL}/accounts/verify-email`, 'POST', null, JSON.stringify(body));
+  return response;
+});
+const changeToNewPassword = createAsyncThunk('account/changeToNewPassword', async (body) => {
+  const response = await fetchApi(`${REACT_APP_API_URL}/accounts/change-password`, 'POST', null, JSON.stringify(body));
+  return response;
+});
+
 const accountSlice = createSlice({
   name: 'account',
   initialState,
@@ -80,6 +91,8 @@ export const actions = {
   resetPassword,
   logInAcc,
   getInviteInfo,
+  verifyEmail,
+  changeToNewPassword,
 };
 
 export default accountSlice.reducer;
