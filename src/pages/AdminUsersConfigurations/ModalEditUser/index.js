@@ -39,7 +39,14 @@ const ModalEditUser = ({ setCurrRecordRow, record, showEditUser, setShowEditUser
             <div className="block_info">
               <div className="direction">
                 <div className="wrapper_img">
-                  <img src={record?.name?.props?.children[0]?.props?.children?.props?.src} alt="logo" />
+                  {record.image ? (
+                    <img src={record.image} alt="logo" />
+                  ) : (
+                    <div className="noimage sm">
+                      {record.fn[0]}
+                      {record.ln[0]}
+                    </div>
+                  )}
                 </div>
                 <div className="infos">
                   <h3>{record?.name?.props?.children[1]?.props?.children}</h3>

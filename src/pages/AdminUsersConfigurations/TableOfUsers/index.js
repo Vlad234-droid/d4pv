@@ -42,9 +42,9 @@ const TableOfUsers = ({ searchValue, setShowDeleteUser }) => {
         return (
           <div className="actions_block">
             <div
-              onClick={(e) => {
+              onClick={() => {
                 //console.log('e', e.target.dataset.action);
-                //console.log('record', record);
+                console.log('record', record);
                 //console.log('index', index);
                 setCurrRecordRow(() => record);
                 setShowEditUser(() => true);
@@ -102,6 +102,8 @@ const TableOfUsers = ({ searchValue, setShowDeleteUser }) => {
         ),
         role: getProperRole(item.role),
         email: item.email,
+        fn: item.first_name,
+        ln: item.last_name,
       });
     });
     setDataSource(() => newData);
