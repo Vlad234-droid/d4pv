@@ -59,6 +59,7 @@ const PreferencesTab = ({ companyId }) => {
           duration: 3.5,
         });
         setModePropert(false);
+        setInitialValues(values);
       }
       setLoading(false);
     });

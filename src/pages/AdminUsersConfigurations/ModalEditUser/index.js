@@ -1,13 +1,34 @@
-import React from 'react';
-import { Modal, Form, Button, Col, Row, Radio } from 'antd';
+import React, { useState } from 'react';
+import { Modal, Form, Button, Col, Row, Radio, notification } from 'antd';
 import './style.scss';
 import { CloseIconSVG } from '../../../components/icons';
 
-const ModalEditUser = ({ setCurrRecordRow, record, showEditUser, setShowEditUser }) => {
+import { actions } from '../../../core/configurations/configurationsSlice';
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+const ModalEditUser = ({ setCurrRecordRow, record, showEditUser, setShowEditUser, updateUsersList }) => {
+  const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
+  const dispatch = useDispatch();
+  const { updateMemberToOrganisation } = bindActionCreators(actions, dispatch);
+
   const onFinish = (values) => {
-    console.log('values', values);
-    setCurrRecordRow(() => null);
+    setLoading(true);
+    updateMemberToOrganisation({
+      account_id: record.key,
+      body: values,
+    }).then((data) => {
+      if (!data.error) {
+        notification.success({
+          description: 'User has been deleted',
+          duration: 3.5,
+        });
+        updateUsersList();
+        setLoading(false);
+        setCurrRecordRow(() => null);
+      }
+    });
     //setShowEditUser(() => false);
   };
 
@@ -31,7 +52,7 @@ const ModalEditUser = ({ setCurrRecordRow, record, showEditUser, setShowEditUser
         requiredMark={true}
         onFinish={onFinish}
         initialValues={{
-          option__user__admin: record.role === 'Admin' ? 'admin' : 'user',
+          role: record.role === 'Admin' ? 1 : 2,
         }}>
         <h2>Edit User</h2>
         <Col span={24}>
@@ -58,18 +79,18 @@ const ModalEditUser = ({ setCurrRecordRow, record, showEditUser, setShowEditUser
         </Col>
 
         <div className="checkBox">
-          <Form.Item name="option__user__admin">
+          <Form.Item name="role">
             <Radio.Group>
               <Row gutter={192}>
                 <Col span={5}>
-                  <Radio value="user" name="user">
+                  <Radio value={2} name="user">
                     <Button type="button" className="user_btn">
                       Regular User
                     </Button>
                   </Radio>
                 </Col>
                 <Col span={5} className="col-exp">
-                  <Radio value="admin" name="admin">
+                  <Radio value={1} name="admin">
                     <Button type="primary" className="admin_btn">
                       Admin
                     </Button>
@@ -93,7 +114,7 @@ const ModalEditUser = ({ setCurrRecordRow, record, showEditUser, setShowEditUser
               </Button>
             </Col>
             <Col span={15}>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit" loading={loading}>
                 Confirm
               </Button>
             </Col>

@@ -14,6 +14,7 @@ const ModalAddUser = ({ showAddUser, setShowAddUser }) => {
   const onFinish = (values) => {
     inViteMemberToOrganisation({
       email: values.email,
+      role: values.role,
     }).then((data) => {
       const type = data.error ? 'error' : 'success';
       return notification[type]({
@@ -44,7 +45,7 @@ const ModalAddUser = ({ showAddUser, setShowAddUser }) => {
         requiredMark={true}
         onFinish={onFinish}
         initialValues={{
-          option__user__admin: 'admin',
+          role: 2,
         }}>
         <h2>Add User</h2>
         <Col span={24}>
@@ -67,16 +68,16 @@ const ModalAddUser = ({ showAddUser, setShowAddUser }) => {
         </Col>
 
         <div className="checkBox">
-          <Form.Item name="option__user__admin">
+          <Form.Item name="role">
             <Radio.Group>
               <Row gutter={192}>
                 <Col span={5}>
-                  <Radio value="user" name="user">
+                  <Radio value={2} name="user">
                     <Button type="button">User</Button>
                   </Radio>
                 </Col>
                 <Col span={5}>
-                  <Radio value="admin" name="admin">
+                  <Radio value={1} name="admin">
                     <Button type="primary">Admin</Button>
                   </Radio>
                 </Col>

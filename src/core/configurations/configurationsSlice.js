@@ -37,6 +37,43 @@ const getMembersOfOrganisation = createAsyncThunk('configuration/getMembersOfOrg
   }
 });
 
+const updateMemberToOrganisation = createAsyncThunk('configuration/updateMemberToOrganisation', async (data) => {
+  const token = lockr.get('auth-token');
+
+  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+  try {
+    const response = await fetchApi(
+      `${REACT_APP_API_URL}/me/organisation/members/${data.account_id}/role`,
+      'PATCH',
+      headers,
+      JSON.stringify(data.body),
+    );
+    return response;
+  } catch (err) {
+    return Promise.reject(err);
+  }
+});
+
+const removeMembersOfOrganisation = createAsyncThunk(
+  'configuration/removeMembersOfOrganisation',
+  async (account_id) => {
+    const token = lockr.get('auth-token');
+
+    const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+    try {
+      const response = await fetchApi(
+        `${REACT_APP_API_URL}/me/organisation/members/${account_id}`,
+        'DELETE',
+        headers,
+        null,
+      );
+      return response;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  },
+);
+
 const getConfCompanies = createAsyncThunk('configuration/getConfCompanies', async () => {
   const token = lockr.get('auth-token');
 
@@ -75,14 +112,14 @@ const configurationSlice = createSlice({
   extraReducers: {},
 });
 
-const {} = configurationSlice.actions;
-
 export const actions = {
   ...configurationSlice.actions,
   inViteMemberToOrganisation,
   getMembersOfOrganisation,
+  removeMembersOfOrganisation,
   getConfCompanies,
   createCompany,
+  updateMemberToOrganisation,
 };
 
 export default configurationSlice.reducer;

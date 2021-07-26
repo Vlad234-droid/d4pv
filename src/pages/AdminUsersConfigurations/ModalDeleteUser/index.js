@@ -1,13 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CloseIconSVG } from '../../../components/icons';
-import { Modal, Form, Button, Col, Row } from 'antd';
-import './style.scss';
+import { Modal, Form, Button, Col, Row, notification } from 'antd';
+import { actions } from '../../../core/configurations/configurationsSlice';
 
-const ModalDeleteUser = ({ showDeleteUser, setShowDeleteUser }) => {
+import './style.scss';
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+const ModalDeleteUser = ({ showDeleteUser, setShowDeleteUser, activeId, updateUsersList }) => {
+  const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
+  const dispatch = useDispatch();
+  const { removeMembersOfOrganisation, getMembersOfOrganisation } = bindActionCreators(actions, dispatch);
   const onFinish = (values) => {
-    console.log('values', values);
+    setLoading(true);
+    removeMembersOfOrganisation(activeId).then((data) => {
+      if (!data.error) {
+        notification.success({
+          description: 'User has been deleted',
+          duration: 3.5,
+        });
+        setShowDeleteUser(false);
+        setLoading(false);
+        updateUsersList();
+      }
+    });
   };
+
+  useEffect(() => {
+    console.log('activeId', activeId);
+  }, [activeId]);
+
   return (
     <Modal
       visible={showDeleteUser}
@@ -37,7 +60,7 @@ const ModalDeleteUser = ({ showDeleteUser, setShowDeleteUser }) => {
               </Button>
             </Col>
             <Col span={15}>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit" loading={loading}>
                 Confirm
               </Button>
             </Col>

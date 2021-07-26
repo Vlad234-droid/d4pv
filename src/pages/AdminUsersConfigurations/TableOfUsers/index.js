@@ -4,13 +4,16 @@ import { EditSVG, DeleteSVG } from '../../../components/icons';
 import ModalEditUser from '../ModalEditUser';
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
+import ModalDeleteUser from '../ModalDeleteUser';
 import { actions } from '../../../core/configurations/configurationsSlice';
 
 import './style.scss';
-const TableOfUsers = ({ searchValue, setShowDeleteUser }) => {
+const TableOfUsers = ({ searchValue }) => {
   const dispatch = useDispatch();
   const { getMembersOfOrganisation } = bindActionCreators(actions, dispatch);
   const [showEditUser, setShowEditUser] = useState(false);
+  const [showDeleteUser, setShowDeleteUser] = useState(false);
+  const [activeId, setActiveId] = useState(null);
   const [currRecordRow, setCurrRecordRow] = useState(null);
   const [tableLoading, setTableLoading] = useState(false);
   const [dataSource, setDataSource] = useState(null);
@@ -44,8 +47,9 @@ const TableOfUsers = ({ searchValue, setShowDeleteUser }) => {
             <div
               onClick={() => {
                 //console.log('e', e.target.dataset.action);
-                console.log('record', record);
+                //console.log('record', record.key);
                 //console.log('index', index);
+                setActiveId(record.key);
                 setCurrRecordRow(() => record);
                 setShowEditUser(() => true);
               }}>
@@ -56,6 +60,7 @@ const TableOfUsers = ({ searchValue, setShowDeleteUser }) => {
                 //console.log('e', e.target.dataset.action);
                 //console.log('record', record);
                 //console.log('index', index);
+                setActiveId(record.key);
                 setShowDeleteUser(() => true);
               }}>
               <DeleteSVG />
@@ -66,9 +71,18 @@ const TableOfUsers = ({ searchValue, setShowDeleteUser }) => {
     },
   ]);
 
+  const updateUsersList = () => {
+    setTableLoading(() => true);
+    getMembersOfOrganisation().then((data) => {
+      setPageInfo(data.payload);
+      setTableLoading(() => false);
+    });
+  };
+
   const onChange = (prop) => {
     console.log('helo', prop);
   };
+
   useEffect(() => {
     setTableLoading(() => true);
     getMembersOfOrganisation().then((data) => {
@@ -148,12 +162,19 @@ const TableOfUsers = ({ searchValue, setShowDeleteUser }) => {
               return record.onCheck ? 'onCheck' : '';
             }}
           />
+          <ModalDeleteUser
+            showDeleteUser={showDeleteUser}
+            setShowDeleteUser={setShowDeleteUser}
+            activeId={activeId}
+            updateUsersList={updateUsersList}
+          />
           {currRecordRow !== null && (
             <ModalEditUser
               setCurrRecordRow={setCurrRecordRow}
               record={currRecordRow}
               showEditUser={showEditUser}
               setShowEditUser={setShowEditUser}
+              updateUsersList={updateUsersList}
             />
           )}
         </>

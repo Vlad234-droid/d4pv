@@ -3,7 +3,6 @@ import { Form, Button, Input, Row, Col } from 'antd';
 import './style.scss';
 import { SearchSVG, CloseSVG } from '../../components/icons';
 import ModalAddUser from './ModalAddUser';
-import ModalDeleteUser from './ModalDeleteUser';
 import TableOfUsers from './TableOfUsers';
 import LayoutConfiguration from '../../components/LayoutConfiguration/Layout';
 
@@ -11,7 +10,6 @@ const AdminUsersConfigurations = () => {
   const [form] = Form.useForm();
   const [searchValue, setSearchValue] = useState('');
   const [showAddUser, setShowAddUser] = useState(false);
-  const [showDeleteUser, setShowDeleteUser] = useState(false);
   const [serchToggle, setSearchToggle] = useState(null);
 
   const onFinish = (values) => {
@@ -24,7 +22,6 @@ const AdminUsersConfigurations = () => {
     <LayoutConfiguration>
       <div className="block_users" id="block_users">
         <ModalAddUser showAddUser={showAddUser} setShowAddUser={setShowAddUser} />
-        <ModalDeleteUser showDeleteUser={showDeleteUser} setShowDeleteUser={setShowDeleteUser} />
         <div className="title_users">
           <h2>Users</h2>
         </div>
@@ -62,7 +59,7 @@ const AdminUsersConfigurations = () => {
           </Row>
         </div>
         <div>
-          <TableOfUsers setShowDeleteUser={setShowDeleteUser} searchValue={searchValue} />
+          <TableOfUsers searchValue={searchValue} />
         </div>
       </div>
     </LayoutConfiguration>
