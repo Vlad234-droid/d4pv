@@ -63,6 +63,17 @@ const deleteProfileImage = createAsyncThunk('profile/deleteProfileImage', async 
   }
 });
 
+const changePassword = createAsyncThunk('profile/changePassword', async (body) => {
+  const token = lockr.get('auth-token');
+  const headers = { 'Content-Type': 'application/json', Accept: 'application/json', Authorization: `bearer ${token}` };
+  try {
+    const response = await fetchApi(`${REACT_APP_API_URL}/me/password`, 'PATCH', headers, JSON.stringify(body));
+    return response;
+  } catch (err) {
+    return Promise.reject(err);
+  }
+});
+
 const profileSlice = createSlice({
   name: 'profile',
   initialState,
@@ -116,6 +127,7 @@ export const actions = {
   updateProfile,
   uploadProfileImage,
   deleteProfileImage,
+  changePassword,
 };
 
 export default profileSlice.reducer;

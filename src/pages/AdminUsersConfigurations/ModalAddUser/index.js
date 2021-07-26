@@ -55,11 +55,11 @@ const ModalAddUser = ({ showAddUser, setShowAddUser }) => {
             rules={[
               {
                 required: true,
-                message: 'Email is required!',
+                message: 'Email is required',
               },
               {
                 type: 'email',
-                message: 'Please input your Email!',
+                message: 'Please input your Email',
               },
             ]}>
             <Input />

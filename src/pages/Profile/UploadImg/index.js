@@ -8,17 +8,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const { Dragger } = Upload;
 
-const UploadImg = ({ form, editCompanyLogo, setEditCompanyLogo }) => {
+const UploadImg = () => {
   const [logoUrl, setLogoUrl] = useState(null);
-
   const image = useSelector((state) => state.profile.data.image);
   const dispatch = useDispatch();
   const { uploadProfileImage, deleteProfileImage } = bindActionCreators(actions, dispatch);
   const customRequest = (e) => {
-    console.log('e', e.file);
-    // form.setFieldsValue({
-    //   logo: e.file,
-    // });
     uploadProfileImage(e.file).then((data) => {
       if (!data.error) {
         notification.success({
@@ -27,80 +22,44 @@ const UploadImg = ({ form, editCompanyLogo, setEditCompanyLogo }) => {
         });
       }
     });
-
+    console.log('helo');
     setLogoUrl(() => URL.createObjectURL(e.file));
     e.onSuccess('ok');
   };
 
-  const checkRender = () => {
-    return (
-      <div className="edit_dragger">
-        {logoUrl !== null ? (
-          <Dragger
-            name="file"
-            customRequest={customRequest}
-            accept="image/png, image/jpeg"
-            className={`upload-img edit ${false ? 'loading' : ''} `}
-            showUploadList={false}>
-            <div className="img_logo__block">
-              <img src={image === '' ? logoUrl : image} alt="logo" />
-              <div className="choices">
-                <div>
-                  <div>
-                    <SVGReload />
-                  </div>
-                  <span>Replace</span>
-                </div>
-                <div
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    deleteProfileImage();
-                  }}>
-                  <div>
-                    <CloseSmallSVG />
-                  </div>
-                  <span>Remove</span>
-                </div>
-              </div>
-            </div>
-          </Dragger>
-        ) : (
-          <Dragger
-            name="file"
-            customRequest={customRequest}
-            accept="image/png, image/jpeg"
-            className={`upload-img edit ${false ? 'loading' : ''} `}
-            showUploadList={false}>
-            <div className="img_logo__block">
-              <img src={image} alt="logo" />
-              <div className="choices">
-                <div>
-                  <div>
-                    <SVGReload />
-                  </div>
-                  <span>Replace</span>
-                </div>
-                <div
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    deleteProfileImage();
-                  }}>
-                  <div>
-                    <CloseSmallSVG />
-                  </div>
-                  <span>Remove</span>
-                </div>
-              </div>
-            </div>
-          </Dragger>
-        )}
-      </div>
-    );
-  };
-
   return (
     <Tooltip placement="rightTop" title={'Upload PNG, JPG, JPEG'}>
-      {image === '' ? (
+      {image !== '' ? (
+        <Dragger
+          name="file"
+          customRequest={customRequest}
+          accept="image/png, image/jpeg"
+          className={`upload-img edit ${false ? 'loading' : ''} `}
+          showUploadList={false}>
+          <div className="img_logo__block">
+            <img src={image} alt="logo" />
+            <div className="choices">
+              <div>
+                <div>
+                  <SVGReload />
+                </div>
+                <span>Replace</span>
+              </div>
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+                  deleteProfileImage();
+                  setLogoUrl(() => null);
+                }}>
+                <div>
+                  <CloseSmallSVG />
+                </div>
+                <span>Remove</span>
+              </div>
+            </div>
+          </div>
+        </Dragger>
+      ) : image === '' && logoUrl === null ? (
         <Dragger
           name="file"
           customRequest={customRequest}
@@ -119,7 +78,38 @@ const UploadImg = ({ form, editCompanyLogo, setEditCompanyLogo }) => {
           </div>
         </Dragger>
       ) : (
-        checkRender()
+        image === '' &&
+        logoUrl !== null && (
+          <Dragger
+            name="file"
+            customRequest={customRequest}
+            accept="image/png, image/jpeg"
+            className={`upload-img edit ${false ? 'loading' : ''} `}
+            showUploadList={false}>
+            <div className="img_logo__block">
+              <img src={logoUrl} alt="logo" />
+              <div className="choices">
+                <div>
+                  <div>
+                    <SVGReload />
+                  </div>
+                  <span>Replace</span>
+                </div>
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deleteProfileImage();
+                    setLogoUrl(() => null);
+                  }}>
+                  <div>
+                    <CloseSmallSVG />
+                  </div>
+                  <span>Remove</span>
+                </div>
+              </div>
+            </div>
+          </Dragger>
+        )
       )}
     </Tooltip>
   );

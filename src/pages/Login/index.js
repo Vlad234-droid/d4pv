@@ -55,11 +55,11 @@ const LoginPage = () => {
                 rules={[
                   {
                     type: 'email',
-                    message: 'Please input your Email!',
+                    message: 'Please input your Email',
                   },
                   {
                     required: true,
-                    message: 'Email is required!',
+                    message: 'Email is required',
                   },
                 ]}>
                 <Input placeholder="Add your email" />
@@ -68,8 +68,8 @@ const LoginPage = () => {
                 label="Password"
                 name="password"
                 rules={[
-                  { min: 8, message: 'Password must be at least 8 characters!' },
-                  { required: true, message: 'Please input your password!' },
+                  { min: 8, message: 'Password must be at least 8 characters' },
+                  { required: true, message: 'Please input your password' },
                 ]}>
                 <Input placeholder="Type your password" type="password" />
               </Form.Item>

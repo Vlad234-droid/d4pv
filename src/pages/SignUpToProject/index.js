@@ -90,7 +90,7 @@ const SignUpToProject = () => {
                     rules={[
                       {
                         required: true,
-                        message: 'Name is required!',
+                        message: 'Name is required',
                       },
                     ]}>
                     <Input placeholder="Add your first name" type="text" />
@@ -103,7 +103,7 @@ const SignUpToProject = () => {
                     rules={[
                       {
                         required: true,
-                        message: 'Last Name is required!',
+                        message: 'Last Name is required',
                       },
                     ]}>
                     <Input placeholder="Add your last name" type="text" />
@@ -117,11 +117,11 @@ const SignUpToProject = () => {
                   rules={[
                     {
                       type: 'email',
-                      message: 'Please input your Email!',
+                      message: 'Please input your Email',
                     },
                     {
                       required: true,
-                      message: 'Email is required!',
+                      message: 'Email is required',
                     },
                   ]}>
                   <Input placeholder="Type your email" />
@@ -134,7 +134,7 @@ const SignUpToProject = () => {
                   className="passwordFirst"
                   rules={[
                     // { min: 6, message: 'Password must be at least 6 characters!' },
-                    { required: true, message: 'Please input your password!' },
+                    { required: true, message: 'Please input your password' },
                     {
                       pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
                       message:
@@ -160,7 +160,7 @@ const SignUpToProject = () => {
                   rules={[
                     {
                       required: true,
-                      message: 'Please confirm your password!',
+                      message: 'Please confirm your password',
                     },
                     ({ getFieldValue }) => ({
                       validator(_, value) {
