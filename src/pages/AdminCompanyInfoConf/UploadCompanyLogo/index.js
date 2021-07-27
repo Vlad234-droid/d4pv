@@ -10,17 +10,21 @@ import { useParams } from 'react-router-dom';
 const { Dragger } = Upload;
 
 const UploadCompanyLogo = ({ editMode, setLogoUrl, logoUrl }) => {
+  const [updatedImg, setUpdatedImg] = useState(null);
   const dispatch = useDispatch();
   const { updateCompanyImage, getCompanieData, removeCompanyImage } = bindActionCreators(actions, dispatch);
 
   const { id } = useParams();
 
-  const image = useSelector((state) => state.companies?.companieData?.image);
+  const image = useSelector((state) => state.companies?.companieData?.image); //
 
-  console.log('image', image);
+  useEffect(() => {
+    setUpdatedImg(() => `${image}?${new Date().getTime()}`);
+    console.log('image', image);
+  }, [image]);
 
   const customRequest = (e) => {
-    setLogoUrl(() => URL.createObjectURL(e.file));
+    // setLogoUrl(() => URL.createObjectURL(e.file));
 
     const body = {
       company_id: id,
@@ -62,9 +66,9 @@ const UploadCompanyLogo = ({ editMode, setLogoUrl, logoUrl }) => {
             </div>
             <span className="upload_photo">Upload logo</span>
           </div>
-        ) : image !== null ? (
+        ) : updatedImg !== null ? (
           <div className="img_logo__block">
-            <img src={image} alt="logo" />
+            <img src={updatedImg} alt="logo" />
             {editMode && (
               <div className="choices">
                 <div>
@@ -89,31 +93,32 @@ const UploadCompanyLogo = ({ editMode, setLogoUrl, logoUrl }) => {
             )}
           </div>
         ) : (
-          <div className="img_logo__block">
-            {/* <img src={image} alt="logo" />
-            {editMode && (
-              <div className="choices">
-                <div>
-                  <div>
-                    <SVGReload />
-                  </div>
-                  <span>Replace</span>
-                </div>
-                <div
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    removeCompanyImage(id).then(() => {
-                      getCompanieData(id);
-                    });
-                  }}>
-                  <div>
-                    <CloseSmallSVG />
-                  </div>
-                  <span>Remove</span>
-                </div>
-              </div>
-            )} */}
-          </div>
+          <div>hello kittyt</div>
+          // <div className="img_logo__block">
+          //   <img src={image} alt="logo" />
+          //   {editMode && (
+          //     <div className="choices">
+          //       <div>
+          //         <div>
+          //           <SVGReload />
+          //         </div>
+          //         <span>Replace</span>
+          //       </div>
+          //       <div
+          //         onClick={(e) => {
+          //           e.stopPropagation();
+          //           removeCompanyImage(id).then(() => {
+          //             getCompanieData(id);
+          //           });
+          //         }}>
+          //         <div>
+          //           <CloseSmallSVG />
+          //         </div>
+          //         <span>Remove</span>
+          //       </div>
+          //     </div>
+          //   )}
+          // </div>
         )}
       </Dragger>
     </Tooltip>

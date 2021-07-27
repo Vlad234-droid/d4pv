@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tooltip, Upload, Spin, notification } from 'antd';
 import './style.scss';
 import { SVGReload, CloseSmallSVG, StarSVG } from '../../../components/icons';
@@ -26,6 +26,10 @@ const UploadImg = () => {
     setLogoUrl(() => URL.createObjectURL(e.file));
     e.onSuccess('ok');
   };
+
+  useEffect(() => {
+    console.log('image', image);
+  }, []);
 
   return (
     <Tooltip placement="rightTop" title={'Upload PNG, JPG, JPEG'}>
