@@ -19,8 +19,6 @@ const getProfile = createAsyncThunk('profile/getProfile', async (_, { dispatch }
     const response = await fetchApi(`${REACT_APP_API_URL}/me`, null, headers, null, logout);
     return response;
   } catch (err) {
-    console.log('ERROR', err);
-
     return Promise.reject(err);
   }
 });
