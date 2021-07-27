@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, bindActionCreators } from '@reduxjs/toolkit';
 import { fetchApi } from '../fetchApi';
 import lockr from 'lockr';
 
@@ -9,12 +9,14 @@ const initialState = {
   isloggedIn: null,
 };
 
-const getProfile = createAsyncThunk('profile/getProfile', async () => {
+const getProfile = createAsyncThunk('profile/getProfile', async (_, { dispatch }) => {
+  const { logout } = bindActionCreators(profileSlice.actions, dispatch);
+
   const token = lockr.get('auth-token');
   const headers = { 'Content-Type': 'application/json', Accept: 'application/json', Authorization: `bearer ${token}` };
 
   try {
-    const response = await fetchApi(`${REACT_APP_API_URL}/me`, null, headers, null);
+    const response = await fetchApi(`${REACT_APP_API_URL}/me`, null, headers, null, logout);
     return response;
   } catch (err) {
     console.log('ERROR', err);
@@ -23,18 +25,20 @@ const getProfile = createAsyncThunk('profile/getProfile', async () => {
   }
 });
 
-const updateProfile = createAsyncThunk('profile/updateProfile', async (body) => {
+const updateProfile = createAsyncThunk('profile/updateProfile', async (body, { dispatch }) => {
+  const { logout } = bindActionCreators(profileSlice.actions, dispatch);
   const token = lockr.get('auth-token');
   const headers = { 'Content-Type': 'application/json', Accept: 'application/json', Authorization: `bearer ${token}` };
   try {
-    const response = await fetchApi(`${REACT_APP_API_URL}/me`, 'PUT', headers, JSON.stringify(body));
+    const response = await fetchApi(`${REACT_APP_API_URL}/me`, 'PUT', headers, JSON.stringify(body), logout);
     return response;
   } catch (err) {
     return Promise.reject(err);
   }
 });
 
-const uploadProfileImage = createAsyncThunk('profile/uploadProfileImage', async (file) => {
+const uploadProfileImage = createAsyncThunk('profile/uploadProfileImage', async (file, { dispatch }) => {
+  const { logout } = bindActionCreators(profileSlice.actions, dispatch);
   const formData = new FormData();
   console.log('file', file);
 
@@ -46,29 +50,31 @@ const uploadProfileImage = createAsyncThunk('profile/uploadProfileImage', async 
     Authorization: `bearer ${token}`,
   };
   try {
-    const response = await fetchApi(`${REACT_APP_API_URL}/me/image`, 'PATCH', headers, formData);
+    const response = await fetchApi(`${REACT_APP_API_URL}/me/image`, 'PATCH', headers, formData, logout);
     return response;
   } catch (err) {
     return Promise.reject(err);
   }
 });
 
-const deleteProfileImage = createAsyncThunk('profile/deleteProfileImage', async () => {
+const deleteProfileImage = createAsyncThunk('profile/deleteProfileImage', async (_, { dispatch }) => {
+  const { logout } = bindActionCreators(profileSlice.actions, dispatch);
   const token = lockr.get('auth-token');
   const headers = { 'Content-Type': 'application/json', Accept: 'application/json', Authorization: `bearer ${token}` };
   try {
-    const response = await fetchApi(`${REACT_APP_API_URL}/me/image`, 'DELETE', headers, null);
+    const response = await fetchApi(`${REACT_APP_API_URL}/me/image`, 'DELETE', headers, null, logout);
     return response;
   } catch (err) {
     return Promise.reject(err);
   }
 });
 
-const changePassword = createAsyncThunk('profile/changePassword', async (body) => {
+const changePassword = createAsyncThunk('profile/changePassword', async (body, { dispatch }) => {
+  const { logout } = bindActionCreators(profileSlice.actions, dispatch);
   const token = lockr.get('auth-token');
   const headers = { 'Content-Type': 'application/json', Accept: 'application/json', Authorization: `bearer ${token}` };
   try {
-    const response = await fetchApi(`${REACT_APP_API_URL}/me/password`, 'PATCH', headers, JSON.stringify(body));
+    const response = await fetchApi(`${REACT_APP_API_URL}/me/password`, 'PATCH', headers, JSON.stringify(body), logout);
     return response;
   } catch (err) {
     return Promise.reject(err);

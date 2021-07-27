@@ -96,12 +96,14 @@ const AdminProfile = () => {
 
   useEffect(() => {
     getProfile().then((data) => {
-      const role = data.payload?.role.split('.');
-      const [_, last] = role;
-      setUpdatedRole(() => {
-        if (last === 'OWNER') return true;
-        return false;
-      });
+      if (!data.error) {
+        const role = data.payload?.role.split('.');
+        const [_, last] = role;
+        setUpdatedRole(() => {
+          if (last === 'OWNER') return true;
+          return false;
+        });
+      }
     });
   }, []);
 

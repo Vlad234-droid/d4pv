@@ -1,6 +1,7 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, bindActionCreators } from '@reduxjs/toolkit';
 import { fetchApi } from '../fetchApi';
 import lockr from 'lockr';
+import { actions as profileActions } from '../profile/profileSlice';
 
 const { REACT_APP_API_URL } = process.env;
 
@@ -8,14 +9,22 @@ const initialState = {
   companieData: null,
 };
 
-const getCompanieData = createAsyncThunk('companies/getCompanieData', async (company_id) => {
+const getCompanieData = createAsyncThunk('companies/getCompanieData', async (company_id, { dispatch }) => {
+  const { logout } = bindActionCreators(profileActions, dispatch);
   const token = lockr.get('auth-token');
   const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
-  const response = await fetchApi(`${REACT_APP_API_URL}/me/organisation/companies/${company_id}`, 'GET', headers, null);
+  const response = await fetchApi(
+    `${REACT_APP_API_URL}/me/organisation/companies/${company_id}`,
+    'GET',
+    headers,
+    null,
+    logout,
+  );
   return response;
 });
 
-const updateCompanieData = createAsyncThunk('companies/updateCompanieData', async (data) => {
+const updateCompanieData = createAsyncThunk('companies/updateCompanieData', async (data, { dispatch }) => {
+  const { logout } = bindActionCreators(profileActions, dispatch);
   const token = lockr.get('auth-token');
   const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
   const body = JSON.stringify(data.body);
@@ -24,11 +33,13 @@ const updateCompanieData = createAsyncThunk('companies/updateCompanieData', asyn
     'PUT',
     headers,
     body,
+    logout,
   );
   return response;
 });
 
-const deleteCompany = createAsyncThunk('companies/deleteCompany', async (company_id) => {
+const deleteCompany = createAsyncThunk('companies/deleteCompany', async (company_id, { dispatch }) => {
+  const { logout } = bindActionCreators(profileActions, dispatch);
   const token = lockr.get('auth-token');
   const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
   const response = await fetchApi(
@@ -36,11 +47,13 @@ const deleteCompany = createAsyncThunk('companies/deleteCompany', async (company
     'DELETE',
     headers,
     null,
+    logout,
   );
   return response;
 });
 
-const addCompanyNote = createAsyncThunk('companies/addCompanyNote', async (data) => {
+const addCompanyNote = createAsyncThunk('companies/addCompanyNote', async (data, { dispatch }) => {
+  const { logout } = bindActionCreators(profileActions, dispatch);
   const token = lockr.get('auth-token');
   const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
   const response = await fetchApi(
@@ -48,11 +61,13 @@ const addCompanyNote = createAsyncThunk('companies/addCompanyNote', async (data)
     'POST',
     headers,
     JSON.stringify(data.body),
+    logout,
   );
   return response;
 });
 
-const addCompanyRequirement = createAsyncThunk('companies/addCompanyRequirement', async (data) => {
+const addCompanyRequirement = createAsyncThunk('companies/addCompanyRequirement', async (data, { dispatch }) => {
+  const { logout } = bindActionCreators(profileActions, dispatch);
   const token = lockr.get('auth-token');
   const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
   const response = await fetchApi(
@@ -60,11 +75,13 @@ const addCompanyRequirement = createAsyncThunk('companies/addCompanyRequirement'
     'POST',
     headers,
     JSON.stringify(data.body),
+    logout,
   );
   return response;
 });
 
-const updateCompanyNote = createAsyncThunk('companies/updateCompanyNote', async (data) => {
+const updateCompanyNote = createAsyncThunk('companies/updateCompanyNote', async (data, { dispatch }) => {
+  const { logout } = bindActionCreators(profileActions, dispatch);
   const token = lockr.get('auth-token');
   const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
   const response = await fetchApi(
@@ -72,11 +89,13 @@ const updateCompanyNote = createAsyncThunk('companies/updateCompanyNote', async 
     'PUT',
     headers,
     JSON.stringify(data.body),
+    logout,
   );
   return response;
 });
 
-const updateCompanyRequirement = createAsyncThunk('companies/updateCompanyRequirement', async (data) => {
+const updateCompanyRequirement = createAsyncThunk('companies/updateCompanyRequirement', async (data, { dispatch }) => {
+  const { logout } = bindActionCreators(profileActions, dispatch);
   const token = lockr.get('auth-token');
   const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
 
@@ -85,50 +104,75 @@ const updateCompanyRequirement = createAsyncThunk('companies/updateCompanyRequir
     'PUT',
     headers,
     JSON.stringify(data.body),
+    logout,
   );
   return response;
 });
 
-const deleteCompanyNote = createAsyncThunk('companies/deleteCompanyNote', async (note_id) => {
-  const token = lockr.get('auth-token');
-  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
-  const response = await fetchApi(`${REACT_APP_API_URL}/me/organisation/notes/${note_id}`, 'DELETE', headers);
-  return response;
-});
-
-const deleteCompanyRequirements = createAsyncThunk('companies/deleteCompanyRequirements', async (requirement_id) => {
+const deleteCompanyNote = createAsyncThunk('companies/deleteCompanyNote', async (note_id, { dispatch }) => {
+  const { logout } = bindActionCreators(profileActions, dispatch);
   const token = lockr.get('auth-token');
   const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
   const response = await fetchApi(
-    `${REACT_APP_API_URL}/me/organisation/requirements/${requirement_id}`,
+    `${REACT_APP_API_URL}/me/organisation/notes/${note_id}`,
     'DELETE',
     headers,
+    null,
+    logout,
   );
   return response;
 });
 
-const visibilityCompanyNote = createAsyncThunk('companies/visibilityCompanyNote', async (note_id) => {
+const deleteCompanyRequirements = createAsyncThunk(
+  'companies/deleteCompanyRequirements',
+  async (requirement_id, { dispatch }) => {
+    const { logout } = bindActionCreators(profileActions, dispatch);
+    const token = lockr.get('auth-token');
+    const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+    const response = await fetchApi(
+      `${REACT_APP_API_URL}/me/organisation/requirements/${requirement_id}`,
+      'DELETE',
+      headers,
+      null,
+      logout,
+    );
+    return response;
+  },
+);
+
+const visibilityCompanyNote = createAsyncThunk('companies/visibilityCompanyNote', async (note_id, { dispatch }) => {
+  const { logout } = bindActionCreators(profileActions, dispatch);
   const token = lockr.get('auth-token');
   const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
-  const response = await fetchApi(`${REACT_APP_API_URL}/me/organisation/notes/${note_id}/visibility`, 'PATCH', headers);
+  const response = await fetchApi(
+    `${REACT_APP_API_URL}/me/organisation/notes/${note_id}/visibility`,
+    'PATCH',
+    headers,
+    null,
+    logout,
+  );
   return response;
 });
 
 const visibilityCompanyRequirements = createAsyncThunk(
   'companies/visibilityCompanyRequirements',
-  async (requirement_id) => {
+  async (requirement_id, { dispatch }) => {
+    const { logout } = bindActionCreators(profileActions, dispatch);
     const token = lockr.get('auth-token');
     const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
     const response = await fetchApi(
       `${REACT_APP_API_URL}/me/organisation/requirements/${requirement_id}/visibility`,
       'PATCH',
       headers,
+      null,
+      logout,
     );
     return response;
   },
 );
 
-const getCompanyPreferences = createAsyncThunk('companies/getCompanyPreferences', async (company_id) => {
+const getCompanyPreferences = createAsyncThunk('companies/getCompanyPreferences', async (company_id, { dispatch }) => {
+  const { logout } = bindActionCreators(profileActions, dispatch);
   const token = lockr.get('auth-token');
   const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
   const response = await fetchApi(
@@ -136,11 +180,13 @@ const getCompanyPreferences = createAsyncThunk('companies/getCompanyPreferences'
     'GET',
     headers,
     null,
+    logout,
   );
   return response;
 });
 
-const updateCompanyPreferences = createAsyncThunk('companies/updateCompanyPreferences', async (data) => {
+const updateCompanyPreferences = createAsyncThunk('companies/updateCompanyPreferences', async (data, { dispatch }) => {
+  const { logout } = bindActionCreators(profileActions, dispatch);
   const token = lockr.get('auth-token');
   const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
 
@@ -149,11 +195,13 @@ const updateCompanyPreferences = createAsyncThunk('companies/updateCompanyPrefer
     'PUT',
     headers,
     JSON.stringify(data.body),
+    logout,
   );
   return response;
 });
 
-const uploadTempStorage = createAsyncThunk('companies/uploadTempStorage', async (file) => {
+const uploadTempStorage = createAsyncThunk('companies/uploadTempStorage', async (file, { dispatch }) => {
+  const { logout } = bindActionCreators(profileActions, dispatch);
   const formData = new FormData();
   formData.append('file', file);
   const token = lockr.get('auth-token');
@@ -162,14 +210,15 @@ const uploadTempStorage = createAsyncThunk('companies/uploadTempStorage', async 
     Authorization: `bearer ${token}`,
   };
   try {
-    const response = await fetchApi(`${REACT_APP_API_URL}/me/temporary_storage`, 'POST', headers, formData);
+    const response = await fetchApi(`${REACT_APP_API_URL}/me/temporary_storage`, 'POST', headers, formData, logout);
     return response;
   } catch (err) {
     return Promise.reject(err);
   }
 });
 
-const updateCompanyImage = createAsyncThunk('profile/updateCompanyImage', async (data) => {
+const updateCompanyImage = createAsyncThunk('profile/updateCompanyImage', async (data, { dispatch }) => {
+  const { logout } = bindActionCreators(profileActions, dispatch);
   const formData = new FormData();
   formData.append('file', data.file);
   const token = lockr.get('auth-token');
@@ -183,6 +232,7 @@ const updateCompanyImage = createAsyncThunk('profile/updateCompanyImage', async 
       'PATCH',
       headers,
       formData,
+      logout,
     );
     return response;
   } catch (err) {
@@ -190,7 +240,8 @@ const updateCompanyImage = createAsyncThunk('profile/updateCompanyImage', async 
   }
 });
 
-const removeCompanyImage = createAsyncThunk('profile/removeCompanyImage', async (company_id) => {
+const removeCompanyImage = createAsyncThunk('profile/removeCompanyImage', async (company_id, { dispatch }) => {
+  const { logout } = bindActionCreators(profileActions, dispatch);
   const token = lockr.get('auth-token');
   const headers = {
     Accept: 'application/json',
@@ -202,6 +253,7 @@ const removeCompanyImage = createAsyncThunk('profile/removeCompanyImage', async 
       'DELETE',
       headers,
       null,
+      logout,
     );
     return response;
   } catch (err) {
