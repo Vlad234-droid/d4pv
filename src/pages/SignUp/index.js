@@ -11,18 +11,20 @@ import { bindActionCreators } from 'redux';
 import { useSelector } from 'react-redux';
 
 const LoginPage = () => {
+  const [loader, setLoader] = useState(false);
+
   const [valueFirstPass, setValueFirstPass] = useState('');
   const [valueSecondPass, setValueSecondPass] = useState('');
   const [showPassFirst, setShowPassFirst] = useState(false);
   const [showPassSecond, setShowPassSecond] = useState(false);
   const [form] = Form.useForm();
   const dispatch = useDispatch();
-  const { status, error } = useSelector((state) => state.account);
   const history = useHistory();
 
   const { createAccount } = bindActionCreators(actions, dispatch);
 
   const onFinishHandler = ({ email, first_name, last_name, password, organisation }) => {
+    setLoader(() => true);
     createAccount({
       email,
       first_name,
@@ -47,6 +49,7 @@ const LoginPage = () => {
       }
     });
     form.resetFields();
+    setLoader(() => false);
   };
 
   const suffixFirst = (
@@ -193,7 +196,7 @@ const LoginPage = () => {
               </Col>
 
               <Form.Item>
-                <Button type="primary" htmlType="submit" style={{ marginTop: '5px' }} loading={status === 'loading'}>
+                <Button type="primary" htmlType="submit" style={{ marginTop: '5px' }} loading={loader}>
                   Sign Up
                 </Button>
               </Form.Item>

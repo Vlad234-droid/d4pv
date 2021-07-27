@@ -11,6 +11,7 @@ import { useParams } from 'react-router-dom';
 import { ShowPassword, CloseToShowPassword } from '../../components/icons';
 
 const ResetPassword = () => {
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
   const { changeToNewPassword } = bindActionCreators(actions, dispatch);
@@ -23,6 +24,7 @@ const ResetPassword = () => {
   const [showPassThird, setShowPassThird] = useState(false);
 
   const onFinish = ({ new_password }) => {
+    setLoading(() => true);
     changeToNewPassword({
       hash: id,
       new_password,
@@ -41,6 +43,7 @@ const ResetPassword = () => {
         history.push('/sign-in');
       }
     });
+    setLoading(() => false);
   };
 
   const suffixSecond = (
@@ -117,7 +120,7 @@ const ResetPassword = () => {
                   />
                 </Form.Item>
                 <Form.Item>
-                  <Button htmlType="submit" type="primary" style={{ marginTop: '5px' }}>
+                  <Button htmlType="submit" type="primary" style={{ marginTop: '5px' }} loading={loading}>
                     Reset Password
                   </Button>
                 </Form.Item>

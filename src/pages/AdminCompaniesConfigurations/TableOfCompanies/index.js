@@ -94,7 +94,7 @@ const TableOfCompanies = ({ searchValue, setShowDeleteCompany, setDeleteCompanyI
         key: item.id,
         logo: (
           <div className="logo">
-            <img src={item.image?.length ? item.image : noLogo} alt="logo" />
+            <img src={item.image?.length ? item.image : 'noLogo'} alt="logo" />
           </div>
         ),
         company_name: item.name,

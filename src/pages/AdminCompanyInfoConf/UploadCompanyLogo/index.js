@@ -11,43 +11,39 @@ const { Dragger } = Upload;
 
 const UploadCompanyLogo = ({ editMode, setLogoUrl, logoUrl }) => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
-  const { uploadTempStorage, updateCompanyImage, getCompanieData, removeCompanyImage } = bindActionCreators(
-    actions,
-    dispatch,
-  );
-
-  const image = useSelector((state) => state.companies?.companieData?.image);
+  const { updateCompanyImage, getCompanieData, removeCompanyImage } = bindActionCreators(actions, dispatch);
 
   const { id } = useParams();
 
+  const image = useSelector((state) => state.companies?.companieData?.image);
+
+  console.log('image', image);
+
   const customRequest = (e) => {
-    setLoading(() => true);
+    setLogoUrl(() => URL.createObjectURL(e.file));
+
     const body = {
       company_id: id,
       file: e.file,
     };
+
     updateCompanyImage(body).then((data) => {
+      getCompanieData(id);
+
       if (data.error) {
-        return notification.error({
+        notification.error({
           message: 'An Error Occurred, Please Try Again',
           duration: 3.5,
         });
       }
-      getCompanieData(id);
-
-      //uploadTempStorage(e.file).then((data) => {
-      //  notification[data.error ? 'error' : 'success']({
-      //    message: data.error ? 'An Error Occurred, Please Try Again' : 'Your image has been uploaded successfully',
-      //    duration: 3.5,
-      //  });
-      //  if (data.error) return;
-      //  console.log('data from uploading img', data.payload);
-      //  setLogoUrl(() => data.payload.url);
-      //});
+      if (!data.error) {
+        notification.success({
+          message: 'Image for Company has been uploaded',
+          duration: 3.5,
+        });
+      }
     });
 
-    setLoading(() => false);
     e.onSuccess('ok');
   };
 
@@ -59,14 +55,14 @@ const UploadCompanyLogo = ({ editMode, setLogoUrl, logoUrl }) => {
         accept=".jpg,.jpeg,.png"
         className={`upload-logo_edit ${false ? 'loading' : ''} ${!editMode && 'edit'} ${!editMode && 'none'}`}
         showUploadList={false}>
-        {image === null || image === '' ? (
+        {image === null ? (
           <div className="upload-title">
             <div>
               <StarSVG />
             </div>
             <span className="upload_photo">Upload logo</span>
           </div>
-        ) : (
+        ) : image !== null ? (
           <div className="img_logo__block">
             <img src={image} alt="logo" />
             {editMode && (
@@ -91,6 +87,32 @@ const UploadCompanyLogo = ({ editMode, setLogoUrl, logoUrl }) => {
                 </div>
               </div>
             )}
+          </div>
+        ) : (
+          <div className="img_logo__block">
+            {/* <img src={image} alt="logo" />
+            {editMode && (
+              <div className="choices">
+                <div>
+                  <div>
+                    <SVGReload />
+                  </div>
+                  <span>Replace</span>
+                </div>
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removeCompanyImage(id).then(() => {
+                      getCompanieData(id);
+                    });
+                  }}>
+                  <div>
+                    <CloseSmallSVG />
+                  </div>
+                  <span>Remove</span>
+                </div>
+              </div>
+            )} */}
           </div>
         )}
       </Dragger>

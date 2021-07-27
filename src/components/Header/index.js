@@ -48,7 +48,7 @@ const Header = () => {
         </div>
         <div className="block">
           <div className="solar">
-            <h2>Go Solar</h2>
+            <h2>{data?.organisation?.name !== null ? data?.organisation?.name : 'Go Solar'}</h2>
           </div>
           <div className="corner_container">
             {data && data.role.split('.')[1] === 'OWNER' && (

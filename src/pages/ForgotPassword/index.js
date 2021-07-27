@@ -9,6 +9,8 @@ import { actions } from '../../core/account/accountSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 const ForgotPassword = () => {
+  const [loader, setLoader] = useState(false);
+
   const [thanks, setThanks] = useState(false);
   const dispatch = useDispatch();
   const [form] = Form.useForm();
@@ -16,6 +18,7 @@ const ForgotPassword = () => {
   const { passwordStatus } = useSelector((state) => state.account);
 
   const onFinish = ({ email }) => {
+    setLoader(() => true);
     resetPassword({
       email,
     }).then((data) => {
@@ -29,6 +32,7 @@ const ForgotPassword = () => {
         setThanks(() => true);
       }
     });
+    setLoader(() => false);
     form.resetFields();
   };
 
@@ -63,7 +67,7 @@ const ForgotPassword = () => {
                       <Input placeholder="Type your email" />
                     </Form.Item>
                     <Form.Item>
-                      <Button htmlType="submit" type="primary" style={{ marginTop: '5px' }}>
+                      <Button htmlType="submit" type="primary" style={{ marginTop: '5px' }} loading={loader}>
                         Recover Password
                       </Button>
                     </Form.Item>

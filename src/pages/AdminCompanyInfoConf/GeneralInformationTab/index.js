@@ -6,6 +6,7 @@ import { Form, Input, Button, Row, Col, Select, notification } from 'antd';
 import InputMask from 'react-input-mask';
 import UploadCompanyLogo from '../UploadCompanyLogo';
 import GooglePlaces from '../../../components/GooglePlaces';
+import { useParams } from 'react-router-dom';
 import { actions } from '../../../core/companies/companiesSlice';
 
 import './style.scss';
@@ -13,11 +14,16 @@ import './style.scss';
 const GeneralInformationTab = ({ editMode, dataSource, setEditMode }) => {
   const [form] = Form.useForm();
   const [logoUrl, setLogoUrl] = useState(null);
+  const { id } = useParams();
 
   const [loading, setLoading] = useState(false);
   const [extraAddress, setExtraAddress] = useState(true);
   const dispatch = useDispatch();
-  const { updateCompanieData, getCompanieData } = bindActionCreators(actions, dispatch);
+  const { getCompanieData, updateCompanieData } = bindActionCreators(actions, dispatch);
+
+  useEffect(() => {
+    getCompanieData(id);
+  }, []);
 
   const onFinishHandler = (values) => {
     const result = {
@@ -48,6 +54,7 @@ const GeneralInformationTab = ({ editMode, dataSource, setEditMode }) => {
         });
       }
     });
+    //setLogoUrl(() => null);
     // setEditMode(() => false);
     // setEditCompanyLogo(() => false);
   };
