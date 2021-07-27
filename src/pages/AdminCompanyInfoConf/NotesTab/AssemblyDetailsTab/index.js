@@ -13,7 +13,6 @@ import { useParams } from 'react-router-dom';
 const AssemblyDetailsTab = ({ keyTab }) => {
   const notes = useSelector((state) => state.companies.companieData.notes);
   const [noteList, setNotelist] = useState(null);
-  const { assembly } = useSelector((state) => state.notes);
   const dispatch = useDispatch();
   const { id } = useParams();
 

@@ -21,7 +21,7 @@ const ModalEditUser = ({ setCurrRecordRow, record, showEditUser, setShowEditUser
     }).then((data) => {
       if (!data.error) {
         notification.success({
-          description: 'User has been deleted',
+          description: 'User has been updated',
           duration: 3.5,
         });
         updateUsersList();

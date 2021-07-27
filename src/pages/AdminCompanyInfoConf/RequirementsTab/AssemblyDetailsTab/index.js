@@ -14,7 +14,6 @@ import { useParams } from 'react-router-dom';
 const SitePlanTab = ({ keyTab }) => {
   const { id } = useParams();
 
-  const { assembly } = useSelector((state) => state.requirements);
   const dispatch = useDispatch();
   const [toEdit, setToEdit] = useState({});
   const [editModal, setEditModal] = useState(false);

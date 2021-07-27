@@ -15,7 +15,6 @@ const LineDiagramTab = ({ keyTab }) => {
   const [noteList, setNotelist] = useState(null);
   const { id } = useParams();
 
-  const { diagram } = useSelector((state) => state.notes);
   const dispatch = useDispatch();
   const [toEdit, setToEdit] = useState({});
   const [editModal, setEditModal] = useState(false);

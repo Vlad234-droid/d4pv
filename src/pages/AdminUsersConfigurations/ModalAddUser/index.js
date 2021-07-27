@@ -12,6 +12,7 @@ const ModalAddUser = ({ showAddUser, setShowAddUser }) => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
+    console.log('values,', values);
     inViteMemberToOrganisation({
       email: values.email,
       role: values.role,
