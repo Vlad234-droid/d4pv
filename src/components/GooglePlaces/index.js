@@ -22,7 +22,6 @@ const GooglePlaces = ({ extraAddress, setExtraAddress, onGenderChange, form }) =
   useEffect(() => {
     const places = new window.google.maps.places.PlacesService(document.getElementById('map'));
     setService(places);
-    console.log('statesList', statesList);
   }, []);
 
   const onSelect = (e) => {

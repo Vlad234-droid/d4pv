@@ -30,7 +30,7 @@ const AdminCompanyInfoConf = () => {
   useEffect(() => {
     clearCompanyData();
     getCompanieData(id);
-  }, [id]);
+  }, []);
 
   const config = [
     {
