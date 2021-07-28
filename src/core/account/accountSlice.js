@@ -36,6 +36,7 @@ const logInAcc = createAsyncThunk('account/authoriseAccount', async (body) => {
   const headers = { Accept: 'application/json' };
   try {
     const response = await fetchApi(`${REACT_APP_API_URL}/accounts/auth`, 'POST', headers, formData);
+    console.log('respose,', response);
     lockr.set('auth-token', response.token);
     return response;
   } catch (err) {

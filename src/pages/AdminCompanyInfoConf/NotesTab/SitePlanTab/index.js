@@ -12,7 +12,6 @@ import AddNoteModal from '../AddNoteModal';
 import { useParams } from 'react-router-dom';
 
 const SitePlanTab = ({ keyTab }) => {
-  const { sitePlan } = useSelector((state) => state.notes);
   const notes = useSelector((state) => state.companies.companieData.notes);
   const [noteList, setNotelist] = useState(null);
   const { id } = useParams();
