@@ -113,6 +113,7 @@ const TableOfCompanies = ({ searchValue, setShowDeleteCompany, setDeleteCompanyI
       if (searchValue.length >= 1) {
         const newData = [];
         dataSource.forEach((item) => {
+          console.log('item', item);
           if (item.company_name.toLowerCase().trim().replace(/\s/g, '').includes(searchValue.toLowerCase())) {
             newData.push(item);
           }
