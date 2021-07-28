@@ -9,6 +9,11 @@ const centeredSVG = () => ({
   cursor: 'pointer',
 });
 
+const centeredSVGNoP = () => ({
+  display: 'block',
+  margin: '0 auto',
+});
+
 const IconInfo = () => {
   return (
     <svg
@@ -689,6 +694,40 @@ const LoaderSVG = () => {
   );
 };
 
+const ArrowLeftDisabled = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" style={centeredSVGNoP()}>
+      <g fill="none" fillRule="evenodd">
+        <g fill="#00254D">
+          <g>
+            <path
+              d="M2.704 4.267l5.358 5.087 5.037-5.087c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-5.747 5.797c-.39.39-1.02.39-1.41 0L1.284 5.677c-.39-.39-.39-1.02 0-1.41.39-.38 1.03-.39 1.42 0z"
+              transform="translate(-400.000000, -2531.000000) translate(400.000000, 2519.000000) translate(0.000000, 12.000000) translate(7.896318, 7.870483) scale(1, -1) rotate(90.000000) translate(-7.896318, -7.870483)"
+            />
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+const ArrowRight = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" style={centeredSVGNoP()}>
+      <g fill="none" fillOpacity=".9" fillRule="evenodd">
+        <g fill="#00254D">
+          <g>
+            <path
+              d="M2.911 4.267L8.27 9.354l5.037-5.087c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-5.747 5.797c-.39.39-1.02.39-1.41 0L1.491 5.677c-.39-.39-.39-1.02 0-1.41.39-.38 1.03-.39 1.42 0z"
+              transform="translate(-696.000000, -2531.000000) translate(400.000000, 2519.000000) translate(304.207363, 20.000000) scale(-1, 1) translate(-304.207363, -20.000000) translate(296.207363, 12.000000) translate(8.103682, 7.870483) scale(1, -1) rotate(90.000000) translate(-8.103682, -7.870483)"
+            />
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
 export {
   IconInfo,
   Logo4PV,
@@ -717,4 +756,6 @@ export {
   HideNotesSVG,
   UserForCheck,
   LoaderSVG,
+  ArrowLeftDisabled,
+  ArrowRight,
 };

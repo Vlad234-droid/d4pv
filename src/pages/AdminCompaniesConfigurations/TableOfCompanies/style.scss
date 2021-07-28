@@ -103,4 +103,80 @@
       }
     }
   }
+  .ant-pagination {
+    display: none;
+    &.showPagination {
+      display: flex;
+      flex-wrap: wrap;
+      grid-row-gap: 8px;
+      row-gap: 8px;
+    }
+    .ant-pagination-item {
+      border: none;
+      width: 40px;
+      height: 40px;
+      margin: 0 8px;
+      padding: 11px 16px;
+      border-radius: 4px;
+      box-shadow: 0 1px 2px 0 rgba(0, 25, 94, 0.2);
+      background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      a {
+        font-family: Montserrat;
+        font-size: 13px;
+        font-weight: 600;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.38;
+        letter-spacing: -0.1px;
+        text-align: center;
+        color: #00254d;
+      }
+      &.ant-pagination-item-active {
+        box-shadow: none;
+        border-radius: 4px;
+        background-color: #ffb40a;
+        a {
+          color: #ffffff;
+        }
+      }
+    }
+    .ant-pagination-prev {
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &.ant-pagination-disabled {
+        div {
+          svg {
+            g {
+              g {
+                fill: #b2beca;
+              }
+            }
+          }
+        }
+      }
+    }
+    .ant-pagination-next {
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &.ant-pagination-disabled {
+        div {
+          svg {
+            g {
+              g {
+                fill: #b2beca;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

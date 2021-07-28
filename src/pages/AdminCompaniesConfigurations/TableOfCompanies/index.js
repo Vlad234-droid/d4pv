@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
 import { actions } from '../../../core/configurations/configurationsSlice';
-
+import { ArrowRight, ArrowLeftDisabled } from '../../../components/icons';
 import noLogo from '../../../assets/img/no-comany-logo.svg';
 
 const TableOfCompanies = ({ searchValue, setShowDeleteCompany, setDeleteCompanyId, deleteCompanyId }) => {
@@ -17,6 +17,7 @@ const TableOfCompanies = ({ searchValue, setShowDeleteCompany, setDeleteCompanyI
   const history = useHistory();
   const [dataSource, setDataSource] = useState(null);
   const [copyOfDataSource, setCopyOfDataSource] = useState(null);
+  const [tableLength, setTableLength] = useState(null);
 
   const [columns, setColumns] = useState([
     {
@@ -82,6 +83,7 @@ const TableOfCompanies = ({ searchValue, setShowDeleteCompany, setDeleteCompanyI
   useEffect(() => {
     setTableLoading(() => true);
     getConfCompanies().then((data) => {
+      setTableLength(() => data?.payload?.length);
       setPageInfo(data.payload);
       setTableLoading(() => false);
     });
@@ -124,6 +126,24 @@ const TableOfCompanies = ({ searchValue, setShowDeleteCompany, setDeleteCompanyI
     }
   }, [searchValue]);
 
+  const itemRender = (current, type, originalElement) => {
+    if (type === 'prev') {
+      return (
+        <div>
+          <ArrowLeftDisabled />
+        </div>
+      );
+    }
+    if (type === 'next') {
+      return (
+        <div>
+          <ArrowRight />
+        </div>
+      );
+    }
+    return originalElement;
+  };
+
   return (
     <>
       {dataSource === null ? (
@@ -141,6 +161,17 @@ const TableOfCompanies = ({ searchValue, setShowDeleteCompany, setDeleteCompanyI
           pagination={false}
           ellipsis={true}
           expandable={true}
+          pagination={{
+            className: `ant-pagination ant-table-pagination ant-table-pagination-center ${
+              tableLength !== null && tableLength > 10 && 'showPagination'
+            }`,
+            itemRender: itemRender,
+            defaultPageSize: 10,
+            pageSize: 10,
+            position: ['bottomCenter'],
+            showQuickJumper: false,
+            showSizeChanger: false,
+          }}
         />
       )}
     </>
