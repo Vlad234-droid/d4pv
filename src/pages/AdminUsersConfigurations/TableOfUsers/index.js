@@ -137,7 +137,6 @@ const TableOfUsers = ({ searchValue }) => {
       if (searchValue.length >= 1) {
         const newData = [];
         dataSource.forEach((item) => {
-          console.log('item', item);
           if (
             item.first_name.props.children[1].props.children.toLowerCase().includes(searchValue.toLowerCase()) ||
             item.email.toLowerCase().includes(searchValue.toLowerCase())
