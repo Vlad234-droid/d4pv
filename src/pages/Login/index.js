@@ -27,7 +27,7 @@ const LoginPage = () => {
       setLoader(false);
       if (data.error) {
         notification.error({
-          message: data.error.message,
+          // message: data.error.message,
           description: 'Wrong login or password',
           duration: 3.5,
         });

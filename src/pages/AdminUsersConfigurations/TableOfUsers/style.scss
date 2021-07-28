@@ -23,6 +23,9 @@
       }
     }
     .ant-table-tbody {
+      .ant-empty.ant-empty-normal {
+        margin: 125px 0px;
+      }
       tr {
         &.onCheck {
           td {

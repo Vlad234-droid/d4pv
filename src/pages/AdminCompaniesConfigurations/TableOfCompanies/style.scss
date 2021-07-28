@@ -39,6 +39,9 @@
       }
     }
     .ant-table-tbody {
+      .ant-empty.ant-empty-normal {
+        margin: 125px 0px;
+      }
       tr {
         &:nth-child(even) {
           background-color: rgba(178, 190, 202, 0.1);

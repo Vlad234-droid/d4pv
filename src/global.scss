@@ -442,3 +442,60 @@ button:not(.ant-btn) {
     }
   }
 }
+// nofification
+.ant-notification-notice {
+  padding: 23px;
+  width: 369px;
+  border-radius: 4px;
+  &.ant-notification-notice-success {
+    background-color: #e8f3ea;
+    position: relative;
+    &:before {
+      content: '';
+      height: 100%;
+      width: 4px;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      background-color: #85ca71;
+    }
+    .ant-notification-notice-message,
+    .ant-notification-notice-description {
+      color: #85ca71;
+    }
+  }
+  &.ant-notification-notice-error {
+    background-color: #ffa49c;
+    &:before {
+      content: '';
+      height: 100%;
+      width: 4px;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      background-color: #ff0015;
+    }
+    .ant-notification-notice-message,
+    .ant-notification-notice-description {
+      color: #ff0015;
+    }
+  }
+  span {
+    &.anticon {
+      display: none;
+    }
+  }
+  .ant-notification-notice-message,
+  .ant-notification-notice-description {
+    margin-left: 10px;
+    margin-right: 0px;
+    font-family: Montserrat;
+    font-size: 13px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.38;
+    letter-spacing: normal;
+    margin-bottom: 0px;
+  }
+}

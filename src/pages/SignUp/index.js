@@ -34,8 +34,7 @@ const LoginPage = () => {
     }).then((data) => {
       if (data.type === 'account/createAccount/fulfilled') {
         notification.success({
-          message: 'Notification Title',
-          description: 'account have been created',
+          description: 'Account have been created',
           duration: 3.5,
         });
         history.push('/sign-in/');

@@ -7,7 +7,7 @@ import './style.scss';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-const ModalDeleteUser = ({ showDeleteUser, setShowDeleteUser, activeId, updateUsersList }) => {
+const ModalDeleteUser = ({ setTableLength, showDeleteUser, setShowDeleteUser, activeId, updateUsersList }) => {
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
   const dispatch = useDispatch();
@@ -23,6 +23,7 @@ const ModalDeleteUser = ({ showDeleteUser, setShowDeleteUser, activeId, updateUs
         setShowDeleteUser(false);
         setLoading(false);
         updateUsersList();
+        setTableLength((prev) => prev - 1);
       }
     });
   };

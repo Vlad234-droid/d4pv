@@ -8,6 +8,7 @@ import ModalDeleteUser from '../ModalDeleteUser';
 import { actions } from '../../../core/configurations/configurationsSlice';
 import './style.scss';
 import { ArrowRight, ArrowLeftDisabled } from '../../../components/icons';
+import { useSelector } from 'react-redux';
 
 const TableOfUsers = ({ searchValue }) => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const TableOfUsers = ({ searchValue }) => {
   const [dataSource, setDataSource] = useState(null);
   const [copyOfDataSource, setCopyOfDataSource] = useState(null);
   const [tableLength, setTableLength] = useState(null);
+  const id = useSelector((state) => state?.profile?.data?.id);
 
   const [columns, setColumns] = useState([
     {
@@ -44,8 +46,10 @@ const TableOfUsers = ({ searchValue }) => {
       dataIndex: 'actions',
       key: 'actions',
       className: 'actions_btns',
-      render: (_, record, index) => {
-        return (
+      render: (test, record, index) => {
+        return record.key === id ? (
+          <div></div>
+        ) : (
           <div className="actions_block">
             <div
               onClick={() => {
@@ -209,6 +213,7 @@ const TableOfUsers = ({ searchValue }) => {
             setShowDeleteUser={setShowDeleteUser}
             activeId={activeId}
             updateUsersList={updateUsersList}
+            setTableLength={setTableLength}
           />
           {currRecordRow !== null && (
             <ModalEditUser
