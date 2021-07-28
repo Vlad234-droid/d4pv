@@ -26,7 +26,7 @@ const getCompanieData = createAsyncThunk('companies/getCompanieData', async (com
 const updateCompanieData = createAsyncThunk('companies/updateCompanieData', async (data, { dispatch }) => {
   const { logout } = bindActionCreators(profileActions, dispatch);
   const token = lockr.get('auth-token');
-  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+  const headers = { Accept: 'application/json', Authorization: `bearer ${token}`, 'Content-Type': 'application/json' };
   const body = JSON.stringify(data.body);
   const response = await fetchApi(
     `${REACT_APP_API_URL}/me/organisation/companies/${data.company_id}`,
@@ -55,7 +55,7 @@ const deleteCompany = createAsyncThunk('companies/deleteCompany', async (company
 const addCompanyNote = createAsyncThunk('companies/addCompanyNote', async (data, { dispatch }) => {
   const { logout } = bindActionCreators(profileActions, dispatch);
   const token = lockr.get('auth-token');
-  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+  const headers = { Accept: 'application/json', Authorization: `bearer ${token}`, 'Content-Type': 'application/json' };
   const response = await fetchApi(
     `${REACT_APP_API_URL}/me/organisation/companies/${data.company_id}/notes`,
     'POST',
@@ -69,7 +69,7 @@ const addCompanyNote = createAsyncThunk('companies/addCompanyNote', async (data,
 const addCompanyRequirement = createAsyncThunk('companies/addCompanyRequirement', async (data, { dispatch }) => {
   const { logout } = bindActionCreators(profileActions, dispatch);
   const token = lockr.get('auth-token');
-  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+  const headers = { Accept: 'application/json', Authorization: `bearer ${token}`, 'Content-Type': 'application/json' };
   const response = await fetchApi(
     `${REACT_APP_API_URL}/me/organisation/companies/${data.company_id}/requirements`,
     'POST',
@@ -83,7 +83,7 @@ const addCompanyRequirement = createAsyncThunk('companies/addCompanyRequirement'
 const updateCompanyNote = createAsyncThunk('companies/updateCompanyNote', async (data, { dispatch }) => {
   const { logout } = bindActionCreators(profileActions, dispatch);
   const token = lockr.get('auth-token');
-  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+  const headers = { Accept: 'application/json', Authorization: `bearer ${token}`, 'Content-Type': 'application/json' };
   const response = await fetchApi(
     `${REACT_APP_API_URL}/me/organisation/notes/${data.note_id}`,
     'PUT',
@@ -97,7 +97,7 @@ const updateCompanyNote = createAsyncThunk('companies/updateCompanyNote', async 
 const updateCompanyRequirement = createAsyncThunk('companies/updateCompanyRequirement', async (data, { dispatch }) => {
   const { logout } = bindActionCreators(profileActions, dispatch);
   const token = lockr.get('auth-token');
-  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+  const headers = { Accept: 'application/json', Authorization: `bearer ${token}`, 'Content-Type': 'application/json' };
 
   const response = await fetchApi(
     `${REACT_APP_API_URL}/me/organisation/requirements/${data.requirement_id}`,
@@ -188,7 +188,7 @@ const getCompanyPreferences = createAsyncThunk('companies/getCompanyPreferences'
 const updateCompanyPreferences = createAsyncThunk('companies/updateCompanyPreferences', async (data, { dispatch }) => {
   const { logout } = bindActionCreators(profileActions, dispatch);
   const token = lockr.get('auth-token');
-  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+  const headers = { Accept: 'application/json', Authorization: `bearer ${token}`, 'Content-Type': 'application/json' };
 
   const response = await fetchApi(
     `${REACT_APP_API_URL}/me/organisation/companies/${data.company_id}/preferences`,

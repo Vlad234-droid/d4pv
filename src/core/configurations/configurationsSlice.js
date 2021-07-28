@@ -14,8 +14,11 @@ const inViteMemberToOrganisation = createAsyncThunk(
   async (body, { dispatch }) => {
     const { logout } = bindActionCreators(profileActions, dispatch);
     const token = lockr.get('auth-token');
-
-    const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+    const headers = {
+      Accept: 'application/json',
+      Authorization: `bearer ${token}`,
+      'Content-Type': 'application/json',
+    };
     try {
       const response = await fetchApi(
         `${REACT_APP_API_URL}/me/organisation/members`,
@@ -50,7 +53,11 @@ const updateMemberToOrganisation = createAsyncThunk(
     const { logout } = bindActionCreators(profileActions, dispatch);
     const token = lockr.get('auth-token');
 
-    const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+    const headers = {
+      Accept: 'application/json',
+      Authorization: `bearer ${token}`,
+      'Content-Type': 'application/json',
+    };
     try {
       const response = await fetchApi(
         `${REACT_APP_API_URL}/me/organisation/members/${data.account_id}/role`,
@@ -72,7 +79,11 @@ const removeMembersOfOrganisation = createAsyncThunk(
     const { logout } = bindActionCreators(profileActions, dispatch);
     const token = lockr.get('auth-token');
 
-    const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+    const headers = {
+      Accept: 'application/json',
+      Authorization: `bearer ${token}`,
+      'Content-Type': 'application/json',
+    };
     try {
       const response = await fetchApi(
         `${REACT_APP_API_URL}/me/organisation/members/${account_id}`,
@@ -106,7 +117,7 @@ const createCompany = createAsyncThunk('configuration/createCompany', async (bod
   const { logout } = bindActionCreators(profileActions, dispatch);
   const token = lockr.get('auth-token');
 
-  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+  const headers = { Accept: 'application/json', Authorization: `bearer ${token}`, 'Content-Type': 'application/json' };
 
   try {
     const response = await fetchApi(

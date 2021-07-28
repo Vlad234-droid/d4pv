@@ -11,7 +11,7 @@ const ModalDeleteUser = ({ showDeleteUser, setShowDeleteUser, activeId, updateUs
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
   const dispatch = useDispatch();
-  const { removeMembersOfOrganisation, getMembersOfOrganisation } = bindActionCreators(actions, dispatch);
+  const { removeMembersOfOrganisation } = bindActionCreators(actions, dispatch);
   const onFinish = (values) => {
     setLoading(true);
     removeMembersOfOrganisation(activeId).then((data) => {
