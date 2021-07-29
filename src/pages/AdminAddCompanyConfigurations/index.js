@@ -75,7 +75,12 @@ const AdminCompanyInfoConf = () => {
 
           {/* //////// */}
         </div>
-        <Form className="form_add_company add_comp" form={form} layout="vertical" onFinish={onFinishHandler}>
+        <Form
+          className="form_add_company add_comp"
+          form={form}
+          layout="vertical"
+          onFinish={onFinishHandler}
+          validateTrigger={'onBlur'}>
           <Form.Item name="image">
             <UploadCompanyLogo
               form={form}
@@ -108,7 +113,7 @@ const AdminCompanyInfoConf = () => {
                 rules={[
                   {
                     required: true,
-                    message: 'Please input Company Phone',
+                    message: false,
                   },
                   () => ({
                     validator(_, value) {
@@ -165,7 +170,7 @@ const AdminCompanyInfoConf = () => {
                 rules={[
                   {
                     required: true,
-                    message: 'Please input Project Manager Phone Number',
+                    message: false,
                   },
                   () => ({
                     validator(_, value) {
