@@ -28,13 +28,11 @@ const GooglePlaces = ({ extraAddress, setExtraAddress, onGenderChange, form }) =
     var request = {
       placeId: e.value.place_id,
     };
-    console.log('service', service);
     service.getDetails(request, callback);
   };
 
   function callback(results, status) {
     if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-      console.log(results);
       const result = results.address_components;
       const street = result.filter((item) => item.types[0] === 'street_number');
       const route = result.filter((item) => item.types[0] === 'route');

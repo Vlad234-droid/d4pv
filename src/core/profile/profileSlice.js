@@ -38,7 +38,6 @@ const updateProfile = createAsyncThunk('profile/updateProfile', async (body, { d
 const uploadProfileImage = createAsyncThunk('profile/uploadProfileImage', async (file, { dispatch }) => {
   const { logout } = bindActionCreators(profileSlice.actions, dispatch);
   const formData = new FormData();
-  console.log('file', file);
 
   formData.append('file', file);
 

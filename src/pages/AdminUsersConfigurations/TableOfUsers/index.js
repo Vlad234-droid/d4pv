@@ -19,6 +19,7 @@ const TableOfUsers = ({ searchValue }) => {
   const [currRecordRow, setCurrRecordRow] = useState(null);
   const [tableLoading, setTableLoading] = useState(false);
   const [dataSource, setDataSource] = useState(null);
+  const [filterSource, setFilterSource] = useState(null);
   const [copyOfDataSource, setCopyOfDataSource] = useState(null);
   const [tableLength, setTableLength] = useState(null);
   const id = useSelector((state) => state?.profile?.data?.id);
@@ -147,27 +148,17 @@ const TableOfUsers = ({ searchValue }) => {
       });
     });
     setDataSource(() => newData);
+    setFilterSource(() => newData);
     setCopyOfDataSource(() => newData);
   };
 
   useEffect(() => {
     if (dataSource !== null) {
-      if (searchValue.length >= 1) {
-        const newData = [];
-        dataSource.forEach((item) => {
-          console.log('item', item);
-          if (
-            item.first_name.props.children[1].props.children.toLowerCase().includes(searchValue.toLowerCase()) ||
-            item.email.toLowerCase().includes(searchValue.toLowerCase())
-          ) {
-            newData.push(item);
-          }
-        });
-        setDataSource(() => newData);
-      } else if (searchValue.length === 0 && searchValue.trim() === '') {
-        if (copyOfDataSource !== null) {
-          setDataSource(() => copyOfDataSource);
-        }
+      if (searchValue.trim().length > 0) {
+        const newData = dataSource.filter((item) => item.fn.toLowerCase().includes(searchValue.toLowerCase()));
+        setFilterSource(() => newData);
+      } else {
+        setFilterSource(() => dataSource);
       }
     }
   }, [searchValue]);
@@ -211,7 +202,7 @@ const TableOfUsers = ({ searchValue }) => {
           <Table
             className="table_users"
             loading={tableLoading}
-            dataSource={dataSource}
+            dataSource={filterSource}
             columns={columns}
             onChange={onChange}
             pagination={false}

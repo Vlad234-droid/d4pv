@@ -43,8 +43,8 @@ const AdminUsersConfigurations = () => {
                   placeholder="Search"
                   value={searchValue}
                   onChange={(e) => {
-                    let value = e.target.value.replace(/\s/g, '');
-
+                    // let value = e.target.value.replace(/\s/g, '');
+                    let value = e.target.value;
                     setSearchValue(value);
                   }}
                   onBlur={() => {
