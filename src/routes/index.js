@@ -21,7 +21,7 @@ const routes = () => {
   return (
     <React.Suspense fallback="">
       <CoreRouter>
-        <Route exact path="/" component={LoginPage} />
+        <PrivateRoute exact path="/" component={Profile} />
         <Route exact path="/sign-up/" component={SignUp} />
         <Route exact path="/sign-in/" component={LoginPage} />
         <Route exact path="/forgot-password/" component={ForgotPassword} />
