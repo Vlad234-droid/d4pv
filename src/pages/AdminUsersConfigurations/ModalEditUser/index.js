@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import { Modal, Form, Button, Col, Row, Radio, notification } from 'antd';
 import './style.scss';
 import { CloseIconSVG } from '../../../components/icons';
-
 import { actions } from '../../../core/configurations/configurationsSlice';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { actions as visActions } from '../../../core/visualization/visualizationSlice';
 
 const ModalEditUser = ({ setCurrRecordRow, record, showEditUser, setShowEditUser, updateUsersList }) => {
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const { updateMemberToOrganisation } = bindActionCreators(actions, dispatch);
+  const { blurModal } = bindActionCreators(visActions, dispatch);
 
   const onFinish = (values) => {
     setLoading(true);
@@ -29,7 +30,8 @@ const ModalEditUser = ({ setCurrRecordRow, record, showEditUser, setShowEditUser
         setCurrRecordRow(() => null);
       }
     });
-    //setShowEditUser(() => false);
+    blurModal(false);
+    setShowEditUser(() => false);
   };
 
   return (
@@ -38,11 +40,11 @@ const ModalEditUser = ({ setCurrRecordRow, record, showEditUser, setShowEditUser
       closeIcon={<CloseIconSVG />}
       onCancel={() => {
         setShowEditUser(() => false);
+        blurModal(false);
         setCurrRecordRow(() => null);
       }}
       cancelButtonProps={{ style: { display: 'none' } }}
       okButtonProps={{ style: { display: 'none' } }}
-      getContainer={() => document.querySelector('.table_users')}
       width={544}
       className="modal_editUser">
       <Form
@@ -109,6 +111,7 @@ const ModalEditUser = ({ setCurrRecordRow, record, showEditUser, setShowEditUser
                 onClick={() => {
                   setShowEditUser(() => false);
                   setCurrRecordRow(() => null);
+                  blurModal(false);
                 }}>
                 Cancel
               </Button>

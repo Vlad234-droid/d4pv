@@ -6,13 +6,12 @@ import { actions } from '../../../core/configurations/configurationsSlice';
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
 
-const ModalAddUser = ({ showAddUser, setShowAddUser }) => {
+const ModalAddUser = ({ showAddUser, setShowAddUser, blurModal }) => {
   const dispatch = useDispatch();
   const { inViteMemberToOrganisation } = bindActionCreators(actions, dispatch);
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    console.log('values,', values);
     inViteMemberToOrganisation({
       email: values.email,
       role: values.role,
@@ -24,6 +23,7 @@ const ModalAddUser = ({ showAddUser, setShowAddUser }) => {
         duration: 3.5,
       });
     });
+    blurModal(false);
     setShowAddUser(() => false);
   };
 
@@ -32,11 +32,11 @@ const ModalAddUser = ({ showAddUser, setShowAddUser }) => {
       visible={showAddUser}
       closeIcon={<CloseIconSVG />}
       onCancel={() => {
+        blurModal(false);
         setShowAddUser(() => false);
       }}
       cancelButtonProps={{ style: { display: 'none' } }}
       okButtonProps={{ style: { display: 'none' } }}
-      getContainer={() => document.getElementById('block_users')}
       width={544}
       className="modal_createUser">
       <Form
@@ -93,6 +93,7 @@ const ModalAddUser = ({ showAddUser, setShowAddUser }) => {
               <Button
                 type="button"
                 onClick={() => {
+                  blurModal();
                   setShowAddUser(() => false);
                 }}>
                 Cancel

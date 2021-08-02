@@ -5,12 +5,18 @@ import { SearchSVG, CloseSVG } from '../../components/icons';
 import ModalAddUser from './ModalAddUser';
 import TableOfUsers from './TableOfUsers';
 import LayoutConfiguration from '../../components/LayoutConfiguration/Layout';
+import { actions } from '../../core/visualization/visualizationSlice';
+import { bindActionCreators } from 'redux';
+import { useDispatch } from 'react-redux';
 
 const AdminUsersConfigurations = () => {
+  const dispatch = useDispatch();
   const [form] = Form.useForm();
   const [searchValue, setSearchValue] = useState('');
   const [showAddUser, setShowAddUser] = useState(false);
   const [serchToggle, setSearchToggle] = useState(null);
+
+  const { blurModal } = bindActionCreators(actions, dispatch);
 
   const onFinish = (values) => {
     console.log('values', values);
@@ -21,7 +27,7 @@ const AdminUsersConfigurations = () => {
   return (
     <LayoutConfiguration>
       <div className="block_users" id="block_users">
-        <ModalAddUser showAddUser={showAddUser} setShowAddUser={setShowAddUser} />
+        <ModalAddUser showAddUser={showAddUser} setShowAddUser={setShowAddUser} blurModal={blurModal} />
         <div className="title_users">
           <h2>Users</h2>
         </div>
@@ -32,7 +38,10 @@ const AdminUsersConfigurations = () => {
                 type="primary"
                 className="save_link"
                 style={{ height: '40px' }}
-                onClick={() => setShowAddUser(() => true)}>
+                onClick={() => {
+                  blurModal(true);
+                  setShowAddUser(() => true);
+                }}>
                 Add User
               </Button>
             </Col>

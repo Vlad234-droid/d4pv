@@ -6,6 +6,7 @@ import { TapPaneConfig } from './config';
 import { Layout } from 'antd';
 import { useHistory, useLocation } from 'react-router-dom';
 import './style.scss';
+import { useSelector } from 'react-redux';
 
 const { TabPane } = Tabs;
 
@@ -13,6 +14,7 @@ const LayoutConfiguration = ({ children, className }) => {
   const history = useHistory();
   const location = useLocation();
   const [currentTub, setCurrentTub] = useState('1');
+  const isBlur = useSelector((state) => state.visualization.isBlur);
 
   useEffect(() => {
     if (location.pathname.includes('user')) setCurrentTub(() => '1');
@@ -33,7 +35,11 @@ const LayoutConfiguration = ({ children, className }) => {
   }
 
   return (
-    <div className={`app-dashboard admin_configurations ${className}`}>
+    <div
+      className={`app-dashboard admin_configurations ${className}`}
+      style={{
+        filter: isBlur ? 'blur(3px)' : 'blur(0px)',
+      }}>
       <Header />
       <Layout.Content className="main-content">
         <div className="dashboard-wrapper">

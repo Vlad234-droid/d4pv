@@ -15,7 +15,7 @@ import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import { useParams } from 'react-router-dom';
 
-const EditRequirements = ({ setEditModal, editModal, toEdit }) => {
+const EditRequirements = ({ blurModal, setEditModal, editModal, toEdit }) => {
   const { id } = useParams();
 
   const [form] = Form.useForm();
@@ -32,6 +32,7 @@ const EditRequirements = ({ setEditModal, editModal, toEdit }) => {
 
     updateCompanyRequirement({ requirement_id: toEdit.id, body }).then(() => getCompanieData(id));
     setEditModal(() => false);
+    blurModal(false);
   };
 
   const [editorState, setEditorState] = useState();
@@ -58,11 +59,11 @@ const EditRequirements = ({ setEditModal, editModal, toEdit }) => {
       visible={editModal}
       closeIcon={<CloseIconSVG />}
       onCancel={() => {
+        blurModal(false);
         setEditModal(() => false);
       }}
       cancelButtonProps={{ style: { display: 'none' } }}
       okButtonProps={{ style: { display: 'none' } }}
-      getContainer={() => document.getElementById('edit_requirements')}
       width={664}
       className="modal_edit_requirements">
       <h3 className="edit_requirements_title">Edit Requirement</h3>
@@ -113,6 +114,7 @@ const EditRequirements = ({ setEditModal, editModal, toEdit }) => {
               <Button
                 type="button"
                 onClick={() => {
+                  blurModal(false);
                   setEditModal(() => false);
                 }}>
                 Cancel

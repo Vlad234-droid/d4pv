@@ -6,7 +6,13 @@ import './style.scss';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-const ModalDeleteCompany = ({ showDeleteCompany, setShowDeleteCompany, deleteCompanyId, setDeleteCompanyId }) => {
+const ModalDeleteCompany = ({
+  blurModal,
+  showDeleteCompany,
+  setShowDeleteCompany,
+  deleteCompanyId,
+  setDeleteCompanyId,
+}) => {
   const [loading, setloading] = useState(false);
   const [form] = Form.useForm();
   const dispatch = useDispatch();
@@ -23,21 +29,22 @@ const ModalDeleteCompany = ({ showDeleteCompany, setShowDeleteCompany, deleteCom
       setDeleteCompanyId(null);
       setloading(false);
     });
+    blurModal(false);
   };
   return (
     <Modal
       visible={showDeleteCompany}
       closeIcon={<CloseIconSVG />}
       onCancel={() => {
+        blurModal(false);
         setShowDeleteCompany(() => false);
       }}
       cancelButtonProps={{ style: { display: 'none' } }}
       okButtonProps={{ style: { display: 'none' } }}
-      getContainer={() => document.getElementById('block_companies')}
       width={544}
       className="modal_deleteUser">
       <Form name="user_delete" layout="vertical" form={form} requiredMark={true} onFinish={onFinish}>
-        <h2>Delete User</h2>
+        <h2>Delete Company</h2>
 
         <p>Are you sure you want to delete this user?</p>
 
@@ -47,6 +54,7 @@ const ModalDeleteCompany = ({ showDeleteCompany, setShowDeleteCompany, deleteCom
               <Button
                 type="button"
                 onClick={() => {
+                  blurModal(false);
                   setShowDeleteCompany(() => false);
                 }}>
                 Cancel

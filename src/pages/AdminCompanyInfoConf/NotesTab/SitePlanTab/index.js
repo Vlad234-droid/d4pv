@@ -10,6 +10,7 @@ import { useState } from 'react';
 import DOMPurify from 'dompurify';
 import AddNoteModal from '../AddNoteModal';
 import { useParams } from 'react-router-dom';
+import { actions as visActions } from '../../../../core/visualization/visualizationSlice';
 
 const SitePlanTab = ({ keyTab }) => {
   const notes = useSelector((state) => state.companies.companieData.notes);
@@ -22,6 +23,7 @@ const SitePlanTab = ({ keyTab }) => {
   const [addNoteModal, setAddNoteModal] = useState(false);
 
   const { visibilityCompanyNote, deleteCompanyNote, getCompanieData } = bindActionCreators(actions, dispatch);
+  const { blurModal } = bindActionCreators(visActions, dispatch);
 
   const chooseEditHandler = (id) => {
     const filtered = notes.filter((item) => item.id === id);
@@ -45,9 +47,14 @@ const SitePlanTab = ({ keyTab }) => {
 
   return (
     <div className="site_plan_block tab_block">
-      <EditNote toEdit={toEdit} setEditModal={setEditModal} editModal={editModal} />
+      <EditNote blurModal={blurModal} toEdit={toEdit} setEditModal={setEditModal} editModal={editModal} />
       {/* /////////////////////////////////////////////////////////////////////// */}
-      <AddNoteModal keyTab={keyTab} addNoteModal={addNoteModal} setAddNoteModal={setAddNoteModal} />
+      <AddNoteModal
+        keyTab={keyTab}
+        addNoteModal={addNoteModal}
+        setAddNoteModal={setAddNoteModal}
+        blurModal={blurModal}
+      />
       <div className="add_block">
         <h2>Site Plan Notes</h2>
         <Col span={7}>
@@ -55,7 +62,10 @@ const SitePlanTab = ({ keyTab }) => {
             type="primary"
             style={{ maxHeight: '40px' }}
             id="add_note"
-            onClick={() => setAddNoteModal(() => true)}>
+            onClick={() => {
+              blurModal(true);
+              setAddNoteModal(() => true);
+            }}>
             Add Note
           </Button>
         </Col>
@@ -69,7 +79,13 @@ const SitePlanTab = ({ keyTab }) => {
             <div className="actions_do">
               <p className={`updated ${!item.visibility && 'modeOpacity'}`}>Updated 10.10.2021 by {item.requested}</p>
               <div className="svgBtn">
-                <div className="btnSVG" id="edit_note" onClick={() => chooseEditHandler(item.id)}>
+                <div
+                  className="btnSVG"
+                  id="edit_note"
+                  onClick={() => {
+                    blurModal(true);
+                    chooseEditHandler(item.id);
+                  }}>
                   <EditCompanySVG />
                 </div>
                 <div className="btnSVG" onClick={() => visibilityCompanyNote(item.id).then(() => getCompanieData(id))}>

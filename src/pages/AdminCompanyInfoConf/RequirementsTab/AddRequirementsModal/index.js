@@ -16,7 +16,7 @@ import './style.scss';
 import iconIMG from '../../../../components/icons/icon-img.png';
 import { useParams } from 'react-router-dom';
 
-const AddRequirementsModal = ({ fileUrl, setFileUrl, keyTab, addRequirements, setAddRequirements }) => {
+const AddRequirementsModal = ({ blurModal, fileUrl, setFileUrl, keyTab, addRequirements, setAddRequirements }) => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const { addCompanyRequirement, getCompanieData } = bindActionCreators(actions, dispatch);
@@ -40,6 +40,7 @@ const AddRequirementsModal = ({ fileUrl, setFileUrl, keyTab, addRequirements, se
 
     form.resetFields();
     setAddRequirements(() => false);
+    blurModal(false);
   };
 
   const handleEditorChange = (state) => {
@@ -86,11 +87,11 @@ const AddRequirementsModal = ({ fileUrl, setFileUrl, keyTab, addRequirements, se
       visible={addRequirements}
       closeIcon={<CloseIconSVG />}
       onCancel={() => {
+        blurModal(false);
         setAddRequirements(() => false);
       }}
       cancelButtonProps={{ style: { display: 'none' } }}
       okButtonProps={{ style: { display: 'none' } }}
-      getContainer={() => document.getElementById('add_requirement')}
       width={664}
       className="modal_add_requirements">
       <h3 className="add_requirements_title">Add Requirement</h3>
@@ -152,6 +153,7 @@ const AddRequirementsModal = ({ fileUrl, setFileUrl, keyTab, addRequirements, se
               <Button
                 type="button"
                 onClick={() => {
+                  blurModal(false);
                   setAddRequirements(() => false);
                 }}>
                 Cancel

@@ -15,7 +15,7 @@ import { useDispatch } from 'react-redux';
 import { actions } from '../../../../core/companies/companiesSlice';
 import { useParams } from 'react-router-dom';
 
-const AddNoteModal = ({ keyTab, addNoteModal, setAddNoteModal }) => {
+const AddNoteModal = ({ blurModal, keyTab, addNoteModal, setAddNoteModal }) => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const { addCompanyNote, getCompanieData } = bindActionCreators(actions, dispatch);
@@ -40,6 +40,7 @@ const AddNoteModal = ({ keyTab, addNoteModal, setAddNoteModal }) => {
     addCompanyNote({ company_id: id, body }).then(() => getCompanieData(id));
     form.resetFields();
     setAddNoteModal(() => false);
+    blurModal(false);
   };
 
   const handleEditorChange = (state) => {
@@ -61,11 +62,11 @@ const AddNoteModal = ({ keyTab, addNoteModal, setAddNoteModal }) => {
       visible={addNoteModal}
       closeIcon={<CloseIconSVG />}
       onCancel={() => {
+        blurModal(false);
         setAddNoteModal(() => false);
       }}
       cancelButtonProps={{ style: { display: 'none' } }}
       okButtonProps={{ style: { display: 'none' } }}
-      getContainer={() => document.getElementById('add_note')}
       width={664}
       className="modal_add_note">
       <h3 className="add_note_title">Add Note</h3>
@@ -135,6 +136,7 @@ const AddNoteModal = ({ keyTab, addNoteModal, setAddNoteModal }) => {
               <Button
                 type="button"
                 onClick={() => {
+                  blurModal(false);
                   setAddNoteModal(() => false);
                 }}>
                 Cancel

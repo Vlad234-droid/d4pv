@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { CloseIconSVG } from '../../../components/icons';
 import { Modal, Form, Button, Col, Row, notification } from 'antd';
 import { actions } from '../../../core/configurations/configurationsSlice';
+import { actions as visActions } from '../../../core/visualization/visualizationSlice';
 
 import './style.scss';
 import { useDispatch } from 'react-redux';
@@ -19,6 +20,7 @@ const ModalDeleteUser = ({
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const { removeMembersOfOrganisation, deleteOrgInvite } = bindActionCreators(actions, dispatch);
+  const { blurModal } = bindActionCreators(visActions, dispatch);
 
   const onFinish = (values) => {
     setLoading(true);
@@ -49,6 +51,8 @@ const ModalDeleteUser = ({
         }
       });
     }
+    setShowDeleteUser(false);
+    blurModal(false);
   };
 
   return (
@@ -56,11 +60,11 @@ const ModalDeleteUser = ({
       visible={showDeleteUser}
       closeIcon={<CloseIconSVG />}
       onCancel={() => {
+        blurModal(false);
         setShowDeleteUser(() => false);
       }}
       cancelButtonProps={{ style: { display: 'none' } }}
       okButtonProps={{ style: { display: 'none' } }}
-      getContainer={() => document.getElementById('block_users')}
       width={544}
       className="modal_deleteUser">
       <Form name="user_delete" layout="vertical" form={form} requiredMark={true} onFinish={onFinish}>
@@ -74,6 +78,7 @@ const ModalDeleteUser = ({
               <Button
                 type="button"
                 onClick={() => {
+                  blurModal(false);
                   setShowDeleteUser(() => false);
                 }}>
                 Cancel

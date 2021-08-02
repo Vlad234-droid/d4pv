@@ -4,7 +4,7 @@ import { Button, Col } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { EditCompanySVG, IconToShow, DeleteSVG, HideNotesSVG } from '../../../../components/icons';
 import { actions } from '../../../../core/companies/companiesSlice';
-
+import { actions as visActions } from '../../../../core/visualization/visualizationSlice';
 import { bindActionCreators } from 'redux';
 import EditNote from './EditNote';
 import { useState } from 'react';
@@ -15,14 +15,12 @@ import { useParams } from 'react-router-dom';
 const SolarAttachmentPlan = ({ keyTab }) => {
   const notes = useSelector((state) => state.companies.companieData.notes);
   const { id } = useParams();
-
   const [noteList, setNotelist] = useState(null);
-
   const dispatch = useDispatch();
   const [toEdit, setToEdit] = useState({});
   const [editModal, setEditModal] = useState(false);
   const [addNoteModal, setAddNoteModal] = useState(false);
-
+  const { blurModal } = bindActionCreators(visActions, dispatch);
   const { visibilityCompanyNote, deleteCompanyNote, getCompanieData } = bindActionCreators(actions, dispatch);
 
   const chooseEditHandler = (id) => {
@@ -47,8 +45,13 @@ const SolarAttachmentPlan = ({ keyTab }) => {
 
   return (
     <div className="site_plan_block tab_block">
-      <EditNote toEdit={toEdit} editModal={editModal} setEditModal={setEditModal} />
-      <AddNoteModal keyTab={keyTab} addNoteModal={addNoteModal} setAddNoteModal={setAddNoteModal} />
+      <EditNote blurModal={blurModal} toEdit={toEdit} editModal={editModal} setEditModal={setEditModal} />
+      <AddNoteModal
+        blurModal={blurModal}
+        keyTab={keyTab}
+        addNoteModal={addNoteModal}
+        setAddNoteModal={setAddNoteModal}
+      />
 
       <div className="add_block">
         <h2>Solar Attachment plan</h2>
@@ -57,7 +60,10 @@ const SolarAttachmentPlan = ({ keyTab }) => {
             id="add_note"
             type="primary"
             style={{ maxHeight: '40px' }}
-            onClick={() => setAddNoteModal(() => true)}>
+            onClick={() => {
+              blurModal(true);
+              setAddNoteModal(() => true);
+            }}>
             Add Note
           </Button>
         </Col>
@@ -71,7 +77,13 @@ const SolarAttachmentPlan = ({ keyTab }) => {
             <div className="actions_do">
               <p className={`updated ${!item.visibility && 'modeOpacity'}`}>Updated 10.10.2021 by {item.requested}</p>
               <div className="svgBtn">
-                <div className="btnSVG" id="edit_note" onClick={() => chooseEditHandler(item.id)}>
+                <div
+                  className="btnSVG"
+                  id="edit_note"
+                  onClick={() => {
+                    blurModal(true);
+                    chooseEditHandler(item.id);
+                  }}>
                   <EditCompanySVG />
                 </div>
                 <div className="btnSVG" onClick={() => visibilityCompanyNote(item.id).then(() => getCompanieData(id))}>

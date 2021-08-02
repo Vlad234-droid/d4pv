@@ -9,10 +9,12 @@ import { actions } from '../../../core/configurations/configurationsSlice';
 import './style.scss';
 import { ArrowRight, ArrowLeftDisabled, IconUser } from '../../../components/icons';
 import { useSelector } from 'react-redux';
+import { actions as visActions } from '../../../core/visualization/visualizationSlice';
 
 const TableOfUsers = ({ searchValue }) => {
   const dispatch = useDispatch();
   const { getMembersOfOrganisation, getInvitesOfOrganisation } = bindActionCreators(actions, dispatch);
+  const { blurModal } = bindActionCreators(visActions, dispatch);
   const [showEditUser, setShowEditUser] = useState(false);
   const [showDeleteUser, setShowDeleteUser] = useState(false);
   const [activeId, setActiveId] = useState(null);
@@ -60,6 +62,7 @@ const TableOfUsers = ({ searchValue }) => {
                   //console.log('index', index);
                   setActiveId(record.key);
                   setCurrRecordRow(record);
+                  blurModal(true);
                   setShowEditUser(() => true);
                 }}>
                 <EditSVG />
@@ -72,6 +75,7 @@ const TableOfUsers = ({ searchValue }) => {
                 //console.log('index', index);
                 setCurrRecordRow(record);
                 setActiveId(record.key);
+                blurModal(true);
                 setShowDeleteUser(() => true);
               }}>
               <DeleteSVG />
@@ -168,7 +172,11 @@ const TableOfUsers = ({ searchValue }) => {
   useEffect(() => {
     if (dataSource !== null) {
       if (searchValue.trim().length > 0) {
-        const newData = dataSource.filter((item) => item.fn.toLowerCase().includes(searchValue.toLowerCase()));
+        const newData = dataSource.filter(
+          (item) =>
+            item.fn.toLowerCase().includes(searchValue.toLowerCase()) ||
+            item.email.toLowerCase().includes(searchValue.toLowerCase()),
+        );
         setFilterSource(() => newData);
       } else {
         setFilterSource(() => dataSource);

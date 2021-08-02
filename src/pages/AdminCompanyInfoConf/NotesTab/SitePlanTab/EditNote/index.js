@@ -15,7 +15,7 @@ import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import { useParams } from 'react-router-dom';
 
-const EditNote = ({ setEditModal, editModal, toEdit }) => {
+const EditNote = ({ blurModal, setEditModal, editModal, toEdit }) => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const { updateCompanyNote, getCompanieData } = bindActionCreators(actions, dispatch);
@@ -32,6 +32,7 @@ const EditNote = ({ setEditModal, editModal, toEdit }) => {
 
     updateCompanyNote({ note_id: toEdit.id, body }).then(() => getCompanieData(id));
     setEditModal(() => false);
+    blurModal(false);
   };
 
   const [editorState, setEditorState] = useState();
@@ -58,11 +59,11 @@ const EditNote = ({ setEditModal, editModal, toEdit }) => {
       visible={editModal}
       closeIcon={<CloseIconSVG />}
       onCancel={() => {
+        blurModal(false);
         setEditModal(() => false);
       }}
       cancelButtonProps={{ style: { display: 'none' } }}
       okButtonProps={{ style: { display: 'none' } }}
-      getContainer={() => document.getElementById('edit_note')}
       width={664}
       className="modal_edit_note">
       <h3 className="edit_note_title">Edit Note</h3>
@@ -134,6 +135,7 @@ const EditNote = ({ setEditModal, editModal, toEdit }) => {
               <Button
                 type="button"
                 onClick={() => {
+                  blurModal(false);
                   setEditModal(() => false);
                 }}>
                 Cancel

@@ -3,6 +3,7 @@ import { Button, Col } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { EditCompanySVG, IconToShow, DeleteSVG, HideNotesSVG } from '../../../../components/icons';
 import { actions } from '../../../../core/companies/companiesSlice';
+import { actions as visActions } from '../../../../core/visualization/visualizationSlice';
 
 import { bindActionCreators } from 'redux';
 import EditRequirements from './EditRequirements';
@@ -22,6 +23,8 @@ const SitePlanTab = ({ keyTab }) => {
     actions,
     dispatch,
   );
+  const { blurModal } = bindActionCreators(visActions, dispatch);
+
   const requirements = useSelector((state) => state.companies.companieData.requirements);
   const [requirementsList, setRequirementsList] = useState(null);
 
@@ -47,9 +50,14 @@ const SitePlanTab = ({ keyTab }) => {
 
   return (
     <div className="site_plan_block tab_block">
-      <EditRequirements toEdit={toEdit} editModal={editModal} setEditModal={setEditModal} />
+      <EditRequirements blurModal={blurModal} toEdit={toEdit} editModal={editModal} setEditModal={setEditModal} />
       {/* /////////////////////////////////////////////////////////////////////////// */}
-      <AddRequirementsModal keyTab={keyTab} addRequirements={addRequirements} setAddRequirements={setAddRequirements} />
+      <AddRequirementsModal
+        blurModal={blurModal}
+        keyTab={keyTab}
+        addRequirements={addRequirements}
+        setAddRequirements={setAddRequirements}
+      />
       <div className="add_block">
         <h2>Solar Attachment Requirments</h2>
         <Col span={7}>
@@ -57,7 +65,10 @@ const SitePlanTab = ({ keyTab }) => {
             type="primary"
             style={{ maxHeight: '40px' }}
             id="add_requirement"
-            onClick={() => setAddRequirements(() => true)}>
+            onClick={() => {
+              blurModal(true);
+              setAddRequirements(() => true);
+            }}>
             Add Requirments
           </Button>
         </Col>
@@ -71,7 +82,13 @@ const SitePlanTab = ({ keyTab }) => {
             <div className="actions_do">
               <p className={`updated ${!item.visibility && 'modeOpacity'}`}>Updated 10.10.2021 by {item.requested}</p>
               <div className="svgBtn">
-                <div className="btnSVG" id="edit_requirements" onClick={() => chooseEditHandler(item.id)}>
+                <div
+                  className="btnSVG"
+                  id="edit_requirements"
+                  onClick={() => {
+                    blurModal(true);
+                    chooseEditHandler(item.id);
+                  }}>
                   <EditCompanySVG />
                 </div>
                 <div

@@ -6,12 +6,17 @@ import TableOfCompanies from './TableOfCompanies';
 import LayoutConfiguration from '../../components/LayoutConfiguration/Layout';
 import { useHistory } from 'react-router-dom';
 import './style.scss';
+import { actions as visActions } from '../../core/visualization/visualizationSlice';
+import { bindActionCreators } from 'redux';
+import { useDispatch } from 'react-redux';
 
 const AdminCompaniesConfigurations = () => {
+  const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState('');
   const [showDeleteCompany, setShowDeleteCompany] = useState(false);
   const [serchToggle, setSearchToggle] = useState(null);
   const [deleteCompanyId, setDeleteCompanyId] = useState(null);
+  const { blurModal } = bindActionCreators(visActions, dispatch);
 
   const history = useHistory();
 
@@ -21,6 +26,7 @@ const AdminCompaniesConfigurations = () => {
     <LayoutConfiguration>
       <div className="block_companies" id="block_companies">
         <ModalDeleteCompany
+          blurModal={blurModal}
           showDeleteCompany={showDeleteCompany}
           setShowDeleteCompany={setShowDeleteCompany}
           deleteCompanyId={deleteCompanyId}
@@ -65,6 +71,7 @@ const AdminCompaniesConfigurations = () => {
         </div>
         <div>
           <TableOfCompanies
+            blurModal={blurModal}
             setShowDeleteCompany={setShowDeleteCompany}
             searchValue={searchValue}
             setDeleteCompanyId={setDeleteCompanyId}

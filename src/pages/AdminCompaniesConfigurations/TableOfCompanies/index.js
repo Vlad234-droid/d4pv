@@ -9,7 +9,7 @@ import { actions } from '../../../core/configurations/configurationsSlice';
 import { ArrowRight, ArrowLeftDisabled } from '../../../components/icons';
 import noLogo from '../../../assets/img/no-comany-logo.svg';
 
-const TableOfCompanies = ({ searchValue, setShowDeleteCompany, setDeleteCompanyId, deleteCompanyId }) => {
+const TableOfCompanies = ({ blurModal, searchValue, setShowDeleteCompany, setDeleteCompanyId, deleteCompanyId }) => {
   const dispatch = useDispatch();
   const { getConfCompanies } = bindActionCreators(actions, dispatch);
 
@@ -63,8 +63,8 @@ const TableOfCompanies = ({ searchValue, setShowDeleteCompany, setDeleteCompanyI
               <EditSVG />
             </div>
             <div
-              onClick={(e) => {
-                console.log('record', record);
+              onClick={() => {
+                blurModal(true);
                 setShowDeleteCompany(() => true);
                 setDeleteCompanyId(() => record.key);
               }}>
