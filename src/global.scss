@@ -499,3 +499,15 @@ button:not(.ant-btn) {
     margin-bottom: 0px;
   }
 }
+
+//
+.ant-modal-body {
+  cursor: initial;
+}
+.ant-modal-wrap {
+  cursor: initial;
+}
+// Editor
+.DraftEditor-editorContainer {
+  cursor: pointer;
+}
