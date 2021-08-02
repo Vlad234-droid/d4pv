@@ -5,6 +5,7 @@ import { EditorState } from 'draft-js';
 import { CloseIconSVG } from '../../../../../components/icons';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { actions } from '../../../../../core/companies/companiesSlice';
+import iconIMG from '../../../../../components/icons/icon-img.png';
 
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
@@ -20,7 +21,7 @@ const EditRequirements = ({ blurModal, setEditModal, editModal, toEdit }) => {
 
   const [form] = Form.useForm();
   const dispatch = useDispatch();
-  const { updateCompanyRequirement, getCompanieData } = bindActionCreators(actions, dispatch);
+  const { updateCompanyRequirement, getCompanieData, uploadFileStorage } = bindActionCreators(actions, dispatch);
 
   const onFinish = ({ reference, wysiwyg }) => {
     let currentContentAsHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
@@ -53,6 +54,19 @@ const EditRequirements = ({ blurModal, setEditModal, editModal, toEdit }) => {
       }
     }
   }, [toEdit, editModal]);
+
+  const uploadCallbackHandler = (file) => {
+    return new Promise((resolve, reject) => {
+      uploadFileStorage(file).then((data) => {
+        const url = data.payload.url;
+        resolve({
+          data: {
+            link: url,
+          },
+        });
+      });
+    });
+  };
 
   return (
     <Modal
@@ -90,11 +104,24 @@ const EditRequirements = ({ blurModal, setEditModal, editModal, toEdit }) => {
               editorClassName="editor-class"
               toolbarClassName="toolbar-class"
               toolbar={{
-                options: ['inline'],
+                options: ['inline', 'image'],
                 inline: {
                   options: ['bold', 'underline'],
                   bold: { icon: bold, className: 'custom_bold' },
                   underline: { icon: underline, className: 'custom_underline' },
+                },
+                image: {
+                  icon: iconIMG,
+                  className: 'iconIMG_custom',
+                  // component: Test,
+                  urlEnabled: false,
+                  previewImage: true,
+                  uploadCallback: uploadCallbackHandler,
+                  alignmentEnabled: false,
+                  defaultSize: {
+                    height: '135',
+                    width: '240',
+                  },
                 },
               }}
             />

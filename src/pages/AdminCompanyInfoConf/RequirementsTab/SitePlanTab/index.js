@@ -26,7 +26,7 @@ const SitePlanTab = ({ keyTab }) => {
   );
   const { blurModal } = bindActionCreators(visActions, dispatch);
 
-  const [fileUrl, setFileUrl] = useState('');
+  //const [fileUrl, setFileUrl] = useState('');
 
   const requirements = useSelector((state) => state.companies.companieData.requirements);
   const [requirementsList, setRequirementsList] = useState(null);
@@ -42,6 +42,7 @@ const SitePlanTab = ({ keyTab }) => {
 
   useEffect(() => {
     const newData = requirements.filter((item) => item.group === 'SitePlan');
+
     setRequirementsList(() => newData);
   }, [requirements]);
 
@@ -54,8 +55,8 @@ const SitePlanTab = ({ keyTab }) => {
         keyTab={keyTab}
         addRequirements={addRequirements}
         setAddRequirements={setAddRequirements}
-        fileUrl={fileUrl}
-        setFileUrl={setFileUrl}
+        //fileUrl={fileUrl}
+        //setFileUrl={setFileUrl}
       />
 
       <div className="add_block">

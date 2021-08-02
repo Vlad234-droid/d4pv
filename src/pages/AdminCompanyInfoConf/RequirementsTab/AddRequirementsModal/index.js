@@ -16,10 +16,10 @@ import './style.scss';
 import iconIMG from '../../../../components/icons/icon-img.png';
 import { useParams } from 'react-router-dom';
 
-const AddRequirementsModal = ({ blurModal, fileUrl, setFileUrl, keyTab, addRequirements, setAddRequirements }) => {
+const AddRequirementsModal = ({ blurModal, keyTab, addRequirements, setAddRequirements }) => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
-  const { addCompanyRequirement, getCompanieData } = bindActionCreators(actions, dispatch);
+  const { addCompanyRequirement, getCompanieData, uploadFileStorage } = bindActionCreators(actions, dispatch);
   const [editorState, setEditorState] = useState();
   const { id } = useParams();
 
@@ -52,7 +52,7 @@ const AddRequirementsModal = ({ blurModal, fileUrl, setFileUrl, keyTab, addRequi
     if (addRequirements) document.body.style.overflow = 'hidden';
     if (!addRequirements) document.body.style.overflow = 'unset';
 
-    const contentBlock = htmlToDraft('<h6></h6>');
+    const contentBlock = htmlToDraft('<p></p>');
     const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
     const editorState = EditorState.createWithContent(contentState);
     setEditorState(() => editorState);
@@ -67,18 +67,14 @@ const AddRequirementsModal = ({ blurModal, fileUrl, setFileUrl, keyTab, addRequi
   // };
 
   const uploadCallbackHandler = (file) => {
-    const imageObject = {
-      file: file,
-      localSrc: URL.createObjectURL(file),
-    };
-
-    setFileUrl(() => imageObject);
-
     return new Promise((resolve, reject) => {
-      resolve({
-        data: {
-          link: `${URL.createObjectURL(file)}`,
-        },
+      uploadFileStorage(file).then((data) => {
+        const url = data.payload.url;
+        resolve({
+          data: {
+            link: url,
+          },
+        });
       });
     });
   };

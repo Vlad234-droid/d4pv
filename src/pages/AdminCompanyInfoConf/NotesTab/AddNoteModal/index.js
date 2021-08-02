@@ -36,7 +36,6 @@ const AddNoteModal = ({ blurModal, keyTab, addNoteModal, setAddNoteModal }) => {
       requested_by,
       group: getProperGroup(),
     };
-    console.log('body', body);
     addCompanyNote({ company_id: id, body }).then(() => getCompanieData(id));
     form.resetFields();
     setAddNoteModal(() => false);
@@ -51,7 +50,7 @@ const AddNoteModal = ({ blurModal, keyTab, addNoteModal, setAddNoteModal }) => {
     if (addNoteModal) document.body.style.overflow = 'hidden';
     if (!addNoteModal) document.body.style.overflow = 'unset';
 
-    const contentBlock = htmlToDraft('<h6></h6>');
+    const contentBlock = htmlToDraft('<p></p>');
     const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
     const editorState = EditorState.createWithContent(contentState);
     setEditorState(() => editorState);

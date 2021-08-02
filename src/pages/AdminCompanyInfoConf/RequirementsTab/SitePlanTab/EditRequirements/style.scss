@@ -25,6 +25,8 @@
     min-height: 40px;
     border-bottom: 1px solid rgba(178, 190, 202, 0.4);
     border-radius: 0px;
+    position: relative;
+
     .rdw-inline-wrapper {
       .rdw-option-wrapper {
         display: none;
@@ -51,6 +53,24 @@
       }
       .rdw-option-wrapper {
         border: none;
+      }
+    }
+    .rdw-image-wrapper {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 0px;
+      .rdw-option-wrapper {
+        border: none;
+        &.iconIMG_custom {
+          img {
+            vertical-align: middle;
+            border-style: none;
+            width: 25px;
+            object-fit: cover;
+            height: 25px;
+          }
+        }
       }
     }
   }

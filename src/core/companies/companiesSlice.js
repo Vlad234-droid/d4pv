@@ -217,6 +217,23 @@ const uploadTempStorage = createAsyncThunk('companies/uploadTempStorage', async 
   }
 });
 
+const uploadFileStorage = createAsyncThunk('companies/uploadFileStorage', async (file, { dispatch }) => {
+  const { logout } = bindActionCreators(profileActions, dispatch);
+  const formData = new FormData();
+  formData.append('file', file);
+  const token = lockr.get('auth-token');
+  const headers = {
+    Accept: 'application/json',
+    Authorization: `bearer ${token}`,
+  };
+  try {
+    const response = await fetchApi(`${REACT_APP_API_URL}/me/filestorage`, 'POST', headers, formData, logout);
+    return response;
+  } catch (err) {
+    return Promise.reject(err);
+  }
+});
+
 const updateCompanyImage = createAsyncThunk('profile/updateCompanyImage', async (data, { dispatch }) => {
   const { logout } = bindActionCreators(profileActions, dispatch);
   const formData = new FormData();
@@ -310,6 +327,7 @@ export const actions = {
   uploadTempStorage,
   updateCompanyImage,
   removeCompanyImage,
+  uploadFileStorage,
 };
 
 export default companiesSlice.reducer;
