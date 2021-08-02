@@ -88,6 +88,10 @@
         .dropMenuProfile {
           left: 2px !important;
           top: 51px !important;
+          a {
+            display: block;
+            width: 100%;
+          }
         }
         .ant-dropdown {
           ul {
