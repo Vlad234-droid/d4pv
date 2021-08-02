@@ -7,18 +7,19 @@ import { useDispatch } from 'react-redux';
 import ModalDeleteUser from '../ModalDeleteUser';
 import { actions } from '../../../core/configurations/configurationsSlice';
 import './style.scss';
-import { ArrowRight, ArrowLeftDisabled } from '../../../components/icons';
+import { ArrowRight, ArrowLeftDisabled, IconUser } from '../../../components/icons';
 import { useSelector } from 'react-redux';
 
 const TableOfUsers = ({ searchValue }) => {
   const dispatch = useDispatch();
-  const { getMembersOfOrganisation } = bindActionCreators(actions, dispatch);
+  const { getMembersOfOrganisation, getInvitesOfOrganisation } = bindActionCreators(actions, dispatch);
   const [showEditUser, setShowEditUser] = useState(false);
   const [showDeleteUser, setShowDeleteUser] = useState(false);
   const [activeId, setActiveId] = useState(null);
   const [currRecordRow, setCurrRecordRow] = useState(null);
   const [tableLoading, setTableLoading] = useState(false);
   const [dataSource, setDataSource] = useState(null);
+  const [filterSource, setFilterSource] = useState(null);
   const [copyOfDataSource, setCopyOfDataSource] = useState(null);
   const [tableLength, setTableLength] = useState(null);
   const id = useSelector((state) => state?.profile?.data?.id);
@@ -51,17 +52,19 @@ const TableOfUsers = ({ searchValue }) => {
           <div></div>
         ) : (
           <div className="actions_block">
-            <div
-              onClick={() => {
-                //console.log('e', e.target.dataset.action);
-                //console.log('record', record.key);
-                //console.log('index', index);
-                setActiveId(record.key);
-                setCurrRecordRow(() => record);
-                setShowEditUser(() => true);
-              }}>
-              <EditSVG />
-            </div>
+            {!record.invite && (
+              <div
+                onClick={() => {
+                  //console.log('e', e.target.dataset.action);
+                  //console.log('record', record.key);
+                  //console.log('index', index);
+                  setActiveId(record.key);
+                  setCurrRecordRow(() => record);
+                  setShowEditUser(() => true);
+                }}>
+                <EditSVG />
+              </div>
+            )}
             <div
               onClick={(e) => {
                 //console.log('e', e.target.dataset.action);
@@ -93,9 +96,20 @@ const TableOfUsers = ({ searchValue }) => {
   useEffect(() => {
     setTableLoading(() => true);
     getMembersOfOrganisation().then((data) => {
-      setTableLength(() => data.payload.length);
-      setPageInfo(data.payload);
-      setTableLoading(() => false);
+      let result = data.payload;
+      getInvitesOfOrganisation().then((invites) => {
+        invites.payload.map((item) => {
+          item.first_name = '';
+          item.image = null;
+          item.last_name = '';
+          item.invite = true;
+          result.push(item);
+          return item;
+        });
+        setTableLength(() => result.length);
+        setPageInfo(result);
+        setTableLoading(() => false);
+      });
     });
   }, []);
 
@@ -110,7 +124,11 @@ const TableOfUsers = ({ searchValue }) => {
         first_name: (
           <div className="wrapper_name">
             <div className="wrapper_img">
-              {item.image?.length ? (
+              {item.invite ? (
+                <div className="inviteimage">
+                  <IconUser />
+                </div>
+              ) : item.image?.length ? (
                 <img src={item.image} alt="Logo" />
               ) : (
                 <div className="noimage sm">
@@ -119,36 +137,28 @@ const TableOfUsers = ({ searchValue }) => {
                 </div>
               )}
             </div>
-            <h3 className="name">{item.first_name}</h3>
+            <h3 className="name invited">{item.invite ? 'waiting for confirmation…' : item.first_name}</h3>
           </div>
         ),
-        role: getProperRole(item.role),
+        role: item.invite ? '' : getProperRole(item.role),
         email: item.email,
         fn: item.first_name,
         ln: item.last_name,
+        invite: item.invite,
       });
     });
     setDataSource(() => newData);
+    setFilterSource(() => newData);
     setCopyOfDataSource(() => newData);
   };
 
   useEffect(() => {
     if (dataSource !== null) {
-      if (searchValue.length >= 1) {
-        const newData = [];
-        dataSource.forEach((item) => {
-          if (
-            item.first_name.props.children[1].props.children.toLowerCase().includes(searchValue.toLowerCase()) ||
-            item.email.toLowerCase().includes(searchValue.toLowerCase())
-          ) {
-            newData.push(item);
-          }
-        });
-        setDataSource(() => newData);
-      } else if (searchValue.length === 0 && searchValue.trim() === '') {
-        if (copyOfDataSource !== null) {
-          setDataSource(() => copyOfDataSource);
-        }
+      if (searchValue.trim().length > 0) {
+        const newData = dataSource.filter((item) => item.fn.toLowerCase().includes(searchValue.toLowerCase()));
+        setFilterSource(() => newData);
+      } else {
+        setFilterSource(() => dataSource);
       }
     }
   }, [searchValue]);
@@ -192,7 +202,7 @@ const TableOfUsers = ({ searchValue }) => {
           <Table
             className="table_users"
             loading={tableLoading}
-            dataSource={dataSource}
+            dataSource={filterSource}
             columns={columns}
             onChange={onChange}
             pagination={false}
