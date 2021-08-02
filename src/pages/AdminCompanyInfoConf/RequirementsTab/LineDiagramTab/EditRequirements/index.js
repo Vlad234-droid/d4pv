@@ -56,15 +56,13 @@ const EditRequirements = ({ blurModal, setEditModal, editModal, toEdit }) => {
   }, [toEdit, editModal]);
 
   const uploadCallbackHandler = (file) => {
-    return new Promise((resolve, reject) => {
-      uploadFileStorage(file).then((data) => {
-        const url = data.payload.url;
-        resolve({
-          data: {
-            link: url,
-          },
-        });
-      });
+    return uploadFileStorage(file).then((data) => {
+      const url = data.payload.url;
+      return {
+        data: {
+          link: url,
+        },
+      };
     });
   };
 
