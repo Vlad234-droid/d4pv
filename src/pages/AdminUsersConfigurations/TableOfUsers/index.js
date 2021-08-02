@@ -59,7 +59,7 @@ const TableOfUsers = ({ searchValue }) => {
                   //console.log('record', record.key);
                   //console.log('index', index);
                   setActiveId(record.key);
-                  setCurrRecordRow(() => record);
+                  setCurrRecordRow(record);
                   setShowEditUser(() => true);
                 }}>
                 <EditSVG />
@@ -70,6 +70,7 @@ const TableOfUsers = ({ searchValue }) => {
                 //console.log('e', e.target.dataset.action);
                 //console.log('record', record);
                 //console.log('index', index);
+                setCurrRecordRow(record);
                 setActiveId(record.key);
                 setShowDeleteUser(() => true);
               }}>
@@ -84,8 +85,20 @@ const TableOfUsers = ({ searchValue }) => {
   const updateUsersList = () => {
     setTableLoading(() => true);
     getMembersOfOrganisation().then((data) => {
-      setPageInfo(data.payload);
-      setTableLoading(() => false);
+      let result = data.payload;
+      getInvitesOfOrganisation().then((invites) => {
+        invites.payload.map((item) => {
+          item.first_name = '';
+          item.image = null;
+          item.last_name = '';
+          item.invite = true;
+          result.push(item);
+          return item;
+        });
+        setTableLength(() => result.length);
+        setPageInfo(result);
+        setTableLoading(() => false);
+      });
     });
   };
 
@@ -206,9 +219,6 @@ const TableOfUsers = ({ searchValue }) => {
             columns={columns}
             onChange={onChange}
             pagination={false}
-            rowClassName={(record) => {
-              return record.onCheck ? 'onCheck' : '';
-            }}
             pagination={{
               className: `ant-pagination ant-table-pagination ant-table-pagination-center ${
                 tableLength !== null && tableLength > 10 && 'showPagination'
@@ -221,13 +231,17 @@ const TableOfUsers = ({ searchValue }) => {
               showSizeChanger: false,
             }}
           />
-          <ModalDeleteUser
-            showDeleteUser={showDeleteUser}
-            setShowDeleteUser={setShowDeleteUser}
-            activeId={activeId}
-            updateUsersList={updateUsersList}
-            setTableLength={setTableLength}
-          />
+          {currRecordRow !== null && (
+            <ModalDeleteUser
+              currRecordRow={currRecordRow}
+              showDeleteUser={showDeleteUser}
+              setShowDeleteUser={setShowDeleteUser}
+              activeId={activeId}
+              updateUsersList={updateUsersList}
+              setTableLength={setTableLength}
+            />
+          )}
+
           {currRecordRow !== null && (
             <ModalEditUser
               setCurrRecordRow={setCurrRecordRow}

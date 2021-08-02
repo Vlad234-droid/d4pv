@@ -60,6 +60,25 @@ const getInvitesOfOrganisation = createAsyncThunk('configuration/getInvitesOfOrg
   }
 });
 
+const deleteOrgInvite = createAsyncThunk('configuration/deleteOrgInvite', async (invite_id, { dispatch }) => {
+  const { logout } = bindActionCreators(profileActions, dispatch);
+  const token = lockr.get('auth-token');
+
+  const headers = { Accept: 'application/json', Authorization: `bearer ${token}` };
+  try {
+    const response = await fetchApi(
+      `${REACT_APP_API_URL}/me/organisation/invites/${invite_id}`,
+      'DELETE',
+      headers,
+      null,
+      logout,
+    );
+    return response;
+  } catch (err) {
+    return Promise.reject(err);
+  }
+});
+
 const updateMemberToOrganisation = createAsyncThunk(
   'configuration/updateMemberToOrganisation',
   async (data, { dispatch }) => {
@@ -162,6 +181,7 @@ export const actions = {
   createCompany,
   updateMemberToOrganisation,
   getInvitesOfOrganisation,
+  deleteOrgInvite,
 };
 
 export default configurationSlice.reducer;

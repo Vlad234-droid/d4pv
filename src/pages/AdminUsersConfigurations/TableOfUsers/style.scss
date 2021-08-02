@@ -27,66 +27,66 @@
         margin: 125px 0px;
       }
       tr {
-        &.onCheck {
-          td {
-            .wrapper_name {
-              h3 {
-                display: none;
-              }
-              &::after {
-                content: 'waiting for confirmation…';
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                left: 56px;
-                opacity: 0.5;
-                font-family: Montserrat;
-                font-size: 12px;
-                font-weight: normal;
-                font-stretch: normal;
-                font-style: normal;
-                line-height: 1.5;
-                letter-spacing: -0.1px;
-                color: #00254d;
-                white-space: nowrap;
-                z-index: 100;
-              }
-              .wrapper_img {
-                position: relative;
-                width: 32px;
-                height: 32px;
-                border: solid 1px #b2beca;
-                &:before {
-                  content: '';
-                  position: absolute;
-                  top: 0px;
-                  left: 0px;
-                  bottom: 0px;
-                  right: 0px;
-                  background: url('../../../components/icons/iconUser.png');
-                  background-position: center;
-                  background-repeat: no-repeat;
-                  background-size: cover;
-                }
+        // &.onCheck {
+        //   td {
+        //     .wrapper_name {
+        //       h3 {
+        //         display: none;
+        //       }
+        //       &::after {
+        //         content: 'waiting for confirmation…';
+        //         position: absolute;
+        //         top: 50%;
+        //         transform: translateY(-50%);
+        //         left: 56px;
+        //         opacity: 0.5;
+        //         font-family: Montserrat;
+        //         font-size: 12px;
+        //         font-weight: normal;
+        //         font-stretch: normal;
+        //         font-style: normal;
+        //         line-height: 1.5;
+        //         letter-spacing: -0.1px;
+        //         color: #00254d;
+        //         white-space: nowrap;
+        //         z-index: 100;
+        //       }
+        //       .wrapper_img {
+        //         position: relative;
+        //         width: 32px;
+        //         height: 32px;
+        //         border: solid 1px #b2beca;
+        //         &:before {
+        //           content: '';
+        //           position: absolute;
+        //           top: 0px;
+        //           left: 0px;
+        //           bottom: 0px;
+        //           right: 0px;
+        //           background: url('../../../components/icons/iconUser.png');
+        //           background-position: center;
+        //           background-repeat: no-repeat;
+        //           background-size: cover;
+        //         }
 
-                img {
-                  display: none;
-                }
-              }
-            }
-            .actions_block {
-              div {
-                &:nth-child(1) {
-                  opacity: 0;
-                  pointer-events: none;
-                }
-              }
-            }
-          }
-          td.roles {
-            opacity: 0;
-          }
-        }
+        //         img {
+        //           display: none;
+        //         }
+        //       }
+        //     }
+        //     .actions_block {
+        //       div {
+        //         &:nth-child(1) {
+        //           opacity: 0;
+        //           pointer-events: none;
+        //         }
+        //       }
+        //     }
+        //   }
+        //   td.roles {
+        //     opacity: 0;
+        //   }
+        // }
         &:nth-child(odd) {
           .noimage {
             background: #ffb40a;
@@ -141,11 +141,10 @@
             h3 {
               font-size: 13px;
               font-weight: 600;
-              font-stretch: normal;
-              font-style: normal;
               letter-spacing: normal;
               color: #00254d;
               margin-bottom: 0px;
+              white-space: nowrap;
               &.invited {
                 font-weight: normal;
               }

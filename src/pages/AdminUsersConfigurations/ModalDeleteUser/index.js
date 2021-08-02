@@ -7,30 +7,49 @@ import './style.scss';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-const ModalDeleteUser = ({ setTableLength, showDeleteUser, setShowDeleteUser, activeId, updateUsersList }) => {
+const ModalDeleteUser = ({
+  currRecordRow,
+  setTableLength,
+  showDeleteUser,
+  setShowDeleteUser,
+  activeId,
+  updateUsersList,
+}) => {
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
   const dispatch = useDispatch();
-  const { removeMembersOfOrganisation } = bindActionCreators(actions, dispatch);
+  const { removeMembersOfOrganisation, deleteOrgInvite } = bindActionCreators(actions, dispatch);
+
   const onFinish = (values) => {
     setLoading(true);
-    removeMembersOfOrganisation(activeId).then((data) => {
-      if (!data.error) {
-        notification.success({
-          description: 'User has been deleted',
-          duration: 3.5,
-        });
-        setShowDeleteUser(false);
-        setLoading(false);
-        updateUsersList();
-        setTableLength((prev) => prev - 1);
-      }
-    });
+    if (currRecordRow.invite) {
+      deleteOrgInvite(activeId).then((data) => {
+        if (!data.error) {
+          notification.success({
+            description: 'User has been deleted',
+            duration: 3.5,
+          });
+          setShowDeleteUser(false);
+          setLoading(false);
+          updateUsersList();
+          setTableLength((prev) => prev - 1);
+        }
+      });
+    } else {
+      removeMembersOfOrganisation(activeId).then((data) => {
+        if (!data.error) {
+          notification.success({
+            description: 'User has been deleted',
+            duration: 3.5,
+          });
+          setShowDeleteUser(false);
+          setLoading(false);
+          updateUsersList();
+          setTableLength((prev) => prev - 1);
+        }
+      });
+    }
   };
-
-  useEffect(() => {
-    console.log('activeId', activeId);
-  }, [activeId]);
 
   return (
     <Modal
