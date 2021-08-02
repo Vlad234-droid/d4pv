@@ -6,7 +6,8 @@ import { Link, useHistory } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { actions } from '../../core/account/accountSlice';
 import { actions as profileActions } from '../../core/profile/profileSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { ShowPassword, CloseToShowPassword } from '../../components/icons';
 
 import './style.scss';
 
@@ -17,6 +18,8 @@ const LoginPage = () => {
   const [form] = Form.useForm();
   const { logInAcc } = bindActionCreators(actions, dispatch);
   const { login } = bindActionCreators(profileActions, dispatch);
+  const [showPassFirst, setShowPassFirst] = useState(false);
+  const [valueFirstPass, setValueFirstPass] = useState('');
 
   const onFinishHandler = ({ email, password }) => {
     setLoader(true);
@@ -37,6 +40,13 @@ const LoginPage = () => {
       history.push('/profile');
     });
   };
+
+  const suffixFirst = (
+    <div className="showPassFirst" onClick={() => setShowPassFirst((prev) => !prev)}>
+      {!showPassFirst ? <ShowPassword /> : <CloseToShowPassword />}
+    </div>
+  );
+
   return (
     <Layout isLogged={false} mode="login" className="login-page">
       <div className="wrapper">
@@ -74,7 +84,14 @@ const LoginPage = () => {
                   { min: 8, message: 'Password must be at least 8 characters' },
                   { required: true, message: 'Please input your password' },
                 ]}>
-                <Input placeholder="Type your password" type="password" />
+                <Input
+                  placeholder="Type your password"
+                  type="password"
+                  suffix={suffixFirst}
+                  value={valueFirstPass}
+                  type={showPassFirst ? 'text' : 'password'}
+                  onChange={(e) => setValueFirstPass(() => e.target.value)}
+                />
               </Form.Item>
               <Form.Item>
                 <Button type="primary" htmlType="submit" loading={loader}>

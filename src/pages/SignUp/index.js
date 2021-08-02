@@ -8,7 +8,6 @@ import { ShowPassword, CloseToShowPassword } from '../../components/icons';
 import { actions } from '../../core/account/accountSlice';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { useSelector } from 'react-redux';
 
 const LoginPage = () => {
   const [loader, setLoader] = useState(false);

@@ -89,6 +89,7 @@ const TableOfUsers = ({ searchValue }) => {
   const updateUsersList = () => {
     setTableLoading(() => true);
     getMembersOfOrganisation().then((data) => {
+      console.log('data', data);
       let result = data.payload;
       getInvitesOfOrganisation().then((invites) => {
         invites.payload.map((item) => {
@@ -134,6 +135,7 @@ const TableOfUsers = ({ searchValue }) => {
     role.split('.')[1] === 'MEMBER' ? 'User' : role.split('.')[1] === 'OWNER' && 'Admin';
 
   const setPageInfo = (data) => {
+    console.log('dayta', data);
     const newData = [];
     data.forEach((item) => {
       newData.push({
@@ -162,6 +164,7 @@ const TableOfUsers = ({ searchValue }) => {
         fn: item.first_name,
         ln: item.last_name,
         invite: item.invite,
+        image: item.image,
       });
     });
     setDataSource(() => newData);

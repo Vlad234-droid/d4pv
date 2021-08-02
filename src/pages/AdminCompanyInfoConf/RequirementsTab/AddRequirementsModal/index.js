@@ -31,6 +31,7 @@ const AddRequirementsModal = ({ blurModal, fileUrl, setFileUrl, keyTab, addRequi
       if (keyTab === 3) return 'AssemblyDetails';
     };
     let currentContentAsHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+
     const body = {
       text: currentContentAsHTML,
       reference,

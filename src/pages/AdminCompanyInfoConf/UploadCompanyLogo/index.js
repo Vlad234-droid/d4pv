@@ -20,7 +20,6 @@ const UploadCompanyLogo = ({ editMode, setLogoUrl, logoUrl }) => {
 
   useEffect(() => {
     setUpdatedImg(() => `${image}?${new Date().getTime()}`);
-    console.log('image', image);
   }, [image]);
 
   const customRequest = (e) => {

@@ -14,6 +14,8 @@ const ModalEditUser = ({ setCurrRecordRow, record, showEditUser, setShowEditUser
   const { updateMemberToOrganisation } = bindActionCreators(actions, dispatch);
   const { blurModal } = bindActionCreators(visActions, dispatch);
 
+  console.log('record', record);
+
   const onFinish = (values) => {
     setLoading(true);
     updateMemberToOrganisation({

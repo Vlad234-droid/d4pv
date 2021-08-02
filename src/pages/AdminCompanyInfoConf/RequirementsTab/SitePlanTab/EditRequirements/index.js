@@ -26,6 +26,8 @@ const EditRequirements = ({ blurModal, setEditModal, editModal, toEdit }) => {
   const onFinish = ({ reference, wysiwyg }) => {
     let currentContentAsHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
 
+    console.log('currentContentAsHTML', currentContentAsHTML);
+
     const body = {
       text: currentContentAsHTML,
       reference: reference,

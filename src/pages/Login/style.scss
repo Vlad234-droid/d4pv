@@ -50,6 +50,20 @@
       }
     }
     .ant-form {
+      .ant-col {
+        .showPassFirst {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: auto;
+          position: absolute;
+          top: 50%;
+          right: 0px;
+          transform: translateY(-50%);
+          margin-right: 16px;
+          cursor: pointer;
+        }
+      }
       width: 100%;
       .ant-row {
         .ant-col {
