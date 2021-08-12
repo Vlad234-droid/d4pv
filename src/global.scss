@@ -443,6 +443,13 @@ button:not(.ant-btn) {
   }
 }
 // nofification
+.ant-notification {
+  top: 4px !important;
+  left: 0px;
+  transform: translateX(-34%);
+  right: 0px;
+}
+
 .ant-notification-notice {
   padding: 23px;
   width: 369px;

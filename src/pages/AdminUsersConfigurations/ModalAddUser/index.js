@@ -27,6 +27,7 @@ const ModalAddUser = ({ showAddUser, setShowAddUser, blurModal }) => {
     setShowAddUser(() => false);
   };
 
+
   return (
     <Modal
       visible={showAddUser}
