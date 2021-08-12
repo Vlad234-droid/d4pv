@@ -20,6 +20,11 @@
       color: #00254d;
     }
   }
+  .DraftEditor-editorContainer {
+    img {
+      max-width: 50%;
+    }
+  }
   .rdw-editor-toolbar.toolbar-class {
     border: none;
     min-height: 40px;

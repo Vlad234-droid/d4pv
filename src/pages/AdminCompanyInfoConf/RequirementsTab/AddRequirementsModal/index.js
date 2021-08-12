@@ -118,8 +118,8 @@ const AddRequirementsModal = ({ blurModal, keyTab, addRequirements, setAddRequir
                   uploadCallback: uploadCallbackHandler,
                   alignmentEnabled: false,
                   defaultSize: {
-                    height: '135',
-                    width: '240',
+                    height: 'auto',
+                    width: 'auto',
                   },
                 },
               }}

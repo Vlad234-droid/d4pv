@@ -120,8 +120,8 @@ const EditRequirements = ({ blurModal, setEditModal, editModal, toEdit }) => {
                   uploadCallback: uploadCallbackHandler,
                   alignmentEnabled: false,
                   defaultSize: {
-                    height: '135',
-                    width: '240',
+                    height: 'auto',
+                    width: 'auto',
                   },
                 },
               }}
