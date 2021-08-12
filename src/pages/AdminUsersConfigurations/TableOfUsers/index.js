@@ -11,7 +11,7 @@ import { ArrowRight, ArrowLeftDisabled, IconUser } from '../../../components/ico
 import { useSelector } from 'react-redux';
 import { actions as visActions } from '../../../core/visualization/visualizationSlice';
 
-const TableOfUsers = ({ searchValue }) => {
+const TableOfUsers = ({ searchValue, toggle }) => {
   const dispatch = useDispatch();
   const { getMembersOfOrganisation, getInvitesOfOrganisation } = bindActionCreators(actions, dispatch);
   const { blurModal } = bindActionCreators(visActions, dispatch);
@@ -129,13 +129,12 @@ const TableOfUsers = ({ searchValue }) => {
         setTableLoading(() => false);
       });
     });
-  }, []);
+  }, [toggle]);
 
   const getProperRole = (role) =>
     role.split('.')[1] === 'MEMBER' ? 'User' : role.split('.')[1] === 'OWNER' && 'Admin';
 
   const setPageInfo = (data) => {
-    console.log('dayta', data);
     const newData = [];
     data.forEach((item) => {
       newData.push({
@@ -212,7 +211,6 @@ const TableOfUsers = ({ searchValue }) => {
   //   console.log('remainder', remainder);
   //   if (remainder > 0) return true;
   //   return false;
-  // };
 
   return (
     <>

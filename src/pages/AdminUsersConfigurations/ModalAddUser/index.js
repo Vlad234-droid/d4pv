@@ -6,7 +6,7 @@ import { actions } from '../../../core/configurations/configurationsSlice';
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
 
-const ModalAddUser = ({ showAddUser, setShowAddUser, blurModal }) => {
+const ModalAddUser = ({ showAddUser, setShowAddUser, blurModal, setToggle }) => {
   const dispatch = useDispatch();
   const { inViteMemberToOrganisation } = bindActionCreators(actions, dispatch);
   const [form] = Form.useForm();
@@ -25,8 +25,8 @@ const ModalAddUser = ({ showAddUser, setShowAddUser, blurModal }) => {
     });
     blurModal(false);
     setShowAddUser(() => false);
+    setToggle((prev) => !prev);
   };
-
 
   return (
     <Modal

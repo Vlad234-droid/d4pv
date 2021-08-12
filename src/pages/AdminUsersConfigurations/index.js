@@ -15,19 +15,21 @@ const AdminUsersConfigurations = () => {
   const [searchValue, setSearchValue] = useState('');
   const [showAddUser, setShowAddUser] = useState(false);
   const [serchToggle, setSearchToggle] = useState(null);
+  const [toggle, setToggle] = useState(false);
 
   const { blurModal } = bindActionCreators(actions, dispatch);
-
-  const onFinish = (values) => {
-    console.log('values', values);
-  };
 
   const SuffixSearch = <div className="suffix-search">{!serchToggle ? <SearchSVG /> : <CloseSVG />}</div>;
 
   return (
     <LayoutConfiguration>
       <div className="block_users" id="block_users">
-        <ModalAddUser showAddUser={showAddUser} setShowAddUser={setShowAddUser} blurModal={blurModal} />
+        <ModalAddUser
+          showAddUser={showAddUser}
+          setShowAddUser={setShowAddUser}
+          blurModal={blurModal}
+          setToggle={setToggle}
+        />
         <div className="title_users">
           <h2>Users</h2>
         </div>
@@ -68,7 +70,7 @@ const AdminUsersConfigurations = () => {
           </Row>
         </div>
         <div>
-          <TableOfUsers searchValue={searchValue} />
+          <TableOfUsers searchValue={searchValue} toggle={toggle} />
         </div>
       </div>
     </LayoutConfiguration>
