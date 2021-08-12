@@ -80,7 +80,7 @@ const UploadImg = () => {
             <div>
               <StarSVG />
             </div>
-            <span className="upload_photo">Upload logo</span>
+            <span className="upload_photo">Upload Photo</span>
           </div>
         </Dragger>
       ) : (
