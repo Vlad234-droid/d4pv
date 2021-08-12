@@ -66,6 +66,9 @@
           &:nth-child(5) {
             min-width: 114px;
           }
+          &.company_phone {
+            white-space: nowrap;
+          }
           &.company_phone,
           &.company_name {
             font-size: 13px;
@@ -84,7 +87,7 @@
             height: 32px;
             overflow: hidden;
             img {
-              width: auto;
+              width: 100%;
               height: 100%;
               object-fit: contain;
             }

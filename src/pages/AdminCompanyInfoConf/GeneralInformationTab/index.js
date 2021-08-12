@@ -138,7 +138,7 @@ const GeneralInformationTab = ({ editMode, dataSource, setEditMode }) => {
             {editMode ? (
               <InputMask
                 className="ant-input"
-                mask="+999999999999"
+                mask="(999)-999-9999"
                 maskChar=" "
                 onChange={(e) => console.log(e.target.value)}>
                 {(inputProps) => <Input {...inputProps} type="tel" />}
@@ -197,7 +197,7 @@ const GeneralInformationTab = ({ editMode, dataSource, setEditMode }) => {
               }),
             ]}>
             {editMode ? (
-              <InputMask className="ant-input" mask="+999999999999" maskChar=" ">
+              <InputMask className="ant-input" mask="(999)-999-9999" maskChar=" ">
                 {(inputProps) => <Input {...inputProps} type="tel" />}
               </InputMask>
             ) : (
