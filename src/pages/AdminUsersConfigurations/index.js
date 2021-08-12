@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button, Input, Row, Col } from 'antd';
+import { Form, Button, Input, Row, Col, notification } from 'antd';
 import './style.scss';
 import { SearchSVG, CloseSVG } from '../../components/icons';
 import ModalAddUser from './ModalAddUser';
