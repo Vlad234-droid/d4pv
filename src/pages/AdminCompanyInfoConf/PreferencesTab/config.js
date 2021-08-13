@@ -4,7 +4,7 @@ export const preferences = [
     title: 'Electrical: System',
     params: [
       {
-        title: 'Grounding Electrode Conductor - valid options (GEC/EGC Combined, GEC&EGC separated)',
+        title: 'Grounding Electrode Conductor',
         name: 'grounding_electrode_conductor',
         placeholder: 'Select Grounding Electrode Conductor',
         options: [
@@ -25,7 +25,7 @@ export const preferences = [
     title: 'Electrical: Balance of System',
     params: [
       {
-        title: 'AC Disconnect Brand Name - valid options (Square D, Eaton, Cuttler Hummer, Siemens, General Electrci)',
+        title: 'AC Disconnect Brand Name',
         name: 'ac_disconnect_brand_name',
         placeholder: 'Select AC Disconnect Brand Name',
         options: [
@@ -58,7 +58,7 @@ export const preferences = [
     title: 'Electrical: Wire table',
     params: [
       {
-        title: 'DC Conductor Material - valid options (Copper, Aluminium)',
+        title: 'DC Conductor Material',
         name: 'dc_conductor_material',
         placeholder: 'Select DC Conductor Material',
         options: [
@@ -73,7 +73,7 @@ export const preferences = [
         ],
       },
       {
-        title: 'AC Conductor Material - valid options (Copper, Aluminium)',
+        title: 'AC Conductor Material',
         name: 'ac_conductor_material',
         placeholder: 'Select AC Conductor Material',
         options: [
@@ -88,7 +88,7 @@ export const preferences = [
         ],
       },
       {
-        title: 'Minimum Conductor Size - valid options (12AWG, 10AWG, 8AWG, 6AWG)',
+        title: 'Minimum Conductor Size',
         name: 'minimum_conductor_size',
         placeholder: 'Select Minimum Conductor Size',
         options: [
@@ -111,7 +111,7 @@ export const preferences = [
         ],
       },
       {
-        title: 'Minimum EGC Size - valid options (12AWG, 10AWG, 8AWG, 6AWG)',
+        title: 'Minimum EGC Size',
         name: 'minimum_egc_size',
         placeholder: 'Select Minimum EGC Size',
         options: [
@@ -134,7 +134,7 @@ export const preferences = [
         ],
       },
       {
-        title: 'DC Conduit Type - valid options (EMT, FMC, LFNC, LFMC, RMC, PVC-40, PVC-80)',
+        title: 'DC Conduit Type',
         name: 'dc_conduit_type',
         placeholder: 'Select DC Conduit Type',
         options: [
@@ -169,7 +169,7 @@ export const preferences = [
         ],
       },
       {
-        title: 'AC Conduit Type - valid options (EMT, FMC, LFNC, LFMC, RMC, PVC-40, PVC-80)',
+        title: 'AC Conduit Type',
         name: 'ac_conduit_type',
         placeholder: 'Select AC Conduit Type',
         options: [
@@ -204,7 +204,7 @@ export const preferences = [
         ],
       },
       {
-        title: 'Min Conduit Size - valid options (1/2", 3/4")',
+        title: 'Min Conduit Size',
         name: 'min_conduit_size',
         placeholder: 'Select Min Conduit Size',
         options: [
@@ -219,7 +219,7 @@ export const preferences = [
         ],
       },
       {
-        title: 'OCPD rating - valid options (multiple of 5, multiple of 10)',
+        title: 'OCPD rating',
         name: 'ocpd_rating',
         placeholder: 'Select OCPD rating',
         options: [
@@ -234,7 +234,7 @@ export const preferences = [
         ],
       },
       {
-        title: 'Minimum OCPD Rating - valid options (15A, 20A)',
+        title: 'Minimum OCPD Rating',
         name: 'minimum_ocpd_rating',
         placeholder: 'Select Minimum OCPD Rating',
         options: [
@@ -254,7 +254,7 @@ export const preferences = [
         placeholder: 'Input Conduit Fill Percentage',
       },
       {
-        title: 'Voltage Drop View - valid options (None, With VD, Advanced VD)',
+        title: 'Voltage Drop View',
         name: 'voltage_drop_view',
         placeholder: 'Select Voltage Drop View',
         options: [
@@ -273,7 +273,7 @@ export const preferences = [
         ],
       },
       {
-        title: 'Neutral View - valid options (Combined with Conductor, As a Separate Column)',
+        title: 'Neutral View',
         name: 'neutral_view',
         placeholder: 'Select Neutral View',
         options: [
@@ -288,7 +288,7 @@ export const preferences = [
         ],
       },
       {
-        title: 'EGC Calculation Method - valid options (Same as conductor, Per NEC 250.122)',
+        title: 'EGC Calculation Method',
         name: 'egc_calculation_method',
         placeholder: 'Select EGC Calculation Method',
         options: [
@@ -303,7 +303,7 @@ export const preferences = [
         ],
       },
       {
-        title: 'Neutral Calculation Method - valid options (Same as conductor, Same as EGC)',
+        title: 'Neutral Calculation Method',
         name: 'neutral_calculation_method',
         placeholder: 'Select Neutral Calculation Method',
         options: [
@@ -324,7 +324,7 @@ export const preferences = [
     title: 'Electrical: Electrical tabels',
     params: [
       {
-        title: 'Bill of Materials Requirement - valid options (Y, N)',
+        title: 'Bill of Materials Requirement',
         name: 'bill_of_materials_requirement',
         placeholder: 'Select Bill of Materials Requirement',
         options: [
@@ -345,7 +345,7 @@ export const preferences = [
     title: 'Electrical: Placards',
     params: [
       {
-        title: 'Equipment Elevation Requirement - valid options (Y, N)',
+        title: 'Equipment Elevation Requirement',
         name: 'equipment_elevation_requirement',
         placeholder: 'Select Equipment Elevation Requirement',
         options: [
@@ -360,7 +360,7 @@ export const preferences = [
         ],
       },
       {
-        title: 'House Placard Requirement - valid options (Y, N)',
+        title: 'House Placard Requirement',
         name: 'house_placard_requirement',
         placeholder: 'Select House Placard Requirement',
         options: [

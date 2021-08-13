@@ -80,7 +80,7 @@ const SitePlanTab = ({ keyTab }) => {
         requirementsList.map((item) => (
           <div className="info_container" key={item.id}>
             <div className="actions_do">
-              <p className={`updated ${!item.visibility && 'modeOpacity'}`}>Updated 10.10.2021 by {item.requested}</p>
+              <p className={`updated ${!item.visibility && 'modeOpacity'}`}>Updated 10.10.2021 by {item.updated_by}</p>
               <div className="svgBtn">
                 <div
                   className="btnSVG"
@@ -111,6 +111,9 @@ const SitePlanTab = ({ keyTab }) => {
             <div className="addit_info">
               <p className={`${!item.visibility && 'modeOpacity'}`}>
                 Reference: <span>{item.reference}</span>
+              </p>
+              <p className={`${!item.visibility && 'modeOpacity'}`}>
+                Requested by: <span>{item.requested_by}</span>
               </p>
             </div>
             <div className="line">

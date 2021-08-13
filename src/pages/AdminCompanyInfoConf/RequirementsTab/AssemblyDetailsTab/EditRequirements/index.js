@@ -23,12 +23,13 @@ const EditRequirements = ({ blurModal, setEditModal, editModal, toEdit }) => {
   const dispatch = useDispatch();
   const { updateCompanyRequirement, getCompanieData, uploadFileStorage } = bindActionCreators(actions, dispatch);
 
-  const onFinish = ({ reference, wysiwyg }) => {
+  const onFinish = ({ reference, requested_by, wysiwyg }) => {
     let currentContentAsHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
 
     const body = {
       text: currentContentAsHTML,
       reference: reference,
+      requested_by,
     };
 
     updateCompanyRequirement({ requirement_id: toEdit.id, body }).then(() => getCompanieData(id));
@@ -93,7 +94,14 @@ const EditRequirements = ({ blurModal, setEditModal, editModal, toEdit }) => {
           reference: toEdit.reference,
         }}>
         <Col span={24}>
-          <Form.Item name="wysiwyg">
+          <Form.Item
+            name="wysiwyg"
+            rules={[
+              {
+                required: true,
+                message: 'Text is required',
+              },
+            ]}>
             <Editor
               editorState={editorState}
               // defaultContentState={contentState}
@@ -127,6 +135,11 @@ const EditRequirements = ({ blurModal, setEditModal, editModal, toEdit }) => {
         </Col>
 
         <Row gutter={24}>
+          <Col span={12}>
+            <Form.Item label="Requested By" name="requested_by">
+              <Input placeholder="" type="text" />
+            </Form.Item>
+          </Col>
           <Col span={12}>
             <Form.Item label="Reference" name="reference">
               <Input placeholder="" type="text" />

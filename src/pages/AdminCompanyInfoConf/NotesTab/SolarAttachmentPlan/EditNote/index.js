@@ -83,7 +83,14 @@ const EditNote = ({ blurModal, setEditModal, editModal, toEdit }) => {
         requiredMark={true}
         onFinish={onFinish}>
         <Col span={24}>
-          <Form.Item name="wysiwyg">
+          <Form.Item
+            name="wysiwyg"
+            rules={[
+              {
+                required: true,
+                message: 'Text is required',
+              },
+            ]}>
             <Editor
               editorState={editorState}
               // defaultContentState={contentState}
@@ -124,7 +131,7 @@ const EditNote = ({ blurModal, setEditModal, editModal, toEdit }) => {
               rules={[
                 {
                   required: true,
-                  message: 'Reference By is required',
+                  message: 'Reference is required',
                 },
               ]}>
               <Input placeholder="" type="text" />

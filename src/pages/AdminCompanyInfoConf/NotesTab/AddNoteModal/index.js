@@ -122,7 +122,7 @@ const AddNoteModal = ({ blurModal, keyTab, addNoteModal, setAddNoteModal }) => {
               rules={[
                 {
                   required: true,
-                  message: 'Reference By is required',
+                  message: 'Reference is required',
                 },
               ]}>
               <Input placeholder="" type="text" />

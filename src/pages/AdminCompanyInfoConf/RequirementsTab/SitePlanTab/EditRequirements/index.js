@@ -24,7 +24,7 @@ const EditRequirements = ({ blurModal, setEditModal, editModal, toEdit }) => {
 
   const { updateCompanyRequirement, getCompanieData, uploadFileStorage } = bindActionCreators(actions, dispatch);
 
-  const onFinish = ({ reference, wysiwyg }) => {
+  const onFinish = ({ reference, requested_by, wysiwyg }) => {
     let currentContentAsHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
 
     console.log('currentContentAsHTML', currentContentAsHTML);
@@ -32,6 +32,7 @@ const EditRequirements = ({ blurModal, setEditModal, editModal, toEdit }) => {
     const body = {
       text: currentContentAsHTML,
       reference: reference,
+      requested_by,
     };
 
     updateCompanyRequirement({ requirement_id: toEdit.id, body }).then(() => getCompanieData(id));
@@ -96,7 +97,14 @@ const EditRequirements = ({ blurModal, setEditModal, editModal, toEdit }) => {
           reference: toEdit.reference,
         }}>
         <Col span={24}>
-          <Form.Item name="wysiwyg">
+          <Form.Item
+            name="wysiwyg"
+            rules={[
+              {
+                required: true,
+                message: 'Text is required',
+              },
+            ]}>
             <Editor
               editorState={editorState}
               // defaultContentState={contentState}
@@ -132,12 +140,25 @@ const EditRequirements = ({ blurModal, setEditModal, editModal, toEdit }) => {
         <Row gutter={24}>
           <Col span={12}>
             <Form.Item
+              label="Requested By"
+              name="requested_by"
+              rules={[
+                {
+                  required: true,
+                  message: 'Requested By is required',
+                },
+              ]}>
+              <Input placeholder="" type="text" />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
               label="Reference"
               name="reference"
               rules={[
                 {
                   required: true,
-                  message: 'Reference By is required',
+                  message: 'Reference is required',
                 },
               ]}>
               <Input placeholder="" type="text" />

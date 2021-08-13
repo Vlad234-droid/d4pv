@@ -82,7 +82,14 @@ const EditNote = ({ blurModal, setEditModal, editModal, toEdit }) => {
           reference: toEdit.reference,
         }}>
         <Col span={24}>
-          <Form.Item name="wysiwyg">
+          <Form.Item
+            name="wysiwyg"
+            rules={[
+              {
+                required: true,
+                message: 'Text is required',
+              },
+            ]}>
             <Editor
               editorState={editorState}
               // defaultContentState={contentState}

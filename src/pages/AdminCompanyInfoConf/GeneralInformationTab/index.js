@@ -25,6 +25,8 @@ const GeneralInformationTab = ({ editMode, dataSource, setEditMode }) => {
     getCompanieData(id);
   }, []);
 
+  console.log('dataSource', dataSource);
+
   const onFinishHandler = (values) => {
     const result = {
       name: values.name,
@@ -278,9 +280,13 @@ const GeneralInformationTab = ({ editMode, dataSource, setEditMode }) => {
         : ''} */}
 
       {!editMode ? (
+        // <div className="companie__details_adress">
+        //   {dataSource.address.state} {dataSource.address.city} {dataSource.address.address_line1}
+        //   {dataSource.address.zip}
+        // </div>
         <div className="companie__details_adress">
-          {dataSource.address.state} {dataSource.address.city} {dataSource.address.address_line1}
-          {dataSource.address.zip}
+          {dataSource.address.address_line1} {dataSource.address.address_line2}, {` ${dataSource.address.city}`},
+          {` ${dataSource.address.state}`} {dataSource.address.zip_code}
         </div>
       ) : (
         <GooglePlaces

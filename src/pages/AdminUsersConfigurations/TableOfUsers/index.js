@@ -136,6 +136,7 @@ const TableOfUsers = ({ searchValue, toggle }) => {
 
   const setPageInfo = (data) => {
     const newData = [];
+    console.log('data', data);
     data.forEach((item) => {
       newData.push({
         key: item.id,
@@ -155,7 +156,9 @@ const TableOfUsers = ({ searchValue, toggle }) => {
                 </div>
               )}
             </div>
-            <h3 className="name invited">{item.invite ? 'waiting for confirmation…' : item.first_name}</h3>
+            <h3 className="name invited">
+              {item.invite ? 'waiting for confirmation…' : `${item.first_name} ${item.last_name}`}
+            </h3>
           </div>
         ),
         role: item.invite ? '' : getProperRole(item.role),

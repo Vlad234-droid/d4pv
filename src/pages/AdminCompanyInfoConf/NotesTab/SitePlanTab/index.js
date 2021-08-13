@@ -45,6 +45,8 @@ const SitePlanTab = ({ keyTab }) => {
     setNotelist(() => newData);
   }, [notes]);
 
+  console.log('notes', notes);
+
   return (
     <div className="site_plan_block tab_block">
       <EditNote blurModal={blurModal} toEdit={toEdit} setEditModal={setEditModal} editModal={editModal} />
@@ -77,7 +79,7 @@ const SitePlanTab = ({ keyTab }) => {
         noteList.map((item) => (
           <div className="info_container" key={item.id}>
             <div className="actions_do">
-              <p className={`updated ${!item.visibility && 'modeOpacity'}`}>Updated 10.10.2021 by {item.requested}</p>
+              <p className={`updated ${!item.visibility && 'modeOpacity'}`}>Updated 10.10.2021 by {item.updated_by}</p>
               <div className="svgBtn">
                 <div
                   className="btnSVG"
