@@ -24,19 +24,13 @@ const AddRequirementsModal = ({ blurModal, keyTab, addRequirements, setAddRequir
   const { id } = useParams();
 
   const onFinish = ({ reference, requested_by }) => {
-    const getProperGroup = () => {
-      if (keyTab === 0) return 'SitePlan';
-      if (keyTab === 1) return 'AttachmentPlan';
-      if (keyTab === 2) return 'LineDiagram';
-      if (keyTab === 3) return 'AssemblyDetails';
-    };
     let currentContentAsHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
 
     const body = {
       text: currentContentAsHTML,
       reference,
       requested_by,
-      group: getProperGroup(),
+      group: keyTab,
     };
     addCompanyRequirement({ company_id: id, body }).then(() => getCompanieData(id));
 

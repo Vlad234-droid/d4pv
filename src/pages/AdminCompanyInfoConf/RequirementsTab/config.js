@@ -1,18 +1,74 @@
 export const config = [
   {
-    tab: 'Site Plan',
-    key: 1,
+    tab: 'Property Information',
+    key: 'PropertyInformation',
   },
   {
-    tab: 'Solar Attachment plan',
-    key: 2,
+    tab: 'Design Criteria',
+    key: 'SiteDesignCriteria',
+  },
+  {
+    tab: 'Contractor Company',
+    key: 'ContractorCompany',
+  },
+  {
+    tab: 'Preliminary Plan',
+    key: 'PreliminaryPlan',
+  },
+  {
+    tab: 'Array Parameters',
+    key: 'ArrayParameters',
+  },
+  {
+    tab: 'PV System',
+    key: 'PVSystem',
+  },
+  {
+    tab: 'Interconnection',
+    key: 'Interconnection',
+  },
+  {
+    tab: 'System Balance',
+    key: 'SystemBalance',
+  },
+  {
+    tab: 'Wire Table',
+    key: 'WireTable',
   },
   {
     tab: 'Line Diagram',
-    key: 3,
+    key: 'LineDiagram',
   },
   {
-    tab: 'Assembly Details',
-    key: 4,
+    tab: 'Electrical Tables',
+    key: 'ElectricalTables',
+  },
+  {
+    tab: 'Site Plan',
+    key: 'SitePlan',
+  },
+  {
+    tab: 'Electrical Plan',
+    key: 'ElectricalPlan',
+  },
+  {
+    tab: 'Placards',
+    key: 'Placards',
+  },
+  {
+    tab: 'Structures',
+    key: 'Structures',
+  },
+  {
+    tab: 'Structures1',
+    key: 'Structures1',
+  },
+  {
+    tab: 'Structures2',
+    key: 'Structures2',
+  },
+  {
+    tab: 'Datasheets',
+    key: 'Datasheets',
   },
 ];

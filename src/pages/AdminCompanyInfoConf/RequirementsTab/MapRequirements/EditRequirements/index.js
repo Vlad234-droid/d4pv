@@ -6,6 +6,7 @@ import { EditorState } from 'draft-js';
 import { CloseIconSVG } from '../../../../../components/icons';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { actions } from '../../../../../core/companies/companiesSlice';
+import iconIMG from '../../../../../components/icons/icon-img.png';
 
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
@@ -16,23 +17,23 @@ import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import { useParams } from 'react-router-dom';
 
-const EditNote = ({ blurModal, setEditModal, editModal, toEdit }) => {
-  console.log('toEdit', toEdit);
+const EditRequirements = ({ blurModal, setEditModal, editModal, toEdit }) => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
-  const { updateCompanyNote, getCompanieData } = bindActionCreators(actions, dispatch);
   const { id } = useParams();
 
-  const onFinish = ({ reference, requested, wysiwyg }) => {
+  const { updateCompanyRequirement, getCompanieData, uploadFileStorage } = bindActionCreators(actions, dispatch);
+
+  const onFinish = ({ reference, requested_by, wysiwyg }) => {
     let currentContentAsHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
 
     const body = {
       text: currentContentAsHTML,
       reference: reference,
-      requested_by: requested,
+      requested_by,
     };
 
-    updateCompanyNote({ note_id: toEdit.id, body }).then(() => getCompanieData(id));
+    updateCompanyRequirement({ requirement_id: toEdit.id, body }).then(() => getCompanieData(id));
     setEditModal(() => false);
     blurModal(false);
   };
@@ -56,6 +57,17 @@ const EditNote = ({ blurModal, setEditModal, editModal, toEdit }) => {
     }
   }, [toEdit, editModal]);
 
+  const uploadCallbackHandler = (file) => {
+    return uploadFileStorage(file).then((data) => {
+      const url = data.payload.url;
+      return {
+        data: {
+          link: url,
+        },
+      };
+    });
+  };
+
   return (
     <Modal
       visible={editModal}
@@ -67,21 +79,21 @@ const EditNote = ({ blurModal, setEditModal, editModal, toEdit }) => {
       cancelButtonProps={{ style: { display: 'none' } }}
       okButtonProps={{ style: { display: 'none' } }}
       width={664}
-      className="modal_edit_note">
-      <h3 className="edit_note_title">Edit Note</h3>
+      className="modal_edit_requirements">
+      <h3 className="edit_requirements_title">Edit Requirement</h3>
 
       {/* // ????//////?????* */}
 
       <Form
-        name="form_edit_note"
-        initialValues={{
-          requested: toEdit.requested_by,
-          reference: toEdit.reference,
-        }}
+        name="form_edit_requirements"
         layout="vertical"
         form={form}
         requiredMark={true}
-        onFinish={onFinish}>
+        onFinish={onFinish}
+        initialValues={{
+          requested: toEdit.requested_by,
+          reference: toEdit.reference,
+        }}>
         <Col span={24}>
           <Form.Item
             name="wysiwyg"
@@ -99,11 +111,24 @@ const EditNote = ({ blurModal, setEditModal, editModal, toEdit }) => {
               editorClassName="editor-class"
               toolbarClassName="toolbar-class"
               toolbar={{
-                options: ['inline'],
+                options: ['inline', 'image'],
                 inline: {
                   options: ['bold', 'underline'],
                   bold: { icon: bold, className: 'custom_bold' },
                   underline: { icon: underline, className: 'custom_underline' },
+                },
+                image: {
+                  icon: iconIMG,
+                  className: 'iconIMG_custom',
+                  // component: Test,
+                  urlEnabled: false,
+                  previewImage: true,
+                  uploadCallback: uploadCallbackHandler,
+                  alignmentEnabled: false,
+                  defaultSize: {
+                    height: 'auto',
+                    width: 'auto',
+                  },
                 },
               }}
             />
@@ -114,7 +139,7 @@ const EditNote = ({ blurModal, setEditModal, editModal, toEdit }) => {
           <Col span={12}>
             <Form.Item
               label="Requested By"
-              name="requested"
+              name="requested_by"
               rules={[
                 {
                   required: true,
@@ -138,7 +163,7 @@ const EditNote = ({ blurModal, setEditModal, editModal, toEdit }) => {
             </Form.Item>
           </Col>
         </Row>
-        <Form.Item className="submit__cancel_note">
+        <Form.Item className="submit__cancel_requirements">
           <Row gutter={16}>
             <Col span={9}>
               <Button
@@ -162,4 +187,4 @@ const EditNote = ({ blurModal, setEditModal, editModal, toEdit }) => {
   );
 };
 
-export default EditNote;
+export default EditRequirements;
