@@ -1,19 +1,23 @@
 const config = [
   {
     tab: 'Site Plan',
-    key: 1,
+    key: 'SitePlan',
+  },
+  {
+    tab: 'Electrical Plan',
+    key: 'ElectricalPlan',
   },
   {
     tab: 'Solar Attachment plan',
-    key: 2,
+    key: 'AttachmentPlan',
   },
   {
     tab: 'Line Diagram',
-    key: 3,
+    key: 'LineDiagram',
   },
   {
     tab: 'Assembly Details',
-    key: 4,
+    key: 'AssemblyDetails',
   },
 ];
 export default config;
