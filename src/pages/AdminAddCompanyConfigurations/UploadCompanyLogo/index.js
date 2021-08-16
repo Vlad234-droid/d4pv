@@ -85,7 +85,7 @@ const UploadCompanyLogo = ({ form, editCompanyLogo, setEditCompanyLogo, setLogoU
             <div>
               <StarSVG />
             </div>
-            <span className="upload_photo">Upload Photo</span>
+            <span className="upload_photo">Upload Logo</span>
           </div>
         </Dragger>
       </Tooltip>

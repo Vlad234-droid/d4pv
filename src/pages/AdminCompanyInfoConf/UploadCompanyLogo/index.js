@@ -63,7 +63,7 @@ const UploadCompanyLogo = ({ editMode, setLogoUrl, logoUrl }) => {
             <div>
               <StarSVG />
             </div>
-            <span className="upload_photo">Upload Photo</span>
+            <span className="upload_photo">Upload Logo</span>
           </div>
         ) : updatedImg !== null ? (
           <div className="img_logo__block">
