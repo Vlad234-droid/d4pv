@@ -44,21 +44,19 @@ const MapNotes = ({ keyTab, text }) => {
   }, [notes, keyTab]);
 
   const getProperDate = (date_updated) => {
-    if (noteList !== null) {
-      function checkForZeroDate(date) {
-        return date < 10 ? `0${date}` : date;
-      }
-      function checkForZeroMonth(month) {
-        let pl1 = month + 1;
-        return pl1 < 10 ? `0${pl1}` : pl1;
-      }
-      const date = new Date(date_updated);
-      const day = checkForZeroDate(date.getDate());
-      const month = checkForZeroMonth(date.getMonth());
-      const year = date.getFullYear();
-
-      return `${day}.${month}.${year}`;
+    function checkForZeroDate(date) {
+      return date < 10 ? `0${date}` : date;
     }
+    function checkForZeroMonth(month) {
+      let pl1 = month + 1;
+      return pl1 < 10 ? `0${pl1}` : pl1;
+    }
+    const date = new Date(date_updated);
+    const day = checkForZeroDate(date.getDate());
+    const month = checkForZeroMonth(date.getMonth());
+    const year = date.getFullYear();
+
+    return `${day}.${month}.${year}`;
   };
 
   const capitalizeLetter = (string) => {
