@@ -443,14 +443,22 @@ button:not(.ant-btn) {
   }
 }
 // nofification
+// .ant-notification {
+//   top: -93px !important;
+//   left: 50% !important;
+//   transform: translate(-28%, -122%);
+//   &.ant-notification-topRight {
+//     transform: translate(-28%, 101%);
+//   }
+// }
 .ant-notification {
   top: 4px !important;
-  left: 0px;
-  transform: translateX(-30%);
-  right: 0px;
+  left: 50% !important;
+  transform: translateX(-28%) !important;
 }
 
 .ant-notification-notice {
+  margin-left: 0px;
   padding: 23px;
   width: 369px;
   border-radius: 4px;
@@ -515,6 +523,6 @@ button:not(.ant-btn) {
   cursor: initial;
 }
 // Editor
-.DraftEditor-editorContainer {
-  // cursor: pointer;
-}
+// .DraftEditor-editorContainer {
+//   // cursor: pointer;
+// }
