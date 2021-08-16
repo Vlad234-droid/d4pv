@@ -68,6 +68,15 @@ const EditRequirements = ({ blurModal, setEditModal, editModal, toEdit }) => {
     });
   };
 
+  useEffect(() => {
+    if (form.__INTERNAL__.name) {
+      form.setFieldsValue({
+        requested_by: toEdit.requested_by,
+        reference: toEdit.reference,
+      });
+    }
+  }, [toEdit]);
+
   return (
     <Modal
       visible={editModal}
@@ -84,16 +93,7 @@ const EditRequirements = ({ blurModal, setEditModal, editModal, toEdit }) => {
 
       {/* // ????//////?????* */}
 
-      <Form
-        name="form_edit_requirements"
-        layout="vertical"
-        form={form}
-        requiredMark={true}
-        onFinish={onFinish}
-        initialValues={{
-          requested_by: toEdit.requested_by,
-          reference: toEdit.reference,
-        }}>
+      <Form name="form_edit_requirements" layout="vertical" form={form} requiredMark={true} onFinish={onFinish}>
         <Col span={24}>
           <Form.Item
             name="wysiwyg"

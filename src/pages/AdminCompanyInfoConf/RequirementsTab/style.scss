@@ -32,6 +32,8 @@
     }
     .tabs_content {
       flex-grow: 1;
+      max-height: 460px;
+      overflow-y: auto;
     }
   }
 }

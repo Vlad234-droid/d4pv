@@ -21,8 +21,6 @@ const EditNote = ({ blurModal, setEditModal, editModal, toEdit }) => {
   const { updateCompanyNote, getCompanieData } = bindActionCreators(actions, dispatch);
   const { id } = useParams();
 
-  console.log('toEdit', toEdit);
-
   const onFinish = ({ reference, requested, wysiwyg }) => {
     let currentContentAsHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
 
@@ -56,6 +54,15 @@ const EditNote = ({ blurModal, setEditModal, editModal, toEdit }) => {
     }
   }, [toEdit, editModal]);
 
+  useEffect(() => {
+    if (form.__INTERNAL__.name) {
+      form.setFieldsValue({
+        requested: toEdit.requested_by,
+        reference: toEdit.reference,
+      });
+    }
+  }, [toEdit]);
+
   return (
     <Modal
       visible={editModal}
@@ -72,16 +79,7 @@ const EditNote = ({ blurModal, setEditModal, editModal, toEdit }) => {
 
       {/* // ????//////?????* */}
 
-      <Form
-        name="form_edit_note"
-        layout="vertical"
-        form={form}
-        requiredMark={true}
-        onFinish={onFinish}
-        initialValues={{
-          requested: toEdit.requested_by,
-          reference: toEdit.reference,
-        }}>
+      <Form name="form_edit_note" layout="vertical" form={form} requiredMark={true} onFinish={onFinish}>
         <Col span={24}>
           <Form.Item
             name="wysiwyg"
