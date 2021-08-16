@@ -43,6 +43,19 @@ const MapNotes = ({ keyTab, text }) => {
     setNotelist(() => newData);
   }, [notes, keyTab]);
 
+  const capitalizeLetter = (string) => {
+    if (string.split(' ').length === 1) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+    if (string.split(' ').length > 1) {
+      const words = string.split(' ');
+      for (let i = 0; i < words.length; i++) {
+        words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+      }
+      return words.join(' ');
+    }
+  };
+
   return (
     <div className="site_plan_block tab_block">
       <EditNote blurModal={blurModal} toEdit={toEdit} setEditModal={setEditModal} editModal={editModal} />
@@ -75,7 +88,9 @@ const MapNotes = ({ keyTab, text }) => {
         noteList.map((item) => (
           <div className="info_container" key={item.id}>
             <div className="actions_do">
-              <p className={`updated ${!item.visibility && 'modeOpacity'}`}>Updated 10.10.2021 by {item.updated_by}</p>
+              <p className={`updated ${!item.visibility && 'modeOpacity'}`}>
+                Updated 10.10.2021 by {capitalizeLetter(item.updated_by)}
+              </p>
               <div className="svgBtn">
                 <div
                   className="btnSVG"

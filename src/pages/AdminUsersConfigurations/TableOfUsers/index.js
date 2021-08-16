@@ -131,6 +131,10 @@ const TableOfUsers = ({ searchValue, toggle }) => {
     });
   }, [toggle]);
 
+  const capitalizeLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   const getProperRole = (role) =>
     role.split('.')[1] === 'MEMBER' ? 'User' : role.split('.')[1] === 'OWNER' && 'Admin';
 
@@ -157,7 +161,9 @@ const TableOfUsers = ({ searchValue, toggle }) => {
               )}
             </div>
             <h3 className="name invited">
-              {item.invite ? 'waiting for confirmation…' : `${item.first_name} ${item.last_name}`}
+              {item.invite
+                ? 'waiting for confirmation…'
+                : `${capitalizeLetter(item.first_name)} ${capitalizeLetter(item.last_name)}`}
             </h3>
           </div>
         ),

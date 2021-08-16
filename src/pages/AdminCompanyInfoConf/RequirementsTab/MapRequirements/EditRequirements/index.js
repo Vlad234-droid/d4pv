@@ -95,14 +95,7 @@ const EditRequirements = ({ blurModal, setEditModal, editModal, toEdit }) => {
 
       <Form name="form_edit_requirements" layout="vertical" form={form} requiredMark={true} onFinish={onFinish}>
         <Col span={24}>
-          <Form.Item
-            name="wysiwyg"
-            rules={[
-              {
-                required: true,
-                message: 'Text is required',
-              },
-            ]}>
+          <Form.Item name="wysiwyg">
             <Editor
               editorState={editorState}
               // defaultContentState={contentState}
