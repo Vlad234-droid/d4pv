@@ -1,8 +1,9 @@
 .form_add_company.add_comp {
   .ant-upload.ant-upload-drag.upload-logo-add {
+    box-sizing: border-box;
     position: relative;
-    max-width: 120px;
-    height: 120px;
+    max-width: 122px;
+    height: 122px;
     margin: 3px 0 0;
     padding: 30px 20px 41px 14px;
     border-radius: 2px;
@@ -54,7 +55,6 @@
         object-fit: contain;
         width: 98%;
         height: 100%;
-        overflow: hidden;
       }
     }
 
