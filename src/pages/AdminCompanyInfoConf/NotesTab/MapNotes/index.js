@@ -20,7 +20,6 @@ const MapNotes = ({ keyTab, text }) => {
   const [toEdit, setToEdit] = useState({});
   const [editModal, setEditModal] = useState(false);
   const [addNoteModal, setAddNoteModal] = useState(false);
-
   const { visibilityCompanyNote, deleteCompanyNote, getCompanieData } = bindActionCreators(actions, dispatch);
   const { blurModal } = bindActionCreators(visActions, dispatch);
 

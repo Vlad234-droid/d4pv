@@ -21,6 +21,8 @@ const EditNote = ({ blurModal, setEditModal, editModal, toEdit }) => {
   const { updateCompanyNote, getCompanieData } = bindActionCreators(actions, dispatch);
   const { id } = useParams();
 
+  console.log('toEdit', toEdit);
+
   const onFinish = ({ reference, requested, wysiwyg }) => {
     let currentContentAsHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
 

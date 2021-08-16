@@ -91,7 +91,7 @@ const EditRequirements = ({ blurModal, setEditModal, editModal, toEdit }) => {
         requiredMark={true}
         onFinish={onFinish}
         initialValues={{
-          requested: toEdit.requested_by,
+          requested_by: toEdit.requested_by,
           reference: toEdit.reference,
         }}>
         <Col span={24}>
