@@ -43,6 +43,24 @@ const MapNotes = ({ keyTab, text }) => {
     setNotelist(() => newData);
   }, [notes, keyTab]);
 
+  const getProperDate = (date_updated) => {
+    if (noteList !== null) {
+      function checkForZeroDate(date) {
+        return date < 10 ? `0${date}` : date;
+      }
+      function checkForZeroMonth(month) {
+        let pl1 = month + 1;
+        return pl1 < 10 ? `0${pl1}` : pl1;
+      }
+      const date = new Date(date_updated);
+      const day = checkForZeroDate(date.getDate());
+      const month = checkForZeroMonth(date.getMonth());
+      const year = date.getFullYear();
+
+      return `${day}.${month}.${year}`;
+    }
+  };
+
   const capitalizeLetter = (string) => {
     if (string.split(' ').length === 1) {
       return string.charAt(0).toUpperCase() + string.slice(1);
@@ -89,7 +107,7 @@ const MapNotes = ({ keyTab, text }) => {
           <div className="info_container" key={item.id}>
             <div className="actions_do">
               <p className={`updated ${!item.visibility && 'modeOpacity'}`}>
-                Updated 10.10.2021 by {capitalizeLetter(item.updated_by)}
+                Updated {getProperDate(item.date_updated)} by {capitalizeLetter(item.updated_by)}
               </p>
               <div className="svgBtn">
                 <div
