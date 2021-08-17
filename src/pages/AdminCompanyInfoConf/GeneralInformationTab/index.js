@@ -285,8 +285,8 @@ const GeneralInformationTab = ({ editMode, dataSource, setEditMode }) => {
         //   {dataSource.address.zip}
         // </div>
         <div className="companie__details_adress">
-          {dataSource.address.address_line1} {dataSource.address.address_line2}, {` ${dataSource.address.city}`},
-          {` ${dataSource.address.state}`} {dataSource.address.zip_code}
+          {dataSource.address.address_line1}, {`${dataSource.address.city}`},{` ${dataSource.address.state}`}{' '}
+          {dataSource.address.zip_code}
         </div>
       ) : (
         <GooglePlaces

@@ -101,7 +101,7 @@ const TableOfCompanies = ({ blurModal, searchValue, setShowDeleteCompany, setDel
         ),
         company_name: item.name,
         company_phone: item.phone,
-        address: `${item.address.address_line1} ${item.address.address_line2}, ${item.address.city},
+        address: `${item.address.address_line1}, ${item.address.city},
          ${item.address.state} ${item.address.zip_code}`,
       });
     });
