@@ -48,8 +48,8 @@
           transform: translate(-50%, -50%);
           display: block;
           img {
-            object-fit: cover;
-            width: 98%;
+            object-fit: contain;
+            width: 98.5%;
             height: 100%;
           }
         }
