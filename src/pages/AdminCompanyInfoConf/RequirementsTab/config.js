@@ -60,14 +60,6 @@ export const config = [
     key: 'Structures',
   },
   {
-    tab: 'Structures1',
-    key: 'Structures1',
-  },
-  {
-    tab: 'Structures2',
-    key: 'Structures2',
-  },
-  {
     tab: 'Datasheets',
     key: 'Datasheets',
   },

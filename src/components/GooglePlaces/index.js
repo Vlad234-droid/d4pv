@@ -46,6 +46,8 @@ const GooglePlaces = ({ extraAddress, setExtraAddress, onGenderChange, form }) =
       const city = `${locality.length ? locality[0].long_name : ''}`;
       const state = `${administrative_area_level_1.length ? administrative_area_level_1[0].short_name : ''}`;
       const zip_code = `${postalCode.length ? postalCode[0].long_name : ''}`;
+      const zipTrim = zip_code;
+      // .replace(/\s+/g, '')
       form.setFieldsValue({
         address_line1: address_line1,
         address_line2: address_line2,
