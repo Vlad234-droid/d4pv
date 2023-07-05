@@ -5,7 +5,7 @@ import lockr from 'lockr';
 const { REACT_APP_API_URL } = process.env;
 
 const initialState = {
-  status: 'idle', //succeddded
+  status: 'idle',
   error: null,
   account_id: '',
   passwordStatus: 'idle',
